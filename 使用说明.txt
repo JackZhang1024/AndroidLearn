@@ -2,3 +2,9 @@
 
 1.简单的用法直接放在master分支上
 2.复杂的用法创建新的分支AL-xxx 如AL-RxJava AL-Retrofit, etc
+
+计划
+1.基础知识 AL_BASIC
+2.MaterialDesign AL_MD
+3.Dagger2 Retrofit RxJava (AL_Dagger AL_Retrofit AL_RXJava)
+
