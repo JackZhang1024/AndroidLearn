@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GameRangeSeekBar">
+        <attr name="seek_bar_height" format="dimension"/>
+        <attr name="seek_bar_bg" format="color"/>
+        <attr name="seek_bar_text_selected_color" format="color"/>
+        <attr name="seek_bar_text_normal_color" format="color"/>
+        <attr name="mark_text_size" format="dimension"/>
+        <attr name="mark_text_array" format="reference"/>
+    </declare-styleable>
+</resources>
