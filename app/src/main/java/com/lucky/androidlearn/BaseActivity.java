@@ -1,4 +1,4 @@
-package com.lucky.androidlearn.base;
+package com.lucky.androidlearn;
 
 import android.support.v7.app.AppCompatActivity;
 

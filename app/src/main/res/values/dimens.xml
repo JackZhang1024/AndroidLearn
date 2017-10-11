@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="game_time_seek_bar_bg">310dp</dimen>
+    <dimen name="game_time_seek_bar_width">330dp</dimen>
+    <dimen name="game_time_seek_bar_thumb_radius">2dp</dimen>
+</resources>

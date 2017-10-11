@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">AndroidLearn</string>
+    <string name="main_view">View</string>
+    <string name="main_other">Other</string>
+    <string name="common_view">Common Widget</string>
+    <string name="material_view">Material Widget</string>
+    <string name="seek_bar">SeekBar</string>
+    <string name="game_tick_60_str">1</string>
+    <string name="game_tick_90_str">1.5</string>
+    <string name="game_tick_120_str">2</string>
+    <string name="game_tick_150_str">2.5</string>
+    <string name="game_tick_180_str">3</string>
+    <string name="game_tick_240_str">4</string>
+    <string name="game_tick_300_str">5</string>
+    <string name="game_tick_360_str">6</string>
+    <string name="game_user_counter_2">2</string>
+    <string name="game_user_counter_6">6</string>
+    <string name="game_user_counter_9">9</string>
+
 </resources>

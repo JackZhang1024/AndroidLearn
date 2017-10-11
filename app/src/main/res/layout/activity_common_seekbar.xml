@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.lucky.androidlearn.widget.common.view.GameTimeSeekBar
+        android:id="@+id/game_time_seek_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:maxHeight="6dp"
+        android:max="11"
+        android:progress="3"
+        android:progressDrawable="@drawable/game_money_seek_bar"
+        android:thumb="@drawable/money_seek_bar" />
+
+</LinearLayout>

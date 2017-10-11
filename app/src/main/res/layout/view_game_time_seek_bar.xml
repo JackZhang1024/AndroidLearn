@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/tickBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_60_str"
+            android:textColor="#ffa2a2a2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_90_str"
+            android:textColor="#ffa2a2a2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_120_str"
+            android:textColor="#ffa2a2a2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_150_str"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_180_str"
+            android:textColor="#ffa2a2a2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_240_str"
+            android:textColor="#ffa2a2a2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_300_str"
+            android:textColor="#ffa2a2a2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/timeSeekBarTickTextView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/game_tick_360_str"
+            android:textColor="#ffa2a2a2"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/timeSeekBarImage"
+        android:layout_width="@dimen/game_time_seek_bar_bg"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/game_time_seek_bar_bg" />
+
+    <SeekBar
+        android:id="@+id/timeSeekBar"
+        android:layout_width="@dimen/game_time_seek_bar_width"
+        android:layout_height="wrap_content"
+        android:max="7"
+        android:progress="0"
+        android:progressDrawable="@drawable/game_time_seek_bar"
+        android:thumb="@mipmap/game_time_thumb"
+        android:layout_centerInParent="true"
+        />
+
+</RelativeLayout>
