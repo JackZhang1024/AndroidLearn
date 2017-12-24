@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@null"
+    android:orientation="vertical">
+
+    <org.cocos2dx.cpp.core.ui.widget.TabIconView
+        android:id="@+id/bottom_tab_icon"
+        android:layout_width="32dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/bottom_tab_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="12.5sp" />
+
+</LinearLayout>

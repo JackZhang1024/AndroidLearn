@@ -9,6 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/repository" />
+            <option value="$PROJECT_DIR$/repository/CommonUtil" />
+            <option value="$PROJECT_DIR$/repository/fancygallery" />
+            <option value="$PROJECT_DIR$/repository/materialdesign" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

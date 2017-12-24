@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <Button
+        android:id="@+id/btn_start_polling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_polling" />
+
+    <Button
+        android:id="@+id/btn_stop_polling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/stop_polling" />
+
+    <Button
+        android:id="@+id/btn_immediate_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/immediate_start" />
+
+    <Button
+        android:id="@+id/btn_immediate_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/immediate_stop" />
+
+    <Button
+        android:id="@+id/btn_restart_polling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/restart_polling" />
+
+
+</LinearLayout>

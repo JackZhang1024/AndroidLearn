@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_density"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前屏幕信息"
+        />
+
+    <TextView
+        android:id="@+id/tv_screen_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前屏幕分辨率"
+        />
+
+    <TextView
+        android:id="@+id/tv_screen_dpi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前屏幕DPI"
+        />
+
+    <TextView
+        android:id="@+id/tv_screen_dot_per_inch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前屏幕每英寸像素点个数"
+        />
+
+
+</LinearLayout>

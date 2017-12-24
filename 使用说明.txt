@@ -6,6 +6,17 @@ https://github.com/AbrahamCaiJin/CommonUtilLibrary
 
 计划
 1.基础知识 AL_BASIC
-2.MaterialDesign AL_MD
-3.Dagger2 Retrofit RxJava (AL_Dagger AL_Retrofit AL_RXJava)
+2.Dagger2 Retrofit RxJava (AL_Dagger AL_Retrofit AL_RXJava)
+3.语法知识
+4.测试知识
 
+整理整理之前的老代码 2017年12月24日10:14:52
+http://blog.csdn.net/qq_35114086/article/details/70050269
+http://blog.csdn.net/daitu_liang/article/details/50246803
+
+动画总结 1.2-1.5
+自定义View总结  1.2-1.5
+MaterialDesign总结   1.2-1.5
+视屏播放学习 1.5-1.20
+
+总结整理

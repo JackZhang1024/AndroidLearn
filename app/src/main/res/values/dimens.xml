@@ -3,4 +3,6 @@
     <dimen name="game_time_seek_bar_bg">310dp</dimen>
     <dimen name="game_time_seek_bar_width">330dp</dimen>
     <dimen name="game_time_seek_bar_thumb_radius">2dp</dimen>
+    <dimen name="mainActivityListItemHeight">48dp</dimen>
+    <dimen name="mainActivityListItemPadding">16dp</dimen>
 </resources>

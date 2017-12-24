@@ -1,15 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/seek_bar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/seek_bar"
-        />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seek_bar" />
+
+        <Button
+            android:id="@+id/btn_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EditText" />
+
+        <Button
+            android:id="@+id/btn_activity_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="将Activity改成对话框" />
+
+        <Button
+            android:id="@+id/btn_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="对话框" />
+
+        <Button
+            android:id="@+id/btn_custom_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义对话框" />
+
+        <Button
+            android:id="@+id/btn_bottom_popupwinodw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="底部弹出对话框" />
+
+        <Button
+            android:id="@+id/btn_top_popupwinodw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="顶部弹出对话框" />
+
+        <Button
+            android:id="@+id/btn_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RecycleView" />
+
+        <Button
+            android:id="@+id/btn_fancygallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fancy_Gallery" />
+
+        <Button
+            android:id="@+id/btn_pulllistview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下拉刷新列表" />
+
+        <Button
+            android:id="@+id/btn_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="通知消息" />
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</ScrollView>

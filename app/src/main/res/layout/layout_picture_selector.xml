@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/popup_bg"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/picture_selector_take_photo_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="@string/tack_photos" />
+
+    <include layout="@layout/divider" />
+
+    <Button
+        android:id="@+id/picture_selector_pick_picture_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="@string/choose_photos" />
+
+    <include layout="@layout/divider" />
+
+    <Button
+        android:id="@+id/picture_selector_pick_system_picture_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="@string/choose_system_photos" />
+
+    <include layout="@layout/divider" />
+
+    <Button
+        android:id="@+id/picture_selector_cancel_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:onClick="cancel"
+        android:text="@string/cancel"
+        android:textColor="@android:color/holo_red_light" />
+
+</LinearLayout>

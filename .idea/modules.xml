@@ -3,7 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidLearn.iml" filepath="$PROJECT_DIR$/AndroidLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/CommonUtil/CommonUtil.iml" filepath="$PROJECT_DIR$/repository/CommonUtil/CommonUtil.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" filepath="$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" filepath="$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/repository.iml" filepath="$PROJECT_DIR$/repository/repository.iml" />
     </modules>
   </component>
 </project>

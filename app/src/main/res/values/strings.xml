@@ -4,7 +4,13 @@
     <string name="main_other">Other</string>
     <string name="common_view">Common Widget</string>
     <string name="material_view">Material Widget</string>
+    <string name="service">Service</string>
     <string name="seek_bar">SeekBar</string>
+    <string name="start_polling">开始轮询</string>
+    <string name="stop_polling">结束轮询</string>
+    <string name="restart_polling">重新启动</string>
+    <string name="immediate_start">立即开始</string>
+    <string name="immediate_stop">立即结束</string>
     <string name="game_tick_60_str">1</string>
     <string name="game_tick_90_str">1.5</string>
     <string name="game_tick_120_str">2</string>
@@ -16,5 +22,31 @@
     <string name="game_user_counter_2">2</string>
     <string name="game_user_counter_6">6</string>
     <string name="game_user_counter_9">9</string>
+    <string name="launch_mode">启动模式</string>
+    <string name="standard_one">标准一</string>
+    <string name="standard_two">标准二</string>
+    <string name="single_top">SingleTop</string>
+    <string name="single_task">SingleTask</string>
+    <string name="single_instance">SingleInstance</string>
+    <string name="is_running_foreground">是否运行在前台</string>
+    <string name="view_pager">ViewPager</string>
+    <string name="lazy_view_pager">LazyLoadViewPager</string>
+    <string name="screen_density">屏幕适配</string>
+    <string name="RecyclerView">RecyclerView</string>
+    <string name="multi_media">多媒体</string>
+    <string name="image">图像</string>
+    <string name="permission_manage">权限管理</string>
+    <string name="choose_photos">从相册中选择</string>
+    <string name="choose_system_photos">选择系统头像</string>
+    <string name="tack_photos">拍照</string>
+    <string name="cancel">取消</string>
+    <string name="permission_read_storage_rationale">选择图片时需要存储权限 \n\n请点击确定之后进入\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="permission_write_storage_rationale">拍照时需要存储权限 \n\n请点击确定之后进入\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="permission_location_rationale">定位需要定位权限 \n\n请点击确定之后进入\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="xml_learn">Learn_Xml</string>
+    <string name="web_service">WebService</string>
+    <string name="reference_learn">学习引用</string>
+    <string name="animation_learn">学习动画</string>
+    <string name="provider_learn">学习Provider</string>
 
 </resources>

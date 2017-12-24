@@ -156,4 +156,11 @@
     <color name="darkblue">#00008b</color> <!-- 暗蓝色 -->
     <color name="navy">#000080</color> <!-- 海军色 -->
     <color name="black">#000000</color> <!-- 黑色 -->
+    <color name="bottomTabTextColorNormal">@color/colorBlack</color>
+    <color name="bottomTabTextColorSelected">@color/colorDarkOrange</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorDarkOrange">#ff8c00</color>
+    <color name="popup_bg">#f1f1f1</color>
+    <color name="rippelColor">#FFFFFF</color>
+    <color name="fadeTransparent">#99000000</color>
 </resources>

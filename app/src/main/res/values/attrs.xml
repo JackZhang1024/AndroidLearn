@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="GameRangeSeekBar">
-        <attr name="seek_bar_height" format="dimension"/>
-        <attr name="seek_bar_bg" format="color"/>
-        <attr name="seek_bar_text_selected_color" format="color"/>
-        <attr name="seek_bar_text_normal_color" format="color"/>
-        <attr name="mark_text_size" format="dimension"/>
-        <attr name="mark_text_array" format="reference"/>
+        <attr name="seek_bar_height" format="dimension" />
+        <attr name="seek_bar_bg" format="color" />
+        <attr name="seek_bar_text_selected_color" format="color" />
+        <attr name="seek_bar_text_normal_color" format="color" />
+        <attr name="mark_text_size" format="dimension" />
+        <attr name="mark_text_array" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="RippleView">
+        <attr name="rv_alpha" format="integer" />
+        <attr name="rv_framerate" format="integer" />
+        <attr name="rv_rippleDuration" format="integer" />
+        <attr name="rv_zoomDuration" format="integer" />
+        <attr name="rv_color" format="color" />
+        <attr name="rv_centered" format="boolean" />
+        <attr name="rv_type" format="enum">
+            <enum name="simpleRipple" value="0" />
+            <enum name="doubleRipple" value="1" />
+            <enum name="rectangle" value="2" />
+        </attr>
+        <attr name="rv_ripplePadding" format="dimension" />
+        <attr name="rv_zoom" format="boolean" />
+        <attr name="rv_zoomScale" format="float" />
+
+    </declare-styleable>
+
+    <declare-styleable name="CustomCalendarView">
+        <attr name="calendarTitleTextColor" format="color" />
+        <attr name="dayOfWeekTextColor" format="color" />
+        <attr name="dayOfMonthTextColor" format="color" />
+        <attr name="calendarBackgroundColor" format="color" />
+        <attr name="disabledDayBackgroundColor" format="color" />
+        <attr name="disabledDayTextColor" format="color" />
+        <attr name="selectedDayBackgroundColor" format="color" />
+        <attr name="selectedDayTextColor" format="color" />
+        <attr name="weekLayoutBackgroundColor" format="color" />
+        <attr name="titleLayoutBackgroundColor" format="color" />
+        <attr name="currentDayOfMonthColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ColorImageView">
+        <attr name="ci_color" format="color" />
+    </declare-styleable>
+
+
 </resources>

@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lucky.androidlearn">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:name=".AndroidApplication"
         android:allowBackup="true"
@@ -11,18 +29,264 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".presentation.ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".widget.common.CommonWidgetActivity"
             android:label="@string/common_view" />
         <activity
             android:name=".widget.material.MaterialWidgetActivity"
             android:label="@string/material_view" />
+        <activity
+            android:name=".service.ServiceActivity"
+            android:label="@string/service" />
+        <activity
+            android:name=".widget.common.EditTextWidgetActivity"
+            android:label="EditText" />
+        <activity
+            android:name=".launchmode.LaunchModeActivity"
+            android:label="@string/launch_mode"
+            android:launchMode="standard" />
+
+        <activity
+            android:name=".launchmode.StandardActivity"
+            android:label="@string/standard_one"
+            android:launchMode="standard" />
+
+        <activity
+            android:name=".launchmode.SecondStandardActivity"
+            android:label="@string/standard_two"
+            android:launchMode="standard" />
+
+        <activity
+            android:name=".launchmode.SingleTopActivity"
+            android:label="@string/single_top"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".launchmode.SingleTaskActivity"
+            android:label="@string/single_task"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".launchmode.SingleInstanceActivity"
+            android:label="@string/single_instance"
+            android:launchMode="singleInstance" />
+
+        <activity
+            android:name=".widget.common.ActivityDialogActivity"
+            android:label="ActivityDialog"
+            android:launchMode="singleTop"
+            android:theme="@style/ActivityDialogStyle" />
+
+        <activity
+            android:name=".widget.common.AppForegroundActivity"
+            android:label="@string/is_running_foreground" />
+
+        <activity
+            android:name=".widget.screen.ScreenDensityActivity"
+            android:label="@string/screen_density" />
+
+        <activity
+            android:name=".widget.common.RecyclerViewActivity"
+            android:label="@string/RecyclerView" />
+
+        <activity
+            android:name=".widget.common.GoogleSwipeRefreshRVActivity"
+            android:label="@string/RecyclerView" />
+
+        <activity
+            android:name=".widget.common.SmartRefreshActivity"
+            android:label="@string/RecyclerView" />
+
+        <activity
+            android:name=".media.MediaActivity"
+            android:label="@string/multi_media" />
+
+        <activity
+            android:name=".media.image.ImageActivity"
+            android:label="@string/image" />
+
+        <activity
+            android:name=".permission.PermissionActivity"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".permission.PermissionManageActivity"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".permission.PermissionFragmentActivity"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".widget.common.fancygallery.FancyGalleryMainActivity"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".widget.common.fancygallery.example.SimpleExample"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".widget.common.fancygallery.example.ViewGroupExample"
+            android:label="@string/permission_manage" />
+        <activity
+            android:name=".widget.common.fancygallery.example.ViewGroupReflectionExample"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".widget.common.fancygallery.example.XmlInflateExample"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".widget.common.pulllistview.PullListViewActivity"
+            android:label="@string/permission_manage" />
+
+        <activity
+            android:name=".media.image.CropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".media.camera.TakePhotosByCameraActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".xml.XmlActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.notification.NotificationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.notification.TargetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".webservice.demo.CityActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".webservice.demo.WebServiceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".webservice.demo.WeatherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".reference.ReferenceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.AnimationMainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.viewanimation.ViewAnimationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.CustomAnimationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.objectanimation.ObjectorAnimationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.valueanimation.ValueAnimatorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.LayoutAnimationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.transitionanimation.TransitionStartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.transitionanimation.TransitionTargetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".provider.MainProviderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".provider.SimpleProviderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.transitionanimation.TransitionMainStartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.transitionanimation.TransitionMainTargetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.SVGAnimationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.EarthMoonSystemActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <service
+            android:name=".core.service.PollService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="POLLING_ACTION" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.lucky.androidlearn.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <provider
+            android:name="com.lucky.androidlearn.provider.BooksProvider"
+            android:authorities="com.lucky.androidlearn.provider" />
+
     </application>
+
 
 </manifest>

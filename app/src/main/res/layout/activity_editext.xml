@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="方法一输入的字数：" />
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="top|left"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/count2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="方法二输入的字数：" />
+
+    <EditText
+        android:id="@+id/content2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="top|left"
+        android:textColor="@color/black" />
+
+</LinearLayout>

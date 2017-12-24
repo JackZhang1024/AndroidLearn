@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_view_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="视图动画" />
+
+    <Button
+        android:id="@+id/btn_object_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="对象动画" />
+
+    <Button
+        android:id="@+id/btn_property_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="属性动画" />
+
+    <Button
+        android:id="@+id/btn_value_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="value动画" />
+
+    <Button
+        android:id="@+id/btn_layout_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="布局动画" />
+
+    <Button
+        android:id="@+id/btn_custom_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义动画" />
+
+    <Button
+        android:id="@+id/btn_transition_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="转场动画" />
+
+    <Button
+        android:id="@+id/btn_svg_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SVG动画" />
+
+</LinearLayout>

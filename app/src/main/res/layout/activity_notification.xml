@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:id="@+id/btn_push_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送通知" />
+
+    <Button
+        android:id="@+id/btn_push_custom_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送自定义通知" />
+
+    <Button
+        android:id="@+id/btn_push_big_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送大文本通知" />
+
+    <Button
+        android:id="@+id/btn_push_inboxstyle_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送InBox通知" />
+
+
+    <Button
+        android:id="@+id/btn_push_big_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送大图片通知" />
+
+    <Button
+        android:id="@+id/btn_push_hangup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送悬挂通知" />
+
+    <Button
+        android:id="@+id/btn_push_media"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送媒体通知" />
+
+
+    <Button
+        android:id="@+id/btn_progress_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击发送有进度条通知" />
+
+    <Button
+        android:id="@+id/btn_clear_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击取消所有通知" />
+
+
+</LinearLayout>

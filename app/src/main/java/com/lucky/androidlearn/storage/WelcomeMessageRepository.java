@@ -7,7 +7,6 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
-import timber.log.Timber;
 
 /**
  * Created by zfz on 2017/1/1.
@@ -28,12 +27,11 @@ public class WelcomeMessageRepository implements MessageRepository {
             //    Thread.sleep(1000);
             //    Timber.e("currentIndex  "+index);
             //}
-            getIpInfo();
+            //getIpInfo();
             //getWeatherInfo();
             //getWeatherInfoBody();
         } catch (Exception e) {
             e.printStackTrace();
-            Timber.e("Error " + e.getMessage());
         }
         return message;
     }
@@ -64,7 +62,6 @@ public class WelcomeMessageRepository implements MessageRepository {
         try {
             retrofit2.Response<TaobaoBean> bean = call.execute();
             area = bean.body().getData().getArea();
-            Timber.e("area " + area);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,7 +81,6 @@ public class WelcomeMessageRepository implements MessageRepository {
             WeatherInfos weatherInfos= call.execute().body();
             String city=weatherInfos.getCity();
             //String aqi=weatherInfos.getAqi();
-            Timber.e("city "+city);
         } catch (Exception e) {
             e.printStackTrace();
         }

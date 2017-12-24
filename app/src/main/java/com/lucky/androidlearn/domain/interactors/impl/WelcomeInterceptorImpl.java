@@ -6,7 +6,6 @@ import com.lucky.androidlearn.domain.executor.MainThread;
 import com.lucky.androidlearn.domain.interactors.WelcomeInteractor;
 import com.lucky.androidlearn.domain.interactors.base.AbstractInteractor;
 import com.lucky.androidlearn.domain.repository.MessageRepository;
-import timber.log.Timber;
 
 /**
  * Created by zfz on 2017/1/1.
@@ -65,6 +64,5 @@ public class WelcomeInterceptorImpl extends AbstractInteractor implements Welcom
     @Override
     public void cancel() {
         super.cancel();
-        Timber.e("isStillRunning---"+isRunning());
     }
 }
