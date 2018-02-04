@@ -8,9 +8,13 @@ import android.widget.Toast;
 
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
+import com.lucky.androidlearn.annotation.AnnotationActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
+import com.lucky.androidlearn.math.MathActivity;
 import com.lucky.androidlearn.media.MediaActivity;
 import com.lucky.androidlearn.media.image.ImageActivity;
+import com.lucky.androidlearn.mvc.MVCMainActivity;
+import com.lucky.androidlearn.mvp.retrofit.MVPMain2Activity;
 import com.lucky.androidlearn.permission.PermissionActivity;
 import com.lucky.androidlearn.permission.PermissionManageActivity;
 import com.lucky.androidlearn.presentation.presenters.MainPresenter;
@@ -90,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         //mMainPresenter.destroy();
     }
 
+
+
     @OnClick(R.id.main_view)
     public void onMainViewClick(View view) {
         Intent intent = new Intent(this, CommonWidgetActivity.class);
@@ -161,4 +167,35 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         Intent intent = new Intent(this, MainProviderActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_math_util)
+    public void onMathClick(View view) {
+        Intent intent = new Intent(this, MathActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_annotation)
+    public void onAnnotationClick(View view) {
+        Intent intent = new Intent(this, AnnotationActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_architecture_mvc)
+    public void onMVCArchitectureClick(View view){
+        Intent intent = new Intent(this, MVCMainActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_architecture_mvp)
+    public void onMVPArchitectureClick(View view){
+        Intent intent = new Intent(this, MVPMain2Activity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_architecture_mvvm)
+    public void onMVVMArchitectureClick(View view){
+        Intent intent = new Intent(this, MVCMainActivity.class);
+        startActivity(intent);
+    }
+
 }

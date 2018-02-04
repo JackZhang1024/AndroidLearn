@@ -1,10 +1,16 @@
 package com.lucky.androidlearn.permission;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.annotation.Nullable;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
 import com.jingewenku.abrahamcaijin.commonutil.AppLogMessageMgr;
 import com.jingewenku.abrahamcaijin.commonutil.AppPhoneMgr;
 import com.lucky.androidlearn.R;
@@ -61,13 +67,13 @@ public class PermissionActivity extends AppCompatActivity {
                             AppLogMessageMgr.e(TAG, "点击了拒绝但是没有点击不再询问 " + permission.name);
                         } else {
                             AppLogMessageMgr.e(TAG, "点击了拒绝同时点击不再询问 " + permission.name);
-                            showAlertDialog("需要打开权限  "+permission.name);
+                            showAlertDialog("需要打开权限  " + permission.name);
                         }
                     }
                 });
     }
 
-    private void showAlertDialog(String message){
+    private void showAlertDialog(String message) {
         AlertDialogHelper dialogHelper = new AlertDialogHelper();
         dialogHelper.showAlert(this, "提示", message, new AlertDialogHelper.AlertDialogInterface() {
             @Override
@@ -81,5 +87,8 @@ public class PermissionActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
 }

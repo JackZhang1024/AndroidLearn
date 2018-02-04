@@ -36,4 +36,11 @@ public class PermissionManageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.btn_location_permission)
+    public void onLocationPermissionClick(View view) {
+        Intent intent = new Intent(this, LocationPermissionCheckActivity.class);
+        startActivity(intent);
+    }
+
+
 }

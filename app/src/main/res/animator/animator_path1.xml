@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:duration="5000"
     android:propertyName="rotation"
     android:valueFrom="0"
-    android:valueTo="360" />
+    android:valueTo="360"
+    tools:ignore="UnusedResources" />

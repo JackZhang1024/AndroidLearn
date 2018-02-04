@@ -8,21 +8,60 @@
         android:id="@+id/btn_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="图像"
-        />
+        android:text="图像" />
 
     <Button
         android:id="@+id/btn_audio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="音频"
-        />
+        android:text="音频" />
 
     <Button
         android:id="@+id/btn_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="视频"
-        />
+        android:text="视频Intent" />
+
+    <Button
+        android:id="@+id/btn_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VideoView" />
+
+    <Button
+        android:id="@+id/btn_video_view_advanced"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VideoView进阶" />
+
+    <Button
+        android:id="@+id/btn_surface_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SurfaceVieo" />
+
+    <Button
+        android:id="@+id/btn_video_mediastore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VieoMediaStore" />
+
+    <Button
+        android:id="@+id/btn_video_capture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VieoCapture" />
+
+    <Button
+        android:id="@+id/btn_video_capture_advanced"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VieoCaptureAdvanced" />
+
+    <Button
+        android:id="@+id/btn_video_capture_texture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VieoCaptureTexture" />
 
 </LinearLayout>

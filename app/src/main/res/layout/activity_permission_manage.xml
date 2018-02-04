@@ -17,5 +17,11 @@
         android:layout_height="wrap_content"
         android:text="Fragment_Permission" />
 
+    <Button
+        android:id="@+id/btn_location_permission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="定位权限检查" />
+
 
 </LinearLayout>

@@ -48,5 +48,10 @@
     <string name="reference_learn">学习引用</string>
     <string name="animation_learn">学习动画</string>
     <string name="provider_learn">学习Provider</string>
-
+    <string name="math_util">数学工具</string>
+    <string name="architecture_mvc">MVC架构</string>
+    <string name="architecture_mvp">MVP架构</string>
+    <string name="architecture_mvvm">MVVM架构</string>
+    <string name="android_annotation">Annotation 注解</string>
+    <string name="constraint_layout">ConstraintLayout</string>
 </resources>

@@ -4,30 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/count"
+    <Button
+        android:id="@+id/btn_count_method_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="方法一输入的字数：" />
+        android:text="统计字符数方法一" />
 
-    <EditText
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:gravity="top|left"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/count2"
+    <Button
+        android:id="@+id/btn_count_method_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="方法二输入的字数：" />
+        android:text="统计字符数方法二" />
 
-    <EditText
-        android:id="@+id/content2"
+    <Button
+        android:id="@+id/btn_input_limit"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:gravity="top|left"
-        android:textColor="@color/black" />
+        android:layout_height="wrap_content"
+        android:text="输入字符限制" />
+
+    <Button
+        android:id="@+id/btn_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="软键盘显示隐藏监听" />
+
+    <Button
+        android:id="@+id/btn_keyboard_change"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="软键盘监听变化" />
 
 </LinearLayout>

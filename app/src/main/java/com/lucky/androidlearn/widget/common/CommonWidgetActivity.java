@@ -8,10 +8,11 @@ import android.view.View;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.R;
-import com.lucky.androidlearn.webservice.demo.WebServiceActivity;
+import com.lucky.androidlearn.widget.common.editText.EditTextWidgetActivity;
 import com.lucky.androidlearn.widget.common.fancygallery.FancyGalleryMainActivity;
 import com.lucky.androidlearn.widget.common.helper.AlertDialogHelper;
 import com.lucky.androidlearn.widget.common.pulllistview.PullListViewActivity;
+import com.lucky.androidlearn.widget.constraintlayout.ConstraintLayoutActivity;
 import com.lucky.androidlearn.widget.notification.NotificationActivity;
 
 import butterknife.ButterKnife;
@@ -99,6 +100,11 @@ public class CommonWidgetActivity extends AppCompatActivity {
     @OnClick(R.id.btn_notification)
     public void onPushNotificationClick(View view) {
         startActivity(new Intent(this, NotificationActivity.class));
+    }
+
+    @OnClick(R.id.btn_constraint_layout)
+    public void onConstraintLayoutClick(View view){
+        startActivity(new Intent(this, ConstraintLayoutActivity.class));
     }
 
 

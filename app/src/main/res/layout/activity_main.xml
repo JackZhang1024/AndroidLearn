@@ -7,13 +7,48 @@
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:scrollbars="none"
-    >
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/btn_annotation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/android_annotation" />
+
+        <Button
+            android:id="@+id/btn_architecture_mvc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/architecture_mvc" />
+
+        <Button
+            android:id="@+id/btn_architecture_mvp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/architecture_mvp" />
+
+        <Button
+            android:id="@+id/btn_architecture_mvvm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/architecture_mvvm" />
+
+        <Button
+            android:id="@+id/btn_math_util"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/math_util" />
 
         <Button
             android:id="@+id/btn_screen_density"

@@ -13,6 +13,8 @@ https://github.com/AbrahamCaiJin/CommonUtilLibrary
 整理整理之前的老代码 2017年12月24日10:14:52
 http://blog.csdn.net/qq_35114086/article/details/70050269
 http://blog.csdn.net/daitu_liang/article/details/50246803
+布局动画
+http://www.cnblogs.com/whoislcj/p/5802899.html
 
 动画总结 1.2-1.5
 自定义View总结  1.2-1.5
@@ -20,3 +22,22 @@ MaterialDesign总结   1.2-1.5
 视屏播放学习 1.5-1.20
 
 总结整理
+http://www.open-open.com/solution/view/1320990756062
+https://www.2cto.com/kf/201408/325309.html
+内存泄漏总结
+http://www.open-open.com/lib/view/open1512981820952.html
+WebView遇到的坑
+https://www.jianshu.com/p/2b2e5d417e10
+直播
+http://blog.csdn.net/Mr_Sk/article/details/71083366
+关于线程池的理解
+http://www.cnblogs.com/zhujiabin/p/5404771.html
+
+https://www.cnblogs.com/purpleraintear/p/6042476.html
+http://blog.csdn.net/superyuanzhe/article/details/48494121
+vitamio学习文档
+https://www.vitamio.org/docs/Tutorial/2014/0731/35.html
+滑动视频列表
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0329/4099.html
+Android软键盘监听
+http://blog.csdn.net/gusgao/article/details/52504630

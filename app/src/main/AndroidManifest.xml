@@ -19,7 +19,15 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT"/>
+    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_VIDEO"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <application
         android:name=".AndroidApplication"
@@ -47,7 +55,7 @@
             android:name=".service.ServiceActivity"
             android:label="@string/service" />
         <activity
-            android:name=".widget.common.EditTextWidgetActivity"
+            android:name=".widget.common.editText.EditTextWidgetActivity"
             android:label="EditText" />
         <activity
             android:name=".launchmode.LaunchModeActivity"
@@ -263,6 +271,122 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".widget.common.editText.CountInputCharacterOneActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.editText.CountInputCharacterTwoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.editText.InputLimitActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".media.video.VideoIntentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".media.video.VideoViewActivity"
+            android:label="VideoView"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 加上configChanges则不会重新走生命周期方法onCreate方法也不会调用 同时在屏幕方向发生变化的时候会调用onConfigChanged方法-->
+        <activity
+            android:name=".media.video.VideoViewAdvancedActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:label="VideoView进阶学习"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".media.video.SurfaceViewVideoActivity"
+            android:label="SurfaceVideo"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".media.video.VideoMediaStoreActivity"
+            android:label="VideoMediaStore"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".permission.LocationPermissionCheckActivity"
+            android:label="定位权限检查"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".media.video.VideoCaptureActivity"
+            android:label="VideoCapture"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".media.video.VideoCaptureAdvancedActivity"
+            android:label="VideoCaptureAdvanced"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".media.video.VideoCaptureTextureActivity"
+            android:label="VideoCaptureTexture"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.editText.EditTextKeyBoardChangeActivity"
+            android:label="EditTextKeyBoard"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize"
+            />
+
+        <activity
+            android:name=".widget.common.editText.keyBoardChangeActivity"
+            android:label="键盘监听"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize"
+            />
+
+
+        <activity
+            android:name=".math.MathActivity"
+            android:label="@string/math_util"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".annotation.AnnotationActivity"
+            android:label="@string/android_annotation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.constraintlayout.ConstraintLayoutActivity"
+            android:label="@string/constraint_layout"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvc.MVCMainActivity"
+            android:label="@string/architecture_mvc"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvp.retrofit.MVPMain2Activity"
+            android:label="@string/architecture_mvp"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"
@@ -287,6 +411,5 @@
             android:authorities="com.lucky.androidlearn.provider" />
 
     </application>
-
 
 </manifest>
