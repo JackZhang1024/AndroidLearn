@@ -57,4 +57,16 @@
         android:layout_height="wrap_content"
         android:text="启动其他App" />
 
+    <Button
+        android:id="@+id/btn_launch_exclude_from_recents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="启动Exclude_from_recents" />
+
+    <Button
+        android:id="@+id/btn_launch_browser_pdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="启动查看PDF" />
+
 </LinearLayout>

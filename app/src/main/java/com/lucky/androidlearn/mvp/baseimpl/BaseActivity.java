@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.jingewenku.abrahamcaijin.commonutil.AppManager;
 
 /**
+ * 一个简单的MVP框架
+ * https://github.com/azhon/Mvp-RxJava-Retrofit
  * Created by zfz on 2018/2/4.
  */
 

@@ -20,14 +20,13 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT"/>
-    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.RECORD_VIDEO"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <permission android:name="com.lucky.androidlearn.aidl.bms"/>
 
     <application
         android:name=".AndroidApplication"
@@ -38,6 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- android:excludeFromRecents="true" -->
         <activity android:name=".presentation.ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,6 +64,7 @@
 
         <activity
             android:name=".launchmode.StandardActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/standard_one"
             android:launchMode="standard" />
 
@@ -72,15 +73,23 @@
             android:label="@string/standard_two"
             android:launchMode="standard" />
 
+
         <activity
             android:name=".launchmode.SingleTopActivity"
             android:label="@string/single_top"
             android:launchMode="singleTop" />
 
+        <!-- taskAffinity 可以指定将启动的Activity所在的任务栈 一般和singleTask配合使用 -->
         <activity
             android:name=".launchmode.SingleTaskActivity"
             android:label="@string/single_task"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:taskAffinity="com.android.launchmode.singletask" />
+
+        <activity
+            android:name=".launchmode.ExcludeFromRecentsActivity"
+            android:label="@string/exclue_from_recents"
+            android:launchMode="singleTop" />
 
         <activity
             android:name=".launchmode.SingleInstanceActivity"
@@ -345,16 +354,14 @@
             android:label="EditTextKeyBoard"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".widget.common.editText.keyBoardChangeActivity"
             android:label="键盘监听"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
 
 
         <activity
@@ -382,10 +389,193 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".mvp.retrofit.MVPMain2Activity"
+            android:name=".mvp.MVPMainActivity"
             android:label="@string/architecture_mvp"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvp.retrofit.ComplexMVPActivity"
+            android:label="@string/architecture_mvp"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvp.simplemvp.SimpleMVPActivity"
+            android:label="@string/architecture_simple_mvp"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvvm.MVVMMainActivity"
+            android:label="@string/architecture_mvvm"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvvm.learn.MVVMLearnActivity"
+            android:label="@string/architecture_mvvm_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvvm.learn.DataBindingIncludeActivity"
+            android:label="@string/architecture_mvvm_databing_include"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".mvvm.learn.DataBindingRVActivity"
+            android:label="@string/architecture_mvvm_databing_recycleview"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava.ObserverActivity"
+            android:label="@string/observer_pattern"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.RxJavaActivity"
+            android:label="@string/rxjava"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
+        <activity
+            android:name=".rxjava2.RxJavaBasicActivity"
+            android:label="@string/rxjava_basic"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.RxJavaThreadControlActivity"
+            android:label="@string/rxjava_thread_control"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.RxJavaOperatorActivity"
+            android:label="@string/rxjava_thread_control"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.RxJavaKeyWordsSearchActivity"
+            android:label="@string/rxjava_keywords_search"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.RxJavaThrottleFirstActivity"
+            android:label="@string/rxjava_avoid_double_click"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
+        <activity
+            android:name=".rxjava2.RxJavaMergeActivity"
+            android:label="@string/rxjava_merge"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.RxJavaCountDownActivity"
+            android:label="@string/rxjava_countdown"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.RxJavaImageDownloadActivity"
+            android:label="@string/rxjava_image_download"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".handler.HandlerLearnActivity"
+            android:label="@string/handler_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".handler.HandlerThreadActivity"
+            android:label="@string/work_to_handler"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".rxjava2.search.RealTimeSearchActivity"
+            android:label="@string/real_time_search"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.learn00.Dagger2Main0Activity"
+            android:label="@string/dagger2_learn_0"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.learn01.Dagger2MainActivity"
+            android:label="@string/dagger2_learn_1"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.learn02.Dagger2Main2Activity"
+            android:label="@string/dagger2_learn_2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.learn03.Dagger2Main3Activity"
+            android:label="@string/dagger2_learn_3"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.lesson04.Dagger2Main4Activity"
+            android:label="@string/dagger2_learn_4"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.lesson04.Dagger2Main5Activity"
+            android:label="@string/dagger2_learn_5"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.DaggerLearnMainActivity"
+            android:label="@string/dagger2_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".animation.curveanimation.CurveAnimationMainActivity"
+            android:label="@string/curve_animation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ipc.IPCLearnActivity"
+            android:label="@string/ipc_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".messager.MessengerActivity"
+            android:label="@string/messager_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".aidl.BookManagerActivity"
+            android:label="@string/ipc_aidl"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
 
         <service
             android:name=".core.service.PollService"
@@ -395,6 +585,37 @@
                 <action android:name="POLLING_ACTION" />
             </intent-filter>
         </service>
+
+        <!-- Messenger 的使用 -->
+        <service
+            android:name=".messager.MessengerService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":remote_ms" />
+
+        <!-- AIDL的使用 -->
+        <service
+            android:name=".aidl.BookManagerService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote_bms">
+            <intent-filter>
+                <action android:name="com.lucky.aidl.bms"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".service.LearnStartService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":remote" />
+
+        <service
+            android:name=".service.LearnStartServiceII"
+            android:enabled="true"
+            android:exported="false"
+            android:process="com.lucky.androidlearn.start.service2" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -9,19 +9,22 @@ import android.widget.Toast;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
+import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
+import com.lucky.androidlearn.handler.HandlerLearnActivity;
+import com.lucky.androidlearn.handler.HandlerThreadActivity;
+import com.lucky.androidlearn.ipc.IPCLearnActivity;
 import com.lucky.androidlearn.math.MathActivity;
 import com.lucky.androidlearn.media.MediaActivity;
-import com.lucky.androidlearn.media.image.ImageActivity;
 import com.lucky.androidlearn.mvc.MVCMainActivity;
-import com.lucky.androidlearn.mvp.retrofit.MVPMain2Activity;
-import com.lucky.androidlearn.permission.PermissionActivity;
+import com.lucky.androidlearn.mvp.MVPMainActivity;
+import com.lucky.androidlearn.mvvm.MVVMMainActivity;
 import com.lucky.androidlearn.permission.PermissionManageActivity;
 import com.lucky.androidlearn.presentation.presenters.MainPresenter;
 import com.lucky.androidlearn.presentation.presenters.impl.MainPresenterImpl;
 import com.lucky.androidlearn.provider.MainProviderActivity;
-import com.lucky.androidlearn.provider.SimpleProviderActivity;
 import com.lucky.androidlearn.reference.ReferenceActivity;
+import com.lucky.androidlearn.rxjava2.RxJavaActivity;
 import com.lucky.androidlearn.webservice.demo.WebServiceActivity;
 import com.lucky.androidlearn.widget.common.AppForegroundActivity;
 import com.lucky.androidlearn.launchmode.LaunchModeActivity;
@@ -93,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         super.onDestroy();
         //mMainPresenter.destroy();
     }
-
 
 
     @OnClick(R.id.main_view)
@@ -181,20 +183,52 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     }
 
     @OnClick(R.id.btn_architecture_mvc)
-    public void onMVCArchitectureClick(View view){
+    public void onMVCArchitectureClick(View view) {
         Intent intent = new Intent(this, MVCMainActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.btn_architecture_mvp)
-    public void onMVPArchitectureClick(View view){
-        Intent intent = new Intent(this, MVPMain2Activity.class);
+    public void onMVPArchitectureClick(View view) {
+        Intent intent = new Intent(this, MVPMainActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.btn_architecture_mvvm)
-    public void onMVVMArchitectureClick(View view){
-        Intent intent = new Intent(this, MVCMainActivity.class);
+    public void onMVVMArchitectureClick(View view) {
+        Intent intent = new Intent(this, MVVMMainActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_rxjava)
+    public void onRxJavaClick(View view) {
+        Intent intent = new Intent(this, RxJavaActivity.class);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.btn_handler_learn)
+    public void onHandlerClick() {
+        Intent intent = new Intent(this, HandlerLearnActivity.class);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.btn_handler_thread_learn)
+    public void onHandlerThreadLearn(){
+        Intent intent = new Intent(this, HandlerThreadActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_dagger2_main)
+    public void onDagger2MainLearn(){
+        Intent intent = new Intent(this, DaggerLearnMainActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_ipc_learn)
+    public void onIPCLearn(){
+        Intent intent = new Intent(this, IPCLearnActivity.class);
         startActivity(intent);
     }
 

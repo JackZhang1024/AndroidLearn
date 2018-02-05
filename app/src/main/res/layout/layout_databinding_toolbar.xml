@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    >
+
+    <data>
+        <variable
+            name="content"
+            type="com.lucky.androidlearn.mvvm.learn.Content"/>
+    </data>
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:title="@{content.title}"
+        app:titleTextColor="@color/blue"
+        app:subtitle="@{content.subTitle}"
+        app:subtitleTextColor="@color/subject_blue"
+        android:background="@color/green"
+        />
+
+</layout>

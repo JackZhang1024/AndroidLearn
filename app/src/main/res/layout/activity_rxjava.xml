@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_obsever_pattern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="观察者模式" />
+
+    <Button
+        android:id="@+id/btn_lesson_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RxJava基本使用" />
+
+    <Button
+        android:id="@+id/btn_lesson_02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RxJava线程控制" />
+
+    <Button
+        android:id="@+id/btn_lesson_03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RxJava操作符" />
+
+    <Button
+        android:id="@+id/btn_lesson_04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RxJava关键字搜索" />
+
+    <Button
+        android:id="@+id/btn_lesson_05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rxjava_avoid_double_click" />
+
+    <Button
+        android:id="@+id/btn_lesson_06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rxjava_merge" />
+
+    <Button
+        android:id="@+id/btn_lesson_07"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rxjava_countdown" />
+
+    <Button
+        android:id="@+id/btn_lesson_08"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rxjava_image_download" />
+
+    <Button
+        android:id="@+id/btn_lesson_09"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/real_time_search" />
+
+</LinearLayout>

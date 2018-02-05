@@ -33,9 +33,15 @@ public class CurveAnimationMainActivity extends AppCompatActivity {
     private RelativeLayout relativeLayout;
     private int targetX;
     private int targetY;
+
+    //屏幕中心点X坐标
     private int srcX = 0;
+
+    //屏幕中心点Y坐标
     private int srcY = 0;
+    //父布局定点X坐标
     private int parentX;
+    //父布局定点Y坐标
     private int parentY;
     private PathMeasure pathMeasure;
     private float[] mCurrentPositions = new float[2];
@@ -112,10 +118,10 @@ public class CurveAnimationMainActivity extends AppCompatActivity {
     }
 
     private void moveView(int rawX, int rawY, View movedView) {
-        int left = rawX - movedView.getWidth() / 2;
-        int top = rawY - movedView.getHeight() / 2;
+        int left  = rawX - movedView.getWidth() / 2;
+        int top   = rawY - movedView.getHeight() / 2;
         int right = left + movedView.getWidth();
-        int bottom = top + movedView.getHeight();
+        int bottom= top + movedView.getHeight();
         movedView.layout(left, top, right, bottom);
     }
 
@@ -296,12 +302,12 @@ public class CurveAnimationMainActivity extends AppCompatActivity {
         int controlX = (startX + endX) / 2;
         int controlY = (startY + endY) / 5;
         final int[] srcLocations = new int[]{startX, startY};
-        //设置贝塞尔曲线路径
+        // 设置贝塞尔曲线路径
         Path path = new Path();
-        //将贝塞尔曲线移动到开始中心点位置
+        // 将贝塞尔曲线移动到开始中心点位置
         path.moveTo(startX - 50, startY);
-        //设置贝塞尔曲线中间位置的点坐标
-        //path.quadTo((startX + endX) /3, startY, endX, endY);
+        // 设置贝塞尔曲线中间位置的点坐标
+        // path.quadTo((startX + endX) /3, startY, endX, endY);
         path.quadTo(controlX, controlY, endX, endY);
         pathMeasure = new PathMeasure(path, false);
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
@@ -412,6 +418,7 @@ public class CurveAnimationMainActivity extends AppCompatActivity {
         int height = dm.heightPixels;
         // 2.获取状态栏的高度
         // getDecorView获取得到的DecorView是window最顶层的View
+        // DecoreView不包括状态栏 它的顶部坐标恰好是状态栏的高度
         Rect frame = new Rect();
         getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int stateHeight = frame.top;

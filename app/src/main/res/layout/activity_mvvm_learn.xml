@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.lucky.androidlearn.mvvm.learn.MyStringUtils" />
+        <!-- 取别名可以避免在不同包下面相同的类型混用 -->
+        <import
+            alias="zhou"
+            type="com.lucky.androidlearn.mvvm.learn.UserEntity" />
+
+        <variable
+            name="event"
+            type="com.lucky.androidlearn.mvvm.learn.MVVMLearnActivity.EventListener" />
+
+        <variable
+            name="content"
+            type="String" />
+
+        <variable
+            name="enabled"
+            type="boolean" />
+
+        <variable
+            name="user"
+            type="zhou" />
+
+        <variable
+            name="profile"
+            type="com.lucky.androidlearn.mvvm.learn.Profile" />
+
+        <variable
+            name="title1"
+            type="String" />
+
+        <variable
+            name="title2"
+            type="String" />
+
+        <variable
+            name="title3"
+            type="String" />
+
+        <variable
+            name="title4"
+            type="String" />
+
+        <variable
+            name="operation0"
+            type="int"/>
+
+        <variable
+            name="person"
+            type="com.lucky.androidlearn.mvvm.learn.PersonObservable"/>
+
+        <import type="java.util.ArrayList"/>
+        <import type="java.util.Map"/>
+        <import type="java.lang.String"/>
+
+        <!-- 列表 ArrayLis<String> -->
+        <variable
+            name="list"
+            type="ArrayList&lt;String&gt;"/>
+
+        <!-- Map Map<String, String> -->
+        <variable
+            name="map"
+            type="Map&lt;String,String&gt;"/>
+
+        <!-- 数组 String[] -->
+        <variable
+            name="array"
+            type="String[]"/>
+
+        <!--自动改变数据的list/map -->
+        <variable
+            name="observablelist"
+            type="android.databinding.ObservableList&lt;String&gt;"/>
+
+        <variable
+            name="observablemap"
+            type="android.databinding.ObservableMap&lt;String,String&gt;"/>
+
+
+    </data>
+
+    <ScrollView xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_basic_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{content}" />
+
+            <Button
+                android:id="@+id/btn_basic_enable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="@{enabled}" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.nickname}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.username}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(user.age)}" />
+
+            <!--  android:visibility="@{user.adult? View.VISIBLE: View.GONE}"  -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brown"
+                android:text="@{user.username}" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:useravatar="@{profile.userAvatar}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{profile.userName}" />
+
+            <!-- 等价于 user.username==null? user.username: user.nickname -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:text="@{user.username??user.nickname}" />
+
+            <!-- 通过静态方法转化数据   英文名首字母大写 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{MyStringUtils.capitalize(profile.userName)}" />
+
+            <!-- ESC 键盘 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow"
+                android:text="@{`Hello World `+@string/app_name}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/aqua"
+                android:text="@{String.valueOf(operation0*200)}" />
+
+            <Button
+                android:id="@+id/btn_change_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="修改文字" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{event::onClick1}"
+                android:text="@{title1}" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{event::onClick2}"
+                android:text="@{title2}" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->event.onClick3(title4)}"
+                android:text="@{title3}" />
+
+            <!-- 自动View上的改变数据-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{person.name}" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{person.nickname}" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_change_name_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="改变姓名和昵称"
+                />
+
+            <!-- list map array 的使用 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{list.get(0)}"
+                android:background="@color/blue"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{map.get(`name`)}"
+                android:background="@color/blueviolet"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{array[0]}"
+                android:background="@color/greenyellow"
+                />
+
+            <!--
+               Animal属性数据改变， list/Map 数据改变 文本控件上的文字自动发生改变 不用我们去设置如setText()
+             -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{observablelist.get(0)}"
+                android:background="@color/aliceblue"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{observablemap.get(`gender`)}"
+                android:background="@color/antiquewhite"
+                />
+
+            <Button
+                android:id="@+id/btn_change_observable_collection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自动改变集合中数据到TextView上"
+                />
+
+            <Button
+                android:id="@+id/btn_databinding_include"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DataBinding和include标签结合使用"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

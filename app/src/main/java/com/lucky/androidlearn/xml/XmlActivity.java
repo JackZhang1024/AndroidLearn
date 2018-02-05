@@ -14,9 +14,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-
 import com.lucky.androidlearn.R;
 
 import junit.framework.Assert;

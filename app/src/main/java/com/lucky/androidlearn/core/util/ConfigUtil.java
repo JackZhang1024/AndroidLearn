@@ -30,7 +30,8 @@ public class ConfigUtil {
     private static void loadProperties(String filename) {
         InputStream in = null;
         try {
-            in = new FileInputStream(filename);//项目的根目录路径下
+            //项目的根目录路径下
+            in = new FileInputStream(filename);
             //in=new FileInputStream("src/"+filename);//src目录下
             //in=Config.class.getClassLoader().getResourceAsStream(filename);//src目录下
             properties.load(in);

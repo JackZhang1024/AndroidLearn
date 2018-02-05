@@ -14,10 +14,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * https://github.com/azhon/Mvp-RxJava-Retrofit
+ *
  * Created by zfz on 2018/2/4.
  */
 
-public class MVPMain2Activity extends BaseActivity<TestContact.Presenter> implements TestContact.View{
+public class ComplexMVPActivity extends BaseActivity<TestContact.Presenter> implements TestContact.View{
 
     @BindView(R.id.tv_query_weather_result)
     TextView mTvWeatherQueryResult;

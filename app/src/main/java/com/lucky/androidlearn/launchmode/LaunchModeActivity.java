@@ -2,17 +2,32 @@ package com.lucky.androidlearn.launchmode;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppApplicationMgr;
-import com.jingewenku.abrahamcaijin.commonutil.AppManager;
+import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
+import com.lucky.androidlearn.BuildConfig;
 import com.lucky.androidlearn.R;
+import com.lucky.androidlearn.core.util.MIMEUtil;
+import com.lucky.androidlearn.dagger2learn.lesson04.ToastManager;
+
+import java.io.File;
+import java.util.List;
+
+import javax.activation.MimeType;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +41,7 @@ import butterknife.OnClick;
 
 public class LaunchModeActivity extends AppCompatActivity {
 
+    private static final String TAG = "LaunchModeActivity";
     @BindView(R.id.tv_instance_name)
     TextView tvInstanceName;
     @BindView(R.id.tv_task_id)
@@ -80,12 +96,20 @@ public class LaunchModeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.btn_launch_exclude_from_recents)
+    public void onLaunchExcluedFromRecentsClick(View view) {
+        Intent intent = new Intent(this, ExcludeFromRecentsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(intent);
+    }
+
     // 启动分享页 单独存在于一个Task中
     @OnClick(R.id.btn_launch_another_app)
     public void onLaunchAnotherAppClick(View view) {
         launchAnotherApp();
     }
 
+    // Scheme跳转协议
     private void launchAnotherApp() {
         if (AppApplicationMgr.isInstalled(this, "com.lucky.customviewlearn")) {
             String aciton = "com.aragoncs.launch";
@@ -93,6 +117,42 @@ public class LaunchModeActivity extends AppCompatActivity {
             Intent intent = new Intent(aciton);
             intent.setData(Uri.parse(uri));
             startActivity(intent);
+        }
+    }
+
+    @OnClick(R.id.btn_launch_browser_pdf)
+    public void onOpenPDFClick() {
+        String filePath = Environment.getExternalStorageDirectory().getAbsoluteFile() + File.separator + "hello.pdf";
+        Log.e(TAG, "onOpenPDFClick: " + filePath);
+        openPDF(filePath);
+    }
+
+    private void openPDF(String filePath) {
+        try {
+            Uri uri = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".fileProvider", new File(filePath));
+            } else {
+                uri = Uri.fromFile(new File(filePath));
+            }
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            //intent.setType("application/pdf");
+            String mimeType = MIMEUtil.getMIMEType(new File(filePath));
+            intent.setType(mimeType);
+            List<ResolveInfo> activityInfoList = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            if (activityInfoList != null && activityInfoList.size() > 0) {
+                Intent realIntent = new Intent();
+                realIntent.setAction(Intent.ACTION_VIEW);
+                realIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                realIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                realIntent.setDataAndType(uri, "application/pdf");
+                startActivity(realIntent);
+            } else {
+                AppToastMgr.show(this, "没有找到对应的程序");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -105,7 +165,7 @@ public class LaunchModeActivity extends AppCompatActivity {
         String action = "com.aragon.test";
         ComponentName name = new ComponentName(packageName, activityName);
         Intent intent = new Intent(action);
-//      intent.setAction(action);
+        // intent.setAction(action);
         intent.setComponent(name);
         intent.putExtra("EXTRA_PARAM0", "HELLO");
         intent.putExtra("EXTRA_PARAM1", "WORLD");

@@ -4,10 +4,13 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +23,8 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.lucky.androidlearn.R;
+
+import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -241,6 +246,47 @@ public class NotificationActivity extends AppCompatActivity {
         notification.defaults |= Notification.DEFAULT_LIGHTS;
         managerCompat.notify(CUSTOM_LAYOUT_NOTIFICATION, notification);
     }
+
+    @OnClick(R.id.btn_custom_sound_notification)
+    public void pushCustomSoundNotification(View view) {
+        long when = System.currentTimeMillis() + 5 * 60 * 1000;
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        Intent intent = new Intent(this, TargetActivity.class);
+        PendingIntent pdi = PendingIntent.getActivity(this, 0, intent, 0);
+        RemoteViews remoteviews = new RemoteViews(getPackageName(), R.layout.remoteview);
+        remoteviews.setTextViewText(R.id.tv_remoteview_1, "RemoteView1Text");
+        remoteviews.setTextViewText(R.id.tv_remoteview_2, "RemoteView2Text");
+        remoteviews.setOnClickPendingIntent(R.id.tv_remoteview_1, pdi);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setLargeIcon(largeIcon);
+        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setWhen(System.currentTimeMillis());
+        builder.setNumber(10);
+        builder.setContentIntent(pdi);
+        builder.setContent(remoteviews);
+        Notification notification = builder.build();
+        notification.flags |= Notification.FLAG_ONGOING_EVENT; // 表明某件事情正在进行
+        notification.flags |= Notification.FLAG_NO_CLEAR; // 在点击清除的时候 不清楚该条通知
+        //notification.defaults |= Notification.DEFAULT_SOUND;
+        //notification.defaults |= Notification.DEFAULT_VIBRATE;
+        notification.defaults |= Notification.DEFAULT_LIGHTS;
+
+        //获取设置通知的声音
+        Uri sound0=Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.notificationsound);
+        Uri sound1=Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/raw/notificationsound");
+        Uri sound2=Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/"+R.raw.notificationsound);
+        //从铃声管理器
+        Uri sound3= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        //从文件
+        //Uri sound4=Uri.fromFile(new File("/sdcard/sound.mp3"))
+        //Uri sound5=Uri.parse(new File("/sdcard/sound.mp3").toString()));
+
+        //设置通知的声音
+        notification.sound = sound3;
+        managerCompat.notify(CUSTOM_LAYOUT_NOTIFICATION, notification);
+    }
+
 
     @OnClick(R.id.btn_clear_notifications)
     public void clearAllNotifications(View view) {

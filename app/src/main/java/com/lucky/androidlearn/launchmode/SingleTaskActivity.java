@@ -22,12 +22,16 @@ public class SingleTaskActivity extends AppCompatActivity {
     @BindView(R.id.tv_instance_name)
     TextView tvInstanceName;
 
+    @BindView(R.id.tv_task_id)
+    TextView tvTaskID;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singletask);
         ButterKnife.bind(this);
         tvInstanceName.setText(this.toString());
+        tvTaskID.setText(String.format("TaskID %s", getTaskId()));
     }
 
     @OnClick(R.id.btn_standard)

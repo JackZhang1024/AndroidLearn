@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
@@ -23,6 +24,8 @@ import butterknife.OnClick;
  */
 
 public class CommonWidgetActivity extends AppCompatActivity {
+
+    private static final String TAG = "CommonWidgetActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,6 +110,35 @@ public class CommonWidgetActivity extends AppCompatActivity {
         startActivity(new Intent(this, ConstraintLayoutActivity.class));
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e(TAG, "onStart: ");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e(TAG, "onRestart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e(TAG, "onPause: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(TAG, "onStop: ");
+    }
 
     @Override
     protected void onDestroy() {

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_ipc_share_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ipc_share_file" />
+
+    <Button
+        android:id="@+id/btn_ipc_messager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ipc_messager" />
+
+    <Button
+        android:id="@+id/btn_ipc_aidl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ipc_aidl" />
+
+    <Button
+        android:id="@+id/btn_ipc_socket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ipc_socket" />
+
+    <Button
+        android:id="@+id/btn_ipc_contentprovider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ipc_content_provider" />
+
+</LinearLayout>

@@ -1,6 +1,5 @@
 package com.lucky.androidlearn.widget.common.scrollconflict;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;

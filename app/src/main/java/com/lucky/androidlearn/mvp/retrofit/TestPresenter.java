@@ -24,7 +24,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TestPresenter extends BasePresenterImpl<TestContact.View> implements TestContact.Presenter {
 
-
     public TestPresenter(TestContact.View baseView) {
         super(baseView);
     }

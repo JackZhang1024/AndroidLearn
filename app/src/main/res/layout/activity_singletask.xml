@@ -12,6 +12,15 @@
         android:textColor="@color/black"
         />
 
+    <TextView
+        android:id="@+id/tv_task_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        />
+
     <Button
         android:id="@+id/btn_standard"
         android:layout_width="match_parent"

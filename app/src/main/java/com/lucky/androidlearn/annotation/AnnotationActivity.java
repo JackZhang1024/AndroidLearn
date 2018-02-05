@@ -59,6 +59,7 @@ public class AnnotationActivity extends AppCompatActivity {
     private void learnAnnotation() {
         ActionBarImpl actionBar = new ActionBarImpl();
         actionBar.setNavigationMode(AbstractActionBar.NAVIGATION_MODE_STANDARD);
+        //actionBar.setNavigationMode(9);
         //actionBar.setNavigationMode(AbstractActionBar.NAVIGATION_MODE_STANDARD | AbstractActionBar.NAVIGATION_MODE_ABS);
         System.out.println("ActionBar navigationMode " + actionBar.getNavigationMode());
 

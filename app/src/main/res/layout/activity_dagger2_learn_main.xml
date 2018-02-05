@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_dagger2_0_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dagger2_learn_0" />
+
+    <Button
+        android:id="@+id/btn_dagger2_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dagger2_learn_1" />
+
+    <Button
+        android:id="@+id/btn_dagger2_2_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dagger2_learn_2" />
+
+    <Button
+        android:id="@+id/btn_dagger2_3_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dagger2_learn_3" />
+
+    <Button
+        android:id="@+id/btn_dagger2_4_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dagger2_learn_4" />
+
+    <Button
+        android:id="@+id/btn_dagger2_5_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dagger2_learn_5" />
+
+
+</LinearLayout>

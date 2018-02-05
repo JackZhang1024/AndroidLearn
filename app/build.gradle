@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda' //这是重点
+//apply plugin: 'me.tatarka.retrolambda' //这是重点
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
     defaultConfig {
         applicationId "com.lucky.androidlearn"
-        minSdkVersion 21
-        targetSdkVersion 26
+        minSdkVersion androidMiniSdkVersion
+        targetSdkVersion androidTargetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,10 +19,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+//    main {
+//        java.srcDirs = ['src/main/java', 'src/main/aidl']
+//    }
+
+
     //支持Java8
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // 配合MVVM使用
+    dataBinding {
+        enabled = true;
     }
 
     // lint检查
@@ -45,56 +56,63 @@ android {
     }
 
     dependencies {
-        compile fileTree(include: ['*.jar'], dir: 'libs')
-        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
             exclude group: 'com.android.support', module: 'support-annotations'
         })
-        compile 'com.android.support.constraint:constraint-layout:1.0.2'
-        compile files('libs/activation.jar')
-        compile files('libs/additionnal.jar')
-        compile files('libs/mail.jar')
-        compile 'com.android.support:appcompat-v7:26.0.0-betal1'
-        compile 'com.android.support:support-v4:26.0.0-alpha1'
-        compile 'com.jakewharton:butterknife:8.8.1'
+        implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+        implementation files('libs/activation.jar')
+        implementation files('libs/additionnal.jar')
+        implementation files('libs/mail.jar')
+        implementation files('libs/ksoap2-android.jar')
+        implementation "com.android.support:appcompat-v7:$supportVersion"
+        implementation "com.android.support:support-v4:$supportVersion"
+        implementation 'com.jakewharton:butterknife:8.8.1'
         annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-        compile 'com.android.support:design:26.0.0-alpha1'
+        implementation "com.android.support:design:$supportVersion"
         // Retrofit
-        compile 'com.squareup.retrofit2:retrofit:2.0.0'
+        implementation 'com.squareup.retrofit2:retrofit:2.0.0'
         // Gson转换器
-        compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+        implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
         // 字符串转换器
-        compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
+        implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
         // simplexml转换器
-        compile('com.squareup.retrofit2:converter-simplexml:2.1.0') {
+        implementation('com.squareup.retrofit2:converter-simplexml:2.1.0') {
             exclude group: 'xpp3', module: 'xpp3'
             exclude group: 'stax', module: 'stax-api'
             exclude group: 'stax', module: 'stax'
         }
         // RxJava
-        compile 'io.reactivex.rxjava2:rxjava:2.1.1'
-        compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-        //retrofit    返回值的adapter的转化器，为了于RxJava配合使用
-        compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-        compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'//拦截器
+        implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
+        implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+        // retrofit    返回值的adapter的转化器，为了于RxJava配合使用
+        implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+        // RxBinding 配合RxJava使用
+        implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+        implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'//拦截器
         // 智能刷新库
-        compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+        implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
         // 没有使用特殊Header，可以不加这行
-        compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+        implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
         // tests
-        testCompile 'junit:junit:4.12'
-        testCompile 'org.mockito:mockito-core:1.+'
-        compile project(':repository:CommonUtil')
-        compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
+        testImplementation 'junit:junit:4.12'
+        testImplementation 'org.mockito:mockito-core:1.+'
+        implementation project(':repository:CommonUtil')
+        implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
         // 裁剪图片
-        compile('com.kevin:crop:1.0.2') {
+        implementation('com.kevin:crop:1.0.2') {
             exclude group: 'com.android.support', module: 'appcompat-v7'
         }
-        compile project(':repository:fancygallery')
-        compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
-        compile project(':repository:materialdesign')
-        compile 'com.android.support:cardview-v7:26.0.0-alpha1'
-        compile 'com.android.support:support-annotations:26.0.0-alpha1'
-        compile 'com.orhanobut:logger:2.1.1'
+        implementation project(':repository:fancygallery')
+        implementation files('libs/universal-image-loader-1.8.6-with-sources.jar')
+        implementation project(':repository:materialdesign')
+        implementation "com.android.support:cardview-v7:$supportVersion"
+        implementation "com.android.support:support-annotations:$supportVersion"
+        implementation 'com.orhanobut:logger:2.1.1'
+        implementation 'com.squareup.picasso:picasso:2.5.2'
+        // Dagger2的依赖配置
+        implementation 'com.google.dagger:dagger:2.13'
+        annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+
     }
 
     packagingOptions {
@@ -106,4 +124,3 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 }
-

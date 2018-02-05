@@ -3,10 +3,13 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath 'me.tatarka:gradle-retrolambda:3.6.1'
+        // Dagger2自动代码生成
+        // classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -15,7 +18,26 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
     }
+}
+
+ext {
+    androidCompileSdkVersion = 26
+    androidCompileTestSdkVersion = 26
+    androidMiniSdkVersion = 21
+    androidTargetSdkVersion = 26
+    androidBuildToolsVersion = "27.0.3"
+    appVersionName = "2.0"
+    appVersionCode = 2
+
+    //Libraries versions
+    supportVersion = '26.1.0'
+    androidTestRunnerVersion = '0.5'
+    espressoVersion = '2.2.2'
+    daggerVersion = '2.13'
+    okhttpVersion = '3.2.0'
+    gsonVersion = "2.4"
 }
 
 task clean(type: Delete) {

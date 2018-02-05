@@ -43,10 +43,10 @@ public class ActivityDialogActivity extends Activity {
         getWindow().setGravity(Gravity.CENTER); // 设置对话框出现的位置
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
+        int height= displayMetrics.heightPixels;
         Log.d(TAG, "setWindowConfig: width "+width+" height "+height);
         int windowWidth = width*85/100;
-        int windowHeight = height*50/100;
+        int windowHeight= height*50/100;
         getWindow().setLayout(windowWidth, windowHeight);
     }
 

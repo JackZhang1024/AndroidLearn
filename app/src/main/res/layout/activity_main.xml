@@ -44,6 +44,13 @@
             android:text="@string/architecture_mvvm" />
 
         <Button
+            android:id="@+id/btn_rxjava"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/rxjava" />
+
+        <Button
             android:id="@+id/btn_math_util"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,6 +139,34 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/provider_learn" />
+
+        <Button
+            android:id="@+id/btn_handler_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/handler_learn" />
+
+        <Button
+            android:id="@+id/btn_handler_thread_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/handler_thread_learn" />
+
+        <Button
+            android:id="@+id/btn_dagger2_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/dagger2_main" />
+
+        <Button
+            android:id="@+id/btn_ipc_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/ipc_learn" />
 
     </LinearLayout>
 

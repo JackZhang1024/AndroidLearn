@@ -1,0 +1,13 @@
+单纯的摆脱findviewbyid
+绑定基本数据类型及String
+绑定Model数据
+绑定事件
+通过静态方法转换数据类型
+通过运算符操作数据
+自定义Binding的类名
+绑定相同Model的操作
+model变量改变自动更新数据
+绑定List/Map等集合数据
+Observable自动更新
+Databinding与include标签的结合
+DataBinding与RecyclerView的结合

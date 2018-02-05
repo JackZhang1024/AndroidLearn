@@ -69,4 +69,9 @@ public class AnimationMainActivity extends AppCompatActivity {
         startActivity(new Intent(this, SVGAnimationActivity.class));
     }
 
+    @OnClick(R.id.btn_curve_animation)
+    public void onCurveAnimationClick(View view) {
+        startActivity(new Intent(this, CurveAnimationMainActivity.class));
+    }
+
 }

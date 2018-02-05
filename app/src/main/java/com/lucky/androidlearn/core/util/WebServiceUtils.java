@@ -1,4 +1,4 @@
-package com.jingewenku.abrahamcaijin.commonutil;
+package com.lucky.androidlearn.core.util;
 
 import android.os.Handler;
 import android.os.Message;

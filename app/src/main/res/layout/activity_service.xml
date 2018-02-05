@@ -42,5 +42,46 @@
         android:layout_marginTop="10dp"
         android:text="@string/restart_polling" />
 
+    <Button
+        android:id="@+id/btn_start_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/start_service" />
+
+    <Button
+        android:id="@+id/btn_stop_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/stop_service" />
+
+    <Button
+        android:id="@+id/btn_start_service2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/start_service_2" />
+
+    <Button
+        android:id="@+id/btn_stop_service2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/stop_service_2" />
+
+    <Button
+        android:id="@+id/btn_bind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/bind_service" />
+
+    <Button
+        android:id="@+id/btn_aidl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/service_aidl" />
 
 </LinearLayout>

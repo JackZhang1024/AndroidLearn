@@ -56,6 +56,13 @@
         android:layout_height="wrap_content"
         android:text="点击发送有进度条通知" />
 
+
+    <Button
+        android:id="@+id/btn_custom_sound_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置自定义的声音震动通知" />
+
     <Button
         android:id="@+id/btn_clear_notifications"
         android:layout_width="wrap_content"

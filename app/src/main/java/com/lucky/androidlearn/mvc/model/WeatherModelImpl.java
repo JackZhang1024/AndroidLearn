@@ -61,8 +61,8 @@ public class WeatherModelImpl implements WeatherModel {
     @Override
     public void getWeather(String cityID, OnRequestCallBack callBack) {
         mOnRequestCallBack = callBack;
-        getWeatherMessage();
-
+        // getWeatherMessage();
+        getWeatherInfo();
     }
 
     @Override
