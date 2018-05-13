@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
+import com.lucky.androidlearn.annotation.SimpleButterKnifeActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
@@ -182,6 +183,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         startActivity(intent);
     }
 
+    @OnClick(R.id.btn_annotation_processor)
+    public void onAnnotationProcessorClick(View view) {
+        Intent intent = new Intent(this, SimpleButterKnifeActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.btn_architecture_mvc)
     public void onMVCArchitectureClick(View view) {
         Intent intent = new Intent(this, MVCMainActivity.class);
@@ -231,5 +238,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         Intent intent = new Intent(this, IPCLearnActivity.class);
         startActivity(intent);
     }
+
+
 
 }

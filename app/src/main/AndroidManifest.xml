@@ -576,6 +576,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".annotation.SimpleButterKnifeActivity"
+            android:label="@string/simple_butterknife"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
 
         <service
             android:name=".core.service.PollService"

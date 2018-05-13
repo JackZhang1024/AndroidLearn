@@ -112,7 +112,9 @@ android {
         // Dagger2的依赖配置
         implementation 'com.google.dagger:dagger:2.13'
         annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
-
+        // 在app Module中添加注解依赖和注解处理器依赖
+        api project(':simplebutterknife-annotations')
+        annotationProcessor project(':simplebutterknife-compiler')
     }
 
     packagingOptions {

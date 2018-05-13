@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" filepath="$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" filepath="$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" />
       <module fileurl="file://$PROJECT_DIR$/repository/repository.iml" filepath="$PROJECT_DIR$/repository/repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simplebutterknife-annotations/simplebutterknife-annotations.iml" filepath="$PROJECT_DIR$/simplebutterknife-annotations/simplebutterknife-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simplebutterknife-compiler/simplebutterknife-compiler.iml" filepath="$PROJECT_DIR$/simplebutterknife-compiler/simplebutterknife-compiler.iml" />
     </modules>
   </component>
 </project>

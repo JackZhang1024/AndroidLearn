@@ -1,1 +1,1 @@
-include ':app', ':repository:CommonUtil', ':repository:fancygallery', ':repository:materialdesign'
+include ':app', ':repository:CommonUtil', ':repository:fancygallery', ':repository:materialdesign', ':simplebutterknife-annotations', ':simplebutterknife-compiler'

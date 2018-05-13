@@ -23,6 +23,13 @@
             android:text="@string/android_annotation" />
 
         <Button
+            android:id="@+id/btn_annotation_processor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/annotation_processor" />
+
+        <Button
             android:id="@+id/btn_architecture_mvc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

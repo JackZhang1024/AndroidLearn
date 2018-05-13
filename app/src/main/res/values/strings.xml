@@ -88,4 +88,6 @@
     <string name="ipc_messager">通过Messager的方法进行数据交换</string>
     <string name="ipc_socket">通过socket的方式进行数据交换</string>
     <string name="ipc_content_provider">通过Provider的方式进行数据交换</string>
+    <string name="simple_butterknife">SimpleButterKnife</string>
+    <string name="annotation_processor">注解处理器</string>
 </resources>

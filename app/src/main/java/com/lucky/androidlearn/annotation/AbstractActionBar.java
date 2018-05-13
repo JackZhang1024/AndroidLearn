@@ -1,9 +1,12 @@
 package com.lucky.androidlearn.annotation;
 
+import android.annotation.TargetApi;
 import android.support.annotation.IntDef;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Created by zfz on 2018/2/3.
@@ -23,6 +26,13 @@ public abstract class AbstractActionBar {
     @IntDef(flag = true, value = {NAVIGATION_MODE_STANDARD, NAVIGATION_MODE_LIST, NAVIGATION_MODE_ABS})
     public @interface NavigationActionBarMode{
 
+    }
+
+
+    @Retention(RetentionPolicy.SOURCE)
+    @Target(ElementType.FIELD)
+    public @interface NavigationTitle{
+        String value() default "girls";
     }
 
     // 定义常量
