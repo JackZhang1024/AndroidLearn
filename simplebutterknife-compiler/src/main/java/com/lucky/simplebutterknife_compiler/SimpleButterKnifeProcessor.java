@@ -46,7 +46,7 @@ public class SimpleButterKnifeProcessor extends AbstractProcessor {
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> types = new LinkedHashSet<>();
         types.add(SimpleBindView.class.getCanonicalName());
-        return super.getSupportedAnnotationTypes();
+        return types;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class SimpleButterKnifeProcessor extends AbstractProcessor {
             MethodSpec.Builder viewBuilder = MethodSpec.constructorBuilder()
                     .addModifiers(Modifier.PUBLIC)
                     .addParameter(targetTypeName, "target")
-                    .addParameter(ClassName.get("android.View", "View"), "source");
+                    .addParameter(ClassName.get("android.view", "View"), "source");
             viewBuilder.addStatement("this.target = target");
             viewBuilder.addCode("\n");
             for (ViewBinding viewBinding: viewBindings){
