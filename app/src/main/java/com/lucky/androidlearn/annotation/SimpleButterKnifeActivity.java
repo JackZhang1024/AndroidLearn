@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.R;
-import com.lucky.simplebutterknife_annotations.SimpleBindView;
+import com.lucky.simplebutterknife.annotations.SimpleBindView;
 
 public class SimpleButterKnifeActivity extends AppCompatActivity {
 
@@ -22,5 +24,8 @@ public class SimpleButterKnifeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_simplebutterknife);
         SimpleButterKnife.bind(this);
         mTvContent.setText("简单的ButterKnife");
+        mBtnShow.setOnClickListener(v->{
+            AppToastMgr.show(this, "Hello World!");
+        });
     }
 }

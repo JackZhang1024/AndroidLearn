@@ -1,4 +1,4 @@
-package com.lucky.simplebutterknife_annotations;
+package com.lucky.simplebutterknife.annotations;
 
 import android.support.annotation.IdRes;
 import java.lang.annotation.ElementType;

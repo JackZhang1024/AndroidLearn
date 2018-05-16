@@ -1,9 +1,9 @@
-package com.lucky.simplebutterknife_compiler;
+package com.lucky.simplebutterknife.compiler;
 
 
 import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
-import com.lucky.simplebutterknife_annotations.SimpleBindView;
+import com.lucky.simplebutterknife.annotations.SimpleBindView;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.JavaFile;
