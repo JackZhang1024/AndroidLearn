@@ -11,6 +11,7 @@ import com.jingewenku.abrahamcaijin.commonutil.AppApplicationMgr;
 import com.lucky.androidlearn.dagger2learn.lesson04.AppComponent;
 import com.lucky.androidlearn.dagger2learn.AppModule;
 import com.lucky.androidlearn.dagger2learn.lesson04.DaggerAppComponent;
+import com.lukcyboy.simpleaar.SimpleAarLog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -36,6 +37,8 @@ public class AndroidApplication extends Application {
         appComponent.inject(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
         Log.e(TAG, "onCreate: 进程ID " + Process.myPid());
+        SimpleAarLog.getInstance();
+
     }
 
     /**
