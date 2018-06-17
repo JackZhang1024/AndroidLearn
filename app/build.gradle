@@ -118,6 +118,8 @@ android {
         // 在app Module中添加注解依赖和注解处理器依赖
         api project(':simplebutterknife-annotations')
         annotationProcessor project(':simplebutterknife-compiler')
+        //implementation project(':simpleaar')
+        implementation(name: 'simpleaar-release', ext: 'aar')
 
         // 配置kotlin第四步
         implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -130,5 +132,11 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/rxjava.properties'
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'   // aar目录
+        }
     }
 }
