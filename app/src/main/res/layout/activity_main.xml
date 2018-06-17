@@ -175,6 +175,13 @@
             android:layout_marginTop="10dp"
             android:text="@string/ipc_learn" />
 
+        <Button
+            android:id="@+id/btn_kotlin_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/kotlin_learn" />
+
     </LinearLayout>
 
 

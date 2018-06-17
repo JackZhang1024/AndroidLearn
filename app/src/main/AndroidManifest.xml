@@ -582,6 +582,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name="com.lucky.androidlearn.kotlin.KotlinLearnMainActivity"
+            android:label="@string/kotlin_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <service
             android:name=".core.service.PollService"

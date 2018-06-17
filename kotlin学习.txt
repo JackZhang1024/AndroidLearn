@@ -1,0 +1,6 @@
+http://kotlinlang.org/docs/tutorials/kotlin-android.html
+http://www.kotlindoc.cn/
+kotlin开源项目
+http://android.jobbole.com/85453/?utm_source=blog.jobbole.com&utm_medium=relatedPosts
+kotlin入坑教程
+http://android.jobbole.com/tag/kotlin/

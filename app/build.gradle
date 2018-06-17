@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'me.tatarka.retrolambda' //这是重点
+//配置kotlin第三步
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion androidCompileSdkVersion
@@ -115,6 +118,9 @@ android {
         // 在app Module中添加注解依赖和注解处理器依赖
         api project(':simplebutterknife-annotations')
         annotationProcessor project(':simplebutterknife-compiler')
+
+        // 配置kotlin第四步
+        implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     }
 
     packagingOptions {
