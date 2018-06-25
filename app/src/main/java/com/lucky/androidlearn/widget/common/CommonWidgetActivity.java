@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.R;
+import com.lucky.androidlearn.widget.bottomlayout.BottomLayoutActivity;
 import com.lucky.androidlearn.widget.common.editText.EditTextWidgetActivity;
 import com.lucky.androidlearn.widget.common.fancygallery.FancyGalleryMainActivity;
 import com.lucky.androidlearn.widget.common.helper.AlertDialogHelper;
@@ -109,6 +110,12 @@ public class CommonWidgetActivity extends AppCompatActivity {
     public void onConstraintLayoutClick(View view){
         startActivity(new Intent(this, ConstraintLayoutActivity.class));
     }
+
+    @OnClick(R.id.btn_bottom_layout)
+    public void onBottomTabLayoutClick(View view){
+        startActivity(new Intent(this, BottomLayoutActivity.class));
+    }
+
 
     @Override
     protected void onStart() {

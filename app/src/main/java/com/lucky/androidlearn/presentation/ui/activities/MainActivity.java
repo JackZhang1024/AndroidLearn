@@ -35,7 +35,7 @@ import com.lucky.androidlearn.widget.common.CommonWidgetActivity;
 import com.lucky.androidlearn.widget.screen.ScreenDensityActivity;
 import com.lucky.androidlearn.service.ServiceActivity;
 import com.lucky.androidlearn.xml.XmlActivity;
-import com.lucky.androidlearn.kotlin.KotlinLearnMainActivity;
+import com.lucky.kotlin.KotlinLearnMainActivity;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
