@@ -1,5 +1,6 @@
 package com.lucky.androidlearn.service;
 
+import android.app.IntentService;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -36,6 +37,10 @@ public class LearnStartService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e(TAG, "onStartCommand: ");
+        if (intent!=null){
+            String params = intent.getStringExtra(ServiceActivity.SERVICE_PARAM);
+            Log.e(TAG, params);
+        }
         doSomethings();
         return START_STICKY;
     }

@@ -1,3 +1,1 @@
-include ':app', ':repository:CommonUtil', ':repository:fancygallery', ':repository:materialdesign', ':simplebutterknife-annotations', ':simplebutterknife-compiler'
-//include ':simpleaar'
-//include ':simpleaar2'
+include ':app', ':repository:CommonUtil', ':repository:fancygallery', ':repository:materialdesign', ':simplebutterknife-annotations', ':simplebutterknife-compiler', ':simpleaar', ':simpleaar2'

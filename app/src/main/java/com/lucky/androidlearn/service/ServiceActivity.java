@@ -31,6 +31,8 @@ public class ServiceActivity extends AppCompatActivity {
     Button btnStartPolling;
     @BindView(R.id.btn_stop_polling)
     Button btnStopPolling;
+    public static final String SERVICE_PARAM = "SERVICE_PARAM";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +60,9 @@ public class ServiceActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_start_service)
     public void startServiceClick(View view) {
-        startService(new Intent(this, LearnStartService.class));
+        Intent intent = new Intent(this, LearnStartService.class);
+        intent.putExtra(SERVICE_PARAM, "helloWorld");
+        startService(intent);
     }
 
     @OnClick(R.id.btn_stop_service)

@@ -35,7 +35,7 @@ import com.lucky.androidlearn.widget.common.CommonWidgetActivity;
 import com.lucky.androidlearn.widget.screen.ScreenDensityActivity;
 import com.lucky.androidlearn.service.ServiceActivity;
 import com.lucky.androidlearn.xml.XmlActivity;
-import com.lucky.kotlin.KotlinLearnMainActivity;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -239,10 +239,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         startActivity(intent);
     }
 
-    @OnClick(R.id.btn_kotlin_learn)
-    public void onKotlinLearn(){
-        Intent intent = new Intent(this, KotlinLearnMainActivity.class);
-        startActivity(intent);
-    }
+
 
 }
