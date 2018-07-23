@@ -15,6 +15,7 @@ import com.lucky.androidlearn.widget.common.fancygallery.FancyGalleryMainActivit
 import com.lucky.androidlearn.widget.common.helper.AlertDialogHelper;
 import com.lucky.androidlearn.widget.common.pulllistview.PullListViewActivity;
 import com.lucky.androidlearn.widget.constraintlayout.ConstraintLayoutActivity;
+import com.lucky.androidlearn.widget.marquee.MarqueeViewActivity;
 import com.lucky.androidlearn.widget.notification.NotificationActivity;
 
 import butterknife.ButterKnife;
@@ -33,6 +34,12 @@ public class CommonWidgetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_widget);
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.btn_marqueeview)
+    public void onMarqueeViewClick(View view) {
+        Intent intent = new Intent(this, MarqueeViewActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.seek_bar)

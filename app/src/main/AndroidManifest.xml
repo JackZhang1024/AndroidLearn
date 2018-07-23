@@ -595,6 +595,12 @@
             android:theme="@style/AppTheme"
             />
 
+        <activity android:name=".widget.marquee.MarqueeViewActivity"
+            android:label="@string/marqueeview"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

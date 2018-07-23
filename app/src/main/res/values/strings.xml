@@ -92,4 +92,5 @@
     <string name="annotation_processor">注解处理器</string>
     <string name="kotlin_learn">Kotlin学习</string>
     <string name="bottom_layout">BottomLayout</string>
+    <string name="marqueeview">跑马灯</string>
 </resources>

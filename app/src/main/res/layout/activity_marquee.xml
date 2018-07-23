@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.lucky.androidlearn.widget.marquee.MarqueeView
+        android:id="@+id/marqueeView"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        app:mvDirection="bottom_to_top"
+        app:mvSingleLine="true"
+        app:mvTextColor="#000" />
+
+    <com.lucky.androidlearn.widget.marquee.CustomMarqueeView
+        android:id="@+id/custom_marqueeview"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:background="@color/pink"
+        android:paddingLeft="15dp"
+        app:marqueeTextColor="@color/colorPrimary"
+        app:marqueeTextGravity="center"
+        app:marqueeTextSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_start_filpping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="开始翻页" />
+
+    <Button
+        android:id="@+id/btn_stop_filpping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="停止翻页" />
+
+
+    <Button
+        android:id="@+id/btn_start_custom_filpping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始翻页" />
+
+    <Button
+        android:id="@+id/btn_stop_custom_filpping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="停止翻页" />
+
+</LinearLayout>

@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/repository/CommonUtil" />
             <option value="$PROJECT_DIR$/repository/fancygallery" />
             <option value="$PROJECT_DIR$/repository/materialdesign" />
+            <option value="$PROJECT_DIR$/simpleaar" />
+            <option value="$PROJECT_DIR$/simpleaar2" />
             <option value="$PROJECT_DIR$/simplebutterknife-annotations" />
             <option value="$PROJECT_DIR$/simplebutterknife-compiler" />
           </set>
