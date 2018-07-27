@@ -46,9 +46,9 @@ public class CustomMarqueeView extends FrameLayout implements View.OnClickListen
     private boolean isRunningAnim = false;
 
     private int currentPosition = 0;
+    private boolean isInitiated;
 
     private FloatEvaluator floatEval = new FloatEvaluator();
-
 
     public CustomMarqueeView(Context context) {
         this(context, null);
@@ -101,12 +101,16 @@ public class CustomMarqueeView extends FrameLayout implements View.OnClickListen
 
     /**
      * 设置要滚动的字符串数据，设置完毕后会自动滚动
-     *
      * @param marqueeData
      */
     public void setMarqueeData(ArrayList<String> marqueeData) {
-        this.marqueeData = marqueeData;
-        start();
+        if (isInitiated){
+            refresh(marqueeData);
+        }else{
+            isInitiated = true;
+            this.marqueeData = marqueeData;
+            start();
+        }
     }
 
 
@@ -131,7 +135,7 @@ public class CustomMarqueeView extends FrameLayout implements View.OnClickListen
                         child1.setText(childText);
                         child2.setText(childText2);
                         currentPosition += 1;
-                    }else if (marqueeData.size() > 0){
+                    } else if (marqueeData.size() > 0) {
                         String childText = marqueeData.get(currentPosition);
                         child1.setText(childText);
                     }
@@ -167,16 +171,23 @@ public class CustomMarqueeView extends FrameLayout implements View.OnClickListen
      */
 
     public void start() {
-
-        if (marqueeData == null || marqueeData.size() == 0 || marqueeData.size() == 1) return;
-
+        if (marqueeData == null || marqueeData.size() == 0 ) return;
+        if (marqueeData.size() == 1){
+            marqueeData.add(marqueeData.get(0));
+        }
         if (isRunningAnim) return;
-
         isStarted = true;
-
-
         postDelayed(translationTask, internal);
+    }
 
+
+    private void refresh(ArrayList<String> marqueeData) {
+        this.marqueeData = marqueeData;
+        removeCallbacks(translationTask);
+        removeAllViews();
+        this.currentPosition = 0;
+        initChild();
+        start();
     }
 
 
@@ -280,6 +291,10 @@ public class CustomMarqueeView extends FrameLayout implements View.OnClickListen
 
                 }
 
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    super.onAnimationCancel(animation);
+                }
             });
             animator.setDuration(getHeight() * 6).setInterpolator(new LinearInterpolator());
             animator.start();

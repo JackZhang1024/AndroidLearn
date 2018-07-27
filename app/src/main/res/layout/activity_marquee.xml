@@ -52,4 +52,12 @@
         android:layout_height="wrap_content"
         android:text="停止翻页" />
 
+
+    <Button
+        android:id="@+id/btn_refresh_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="刷新数据" />
+
+
 </LinearLayout>

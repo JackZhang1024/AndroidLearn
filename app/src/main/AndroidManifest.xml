@@ -629,11 +629,14 @@
             </intent-filter>
         </service>
 
+
+        <!--  android:process=":remote"  -->
         <service
             android:name=".service.LearnStartService"
             android:enabled="true"
             android:exported="false"
-            android:process=":remote" />
+            android:process=":remote"
+            />
 
         <service
             android:name=".service.LearnStartServiceII"

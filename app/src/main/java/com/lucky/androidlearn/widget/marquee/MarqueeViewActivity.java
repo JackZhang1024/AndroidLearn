@@ -18,7 +18,7 @@ public class MarqueeViewActivity extends AppCompatActivity {
     MarqueeView mMarqueeView;
     List<String> mNotices = new ArrayList<>();
     Button mBtnStartFlip, mBtnStopFlip;
-    Button mBtnStartCustomFlip, mBtnStopCustomFlip;
+    Button mBtnStartCustomFlip, mBtnStopCustomFlip, mBtnRefreshData;
     CustomMarqueeView mCustomMarqueeView;
     ArrayList<String> mMarqueeData = new ArrayList<>();
 
@@ -31,6 +31,7 @@ public class MarqueeViewActivity extends AppCompatActivity {
         mBtnStopFlip = findViewById(R.id.btn_stop_filpping);
         mBtnStartCustomFlip = findViewById(R.id.btn_start_custom_filpping);
         mBtnStopCustomFlip = findViewById(R.id.btn_stop_custom_filpping);
+        mBtnRefreshData = findViewById(R.id.btn_refresh_data);
         mCustomMarqueeView = (CustomMarqueeView) findViewById(R.id.custom_marqueeview);
         mBtnStartFlip.setOnClickListener(v -> {
             startFlipping();
@@ -61,11 +62,13 @@ public class MarqueeViewActivity extends AppCompatActivity {
             mCustomMarqueeView.toggleMarquee();
 
         });
-
+        mBtnRefreshData.setOnClickListener(v -> {
+            refreshData();
+        });
         mCustomMarqueeView.setMarqueeViewItemClickListener(new CustomMarqueeView.MarqueeViewItemClickListener() {
             @Override
             public void onMarqueeViewItemClick(int position) {
-                AppToastMgr.shortToast(MarqueeViewActivity.this, "position "+position);
+                AppToastMgr.shortToast(MarqueeViewActivity.this, "position " + position);
             }
         });
     }
@@ -88,5 +91,13 @@ public class MarqueeViewActivity extends AppCompatActivity {
         }
     }
 
+    private void refreshData() {
+        mMarqueeData.clear();
+        mMarqueeData.add("1. 床前明月光");
+//        mMarqueeData.add("2. 疑是地上霜");
+//        mMarqueeData.add("3. 举头望明月");
+//        mMarqueeData.add("4. 低头思故乡");
+        mCustomMarqueeView.setMarqueeData(mMarqueeData);
+    }
 
 }

@@ -41,3 +41,5 @@ https://www.vitamio.org/docs/Tutorial/2014/0731/35.html
 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0329/4099.html
 Android软键盘监听
 http://blog.csdn.net/gusgao/article/details/52504630
+
+https://github.com/CarGuo/GSYVideoPlayer
