@@ -123,6 +123,17 @@ android {
 
         // 配置kotlin第四步
         implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+        // CrossWalk
+        //compile 'org.xwalk:xwalk_core_library:10.39.235.15'
+        compile(name: 'crosswalk-23.53.589.4', ext: 'aar')
+
+        // Weex
+        //compile 'com.taobao.android:weex_inspector:0.16.15'
+
+        // 测试J2V8
+        compile(name: 'j2v8-4.8.2', ext: 'aar')
+
     }
 
     packagingOptions {
@@ -135,6 +146,9 @@ android {
     }
 
     repositories {
+        maven {
+            url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
+        }
         flatDir {
             dirs 'libs'   // aar目录
         }

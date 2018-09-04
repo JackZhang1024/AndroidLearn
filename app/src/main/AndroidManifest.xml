@@ -22,15 +22,16 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <permission android:name="com.lucky.androidlearn.aidl.bms"/>
+    <permission android:name="com.lucky.androidlearn.aidl.bms" />
 
     <application
         android:name=".AndroidApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -592,11 +593,38 @@
             android:name=".widget.bottomlayout.BottomLayoutActivity"
             android:label="@string/bottom_layout"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.marquee.MarqueeViewActivity"
+            android:label="@string/marqueeview"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".crosswalk.CrossWalkActivity"
+            android:label="CrossWalk"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             />
 
-        <activity android:name=".widget.marquee.MarqueeViewActivity"
-            android:label="@string/marqueeview"
+        <activity
+            android:name=".j2v8.J2V8LearnActivity"
+            android:label="J2V8学习"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
+        <activity
+            android:name=".security.SecurityCheckActivity"
+            android:label="安全信息检查"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
+        <activity
+            android:name=".json.JsonLearnActivity"
+            android:label="Json解析"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             />
@@ -624,8 +652,8 @@
             android:exported="true"
             android:process=":remote_bms">
             <intent-filter>
-                <action android:name="com.lucky.aidl.bms"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.lucky.aidl.bms" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
@@ -635,8 +663,14 @@
             android:name=".service.LearnStartService"
             android:enabled="true"
             android:exported="false"
-            android:process=":remote"
-            />
+            android:process=":remote" />
+
+        <service android:name=".service.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <!-- JobScheduler JobService JobInfo -->
+        <service android:name=".service.LocationJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <service
             android:name=".service.LearnStartServiceII"

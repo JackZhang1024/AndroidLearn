@@ -16,6 +16,34 @@
 
 
         <Button
+            android:id="@+id/btn_j2v8_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/j2v8_learn" />
+
+        <Button
+            android:id="@+id/btn_security_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/app_security_check" />
+
+        <Button
+            android:id="@+id/btn_json_parse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/json_parse" />
+
+        <Button
+            android:id="@+id/btn_crosswalk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/crosswalk" />
+
+        <Button
             android:id="@+id/btn_annotation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

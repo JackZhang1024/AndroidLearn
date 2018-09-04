@@ -15,19 +15,53 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+
 import com.lucky.androidlearn.R;
 
 import junit.framework.Assert;
 
 public class XmlActivity extends AppCompatActivity {
 
+    private static final String TAG = "XmlActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
             setContentView(R.layout.activity_xml);
-            xmlSerializerCreateJava();
-            xmlSerializerCreateAndroid();
+            findViewById(R.id.btn_xml_create_java).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    xmlSerializerCreateJava();
+                }
+            });
+            findViewById(R.id.btn_xml_create_android).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    xmlSerializerCreateAndroid();
+                }
+            });
+            findViewById(R.id.btn_dom_parse).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    domParse();
+                }
+            });
+            findViewById(R.id.btn_sax_parse).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saxParse();
+                }
+            });
+            findViewById(R.id.btn_pull_parse).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pullParse();
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,29 +81,59 @@ public class XmlActivity extends AppCompatActivity {
         }
     }
 
-    public void xmlSerializerCreateAndroid() throws Exception {
-        List<Person> persons = new ArrayList<Person>();
-        persons.add(new Person(1, "zhangsan", 80));
-        persons.add(new Person(2, "lisi", 43));
-        persons.add(new Person(3, "wangwu", 12));
-        File file = Environment.getExternalStorageDirectory();
-        File xmlFile = new File(file, "person.xml");
-        FileOutputStream outStream = new FileOutputStream(xmlFile);
-        PersonService.save(persons, outStream);
+    public void xmlSerializerCreateAndroid() {
+        try {
+            List<Person> persons = new ArrayList<Person>();
+            persons.add(new Person(1, "zhangsan", 80));
+            persons.add(new Person(2, "lisi", 43));
+            persons.add(new Person(3, "wangwu", 12));
+            File file = Environment.getExternalStorageDirectory();
+            File xmlFile = new File(file, "person.xml");
+            FileOutputStream outStream = new FileOutputStream(xmlFile);
+            PersonService.save(persons, outStream);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
-    private void doSomething() throws Exception {
-        AssetManager mAssess = getAssets();
-        InputStream is = mAssess.open("persons.xml");
-        //DOM解析
-        IXmlService mDomService = new DomXmlService();
-        List<Person> persons = mDomService.getPersonsByParseXML(is);
-        //SAX解析
-//			mSaxService=new SaxXmlService();
-//			persons=mSaxService.getPersonsByParseXML(is);
-        //PULL解析
-//			mPullService=new PullXmlService();
-//			persons=mPullService.getPersonsByParseXML(is);
+    private void domParse() {
+        try {
+            AssetManager mAssess = getAssets();
+            InputStream is = mAssess.open("persons.xml");
+            //DOM解析
+            IXmlService mDomService = new DomXmlService();
+            List<Person> persons = mDomService.getPersonsByParseXML(is);
+            Log.e(TAG, "domParse: "+persons.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saxParse() {
+        try {
+            AssetManager mAssess = getAssets();
+            InputStream is = mAssess.open("persons.xml");
+            //SAX解析
+            IXmlService mSaxService = new SaxXmlService();
+            List<Person> persons = mSaxService.getPersonsByParseXML(is);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void pullParse() {
+        try {
+            AssetManager mAssess = getAssets();
+            InputStream is = mAssess.open("persons.xml");
+            //DOM解析
+            IXmlService mDomService = new PullXmlService();
+            List<Person> persons = mDomService.getPersonsByParseXML(is);
+        } catch (Exception e) {
+
+        }
+
     }
 
 }

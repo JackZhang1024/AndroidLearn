@@ -93,4 +93,13 @@
     <string name="kotlin_learn">Kotlin学习</string>
     <string name="bottom_layout">BottomLayout</string>
     <string name="marqueeview">跑马灯</string>
+    <string name="crosswalk">CrossWalk</string>
+    <string name="startJobService">StartJobService</string>
+    <string name="stopJobService">StopJobService</string>
+    <string name="startLocationService">开启定位服务</string>
+    <string name="stopLocationService">结束定位服务</string>
+    <string name="j2v8_learn">J2V8学习</string>
+    <string name="app_security_check">App安全信息检查</string>
+    <string name="json_parse">Json解析</string>
+
 </resources>

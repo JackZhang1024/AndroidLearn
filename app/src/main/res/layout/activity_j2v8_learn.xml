@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_execute_js"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击执行JavaScript脚本"
+        />
+
+    <Button
+        android:id="@+id/btn_execute_jsobject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="资源释放"
+        />
+
+    <Button
+        android:id="@+id/btn_create_v8object"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="创建V8Object"
+        />
+
+    <Button
+        android:id="@+id/btn_v8_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        />
+
+    <Button
+        android:id="@+id/btn_call_js_function"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="调用JS方法"
+        />
+
+    <Button
+        android:id="@+id/btn_call_java_function"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="调用Java方法"
+        />
+
+    <Button
+        android:id="@+id/btn_call_java_callback_function"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="调用Java回调方法"
+        />
+
+    <Button
+        android:id="@+id/btn_call_js_show_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示Alert"
+        />
+
+</LinearLayout>

@@ -10,11 +10,14 @@ import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
 import com.lucky.androidlearn.annotation.SimpleButterKnifeActivity;
+import com.lucky.androidlearn.crosswalk.CrossWalkActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
+import com.lucky.androidlearn.j2v8.J2V8LearnActivity;
+import com.lucky.androidlearn.json.JsonLearnActivity;
 import com.lucky.androidlearn.math.MathActivity;
 import com.lucky.androidlearn.media.MediaActivity;
 import com.lucky.androidlearn.mvc.MVCMainActivity;
@@ -26,6 +29,7 @@ import com.lucky.androidlearn.presentation.presenters.impl.MainPresenterImpl;
 import com.lucky.androidlearn.provider.MainProviderActivity;
 import com.lucky.androidlearn.reference.ReferenceActivity;
 import com.lucky.androidlearn.rxjava2.RxJavaActivity;
+import com.lucky.androidlearn.security.SecurityCheckActivity;
 import com.lucky.androidlearn.webservice.demo.WebServiceActivity;
 import com.lucky.androidlearn.widget.common.AppForegroundActivity;
 import com.lucky.androidlearn.launchmode.LaunchModeActivity;
@@ -240,5 +244,29 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     }
 
 
+    @OnClick(R.id.btn_crosswalk)
+    public void onCrossWalkLearn(){
+        Intent intent = new Intent(this, CrossWalkActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_j2v8_learn)
+    public void onJ2V8Learn(){
+        Intent intent = new Intent(this, J2V8LearnActivity.class);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.btn_security_check)
+    public void onSecurityCheck(){
+        Intent intent = new Intent(this, SecurityCheckActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_json_parse)
+    public void onJsonParse(){
+        Intent intent = new Intent(this, JsonLearnActivity.class);
+        startActivity(intent);
+    }
 
 }

@@ -4,4 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/btn_xml_create_java"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Java创建XML"
+        />
+
+    <Button
+        android:id="@+id/btn_xml_create_android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Android创建XML"
+        />
+
+    <Button
+        android:id="@+id/btn_dom_parse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dom解析"
+        />
+
+    <Button
+        android:id="@+id/btn_sax_parse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAX解析"
+        />
+
+    <Button
+        android:id="@+id/btn_pull_parse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pull解析"
+        />
+
 </LinearLayout>

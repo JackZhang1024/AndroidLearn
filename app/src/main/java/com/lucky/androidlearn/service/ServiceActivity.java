@@ -1,10 +1,12 @@
 package com.lucky.androidlearn.service;
 
 import android.app.Service;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -16,6 +18,8 @@ import android.widget.Button;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.core.service.PollService;
 import com.lucky.androidlearn.core.util.PollingManageUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,5 +105,57 @@ public class ServiceActivity extends AppCompatActivity {
             Log.e(TAG, "onServiceDisconnected: ");
         }
     };
+
+
+    @OnClick(R.id.btn_start_job_service)
+    public void startJobService() {
+        MyJobService.enqueueWork(this, new Intent());
+    }
+
+    @OnClick(R.id.btn_stop_job_service)
+    public void stopJobService() {
+        stopService(new Intent(this, MyJobService.class));
+    }
+
+    JobScheduler mJobScheduler;
+    @OnClick(R.id.btn_start_location_jobservice)
+    public void startLocationJobService() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+            mJobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+            ComponentName componentName = new ComponentName(this, LocationJobService.class);
+            JobInfo.Builder builder = new JobInfo.Builder(997, componentName);
+
+            if (Build.VERSION.SDK_INT >= 24) {
+//                builder.setMinimumLatency(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS); //执行的最小延迟时间
+//                builder.setOverrideDeadline(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS);  //执行的最长延时时间
+//                builder.setMinimumLatency(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS);
+//                builder.setBackoffCriteria(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS, JobInfo.BACKOFF_POLICY_LINEAR);//线性重试方案
+                builder.setMinimumLatency(100); //执行的最小延迟时间
+                builder.setOverrideDeadline(100);  //执行的最长延时时间
+                builder.setMinimumLatency(100); // 执行的最小延时
+                builder.setBackoffCriteria(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS, JobInfo.BACKOFF_POLICY_LINEAR);//线性重试方案
+            } else {
+                //builder.setPeriodic(JobInfo.DEFAULT_INITIAL_BACKOFF_MILLIS);
+                builder.setPeriodic(3000);
+            }
+            //builder.setPersisted(true);  // 设置设备重启时，执行该任务
+            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+            builder.setRequiresCharging(true); // 当插入充电器，执行该任务
+            JobInfo jobInfo = builder.build();
+            mJobScheduler.schedule(jobInfo);
+        }
+    }
+
+
+    @OnClick(R.id.btn_stop_location_jobservice)
+    public void stopLocationJobService(){
+        List<JobInfo> allJobs = mJobScheduler.getAllPendingJobs();
+        for (JobInfo jobInfo : allJobs) {
+            Log.d(TAG, String.format("Cancel %d", jobInfo.getId()));
+            mJobScheduler.cancel(jobInfo.getId());
+        }
+    }
+
+
 
 }

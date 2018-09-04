@@ -2,11 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/app" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/repository" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/simpleaar" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/simpleaar2" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/simplebutterknife-annotations" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/simplebutterknife-compiler" vcs="svn" />
   </component>
 </project>
