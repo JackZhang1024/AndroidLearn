@@ -43,3 +43,6 @@ Android软键盘监听
 http://blog.csdn.net/gusgao/article/details/52504630
 
 https://github.com/CarGuo/GSYVideoPlayer
+
+保存透明背景图片
+https://blog.csdn.net/u011494050/article/details/38776913
