@@ -13,6 +13,7 @@ import com.lucky.androidlearn.annotation.SimpleButterKnifeActivity;
 import com.lucky.androidlearn.crosswalk.CrossWalkActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
+import com.lucky.androidlearn.eventchange.AttributeChangeListenActivity;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
@@ -23,6 +24,8 @@ import com.lucky.androidlearn.media.MediaActivity;
 import com.lucky.androidlearn.mvc.MVCMainActivity;
 import com.lucky.androidlearn.mvp.MVPMainActivity;
 import com.lucky.androidlearn.mvvm.MVVMMainActivity;
+import com.lucky.androidlearn.network.NetWorkTrafficActivity;
+import com.lucky.androidlearn.network.traffic.TrafficMonitorService;
 import com.lucky.androidlearn.permission.PermissionManageActivity;
 import com.lucky.androidlearn.presentation.presenters.MainPresenter;
 import com.lucky.androidlearn.presentation.presenters.impl.MainPresenterImpl;
@@ -36,6 +39,7 @@ import com.lucky.androidlearn.launchmode.LaunchModeActivity;
 import com.lucky.androidlearn.storage.WelcomeMessageRepository;
 import com.lucky.androidlearn.threading.MainThreadImpl;
 import com.lucky.androidlearn.widget.common.CommonWidgetActivity;
+import com.lucky.androidlearn.widget.material.MaterialWidgetActivity;
 import com.lucky.androidlearn.widget.screen.ScreenDensityActivity;
 import com.lucky.androidlearn.service.ServiceActivity;
 import com.lucky.androidlearn.xml.XmlActivity;
@@ -68,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         ButterKnife.bind(this);
         mMainPresenter = new MainPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, new WelcomeMessageRepository());
+        startTrafficMonitor();
+    }
+
+    private void startTrafficMonitor(){
+        startService(new Intent(this, TrafficMonitorService.class));
     }
 
     @Override
@@ -100,12 +109,19 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     protected void onDestroy() {
         super.onDestroy();
         //mMainPresenter.destroy();
+        stopService(new Intent(this, TrafficMonitorService.class));
     }
 
 
     @OnClick(R.id.main_view)
     public void onMainViewClick(View view) {
         Intent intent = new Intent(this, CommonWidgetActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.material_view)
+    public void onMaterialViewClick(View view) {
+        Intent intent = new Intent(this, MaterialWidgetActivity.class);
         startActivity(intent);
     }
 
@@ -268,5 +284,18 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         Intent intent = new Intent(this, JsonLearnActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_attribute_change)
+    public void onAttributeChange(){
+        Intent intent = new Intent(this, AttributeChangeListenActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_network_traffic)
+    public void onNetWorkTrafficListen(){
+        Intent intent = new Intent(this, NetWorkTrafficActivity.class);
+        startActivity(intent);
+    }
+
 
 }

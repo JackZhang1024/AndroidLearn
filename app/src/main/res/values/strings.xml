@@ -101,5 +101,7 @@
     <string name="j2v8_learn">J2V8学习</string>
     <string name="app_security_check">App安全信息检查</string>
     <string name="json_parse">Json解析</string>
-
+    <string name="attribute_change">属性变化</string>
+    <string name="material_design">材料设计</string>
+    <string name="network_traffic">网络流量监控</string>
 </resources>

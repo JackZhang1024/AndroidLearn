@@ -629,6 +629,20 @@
             android:theme="@style/AppTheme"
             />
 
+        <activity
+            android:name=".eventchange.AttributeChangeListenActivity"
+            android:label="属性变化监听"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
+        <activity
+            android:name=".network.NetWorkTrafficActivity"
+            android:label="@string/network_traffic"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"
@@ -677,6 +691,13 @@
             android:enabled="true"
             android:exported="false"
             android:process="com.lucky.androidlearn.start.service2" />
+
+        <!-- 数据网络监控 -->
+        <service
+            android:name=".network.traffic.TrafficMonitorService"
+            android:enabled="true"
+            android:exported="false"
+            />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

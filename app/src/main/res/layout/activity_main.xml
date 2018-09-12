@@ -16,6 +16,13 @@
 
 
         <Button
+            android:id="@+id/btn_network_traffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/network_traffic" />
+
+        <Button
             android:id="@+id/btn_j2v8_learn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,6 +35,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/app_security_check" />
+
+        <Button
+            android:id="@+id/btn_attribute_change"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/attribute_change" />
 
         <Button
             android:id="@+id/btn_json_parse"
@@ -104,6 +118,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/main_view" />
+
+        <Button
+            android:id="@+id/material_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/material_design" />
 
         <Button
             android:id="@+id/btn_service"
