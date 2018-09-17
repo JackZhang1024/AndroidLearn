@@ -67,6 +67,8 @@ public class AnnotationActivity extends AppCompatActivity {
         //actionBar.setNavigationActionBarMode(AbstractActionBar.NAVIGATION_MODE_STANDARD | AbstractActionBar.NAVIGATION_MODE_ABS);
 
         System.out.println("ActionBar navigationActionBarMode " + actionBar.getNavigationActionBarMode());
+
+        actionBar.setNavigationMenuText(AbstractActionBar.NAVIGATION_MENU_START);
     }
 
     /**

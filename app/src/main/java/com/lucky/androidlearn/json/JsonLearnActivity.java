@@ -1,5 +1,6 @@
 package com.lucky.androidlearn.json;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +16,16 @@ public class JsonLearnActivity extends AppCompatActivity implements View.OnClick
 
     private static final String TAG = "JsonLearnActivity";
     private Button mBtnParseJson;
+    private Button mBtnJson2Nodes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
         mBtnParseJson = findViewById(R.id.btn_json);
+        mBtnJson2Nodes = findViewById(R.id.btn_json_to_nodes);
         mBtnParseJson.setOnClickListener(this);
+        mBtnJson2Nodes.setOnClickListener(this);
     }
 
     @Override
@@ -29,6 +33,9 @@ public class JsonLearnActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.btn_json:
                 parseJson();
+                break;
+            case R.id.btn_json_to_nodes:
+                startActivity(new Intent(this, JsonToNodesActivity.class));
                 break;
         }
     }

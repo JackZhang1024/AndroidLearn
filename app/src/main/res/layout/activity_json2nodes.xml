@@ -5,18 +5,10 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_json"
+        android:id="@+id/btn_json2nodes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Json解析"
+        android:text="@string/json_to_nodes"
         />
-
-    <Button
-        android:id="@+id/btn_json_to_nodes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Json2Nodes"
-        />
-
 
 </LinearLayout>

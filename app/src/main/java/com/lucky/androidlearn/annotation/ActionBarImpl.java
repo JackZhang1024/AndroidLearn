@@ -17,6 +17,7 @@ public class ActionBarImpl extends AbstractActionBar {
     @NavigationTitle("Science")
     private String navigatioinTitle;
 
+
     @Override
     public int getNavigationMode() {
         return navigationMode;
@@ -35,5 +36,11 @@ public class ActionBarImpl extends AbstractActionBar {
     @Override
     public void setNavigationActionBarMode(@NavigationActionBarMode int mode) {
         navigationActionBarMode = mode;
+    }
+
+
+    @Override
+    public void setNavigationMenuText(@NavigationMenuText String menuText) {
+
     }
 }

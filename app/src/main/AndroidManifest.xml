@@ -643,6 +643,13 @@
             android:theme="@style/AppTheme"
             />
 
+        <activity
+            android:name=".json.JsonToNodesActivity"
+            android:label="@string/json_to_nodes"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

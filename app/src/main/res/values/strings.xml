@@ -104,4 +104,5 @@
     <string name="attribute_change">属性变化</string>
     <string name="material_design">材料设计</string>
     <string name="network_traffic">网络流量监控</string>
+    <string name="json_to_nodes">Json2Nodes</string>
 </resources>
