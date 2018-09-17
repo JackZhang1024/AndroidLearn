@@ -57,7 +57,6 @@ public class NetWorkTrafficActivity extends AppCompatActivity implements View.On
     // 获取格式化的网络流量统计数据
     public String getFormattedStatics(long traffics) {
         String trafficInByte = String.format("%s Bytes", traffics);
-        Log.e(TAG, trafficInByte);
         long trafficInKB = traffics / 1024;
         return String.format("%s KB", trafficInKB);
     }

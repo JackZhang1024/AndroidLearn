@@ -13,10 +13,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.presentation.ui.activities.MainActivity;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
