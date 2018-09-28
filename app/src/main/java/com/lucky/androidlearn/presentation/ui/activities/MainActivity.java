@@ -21,6 +21,7 @@ import com.lucky.androidlearn.j2v8.J2V8LearnActivity;
 import com.lucky.androidlearn.json.JsonLearnActivity;
 import com.lucky.androidlearn.math.MathActivity;
 import com.lucky.androidlearn.media.MediaActivity;
+import com.lucky.androidlearn.multithread.MultiThreadActivity;
 import com.lucky.androidlearn.mvc.MVCMainActivity;
 import com.lucky.androidlearn.mvp.MVPMainActivity;
 import com.lucky.androidlearn.mvvm.MVVMMainActivity;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         ButterKnife.bind(this);
         mMainPresenter = new MainPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, new WelcomeMessageRepository());
-        startTrafficMonitor();
+        //startTrafficMonitor();
     }
 
     private void startTrafficMonitor(){
@@ -110,6 +111,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         super.onDestroy();
         //mMainPresenter.destroy();
         stopService(new Intent(this, TrafficMonitorService.class));
+    }
+
+
+    @OnClick(R.id.btn_multi_thread)
+    public void onMultiThreadClick(View view){
+        Intent intent = new Intent(this, MultiThreadActivity.class);
+        startActivity(intent);
     }
 
 

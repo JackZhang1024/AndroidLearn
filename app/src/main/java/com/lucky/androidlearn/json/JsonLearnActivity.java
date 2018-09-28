@@ -1,6 +1,7 @@
 package com.lucky.androidlearn.json;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +9,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
+import com.jingewenku.abrahamcaijin.commonutil.AppLogMessageMgr;
+import com.jingewenku.abrahamcaijin.commonutil.AppResourceMgr;
 import com.lucky.androidlearn.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 
 public class JsonLearnActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,7 +40,8 @@ public class JsonLearnActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_json:
-                parseJson();
+                //parseJson();
+                parseConfigJSON();
                 break;
             case R.id.btn_json_to_nodes:
                 startActivity(new Intent(this, JsonToNodesActivity.class));
@@ -58,6 +67,40 @@ public class JsonLearnActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    private void parseConfigJSON() {
+        String configJSON = AppResourceMgr.getStringByAssets(this, "config.json");
+        Log.e(TAG, "parseConfigJSON: " + configJSON);
+        try {
+            JSONArray jsonArray = new JSONArray(configJSON);
+            Log.e(TAG, "parseConfigJSON: size " + jsonArray.length());
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                // mallCredit=9
+                // strHVersionCode strHVersionName
+                String zipCode = jsonObject.getString("strHVersionCode");
+                String strHVersionName = jsonObject.getString("strHVersionName");
+                Log.e(TAG, "parseConfigJSON: zipCode " + zipCode + "  strHVersionName " + strHVersionName);
+                String result = String.format("%s=%s\n", strHVersionName, zipCode);
+                stringBuffer.append(result);
+            }
+            Log.e(TAG, "parseConfigJSON: result " + stringBuffer.toString());
+            String config = stringBuffer.toString();
+            createConfigJSON(stringBuffer.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createConfigJSON(String config) {
+//        try {
+//            String fileName = "config.json";
+//            AppFileMgr.createSDFile(fileName);
+//            AppFileMgr.writeFile(fileName, config);
+//        } catch (IOException e){
+//             e.printStackTrace();
+//        }
+    }
 
     class Notification {
         String lUserId;

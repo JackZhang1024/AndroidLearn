@@ -93,6 +93,7 @@
     <string name="kotlin_learn">Kotlin学习</string>
     <string name="bottom_layout">BottomLayout</string>
     <string name="marqueeview">跑马灯</string>
+    <string name="show_toast">Toast报错</string>
     <string name="crosswalk">CrossWalk</string>
     <string name="startJobService">StartJobService</string>
     <string name="stopJobService">StopJobService</string>
@@ -105,4 +106,5 @@
     <string name="material_design">材料设计</string>
     <string name="network_traffic">网络流量监控</string>
     <string name="json_to_nodes">Json2Nodes</string>
+    <string name="multi_thread_safe">多线程安全</string>
 </resources>

@@ -650,6 +650,13 @@
             android:theme="@style/AppTheme"
             />
 
+        <activity
+            android:name=".multithread.MultiThreadActivity"
+            android:label="@string/multi_thread_safe"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

@@ -34,7 +34,11 @@ public class SecurityCheckActivity extends AppCompatActivity implements View.OnC
                 AppToastMgr.shortToast(this, isProxy ? "使用代理中" : "没有使用代理");
                 break;
             case R.id.btn_check_root:
-
+                if (MobileRoot.isRoot()){
+                    AppToastMgr.shortToast(this, "该手机已经被Root了");
+                } else{
+                    AppToastMgr.shortToast(this, "该手机没有被Root");
+                }
                 break;
 
         }

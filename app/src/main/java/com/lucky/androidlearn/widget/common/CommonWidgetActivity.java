@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.R;
@@ -35,6 +36,17 @@ public class CommonWidgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_common_widget);
         ButterKnife.bind(this);
     }
+
+    @OnClick(R.id.btn_toast)
+    public void onShowToastClick(View view) {
+        try {
+            Thread.sleep(6000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(this, "哈哈", Toast.LENGTH_SHORT).show();
+    }
+
 
     @OnClick(R.id.btn_marqueeview)
     public void onMarqueeViewClick(View view) {
@@ -114,12 +126,12 @@ public class CommonWidgetActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_constraint_layout)
-    public void onConstraintLayoutClick(View view){
+    public void onConstraintLayoutClick(View view) {
         startActivity(new Intent(this, ConstraintLayoutActivity.class));
     }
 
     @OnClick(R.id.btn_bottom_layout)
-    public void onBottomTabLayoutClick(View view){
+    public void onBottomTabLayoutClick(View view) {
         startActivity(new Intent(this, BottomLayoutActivity.class));
     }
 

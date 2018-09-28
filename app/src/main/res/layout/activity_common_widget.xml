@@ -9,6 +9,13 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_toast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_toast" />
+
+
+        <Button
             android:id="@+id/btn_marqueeview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
