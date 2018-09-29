@@ -1,9 +1,12 @@
 package com.lucky.androidlearn.json.node;
 
+import android.util.Log;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ZiRuNode {
-
+    private static final String TAG = "ZiRuNode";
     // 当前node数据
     private NodeData nodeData;
 
@@ -28,12 +31,68 @@ public class ZiRuNode {
 
 
     // 创建ZiRuNode对象
-    public ZiRuNode createZiRuNode(JSONObject jsonObject){
+    public static ZiRuNode createZiRuNode(JSONObject jsonObject, ZiRuNode parentNode) {
+        ZiRuNode currentZiRuNode = new ZiRuNode();
         NodeData nodeData = new NodeData();
-        //String viewId = jsonObject.getString();
-        return null;
+        try {
+            String viewId = jsonObject.optString("viewId");
+            nodeData.setViewId(viewId);
+            String tag = jsonObject.optString("tag");
+            nodeData.setTag(tag);
+            int childSize = jsonObject.optInt("childSize");
+            nodeData.setChildSize(childSize);
+            String viewType = jsonObject.optString("viewType");
+            nodeData.setViewType(viewType);
+            String viewName = jsonObject.optString("viewName");
+            nodeData.setViewName(viewName);
+            JSONObject styleJSONObj = jsonObject.getJSONObject("style");
+            NodeData.Style style = createNodeDataStyle(styleJSONObj);
+            nodeData.setStyle(style);
+            JSONObject attributeJSONObj = jsonObject.getJSONObject("attribute");
+            NodeData.Attribute attribute = createNodeDataAttribute(attributeJSONObj);
+            nodeData.setAttribute(attribute);
+            currentZiRuNode.setNodeData(nodeData);
+            currentZiRuNode.setParentNode(parentNode);
+            createNodeDataChildren(jsonObject, currentZiRuNode, childSize);
+            if (parentNode!=null){
+                parentNode.getNodeData().addChild(currentZiRuNode);
+            }
+            //Log.e(TAG, "createZiRuNode: currentNode  "+currentZiRuNode.getNodeData().getViewName());
+            if (parentNode!=null){
+                //Log.e(TAG, "createZiRuNode: parentNode "+parentNode.getNodeData().getViewName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return currentZiRuNode;
     }
 
+    private static NodeData.Style createNodeDataStyle(JSONObject jsonObject) {
+        NodeData.Style style = new NodeData.Style();
+        style.setBackground(jsonObject.optString(NodeData.Style.BACKGROUND));
+        style.setHeight(jsonObject.optInt(NodeData.Style.HEIGHT));
+        style.setWidth(jsonObject.optInt(NodeData.Style.WIDTH));
+        return style;
+    }
 
+    private static NodeData.Attribute createNodeDataAttribute(JSONObject jsonObject) {
+        NodeData.Attribute attribute = new NodeData.Attribute();
+        attribute.setTag(jsonObject.optString(NodeData.Attribute.TAG));
+        return attribute;
+    }
+
+    private static void createNodeDataChildren(JSONObject jsonObject, ZiRuNode parentNode, int childSize) {
+        if (childSize > 0) {
+            try {
+                JSONArray childrenJSONArray = jsonObject.getJSONArray("children");
+                for (int i =0; i< childrenJSONArray.length(); i++){
+                     JSONObject childJSONObj = childrenJSONArray.getJSONObject(i);
+                     createZiRuNode(childJSONObj, parentNode);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

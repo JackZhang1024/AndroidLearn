@@ -24,8 +24,10 @@ public class MultiThreadActivity extends AppCompatActivity {
          //MapSafeCheckTestCase checkTestCase = new MapSafeCheckTestCase();
          //checkTestCase.doTest();
 
-         MapSafeCheckTestCase2 checkTestCase2 = new MapSafeCheckTestCase2();
-         checkTestCase2.doCheckTest();
+//         MapSafeCheckTestCase2 checkTestCase2 = new MapSafeCheckTestCase2();
+//         checkTestCase2.doCheckTest();
+        ThreadSafeCheckTestCase threadSafeCheckTestCase = new ThreadSafeCheckTestCase();
+        threadSafeCheckTestCase.doCheck();
     }
 
 

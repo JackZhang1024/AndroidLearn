@@ -107,4 +107,5 @@
     <string name="network_traffic">网络流量监控</string>
     <string name="json_to_nodes">Json2Nodes</string>
     <string name="multi_thread_safe">多线程安全</string>
+
 </resources>

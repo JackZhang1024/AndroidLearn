@@ -1,5 +1,6 @@
 package com.lucky.androidlearn.json.node;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NodeData {
@@ -17,7 +18,12 @@ public class NodeData {
     private String viewName;
     // viewId
     private String viewId;
+    // tag
+    private String tag;
 
+    NodeData(){
+        children = new ArrayList<>();
+    }
 
     public int getChildSize() {
         return childSize;
@@ -28,11 +34,18 @@ public class NodeData {
     }
 
     public List<ZiRuNode> getChildren() {
+        if (children==null){
+            children = new ArrayList<>();
+        }
         return children;
     }
 
     public void setChildren(List<ZiRuNode> children) {
         this.children = children;
+    }
+
+    public void addChild(ZiRuNode childNode){
+        children.add(childNode);
     }
 
     public Attribute getAttribute() {
@@ -75,8 +88,17 @@ public class NodeData {
         this.viewId = viewId;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     // 节点属性
     public static class Attribute{
+        public static final String TAG = "tag";
         String tag;
 
         public String getTag() {
@@ -90,6 +112,10 @@ public class NodeData {
 
     // 节点样式
     public static class Style{
+        public static final String BACKGROUND = "background";
+        public static final String HEIGHT = "height";
+        public static final String WIDTH = "width";
+
         String background;
         String max_height;
         String position;

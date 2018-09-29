@@ -1,0 +1,1110 @@
+{
+	"element": {
+		"viewId": "body_14aed714-9646-4e46-aadb-4df4d40be836",
+		"tag": "body",
+		"childSize": 6,
+		"children": [{
+			"viewId": "header_4eb942c8-9bc6-485e-89da-7929af14cd08",
+			"tag": "header",
+			"childSize": 1,
+			"children": [{
+				"viewId": "div_86503e5f-89d2-4c94-b730-87d1a99e333a",
+				"tag": "div",
+				"childSize": 1,
+				"children": [{
+					"viewId": "div_af50a948-7ed5-48ec-9ba4-5385e781e83d",
+					"tag": "div",
+					"childSize": 3,
+					"children": [{
+						"textName": "返回",
+						"viewId": "div_47fe49a3-c22d-4ea4-8b9a-ca2ec15bc9f0",
+						"tag": "div",
+						"childSize": 1,
+						"children": [{
+							"viewId": "img_a116ab8e-0648-4934-a39c-7d65edce8c5b",
+							"tag": "img",
+							"childSize": 0,
+							"viewType": "View",
+							"attribute": {
+								"src": "http://img.dafy.com/mobile/common/img/20180109/top/_We_return.png"
+							},
+							"style": {
+								"maxHeight": "20",
+								"position": "absolute",
+								"left": "3%",
+								"top": "29%",
+								"color": "#FFFFFF",
+								"height": -2,
+								"width": -1
+							},
+							"viewName": "ImageView"
+						}],
+						"viewType": "GroupView",
+						"attribute": {
+							"class": "_Wedafytop_return"
+						},
+						"style": {
+							"position": "absolute",
+							"height": "49",
+							"width": "80",
+							"fontSize": "16",
+							"color": "#FFFFFF"
+						},
+						"viewName": "VLinearLayout"
+					}, {
+						"textName": "订单记录",
+						"viewId": "div_37e93c35-2bda-42c7-91d4-b8e9a368558c",
+						"tag": "div",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {
+							"class": "_Wedafytop_title"
+						},
+						"style": {
+							"width": 0,
+							"color": "#FFFFFF",
+							"fontSize": "20",
+							"height": -2,
+							"weight": 1
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "●●●",
+						"viewId": "div_97667178-9c91-4b29-8c0d-016a93de359e",
+						"tag": "div",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {
+							"class": "_Wedafytop_righttext"
+						},
+						"style": {
+							"width": "120",
+							"height": "26",
+							"top": "0px",
+							"position": "absolute",
+							"fontSize": "16",
+							"color": "#FFFFFF"
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "_Wedafytop_positon"
+					},
+					"style": {
+						"position": "relative",
+						"color": "#FFFFFF",
+						"height": -2,
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"class": "_Wedafytopback"
+				},
+				"style": {
+					"background": "#FC641C",
+					"width": 0,
+					"color": "#FFFFFF",
+					"height": "50",
+					"position": "fixed",
+					"left": "0px",
+					"top": "0px",
+					"weight": 1
+				},
+				"viewName": "VLinearLayout"
+			}],
+			"viewType": "GroupView",
+			"attribute": {
+				"class": "_Wedafytop"
+			},
+			"style": {
+				"height": "49",
+				"width": -1
+			},
+			"viewName": "HLinearLayout"
+		}, {
+			"viewId": "div_b2c53b56-dfc7-4778-9832-8ef83cc6348c",
+			"tag": "div",
+			"childSize": 2,
+			"children": [{
+				"viewId": "div_ea1cb2a8-1d36-45ce-836c-9e611f6cc5b5",
+				"tag": "div",
+				"childSize": 1,
+				"children": [{
+					"viewId": "input_52d6f184-5a97-474f-8c17-b5935191eda1",
+					"tag": "input",
+					"childSize": 0,
+					"viewType": "View",
+					"attribute": {
+						"id": "searchParam",
+						"placeholder": "请输入订单编号或支付手机号"
+					},
+					"style": {
+						"fontSize": "14",
+						"color": "#222222",
+						"height": "50",
+						"border": "0",
+						"width": "250"
+					},
+					"viewName": "EditView"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"id": "userSearchDiv",
+					"class": "userSearch_input"
+				},
+				"style": {
+					"padding": ["5", "10", "5", "30"],
+					"background": "#ffffff",
+					"position": "relative",
+					"height": -2,
+					"width": -2
+				},
+				"viewName": "VLinearLayout"
+			}, {
+				"textName": "搜索",
+				"viewId": "div_ad34feb5-dc70-4239-8a71-f49251482e79",
+				"tag": "div",
+				"childSize": 0,
+				"viewType": "View",
+				"attribute": {
+					"class": "wenzi"
+				},
+				"style": {
+					"padding": ["5", 0, "5", 0],
+					"fontSize": "16",
+					"color": "#fc651c",
+					"height": -2,
+					"width": -2
+				},
+				"viewName": "TextView"
+			}],
+			"viewType": "GroupView",
+			"attribute": {
+				"class": "userSearch clearfix"
+			},
+			"style": {
+				"height": -2,
+				"width": -1
+			},
+			"viewName": "HLinearLayout"
+		}, {
+			"viewId": "ul_3c274743-f076-4beb-98cd-390ecd897616",
+			"tag": "ul",
+			"childSize": 3,
+			"children": [{
+				"viewId": "li_a3da617b-ca54-4aed-bf90-51e982761f69",
+				"tag": "li",
+				"childSize": 1,
+				"children": [{
+					"textName": "全部订单",
+					"viewId": "p_3af80920-9302-4297-82e6-2ee3abc65fac",
+					"tag": "p",
+					"childSize": 0,
+					"viewType": "View",
+					"attribute": {
+						"id": "li_p_first"
+					},
+					"style": {
+						"padding": ["0", "0", "0", "0"],
+						"margin": ["0", "0", "0", "0"],
+						"color": "#FFFFFf",
+						"height": -2,
+						"width": -1
+					},
+					"viewName": "TextView"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"id": "li_first"
+				},
+				"style": {
+					"background": "#ffcd48",
+					"color": "#FFFFFf",
+					"width": 0,
+					"height": "30",
+					"fontSize": "14",
+					"weight": 1
+				},
+				"viewName": "VLinearLayout"
+			}, {
+				"viewId": "li_84663d60-de77-4feb-8dcc-df561f2d3eb6",
+				"tag": "li",
+				"childSize": 1,
+				"children": [{
+					"textName": "支付完成",
+					"viewId": "p_8c79ed24-3b8a-4a25-87c0-ca7a7a909334",
+					"tag": "p",
+					"childSize": 0,
+					"viewType": "View",
+					"attribute": {
+						"id": "li_p_second"
+					},
+					"style": {
+						"padding": ["0", "0", "0", "0"],
+						"margin": ["0", "0", "0", "0"],
+						"color": "#f3b120",
+						"height": -2,
+						"width": -1
+					},
+					"viewName": "TextView"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"id": "li_second"
+				},
+				"style": {
+					"width": 0,
+					"height": "30",
+					"color": "#f3b120",
+					"fontSize": "14",
+					"background": "#FFFFFF",
+					"weight": 1
+				},
+				"viewName": "VLinearLayout"
+			}, {
+				"viewId": "li_d55b81d4-d8c4-41d0-8da0-e3fd420f6eea",
+				"tag": "li",
+				"childSize": 1,
+				"children": [{
+					"textName": "支付中",
+					"viewId": "p_1a345639-d3ac-4204-831b-1b7f848e00f8",
+					"tag": "p",
+					"childSize": 0,
+					"viewType": "View",
+					"attribute": {
+						"id": "li_p_third"
+					},
+					"style": {
+						"padding": ["0", "0", "0", "0"],
+						"margin": ["0", "0", "0", "0"],
+						"color": "#f3b120",
+						"height": -2,
+						"width": -1
+					},
+					"viewName": "TextView"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"id": "li_third"
+				},
+				"style": {
+					"width": 0,
+					"height": "30",
+					"color": "#f3b120",
+					"fontSize": "14",
+					"background": "#FFFFFF",
+					"weight": 1
+				},
+				"viewName": "VLinearLayout"
+			}],
+			"viewType": "GroupView",
+			"attribute": {},
+			"style": {
+				"layout_gravity": "center",
+				"margin": ["10", "0", "10", "0"],
+				"background": "#FFFFFF",
+				"border": "1px solid #ffcd48",
+				"padding": ["0", "0", "0", "0"],
+				"height": -2,
+				"width": -1
+			},
+			"viewName": "HLinearLayout"
+		}, {
+			"viewId": "div_34462772-c2f5-4a11-8eb2-680702c7a051",
+			"tag": "div",
+			"childSize": 1,
+			"children": [{
+				"viewId": "div_bcea3f0d-8499-40eb-802f-23e7685b6244",
+				"tag": "div",
+				"childSize": 5,
+				"children": [{
+					"viewId": "div_c51ed1c5-2eab-46f7-85bc-6a430955ac39",
+					"tag": "div",
+					"childSize": 1,
+					"children": [{
+						"viewId": "div_eac37810-475f-473e-8a76-676cb0668b64",
+						"tag": "div",
+						"childSize": 2,
+						"children": [{
+							"textName": "交易总额：",
+							"viewId": "label_4bcb955b-cb54-48f4-b14c-1756e96d7620",
+							"tag": "label",
+							"childSize": 0,
+							"viewType": "View",
+							"attribute": {},
+							"style": {
+								"fontSize": "16",
+								"color": "#222222",
+								"height": -2,
+								"width": -2
+							},
+							"viewName": "TextView"
+						}, {
+							"textName": "1234.00元",
+							"viewId": "span_2f831360-a2b1-4ed6-87fa-bf1668f6b34a",
+							"tag": "span",
+							"childSize": 0,
+							"viewType": "View",
+							"attribute": {},
+							"style": {
+								"fontSize": "16",
+								"color": "#222222",
+								"height": -2,
+								"width": -2
+							},
+							"viewName": "TextView"
+						}],
+						"viewType": "GroupView",
+						"attribute": {
+							"class": "orderBorder"
+						},
+						"style": {
+							"height": "40",
+							"color": "#222222",
+							"width": -1
+						},
+						"viewName": "HLinearLayout"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderh2"
+					},
+					"style": {
+						"width": "690",
+						"layout_gravity": "center",
+						"margin": ["0", 0, "0", 0],
+						"height": -2
+					},
+					"viewName": "VLinearLayout"
+				}, {
+					"viewId": "div_f5669244-e864-4189-8e1d-bc29fe7a13bd",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "首付金额：",
+						"viewId": "label_95d4cbb3-7838-4814-aa53-84963b5e2260",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "100元",
+						"viewId": "span_60e94707-7852-41d3-8d85-e3cc8518d6a9",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_d904a045-8589-4dbb-8eff-865d400b62db",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "交易状态：",
+						"viewId": "label_64bfe551-10de-40c6-ad51-0723f8618a41",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "成功",
+						"viewId": "span_b462831f-6a80-44ce-8c71-faba9d8d6ca9",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_04236243-197e-4372-8d03-f7c982329d7d",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "支付手机：",
+						"viewId": "label_e3c390f0-6b91-4b6e-8338-1d3b677c39a8",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "181111111111",
+						"viewId": "span_5defa28a-6fb6-4b4b-8cd3-ef0faa84a941",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_8da416e3-ef1f-438d-9864-e4d94d168875",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "交易时间：",
+						"viewId": "label_583ab35a-535d-464c-aa17-926c600a1d02",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "2015-12-14",
+						"viewId": "span_25e9edd1-cb13-44bc-91f5-47dfef6947ea",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"class": "myOrderDetail clearfix"
+				},
+				"style": {
+					"height": -2,
+					"width": -1
+				},
+				"viewName": "VLinearLayout"
+			}],
+			"viewType": "GroupView",
+			"attribute": {
+				"id": "payment",
+				"class": "payment"
+			},
+			"style": {
+				"display": "block",
+				"width": -1,
+				"height": -2
+			},
+			"viewName": "VLinearLayout"
+		}, {
+			"viewId": "div_088d0213-e8ff-4e98-8afa-b7ac0a2967f8",
+			"tag": "div",
+			"childSize": 1,
+			"children": [{
+				"viewId": "div_bc206944-b3b1-489e-8eec-3df3d0fbbd32",
+				"tag": "div",
+				"childSize": 5,
+				"children": [{
+					"viewId": "div_ffcbae32-6e75-4df4-8ddf-4a425799bc38",
+					"tag": "div",
+					"childSize": 1,
+					"children": [{
+						"viewId": "div_6dbbf059-1a50-449b-a379-87d838a2c279",
+						"tag": "div",
+						"childSize": 2,
+						"children": [{
+							"textName": "交易总额：",
+							"viewId": "label_338ad373-dfce-4d78-88a8-d3a1c383372a",
+							"tag": "label",
+							"childSize": 0,
+							"viewType": "View",
+							"attribute": {},
+							"style": {
+								"fontSize": "16",
+								"color": "#222222",
+								"height": -2,
+								"width": -2
+							},
+							"viewName": "TextView"
+						}, {
+							"textName": "2000.00元",
+							"viewId": "span_f2eec4e9-e043-4d3f-8b55-773d59c7cf23",
+							"tag": "span",
+							"childSize": 0,
+							"viewType": "View",
+							"attribute": {},
+							"style": {
+								"fontSize": "16",
+								"color": "#222222",
+								"height": -2,
+								"width": -2
+							},
+							"viewName": "TextView"
+						}],
+						"viewType": "GroupView",
+						"attribute": {
+							"class": "orderBorder"
+						},
+						"style": {
+							"height": "40",
+							"color": "#222222",
+							"width": -1
+						},
+						"viewName": "HLinearLayout"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderh2"
+					},
+					"style": {
+						"width": "690",
+						"layout_gravity": "center",
+						"margin": ["0", 0, "0", 0],
+						"height": -2
+					},
+					"viewName": "VLinearLayout"
+				}, {
+					"viewId": "div_4e76a482-a855-4883-84d3-42cc4b2207b7",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "首付金额：",
+						"viewId": "label_f83128f8-b1b0-42e1-8704-0d86ea6c58ed",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "300元",
+						"viewId": "span_7b379767-a7e5-464d-b83b-ba9418dc2ca8",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_5ad313e7-9586-4a18-9153-ce8225deed88",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "交易状态：",
+						"viewId": "label_f59b9100-f16f-4acd-91a9-e058ac81d690",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "失败",
+						"viewId": "span_107ca208-dcdd-4fcf-92e2-e2d8d9ba37c6",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_f40213ff-2dd9-4a03-95b0-d6fbcb243fe3",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "支付手机：",
+						"viewId": "label_6d328ea1-8662-458f-a69b-2bc6ddb84ebe",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "181111111111",
+						"viewId": "span_8c90f3da-b35b-44dc-844d-8e24bbc18d27",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_5973c48b-4260-4143-87b4-a420d1d97b22",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "交易时间：",
+						"viewId": "label_71308b4e-4f94-4937-a1a4-4348991d4924",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "2016-6-6",
+						"viewId": "span_7eddd8be-7564-4df5-873d-2aa897b49a8e",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"class": "myOrderDetail clearfix"
+				},
+				"style": {
+					"height": -2,
+					"width": -1
+				},
+				"viewName": "VLinearLayout"
+			}],
+			"viewType": "GroupView",
+			"attribute": {
+				"id": "payment_over",
+				"class": "payment"
+			},
+			"style": {
+				"display": "none",
+				"color": "#ffbb00",
+				"height": -2,
+				"width": -1
+			},
+			"viewName": "VLinearLayout"
+		}, {
+			"viewId": "div_38c6206e-9d21-49bf-878a-6ceffab9baf6",
+			"tag": "div",
+			"childSize": 1,
+			"children": [{
+				"viewId": "div_08c60aaa-e025-4b15-b3b1-05afd7a7ad1d",
+				"tag": "div",
+				"childSize": 5,
+				"children": [{
+					"viewId": "div_87d52031-4d15-4648-b3a2-351973950624",
+					"tag": "div",
+					"childSize": 1,
+					"children": [{
+						"viewId": "div_e332d38e-4856-4483-8fb2-e68a7f8baaaa",
+						"tag": "div",
+						"childSize": 2,
+						"children": [{
+							"textName": "交易总额：",
+							"viewId": "label_37cdc01a-a1f9-4097-8f55-cec8c01806aa",
+							"tag": "label",
+							"childSize": 0,
+							"viewType": "View",
+							"attribute": {},
+							"style": {
+								"fontSize": "16",
+								"color": "#222222",
+								"height": -2,
+								"width": -2
+							},
+							"viewName": "TextView"
+						}, {
+							"textName": "3000.00元",
+							"viewId": "span_8704eb14-17d4-486a-99fb-b64d3afe973c",
+							"tag": "span",
+							"childSize": 0,
+							"viewType": "View",
+							"attribute": {},
+							"style": {
+								"fontSize": "16",
+								"color": "#222222",
+								"height": -2,
+								"width": -2
+							},
+							"viewName": "TextView"
+						}],
+						"viewType": "GroupView",
+						"attribute": {
+							"class": "orderBorder"
+						},
+						"style": {
+							"height": "40",
+							"color": "#222222",
+							"width": -1
+						},
+						"viewName": "HLinearLayout"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderh2"
+					},
+					"style": {
+						"width": "690",
+						"layout_gravity": "center",
+						"margin": ["0", 0, "0", 0],
+						"height": -2
+					},
+					"viewName": "VLinearLayout"
+				}, {
+					"viewId": "div_b99b6026-278b-4686-a334-41a6898d1124",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "首付金额：",
+						"viewId": "label_740eb5f6-8b01-4950-80a8-985b61accff1",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "300元",
+						"viewId": "span_c9062c9c-9eda-43f3-82ae-1a122167edba",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_3b6899d9-fb9d-4291-bd56-7e7c75d61a5e",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "交易状态：",
+						"viewId": "label_a8820f0d-8df4-4c3b-b9a2-1d0247aa809c",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "处理中",
+						"viewId": "span_d3bc0cd7-0748-442f-b4a8-c1a44b552d19",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_9f4c0804-3262-4d83-9bfb-8e2d7b662356",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "支付手机：",
+						"viewId": "label_69d98b58-ea08-4051-93b1-884895f0e788",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "181111111111",
+						"viewId": "span_7974d1c4-fa27-409d-b88d-c32cd741391c",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}, {
+					"viewId": "div_b9e8ca5d-9c98-4eb1-adb5-cec4d610e941",
+					"tag": "div",
+					"childSize": 2,
+					"children": [{
+						"textName": "交易时间：",
+						"viewId": "label_478ab113-b913-4222-a0aa-46fb658de332",
+						"tag": "label",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}, {
+						"textName": "2018-8-8",
+						"viewId": "span_40dc1092-7fd9-4680-bc23-aa5b13106e4d",
+						"tag": "span",
+						"childSize": 0,
+						"viewType": "View",
+						"attribute": {},
+						"style": {
+							"fontSize": "16",
+							"color": "#222222",
+							"height": -2,
+							"width": -2
+						},
+						"viewName": "TextView"
+					}],
+					"viewType": "GroupView",
+					"attribute": {
+						"class": "orderPublich1"
+					},
+					"style": {
+						"height": "40",
+						"color": "#222222",
+						"width": -1
+					},
+					"viewName": "HLinearLayout"
+				}],
+				"viewType": "GroupView",
+				"attribute": {
+					"class": "myOrderDetail clearfix"
+				},
+				"style": {
+					"height": -2,
+					"width": -1
+				},
+				"viewName": "VLinearLayout"
+			}],
+			"viewType": "GroupView",
+			"attribute": {
+				"id": "payment_in",
+				"class": "payment"
+			},
+			"style": {
+				"display": "none",
+				"color": "#0000cc",
+				"height": -2,
+				"width": -1
+			},
+			"viewName": "VLinearLayout"
+		}],
+		"viewType": "GroupView",
+		"attribute": {},
+		"style": {
+			"background": "#F0EFF5",
+			"height": -1,
+			"width": -1
+		},
+		"viewName": "VLinearLayout"
+	}
+}
