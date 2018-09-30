@@ -54,12 +54,11 @@ public class ZiRuNode {
             currentZiRuNode.setNodeData(nodeData);
             currentZiRuNode.setParentNode(parentNode);
             createNodeDataChildren(jsonObject, currentZiRuNode, childSize);
-            if (parentNode!=null){
+            if (parentNode != null) {
                 parentNode.getNodeData().addChild(currentZiRuNode);
-            }
-            //Log.e(TAG, "createZiRuNode: currentNode  "+currentZiRuNode.getNodeData().getViewName());
-            if (parentNode!=null){
-                //Log.e(TAG, "createZiRuNode: parentNode "+parentNode.getNodeData().getViewName());
+            } else {
+                parentNode = currentZiRuNode;
+                Log.e(TAG, "createZiRuNode: rootNode ");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,9 +84,9 @@ public class ZiRuNode {
         if (childSize > 0) {
             try {
                 JSONArray childrenJSONArray = jsonObject.getJSONArray("children");
-                for (int i =0; i< childrenJSONArray.length(); i++){
-                     JSONObject childJSONObj = childrenJSONArray.getJSONObject(i);
-                     createZiRuNode(childJSONObj, parentNode);
+                for (int i = 0; i < childrenJSONArray.length(); i++) {
+                    JSONObject childJSONObj = childrenJSONArray.getJSONObject(i);
+                    createZiRuNode(childJSONObj, parentNode);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
