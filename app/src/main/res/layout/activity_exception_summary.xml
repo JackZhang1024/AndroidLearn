@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--Toast 异常 此种异常一般出现在7.0以下手机-->
+    <Button
+        android:id="@+id/btn_toast_exception"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/toast_exception"
+        />
+</LinearLayout>

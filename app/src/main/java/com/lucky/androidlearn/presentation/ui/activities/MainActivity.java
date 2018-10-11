@@ -14,6 +14,7 @@ import com.lucky.androidlearn.crosswalk.CrossWalkActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
 import com.lucky.androidlearn.eventchange.AttributeChangeListenActivity;
+import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
@@ -304,6 +305,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         Intent intent = new Intent(this, NetWorkTrafficActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_exception_summary)
+    public void onExceptionSummaryClick(View view){
+        Intent intent = new Intent(this, ExceptionSummaryActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }

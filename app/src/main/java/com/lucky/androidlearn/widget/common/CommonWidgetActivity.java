@@ -2,6 +2,7 @@ package com.lucky.androidlearn.widget.common;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,14 +38,25 @@ public class CommonWidgetActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.btn_layout_gravity)
+    public void onLayoutGravityClick(View view){
+        Intent intent = new Intent(this, LayoutGravityActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.btn_toast)
     public void onShowToastClick(View view) {
-        try {
-            Thread.sleep(6000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Toast.makeText(this, "哈哈", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(CommonWidgetActivity.this, "哈哈", Toast.LENGTH_SHORT).show();
+            }
+        }, 5000);
+    }
+
+    @OnClick(R.id.btn_close_activity)
+    public void closeActivity(View view){
+        finish();
     }
 
 

@@ -657,6 +657,27 @@
             android:theme="@style/AppTheme"
             />
 
+        <activity
+            android:name=".widget.common.LayoutGravityActivity"
+            android:label="@string/layout_gravity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+        <!-- 异常总结 exception_summary -->
+        <activity
+            android:name=".exception.ExceptionSummaryActivity"
+            android:label="@string/exception_summary"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+        <!-- Toast异常 -->
+        <activity
+            android:name=".exception.toast.ToastExceptionActivity"
+            android:label="@string/toast_exception"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

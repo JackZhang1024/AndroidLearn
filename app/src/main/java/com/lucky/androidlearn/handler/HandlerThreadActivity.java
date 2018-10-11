@@ -60,6 +60,7 @@ public class HandlerThreadActivity extends AppCompatActivity {
                     }
                 }
             };
+            //从WorkThread线程发送消息到HandlerThread线程
             mHandlerThreadHandler.sendEmptyMessage(MSG_HELLO);
         }
     }

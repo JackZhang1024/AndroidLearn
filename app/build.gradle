@@ -15,6 +15,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //jackOptions.enabled = true // 支持Java8
+//        ndk {
+//            abiFilters "armeabi"
+//        }
     }
     buildTypes {
         release {
@@ -26,6 +29,13 @@ android {
 //    main {
 //        java.srcDirs = ['src/main/java', 'src/main/aidl']
 //    }
+
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 
 
     //支持Java8
@@ -66,6 +76,7 @@ android {
         implementation files('libs/activation.jar')
         implementation files('libs/additionnal.jar')
         implementation files('libs/mail.jar')
+        //implementation files('libs/sun.misc.BASE64Decoder.jar')
         implementation files('libs/ksoap2-android.jar')
         implementation "com.android.support:appcompat-v7:$supportVersion"
         implementation "com.android.support:support-v4:$supportVersion"
@@ -132,7 +143,7 @@ android {
         //compile 'com.taobao.android:weex_inspector:0.16.15'
 
         // 测试J2V8
-        compile(name: 'j2v8-4.8.2', ext: 'aar')
+        implementation(name: 'j2v8-4.8.2', ext: 'aar')
 
     }
 
@@ -144,13 +155,13 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/rxjava.properties'
     }
+}
 
-    repositories {
-        maven {
-            url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
-        }
-        flatDir {
-            dirs 'libs'   // aar目录
-        }
+repositories {
+    maven {
+        url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
+    }
+    flatDir {
+        dirs 'libs'   // aar目录
     }
 }

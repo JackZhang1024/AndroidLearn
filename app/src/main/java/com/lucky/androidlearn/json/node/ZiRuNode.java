@@ -55,10 +55,12 @@ public class ZiRuNode {
             currentZiRuNode.setParentNode(parentNode);
             createNodeDataChildren(jsonObject, currentZiRuNode, childSize);
             if (parentNode != null) {
+                Log.e(TAG, "createZiRuNode: nonRootNode");
                 parentNode.getNodeData().addChild(currentZiRuNode);
             } else {
                 parentNode = currentZiRuNode;
-                Log.e(TAG, "createZiRuNode: rootNode ");
+                Log.e(TAG, "createZiRuNode: rootNode "+currentZiRuNode.getNodeData().getViewId());
+                return parentNode;
             }
         } catch (Exception e) {
             e.printStackTrace();
