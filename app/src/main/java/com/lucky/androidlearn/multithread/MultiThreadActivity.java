@@ -30,6 +30,10 @@ public class MultiThreadActivity extends AppCompatActivity {
         threadSafeCheckTestCase.doCheck();
     }
 
-
+    @OnClick(R.id.btn_condition)
+    public void onCondition(View view){
+       ConditionTestCase conditionTestCase = new ConditionTestCase();
+       conditionTestCase.doTest();
+    }
 
 }

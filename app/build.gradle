@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 //配置kotlin第三步
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion androidCompileSdkVersion
     buildToolsVersion androidBuildToolsVersion
@@ -37,7 +36,6 @@ android {
         }
     }
 
-
     //支持Java8
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -69,6 +67,7 @@ android {
     }
 
     dependencies {
+        //compile fileTree(include: ['*.jar'], dir: 'libs')
         androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
             exclude group: 'com.android.support', module: 'support-annotations'
         })
@@ -76,7 +75,7 @@ android {
         implementation files('libs/activation.jar')
         implementation files('libs/additionnal.jar')
         implementation files('libs/mail.jar')
-        //implementation files('libs/sun.misc.BASE64Decoder.jar')
+        implementation files('libs/j2v8_android-2.0.jar')
         implementation files('libs/ksoap2-android.jar')
         implementation "com.android.support:appcompat-v7:$supportVersion"
         implementation "com.android.support:support-v4:$supportVersion"
@@ -133,18 +132,18 @@ android {
         implementation(name: 'simpleaar-release', ext: 'aar')
 
         // 配置kotlin第四步
-        implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
         // CrossWalk
         //compile 'org.xwalk:xwalk_core_library:10.39.235.15'
-        compile(name: 'crosswalk-23.53.589.4', ext: 'aar')
+        //compile(name: 'crosswalk-23.53.589.4', ext: 'aar')
 
         // Weex
         //compile 'com.taobao.android:weex_inspector:0.16.15'
 
         // 测试J2V8
-        implementation(name: 'j2v8-4.8.2', ext: 'aar')
-
+        //implementation(name: 'j2v8-4.8.2', ext: 'aar')
+        //compile(name: 'j2v8-4.8.2', ext: 'aar')
     }
 
     packagingOptions {
@@ -156,7 +155,6 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 }
-
 repositories {
     maven {
         url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'

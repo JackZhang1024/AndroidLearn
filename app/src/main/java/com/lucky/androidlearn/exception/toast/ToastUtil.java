@@ -20,6 +20,11 @@ import java.lang.reflect.Method;
 
 import javax.security.auth.login.LoginException;
 
+/**
+ * 问题分析
+ * https://blog.csdn.net/joye123/article/details/80738113
+ *
+ */
 public class ToastUtil {
     private static final String TAG = "ToastUtil";
     private Context mContext;
