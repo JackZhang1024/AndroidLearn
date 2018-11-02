@@ -111,4 +111,5 @@
     <string name="close_activity">关闭Activity</string>
     <string name="exception_summary">异常总结</string>
     <string name="toast_exception">Toast异常</string>
+    <string name="umeng">友盟</string>
 </resources>

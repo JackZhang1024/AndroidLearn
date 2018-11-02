@@ -35,6 +35,7 @@ import com.lucky.androidlearn.provider.MainProviderActivity;
 import com.lucky.androidlearn.reference.ReferenceActivity;
 import com.lucky.androidlearn.rxjava2.RxJavaActivity;
 import com.lucky.androidlearn.security.SecurityCheckActivity;
+import com.lucky.androidlearn.umeng.UMengActivity;
 import com.lucky.androidlearn.webservice.demo.WebServiceActivity;
 import com.lucky.androidlearn.widget.common.AppForegroundActivity;
 import com.lucky.androidlearn.launchmode.LaunchModeActivity;
@@ -45,6 +46,7 @@ import com.lucky.androidlearn.widget.material.MaterialWidgetActivity;
 import com.lucky.androidlearn.widget.screen.ScreenDensityActivity;
 import com.lucky.androidlearn.service.ServiceActivity;
 import com.lucky.androidlearn.xml.XmlActivity;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -75,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         mMainPresenter = new MainPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, new WelcomeMessageRepository());
         //startTrafficMonitor();
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        MobclickAgent.setDebugMode(true);
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.setSessionContinueMillis(10000);
+        MobclickAgent.setCatchUncaughtExceptions(false);
     }
 
     private void startTrafficMonitor(){
@@ -312,6 +319,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         startActivity(intent);
     }
 
+    //btn_umeng
+    @OnClick(R.id.btn_umeng)
+    public void onUmengClick(View view){
+        Intent intent = new Intent(this, UMengActivity.class);
+        startActivity(intent);
+    }
 
 
 }

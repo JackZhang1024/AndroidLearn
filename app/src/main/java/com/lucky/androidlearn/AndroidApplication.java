@@ -14,6 +14,8 @@ import com.lucky.androidlearn.dagger2learn.lesson04.DaggerAppComponent;
 import com.lukcyboy.simpleaar.SimpleAarLog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 
 import javax.inject.Inject;
 
@@ -38,7 +40,8 @@ public class AndroidApplication extends Application {
         Logger.addLogAdapter(new AndroidLogAdapter());
         Log.e(TAG, "onCreate: 进程ID " + Process.myPid());
         SimpleAarLog.getInstance();
-
+        //友盟统计
+        UMConfigure.init(this, "5bdbef32b465f5b32400001d", "AndroidLearn", UMConfigure.DEVICE_TYPE_PHONE, null);
     }
 
     /**
