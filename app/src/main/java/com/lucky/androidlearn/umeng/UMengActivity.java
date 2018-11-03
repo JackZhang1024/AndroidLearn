@@ -39,6 +39,12 @@ public class UMengActivity extends AppCompatActivity {
                 MobclickAgent.onEvent(UMengActivity.this, "DeviceInfo");
             }
         });
+        findViewById(R.id.btn_make_crash).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCrash();
+            }
+        });
     }
 
 
@@ -152,6 +158,11 @@ public class UMengActivity extends AppCompatActivity {
             }
         }
         return result;
+    }
+
+    private void makeCrash(){
+        int a = 10/0;
+        System.out.println("a "+a);
     }
 
 }

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         MobclickAgent.setDebugMode(true);
         MobclickAgent.openActivityDurationTrack(false);
         MobclickAgent.setSessionContinueMillis(10000);
-        MobclickAgent.setCatchUncaughtExceptions(false);
+        MobclickAgent.setCatchUncaughtExceptions(true);
     }
 
     private void startTrafficMonitor(){
