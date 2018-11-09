@@ -147,6 +147,11 @@ public class CommonWidgetActivity extends AppCompatActivity {
         startActivity(new Intent(this, BottomLayoutActivity.class));
     }
 
+    @OnClick(R.id.btn_flex_layout)
+    public void onFlexLayoutClick(View view){
+        startActivity(new Intent(this, FlexLayoutActivity.class));
+    }
+
 
     @Override
     protected void onStart() {

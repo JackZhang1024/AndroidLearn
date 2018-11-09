@@ -47,6 +47,9 @@ import com.lucky.androidlearn.widget.screen.ScreenDensityActivity;
 import com.lucky.androidlearn.service.ServiceActivity;
 import com.lucky.androidlearn.xml.XmlActivity;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
+
+import java.nio.charset.Charset;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -77,11 +80,17 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         mMainPresenter = new MainPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, new WelcomeMessageRepository());
         //startTrafficMonitor();
+        //UMConfigure.init(this, "5bdbef32b465f5b32400001d", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-        MobclickAgent.setDebugMode(true);
-        MobclickAgent.openActivityDurationTrack(false);
-        MobclickAgent.setSessionContinueMillis(10000);
-        MobclickAgent.setCatchUncaughtExceptions(true);
+        //MobclickAgent.setDebugMode(true);
+        //MobclickAgent.openActivityDurationTrack(false);
+        //MobclickAgent.setSessionContinueMillis(10000);
+        //MobclickAgent.setCatchUncaughtExceptions(true);
+        String abc = "hello,123";
+//        byte[] bytes = abc.getBytes(Charset.defaultCharset());
+//        for (byte i:bytes){
+//            System.out.println(i);
+//        }
     }
 
     private void startTrafficMonitor(){

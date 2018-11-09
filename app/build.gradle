@@ -144,9 +144,10 @@ android {
         // 测试J2V8
         //implementation(name: 'j2v8-4.8.2', ext: 'aar')
         //compile(name: 'j2v8-4.8.2', ext: 'aar')
-        compile 'com.umeng.sdk:common:latest.integration'
-        compile 'com.umeng.sdk:analytics:latest.integration'
-
+        compile 'com.umeng.sdk:common:1.5.3'
+        compile 'com.umeng.sdk:analytics:7.5.3'
+        // 类似CSStan
+        implementation 'com.google.android:flexbox:1.1.0'
     }
 
     packagingOptions {
