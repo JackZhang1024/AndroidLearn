@@ -167,3 +167,7 @@ repositories {
         dirs 'libs'   // aar目录
     }
 }
+
+dependencies {
+    implementation 'com.alibaba:fastjson:1.2.51'
+}
