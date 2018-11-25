@@ -1,10 +1,20 @@
 package com.jingewenku.abrahamcaijin.commonutil;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.util.Log;
 import android.widget.ImageView;
+
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -24,29 +34,35 @@ import com.squareup.picasso.Transformation;
  * 优缺点：对图片处理强大，取消已经不在视野范围的ImageView图片资源的加载（否则会导致图片错位），
  * 使用4.0+系统上的HTTP缓存来代替磁盘缓存；只能得到结果，不能监听图片下载过程
  * <BR/> Picasso 可以与okhttp搭配
- *
+ * <p>
  * 如果使用Picasso同时也使用了okhttp库，那么项目运行的时候可能会报出一下异常：
- Picasso detected an unsupported OkHttp on the classpath
- 针对该情况，网上说需要引入：compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
- 即同时引入一下三个包：
- compile 'com.squareup.okhttp:okhttp:2.4.0'
- compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
- compile 'com.squareup.picasso:picasso:2.4.0'
-
+ * Picasso detected an unsupported OkHttp on the classpath
+ * 针对该情况，网上说需要引入：compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+ * 即同时引入一下三个包：
+ * compile 'com.squareup.okhttp:okhttp:2.4.0'
+ * compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+ * compile 'com.squareup.picasso:picasso:2.4.0'
  */
 public class PicassoUtils {
     private static PicassoUtils instance;
-    /**圆形*/
-    public static String PICASSO_BITMAP_SHOW_CIRCLE_TYPE="PicassoUtils_Circle_Type";
-    /**圆角*/
-    public static String PICASSO_BITMAP_SHOW_ROUND_TYPE="PicassoUtils_Round_Type";
-    /**正常*/
-    public static String PICASSO_BITMAP_SHOW_NORMAL_TYPE="PicassoUtils_Normal_Type";
-    public static PicassoUtils getinstance(){
-        if(instance==null){
+    /**
+     * 圆形
+     */
+    public static String PICASSO_BITMAP_SHOW_CIRCLE_TYPE = "PicassoUtils_Circle_Type";
+    /**
+     * 圆角
+     */
+    public static String PICASSO_BITMAP_SHOW_ROUND_TYPE = "PicassoUtils_Round_Type";
+    /**
+     * 正常
+     */
+    public static String PICASSO_BITMAP_SHOW_NORMAL_TYPE = "PicassoUtils_Normal_Type";
+
+    public static PicassoUtils getinstance() {
+        if (instance == null) {
             synchronized (PicassoUtils.class) {
-                if(instance==null){
-                    instance=new PicassoUtils();
+                if (instance == null) {
+                    instance = new PicassoUtils();
                 }
             }
         }
@@ -71,78 +87,84 @@ public class PicassoUtils {
     //picasso.resumeTag(context);
     //picasso.pauseTag(context);
     //Picasso.with(context).load(contactUri).placeholder(R.drawable.contact_picture_placeholder).tag(context).into(holder.icon);
+
     /**
      * 加载图片通过地址
+     *
      * @param context
-     * @param path
-     *  <BR/>
-     *  String imagePath = "/mnt/sdcard/phone_pregnancy/header.png";  <BR/>
-        String imagefileUrl = Scheme.FILE.wrap(imagePath); <BR/>
-        //图片来源于Content provider
-        String contentprividerUrl = "content://media/external/audio/albumart/13";   <BR/>
-        //图片来源于assets
-        //  String assetsUrl = Scheme.ASSETS.wrap("image.png");  <BR/>
-        String assetsUrl = "assets://fail_image.9.png";  <BR/>
-        //图片来源于  drawable
-        //  String drawableUrl = Scheme.DRAWABLE.wrap("R.drawable.ic_launcher.png");<BR/>
-        String drawableUrl = "drawable://" + R.drawable.ic_add; <BR/>
-        //图片来源于  网络
-        String neturi = "http://ww2.sinaimg.cn/large/49aaa343jw1dgwd0qvb4pj.jpg";<BR/>
-        <P>
+     * @param path             <BR/>
+     *                         String imagePath = "/mnt/sdcard/phone_pregnancy/header.png";  <BR/>
+     *                         String imagefileUrl = Scheme.FILE.wrap(imagePath); <BR/>
+     *                         //图片来源于Content provider
+     *                         String contentprividerUrl = "content://media/external/audio/albumart/13";   <BR/>
+     *                         //图片来源于assets
+     *                         //  String assetsUrl = Scheme.ASSETS.wrap("image.png");  <BR/>
+     *                         String assetsUrl = "assets://fail_image.9.png";  <BR/>
+     *                         //图片来源于  drawable
+     *                         //  String drawableUrl = Scheme.DRAWABLE.wrap("R.drawable.ic_launcher.png");<BR/>
+     *                         String drawableUrl = "drawable://" + R.drawable.ic_add; <BR/>
+     *                         //图片来源于  网络
+     *                         String neturi = "http://ww2.sinaimg.cn/large/49aaa343jw1dgwd0qvb4pj.jpg";<BR/>
      * @param imageView
-     * @param placeholderimage  占位图片
-     * @param errorimage  加载错误图片
+     * @param placeholderimage 占位图片
+     * @param errorimage       加载错误图片
      * @param bitmapShowType   PICASSO_BITMAP_SHOW_CIRCLE_TYPE ， PICASSO_BITMAP_SHOW_ROUND_TYPE ，PICASSO_BITMAP_SHOW_NORMAL_TYPE
-     * @param roundRadius  设置圆角半径
+     * @param roundRadius      设置圆角半径
      */
-    public void LoadImage(Context context,String path,ImageView imageView,int placeholderimage,int errorimage,String bitmapShowType,float roundRadius){
-        if(bitmapShowType.equals(PICASSO_BITMAP_SHOW_CIRCLE_TYPE)){
+    public void LoadImage(Context context, String path, ImageView imageView, int placeholderimage, int errorimage, String bitmapShowType, float roundRadius) {
+        if (bitmapShowType.equals(PICASSO_BITMAP_SHOW_CIRCLE_TYPE)) {
             Picasso.with(context).load(path).placeholder(placeholderimage).error(errorimage).transform(new CircleTransform()).into(imageView);
-        }else if(bitmapShowType.equals(PICASSO_BITMAP_SHOW_ROUND_TYPE)){
-            Picasso.with(context).load(path).placeholder(placeholderimage).error(errorimage).transform(new RoundTransform(roundRadius)).into(imageView);
-        }else {
+        } else if (bitmapShowType.equals(PICASSO_BITMAP_SHOW_ROUND_TYPE)) {
+            Picasso.with(context).load(path).transform(new RoundTransform(roundRadius)).into(imageView);
+            //Picasso.with(context).load(path).placeholder(placeholderimage).error(errorimage).transform(new RoundTransform(roundRadius)).into(imageView);
+        } else {
             Picasso.with(context).load(path).placeholder(placeholderimage).error(errorimage).into(imageView);
         }
     }
+
     /**
      * 加载图片本地 通过id
+     *
      * @param context
-     * @param localimage  R.drawable.landing_screen
+     * @param localimage     R.drawable.landing_screen
      * @param imageView
-     * @param bitmapShowType   PICASSO_BITMAP_SHOW_CIRCLE_TYPE ， PICASSO_BITMAP_SHOW_ROUND_TYPE ，PICASSO_BITMAP_SHOW_NORMAL_TYPE
-     * @param roundRadius  设置圆角半径
+     * @param bitmapShowType PICASSO_BITMAP_SHOW_CIRCLE_TYPE ， PICASSO_BITMAP_SHOW_ROUND_TYPE ，PICASSO_BITMAP_SHOW_NORMAL_TYPE
+     * @param roundRadius    设置圆角半径
      */
-    public void LoadImage(Context context,int localimage,ImageView imageView,String bitmapShowType,float roundRadius){
-        if(bitmapShowType.equals(PICASSO_BITMAP_SHOW_CIRCLE_TYPE)){
-            Picasso.with(context).load(localimage).placeholder(R.drawable.img_loading).error(R.drawable.img_load_error).transform(new CircleTransform()).into(imageView);
-        }else if(bitmapShowType.equals(PICASSO_BITMAP_SHOW_ROUND_TYPE)){
+    public void LoadImage(Context context, int localimage, ImageView imageView, String bitmapShowType, float roundRadius) {
+        if (bitmapShowType.equals(PICASSO_BITMAP_SHOW_CIRCLE_TYPE)) {
+            Picasso.with(context).load(localimage).transform(new CircleTransform()).into(imageView);
+        } else if (bitmapShowType.equals(PICASSO_BITMAP_SHOW_ROUND_TYPE)) {
             Picasso.with(context).load(localimage).transform(new RoundTransform(roundRadius)).into(imageView);
-        }else {
+        } else {
             Picasso.with(context).load(localimage).into(imageView);
         }
     }
+
     /**
      * 加载图片 设置宽高  图片默认居中 （centerCrop() ）
+     *
      * @param context
      * @param path
      * @param imageView
      * @param targetWidth
      * @param targetHeight
-     * @param bitmapShowType   PICASSO_BITMAP_SHOW_CIRCLE_TYPE ， PICASSO_BITMAP_SHOW_ROUND_TYPE ，PICASSO_BITMAP_SHOW_NORMAL_TYPE
-     * @param roundRadius  设置圆角半径
+     * @param bitmapShowType PICASSO_BITMAP_SHOW_CIRCLE_TYPE ， PICASSO_BITMAP_SHOW_ROUND_TYPE ，PICASSO_BITMAP_SHOW_NORMAL_TYPE
+     * @param roundRadius    设置圆角半径
      */
-    public void LoadImageWithWidtAndHeight(Context context,String path,ImageView imageView,int targetWidth,int targetHeight,String bitmapShowType,float roundRadius){
-        if(bitmapShowType.equals(PICASSO_BITMAP_SHOW_CIRCLE_TYPE)){
+    public void LoadImageWithWidtAndHeight(Context context, String path, ImageView imageView, int targetWidth, int targetHeight, String bitmapShowType, float roundRadius) {
+        if (bitmapShowType.equals(PICASSO_BITMAP_SHOW_CIRCLE_TYPE)) {
             Picasso.with(context).load(path).resize(targetWidth, targetHeight).centerCrop().transform(new CircleTransform()).into(imageView);
-        }else if(bitmapShowType.equals(PICASSO_BITMAP_SHOW_ROUND_TYPE)){
+        } else if (bitmapShowType.equals(PICASSO_BITMAP_SHOW_ROUND_TYPE)) {
             Picasso.with(context).load(path).resize(targetWidth, targetHeight).centerCrop().transform(new RoundTransform(roundRadius)).into(imageView);
-        }else {
+        } else {
             Picasso.with(context).load(path).resize(targetWidth, targetHeight).centerCrop().into(imageView);
         }
     }
     //--------------------------------------------------
+
     /**
-     *设置圆形头像
+     * 设置圆形头像
      */
     public class CircleTransform implements Transformation {
         @Override
@@ -162,7 +184,7 @@ public class PicassoUtils {
             Canvas canvas = new Canvas(bitmap);
             Paint paint = new Paint();
             BitmapShader shader = new BitmapShader(squaredBitmap,
-                BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+                    BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
             paint.setShader(shader);
             paint.setAntiAlias(true);
             float r = size / 2f;
@@ -178,37 +200,39 @@ public class PicassoUtils {
         }
     }
     //------------------------------------------------------
+
     /**
      * 绘制圆角
      */
-    public class RoundTransform implements Transformation{
+    public class RoundTransform implements Transformation {
         private float radius;
+
         public RoundTransform(float radius) {
-            this.radius=radius;
+            this.radius = radius;
         }
+
         @Override
         public String key() {
             return "round";
         }
 
         @Override
-        public Bitmap transform(Bitmap bitmap) {
-            int size = Math.min(bitmap.getWidth(), bitmap.getHeight());
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
 
-            int x = (bitmap.getWidth() - size) / 2;
-            int y = (bitmap.getHeight() - size) / 2;
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
 
-            Bitmap squaredBitmap = Bitmap.createBitmap(bitmap, x, y, size, size);
-            if (squaredBitmap != bitmap) {
-                bitmap.recycle();
-            }
-            Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Config.ARGB_8888);
+            Bitmap bitmap = Bitmap.createBitmap(source, x, y, size, size);
+//            if (bitmap != source) {
+//                source.recycle();
+//            }
+            Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Config.ARGB_8888);
             Canvas canvas = new Canvas(output);
 
             final int color = 0xff424242;
             final Paint paint = new Paint();
-            final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+            final Rect rect = new Rect(0, 0, source.getWidth(), source.getHeight());
             final RectF rectF = new RectF(rect);
 
             paint.setAntiAlias(true);
@@ -217,10 +241,49 @@ public class PicassoUtils {
             canvas.drawRoundRect(rectF, radius, radius, paint);
 
             paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-            canvas.drawBitmap(bitmap, rect, rect, paint);
-            squaredBitmap.recycle();
+            canvas.drawBitmap(source, rect, rect, paint);
+            source.recycle();
             return output;
         }
 
     }
+
+
+    /**
+     * 圆角显示图片-Picasso
+     */
+    class RoundCornerTransform implements Transformation {
+        private float radius;//圆角值
+        private static final String TAG = "RoundCornerTransform";
+        public RoundCornerTransform(float radius) {
+            this.radius = radius;
+        }
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int width = source.getWidth();
+            int height = source.getHeight();
+            //画板
+            Bitmap bitmap = Bitmap.createBitmap(width, height, source.getConfig());
+            Paint paint = new Paint();
+            Canvas canvas = new Canvas(bitmap);//创建同尺寸的画布
+            paint.setAntiAlias(true);//画笔抗锯齿
+            paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+            //画圆角背景
+            RectF rectF = new RectF(new Rect(0, 0, width, height));//赋值
+            canvas.drawRoundRect(rectF, radius, radius, paint);//画圆角矩形
+            paint.setFilterBitmap(true);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(source, 0, 0, paint);
+            source.recycle();//释放
+
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "round : radius = " + radius;
+        }
+    }
+
 }
