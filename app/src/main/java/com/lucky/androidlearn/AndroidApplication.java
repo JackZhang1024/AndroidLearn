@@ -7,14 +7,12 @@ import android.location.LocationManager;
 import android.os.Process;
 import android.util.Log;
 
-import com.jingewenku.abrahamcaijin.commonutil.AppApplicationMgr;
-import com.lucky.androidlearn.dagger2learn.lesson04.AppComponent;
 import com.lucky.androidlearn.dagger2learn.AppModule;
+import com.lucky.androidlearn.dagger2learn.lesson04.AppComponent;
 import com.lucky.androidlearn.dagger2learn.lesson04.DaggerAppComponent;
 import com.lukcyboy.simpleaar.SimpleAarLog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
-import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.lang.reflect.Field;
@@ -89,4 +87,5 @@ public class AndroidApplication extends Application {
     public static AndroidApplication getInstances() {
         return mAndroidApplication;
     }
+
 }

@@ -113,4 +113,6 @@
     <string name="toast_exception">Toast异常</string>
     <string name="umeng">友盟</string>
     <string name="flex_layout">FlexLayout</string>
+    <string name="yoga_layout">YogaLayout</string>
+    <string name="scroll_conflict">ScrollConflict</string>
 </resources>

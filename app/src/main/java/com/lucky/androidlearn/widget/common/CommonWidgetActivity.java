@@ -16,9 +16,11 @@ import com.lucky.androidlearn.widget.common.editText.EditTextWidgetActivity;
 import com.lucky.androidlearn.widget.common.fancygallery.FancyGalleryMainActivity;
 import com.lucky.androidlearn.widget.common.helper.AlertDialogHelper;
 import com.lucky.androidlearn.widget.common.pulllistview.PullListViewActivity;
+import com.lucky.androidlearn.widget.common.scrollconflict.ScrollConflictActivity;
 import com.lucky.androidlearn.widget.constraintlayout.ConstraintLayoutActivity;
 import com.lucky.androidlearn.widget.marquee.MarqueeViewActivity;
 import com.lucky.androidlearn.widget.notification.NotificationActivity;
+import com.lucky.androidlearn.yoga.YogaLayoutActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -150,6 +152,17 @@ public class CommonWidgetActivity extends AppCompatActivity {
     @OnClick(R.id.btn_flex_layout)
     public void onFlexLayoutClick(View view){
         startActivity(new Intent(this, FlexLayoutActivity.class));
+    }
+
+    // btn_yoga_layout
+    @OnClick(R.id.btn_yoga_layout)
+    public void onYogaLayoutClick(View view){
+        startActivity(new Intent(this, YogaLayoutActivity.class));
+    }
+
+    @OnClick(R.id.btn_scroll_conflict)
+    public void onScrollConflictClick(View view){
+        startActivity(new Intent(this, ScrollConflictActivity.class));
     }
 
 

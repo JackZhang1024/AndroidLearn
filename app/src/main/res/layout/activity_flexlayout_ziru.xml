@@ -1,18 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
-    <LinearLayout
-        android:id="@+id/root_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+    <!--<LinearLayout-->
+        <!--android:id="@+id/content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--android:background="@color/red"-->
+        <!--&gt;-->
 
-    </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_middle"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="300dp"-->
+            <!--android:orientation="vertical"-->
+            <!--&gt;-->
+            <!--<LinearLayout-->
+                <!--android:id="@+id/ll_inner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:background="@color/cadetblue"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_title"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="Hello World!"-->
+                    <!--/>-->
+
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+        <!---->
+    <!--</LinearLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="dd"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="dd"
+            />
+
+    </RelativeLayout>
 
 </LinearLayout>
