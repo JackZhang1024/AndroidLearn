@@ -1,11 +1,15 @@
 package com.lucky.androidlearn.presentation.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
+import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getContentViewHeight();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mMainPresenter = new MainPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
@@ -101,6 +106,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     protected void onResume() {
         super.onResume();
         //mMainPresenter.resume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int height = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getHeight();
+                int titleBarHeight = AppScreenMgr.getTitleBarHeight(MainActivity.this);
+                System.out.println("contentHeight "+height+"  titleBarHeight "+titleBarHeight);
+            }
+        }, 1000);
     }
 
     @Override
@@ -333,6 +346,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public void onUmengClick(View view){
         Intent intent = new Intent(this, UMengActivity.class);
         startActivity(intent);
+    }
+
+    private void getContentViewHeight(){
+        int screenHeight = AppScreenMgr.getScreenHeight(this);
+        int statusHeight = AppScreenMgr.getStatusHeight(this);
+        int statusBarHeight = AppScreenMgr.getStatusBarHeight(this);
+        System.out.println("screenHeight "+screenHeight+" statusHeight "+statusHeight+" statusBarHeight "+statusBarHeight);
     }
 
 

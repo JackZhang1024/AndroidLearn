@@ -9,20 +9,20 @@ import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayout;
 import com.lucky.androidlearn.R;
-import com.lucky.androidlearn.presentation.presenters.MainPresenter;
 
 // https://cloud.tencent.com/developer/article/1354252
 // https://www.jianshu.com/p/b3a9c4a99053
 
 public class FlexLayoutActivity extends AppCompatActivity {
     private static final String TAG = "FlexLayoutActivity";
-    private LinearLayout mRootView;
+    private RelativeLayout mRootView;
     private LinearLayout mContentView;
     private static final String ROOT_VIEW = "root_view";
 
@@ -30,7 +30,7 @@ public class FlexLayoutActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flexlayout_ziru);
-        mRootView = (LinearLayout) findViewById(R.id.root);
+        mRootView = (RelativeLayout) findViewById(R.id.root);
         mContentView = (LinearLayout) findViewById(R.id.content);
         mRootView.setTag(ROOT_VIEW);
         //addFlexBoxLayout();
@@ -63,43 +63,43 @@ public class FlexLayoutActivity extends AppCompatActivity {
 
     private void calculateChildViewWidth() {
         TextView tvTitle = (TextView) findViewById(R.id.tv_title);
-        Pair<Integer, View> pair = getParentViewWidth(tvTitle);
-        Log.e(TAG, "calculateChildViewWidth: " + pair.first+" "+pair.second.getTag());
+        int width = getParentViewWidth(tvTitle);
+        Log.e(TAG, "calculateChildViewWidth: " + width);
         int height = getParentViewHeight(tvTitle);
+        Log.e(TAG, "calculateChildViewHeight: " + height);
     }
 
 
     // TODO: 2018/11/21 通过百分比计算子控件的宽度
-    private Pair<Integer, View> getParentViewWidth(View view) {
+    // 1. 如果父视图是指定宽 则返回指定宽
+    // 2. 如果父视图是撑满 则继续调用 直到返回具体的数值
+    // 3. 暂时不考虑包裹内容的情况
+    private int getParentViewWidth(View view) {
         ViewGroup parentView = (ViewGroup) view.getParent();
         ViewGroup.LayoutParams layoutParams = parentView.getLayoutParams();
         int width = layoutParams.width;
-        Log.e(TAG, "getParentViewWidth: " + width + " tag " + parentView.getTag());
         if (width == ViewGroup.LayoutParams.MATCH_PARENT) {
-            if (ROOT_VIEW.equals(parentView.getTag())) {
-                parentView.setTag(ROOT_VIEW);
-                return new Pair<>(width, parentView);
-            } else {
-                getParentViewWidth(parentView);
-            }
+            // 撑满父容器
+            width = getParentViewWidth(parentView);
         } else if (width == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            return new Pair<>(width, parentView);
+            width = getParentViewWidth(parentView);
+        } else if (width > -1) {
+            // 指定宽
+            return width;
         }
-        return new Pair<>(width, parentView);
+        return width;
     }
+
 
     private int getParentViewHeight(View view) {
         ViewGroup parentView = (ViewGroup) view.getParent();
         ViewGroup.LayoutParams layoutParams = parentView.getLayoutParams();
         int height = layoutParams.height;
-        Log.e(TAG, "getParentViewHeight: " + height + " tag " + parentView.getTag());
         if (height == ViewGroup.LayoutParams.MATCH_PARENT) {
-            if (ROOT_VIEW.equals(parentView.getTag())) {
-                return height;
-            } else {
-                getParentViewWidth(parentView);
-            }
+            height = getParentViewHeight(parentView);
         } else if (height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            height = getParentViewHeight(parentView);
+        } else if (height > -1) {
             return height;
         }
         return height;
