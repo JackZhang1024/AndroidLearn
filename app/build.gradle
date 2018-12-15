@@ -148,6 +148,7 @@ android {
         compile 'com.umeng.sdk:analytics:7.5.3'
         // 类似CSStan
         implementation 'com.google.android:flexbox:1.0.0'
+        implementation group: 'com.facebook.yoga.android', name: 'yoga-layout', version: '1.8.0'
     }
 
     packagingOptions {

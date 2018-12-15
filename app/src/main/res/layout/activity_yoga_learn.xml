@@ -1,84 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<com.facebook.yoga.android.YogaLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yoga="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/yoga_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <!--<com.facebook.yoga.android.YogaLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/ygcontainer"-->
-            <!--yoga:flex_direction="column"-->
-            <!--yoga:align_items="flex_start">-->
-
-            <!--<com.facebook.yoga.android.VirtualYogaLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--yoga:flex_direction="row"-->
-                <!--yoga:align_items="flex_start"-->
-                <!--&gt;-->
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/img"-->
-                    <!--android:layout_width="60dp"-->
-                    <!--android:layout_height="60dp"-->
-                    <!--android:src="@drawable/ic_launcher"-->
-                    <!--yoga:flex="0"-->
-                    <!--yoga:margin_left="10dp"-->
-                    <!--/>-->
-
-                <!--<com.facebook.yoga.android.VirtualYogaLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--yoga:flex_direction="column"-->
-                    <!--yoga:align_items="flex_start"-->
-                    <!--yoga:flex="0"-->
-                    <!--yoga:margin_left="10dp">-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="中国日报"-->
-                        <!--android:textColor="@android:color/holo_red_light"-->
-                        <!--android:textSize="18dp"-->
-                        <!--yoga:flex="0"-->
-                        <!--/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="3小时前 来自微博网页版 已编辑"-->
-                        <!--android:textColor="@android:color/darker_gray"-->
-                        <!--android:textSize="14dp"-->
-                        <!--yoga:flex="0"-->
-                        <!--/>-->
-
-                <!--</com.facebook.yoga.android.VirtualYogaLayout>-->
-
-            <!--</com.facebook.yoga.android.VirtualYogaLayout>-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="【直播中国地球卫士青年奖发布会：王俊凯、徐峥、惠若琪、董力将出席】18日，联合国环境规划署与微博联合推出“中国地球卫士青年奖”，将为中国地球卫士青年奖倡导者颁发证书。联合国副秘书长兼环境署执行主任埃里克.索尔海姆 、@TFBOYS-王俊凯 @徐峥 @元气少女惠Rachel @_董大力 等将出席。一起为 ​​​​..."-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="14dp"-->
-                <!--yoga:flex="0"-->
-                <!--yoga:margin_left="10dp"-->
-                <!--/>-->
-
-            <!--<ImageView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/ic_launcher"-->
-                <!--yoga:flex="0"-->
-                <!--yoga:margin_left="10dp"-->
-                <!--/>-->
-
-        <!--</com.facebook.yoga.android.YogaLayout>-->
-    </FrameLayout>
-</FrameLayout>
+</com.facebook.yoga.android.YogaLayout>

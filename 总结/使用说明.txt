@@ -46,3 +46,6 @@ https://github.com/CarGuo/GSYVideoPlayer
 
 保存透明背景图片
 https://blog.csdn.net/u011494050/article/details/38776913
+
+列表优化
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0115/7023.html
