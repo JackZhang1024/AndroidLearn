@@ -1,5 +1,6 @@
 package com.lucky.androidlearn.yoga;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +17,6 @@ import com.facebook.yoga.YogaWrap;
 import com.facebook.yoga.android.YogaLayout;
 import com.lucky.androidlearn.R;
 
-import org.json.JSONObject;
-
 public class YogaLayoutActivity extends AppCompatActivity {
 
     YogaLayout mYogaLayout;
@@ -28,21 +27,9 @@ public class YogaLayoutActivity extends AppCompatActivity {
         SoLoader.init(this, false);
         setContentView(R.layout.activity_yoga_learn);
         mYogaLayout = (YogaLayout) findViewById(R.id.yoga_layout);
-        addTextView();
-    }
-
-    private void addTextView() {
-        TextView tvTitle = new TextView(this);
-        tvTitle.setText("Hello World!");
-        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        mYogaLayout.addView(tvTitle);
-        YogaNode tvTitleNode = mYogaLayout.getYogaNodeForView(tvTitle);
-        handYoGaNodeDefault(tvTitleNode);
-        //tvTitleNode.setWidth(100);
-        //tvTitleNode.setWidthPercent(60.0f);
-        //tvTitleNode.setWidthAuto();
-        tvTitleNode.setHeight(100);
-        tvTitleNode.setMargin(YogaEdge.LEFT, 20);
+        //createYogaLayout(mYogaLayout);
+        //createVerticalYogaLayout(mYogaLayout);
+        createComplexYogaLayout(mYogaLayout);
     }
 
     public void handYoGaNodeDefault(YogaNode yogaNode) {
@@ -52,6 +39,113 @@ public class YogaLayoutActivity extends AppCompatActivity {
         yogaNode.setFlexGrow(0);
         yogaNode.setFlexShrink(0);
         yogaNode.setAlignSelf(YogaAlign.AUTO);
+    }
+
+    // FlexGrow相当于原生的layout_weight widthPercent是100 会直接占父容器的全部宽度
+    // FlexGrow跟FlexDirection的方向有关系
+    // yogaNode的padding设置只对YogaLayout起作用，其他控件不起作用
+    private void createYogaLayout(YogaLayout parentView){
+        YogaLayout yogaLayout = new YogaLayout(this);
+        parentView.addView(yogaLayout);
+        YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
+        yogaNode.setFlexDirection(YogaFlexDirection.ROW);
+        yogaNode.setWrap(YogaWrap.NO_WRAP);
+        //yogaNode.setJustifyContent(YogaJustify.SPACE_AROUND);
+        yogaNode.setFlexGrow(0);
+        yogaNode.setFlexShrink(0);
+        yogaNode.setAlignSelf(YogaAlign.AUTO);
+        yogaNode.setMargin(YogaEdge.LEFT, 40);
+        yogaNode.setPadding(YogaEdge.ALL, 40);
+
+        TextView tvMusic = new TextView(this);
+        tvMusic.setBackgroundColor(Color.YELLOW);
+        tvMusic.setText("Music");
+        tvMusic.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        tvMusic.setPadding(40, 40, 40, 40);
+        yogaLayout.addView(tvMusic);
+        YogaNode tvMusicNode = yogaLayout.getYogaNodeForView(tvMusic);
+        //tvMusicNode.setHeight(100);
+//        tvMusicNode.setPadding(YogaEdge.TOP, 10);
+//        tvMusicNode.setPadding(YogaEdge.BOTTOM, 10);
+        tvMusicNode.setWidthPercent(40);
+        //tvMusicNode.setMargin(YogaEdge.LEFT, 40);
+//        tvMusicNode.setFlexGrow(1);
+        //tvMusicNode.setWidth(100);
+
+        TextView tvMovie = new TextView(this);
+        tvMovie.setBackgroundColor(Color.RED);
+        tvMovie.setText("Movie");
+        tvMovie.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        yogaLayout.addView(tvMovie);
+        YogaNode tvMovieNode = yogaLayout.getYogaNodeForView(tvMovie);
+        tvMovieNode.setHeight(200);
+        //tvMovieNode.setWidth(100);
+        tvMovieNode.setWidthPercent(60);
+    }
+
+
+    private void createVerticalYogaLayout(YogaLayout parentView){
+        YogaLayout yogaLayout = new YogaLayout(this);
+        parentView.addView(yogaLayout);
+        YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
+        yogaNode.setFlexDirection(YogaFlexDirection.COLUMN);
+        yogaNode.setWrap(YogaWrap.NO_WRAP);
+        //yogaNode.setJustifyContent(YogaJustify.SPACE_AROUND);
+        yogaNode.setFlexGrow(1);
+//        yogaNode.setFlexShrink(0);
+        yogaNode.setAlignSelf(YogaAlign.AUTO);
+
+        TextView tvMusic = new TextView(this);
+        tvMusic.setText("Music");
+        tvMusic.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        yogaLayout.addView(tvMusic);
+        YogaNode tvMusicNode = yogaLayout.getYogaNodeForView(tvMusic);
+        //tvMusicNode.setHeight(100);
+//        tvMusicNode.setPadding(YogaEdge.TOP, 10);
+//        tvMusicNode.setPadding(YogaEdge.BOTTOM, 10);
+        tvMusicNode.setWidthPercent(40);
+        //tvMusicNode.setHeightPercent(100);
+        tvMusicNode.setFlexGrow(1);
+        //tvMusicNode.setMargin(YogaEdge.LEFT, 40);
+//        tvMusicNode.setFlexGrow(1);
+        //tvMusicNode.setWidth(100);
+
+        TextView tvMovie = new TextView(this);
+        tvMovie.setText("Movie");
+        tvMovie.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        yogaLayout.addView(tvMovie);
+        YogaNode tvMovieNode = yogaLayout.getYogaNodeForView(tvMovie);
+        tvMovieNode.setHeight(200);
+        //tvMovieNode.setHeightPercent(100);
+        //tvMovieNode.setWidth(100);
+        tvMovieNode.setWidthPercent(60);
+    }
+
+
+    private void createComplexYogaLayout(YogaLayout parentView){
+        YogaLayout yogaLayout = new YogaLayout(this);
+        yogaLayout.setBackgroundColor(Color.YELLOW);
+        parentView.addView(yogaLayout);
+        YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
+        yogaNode.setFlexDirection(YogaFlexDirection.ROW);
+        yogaNode.setWrap(YogaWrap.NO_WRAP);
+        //yogaNode.setJustifyContent(YogaJustify.SPACE_AROUND);
+        yogaNode.setFlexGrow(0);
+        yogaNode.setFlexShrink(0);
+        yogaNode.setPadding(YogaEdge.LEFT, 20);
+        yogaNode.setPadding(YogaEdge.RIGHT, 20);
+        yogaNode.setAlignSelf(YogaAlign.AUTO);
+        //yogaNode.setWidthPercent(60);
+
+        YogaLayout musicYogaLayout = new YogaLayout(this);
+        musicYogaLayout.setBackgroundColor(Color.BLUE);
+        yogaLayout.addView(musicYogaLayout);
+        YogaNode musicNode = yogaLayout.getYogaNodeForView(musicYogaLayout);
+        musicNode.setHeight(100);
+        musicNode.setWidthPercent(80);
+//        tvMusicNode.setFlexGrow(1);
+        //tvMusicNode.setWidth(100);
+
     }
 
 }

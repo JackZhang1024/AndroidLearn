@@ -14,9 +14,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //jackOptions.enabled = true // 支持Java8
-//        ndk {
-//            abiFilters "armeabi"
-//        }
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+        }
     }
     buildTypes {
         release {
@@ -75,7 +75,8 @@ android {
         implementation files('libs/activation.jar')
         implementation files('libs/additionnal.jar')
         implementation files('libs/mail.jar')
-        implementation files('libs/j2v8_android-2.0.jar')
+        implementation files('libs/classes.jar')
+        //implementation files('libs/j2v8_android-2.0.jar')
         implementation files('libs/ksoap2-android.jar')
         implementation "com.android.support:appcompat-v7:$supportVersion"
         implementation "com.android.support:support-v4:$supportVersion"
@@ -147,8 +148,8 @@ android {
         compile 'com.umeng.sdk:common:1.5.3'
         compile 'com.umeng.sdk:analytics:7.5.3'
         // 类似CSStan
-        implementation 'com.google.android:flexbox:1.0.0'
-        implementation group: 'com.facebook.yoga.android', name: 'yoga-layout', version: '1.8.0'
+        implementation 'com.google.android:flexbox:1.1.0'
+        implementation group: 'com.facebook.yoga.android', name: 'yoga-layout', version: '1.10.0'
     }
 
     packagingOptions {

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import com.eclipsesource.v8.JavaVoidCallback;
 import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
@@ -86,7 +87,7 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
     // 运行JS脚本
     private void executeJS() {
         V8 runtime = V8.createV8Runtime();
-        int result = runtime.executeIntScript("1+1");
+        int result = runtime.executeIntegerScript("1+1");
         System.out.println("result " + result);
         runtime.release();
     }
@@ -140,7 +141,7 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
         V8 runtime = V8.createV8Runtime();
         runtime.executeVoidScript("var foo=function(x){return 10+x; }");
         V8Array parameters = new V8Array(runtime).push(10);
-        int result = runtime.executeIntFunction("foo", parameters);
+        int result = runtime.executeIntegerFunction("foo", parameters);
         System.out.println("result " + result);
         parameters.release();
         runtime.release();
@@ -159,7 +160,7 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
         V8 runtime = V8.createV8Runtime();
         runtime.registerJavaMethod(new JavaVoidCallback() {
             @Override
-            public void invoke(V8Array parameters) {
+            public void invoke(V8Object var1, V8Array parameters) {
                 if (parameters.length() > 0) {
                     Object object = parameters.get(0);
                     Log.e(TAG, "invoke: " + object);
@@ -183,7 +184,7 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
         runtime.registerJavaMethod(new Alert(this), "alert", "alert", new Class<?>[]{String.class, String.class});
         runtime.executeVoidScript("var foo=function(x){ alert('标题', '中国'); return 10+x; }");
         V8Array parameters = new V8Array(runtime).push(10);
-        int result = runtime.executeIntFunction("foo", parameters);
+        int result = runtime.executeIntegerFunction("foo", parameters);
         System.out.println("result " + result);
         parameters.release();
         runtime.release();
