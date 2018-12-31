@@ -7,13 +7,15 @@ import android.location.LocationManager;
 import android.os.Process;
 import android.util.Log;
 
-import com.jingewenku.abrahamcaijin.commonutil.AppApplicationMgr;
-import com.lucky.androidlearn.dagger2learn.lesson04.AppComponent;
 import com.lucky.androidlearn.dagger2learn.AppModule;
+import com.lucky.androidlearn.dagger2learn.lesson04.AppComponent;
 import com.lucky.androidlearn.dagger2learn.lesson04.DaggerAppComponent;
 import com.lukcyboy.simpleaar.SimpleAarLog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.umeng.commonsdk.UMConfigure;
+
+import java.lang.reflect.Field;
 
 import javax.inject.Inject;
 
@@ -38,7 +40,21 @@ public class AndroidApplication extends Application {
         Logger.addLogAdapter(new AndroidLogAdapter());
         Log.e(TAG, "onCreate: 进程ID " + Process.myPid());
         SimpleAarLog.getInstance();
-
+        //友盟统计
+        //UMConfigure.init(this, "5bdbef32b465f5b32400001d", "AndroidLearn", UMConfigure.DEVICE_TYPE_PHONE, null);
+        //设置LOG开关，默认为false
+        UMConfigure.setLogEnabled(true);
+        try {
+            Class<?> aClass = Class.forName("com.umeng.commonsdk.UMConfigure");
+            Field[] fs = aClass.getDeclaredFields();
+            for (Field f:fs){
+                Log.e("xxxxxx","ff="+f.getName()+"   "+f.getType().getName());
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
+        UMConfigure.init(this, "5bdbef32b465f5b32400001d", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
     }
 
     /**
@@ -71,4 +87,5 @@ public class AndroidApplication extends Application {
     public static AndroidApplication getInstances() {
         return mAndroidApplication;
     }
+
 }

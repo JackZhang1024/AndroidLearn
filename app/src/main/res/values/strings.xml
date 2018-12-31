@@ -107,5 +107,12 @@
     <string name="network_traffic">网络流量监控</string>
     <string name="json_to_nodes">Json2Nodes</string>
     <string name="multi_thread_safe">多线程安全</string>
-
+    <string name="layout_gravity">布局方向</string>
+    <string name="close_activity">关闭Activity</string>
+    <string name="exception_summary">异常总结</string>
+    <string name="toast_exception">Toast异常</string>
+    <string name="umeng">友盟</string>
+    <string name="flex_layout">FlexLayout</string>
+    <string name="yoga_layout">YogaLayout</string>
+    <string name="scroll_conflict">ScrollConflict</string>
 </resources>

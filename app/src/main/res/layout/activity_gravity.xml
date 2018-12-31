@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="right"
+    >
+    <!--
+    layout_gravity 只能使用用LinearLayout 并且和布局的方向有关系
+    orientation 是水平方向的时候 layout_gravity可以设置的参数有 bottom top center_vertical
+    orientation 是竖直方向的时候 layout_gravity可以设置的参数有 left right center_horizontal
+
+    -->
+    <Button
+        android:id="@+id/btn_click"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="点我"
+        />
+
+
+</LinearLayout>

@@ -13,9 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.lucky.androidlearn.R;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -67,7 +70,7 @@ public class GoogleSwipeRefreshRVActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         swipeRefreshLayout.setColorSchemeResources(R.color.blue);
-        initData();
+        //initData();
         myRecycleViewAdapter = new MyRecycleViewAdapter(dataList);
         recyclerView.setAdapter(myRecycleViewAdapter);
     }
@@ -85,7 +88,7 @@ public class GoogleSwipeRefreshRVActivity extends AppCompatActivity {
             this.myDataList = dataList;
         }
 
-        public void notifyDataChange(List<String> dataList){
+        public void notifyDataChange(List<String> dataList) {
             this.myDataList = dataList;
             notifyDataSetChanged();
         }
@@ -132,7 +135,11 @@ public class GoogleSwipeRefreshRVActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                Thread.sleep(3* 1000);
+                Thread.sleep(3 * 1000);
+                dataList.add("下拉刷新");
+                dataList.add("下拉刷新");
+                dataList.add("下拉刷新");
+                dataList.add("下拉刷新");
                 dataList.add("下拉刷新");
                 mHandler.sendEmptyMessage(0);
             } catch (Exception e) {

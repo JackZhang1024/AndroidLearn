@@ -8,8 +8,20 @@
         android:id="@+id/btn_check_map_safe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="检查Map的线程安全问题"
+        android:text="检查Map的线程安全问题" />
+
+    <Button
+        android:id="@+id/btn_condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Condition"
         />
 
+    <Button
+        android:id="@+id/btn_thread_pool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="线程池"
+        />
 
 </LinearLayout>

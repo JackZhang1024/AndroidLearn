@@ -9,6 +9,18 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_layout_gravity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/layout_gravity" />
+
+        <Button
+            android:id="@+id/btn_close_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/close_activity" />
+
+        <Button
             android:id="@+id/btn_toast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,6 +110,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="BottomTabLayout" />
+
+        <!-- 弹性布局 -->
+        <Button
+            android:id="@+id/btn_flex_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/flex_layout" />
+
+        <Button
+            android:id="@+id/btn_yoga_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/yoga_layout" />
+
+        <Button
+            android:id="@+id/btn_scroll_conflict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scroll_conflict" />
+
 
     </LinearLayout>
 

@@ -12,9 +12,14 @@ import android.support.annotation.Nullable;
 import android.support.annotation.Size;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.lucky.androidlearn.R;
 
+import org.json.JSONObject;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +30,8 @@ import butterknife.ButterKnife;
  */
 
 public class AnnotationActivity extends AppCompatActivity {
+
+    private static final String TAG = "AnnotationActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +55,8 @@ public class AnnotationActivity extends AppCompatActivity {
 
         learnAnnotation();
         learnRangeAnnotation();
+        getJSMethods(JSMethodObject.class, JSMethodObject.class.getName());
+        getJSMethods(JSDeclareMethodObject.class, JSDeclareMethodObject.class.getName());
     }
 
     /**
@@ -151,4 +160,31 @@ public class AnnotationActivity extends AppCompatActivity {
     private void setStringRes(@StringRes int stringRes) {
 
     }
+
+
+    public void getJSMethods(Class<? extends JSObject> clz, String constructorName) {
+        Method[] methods = clz.getDeclaredMethods();
+        for (Method method : methods) {
+            Log.e(TAG, "getJSMethods: MethodName " + method.getName());
+            JSMethod jsMethod = (JSMethod) method.getAnnotation(JSMethod.class);
+            String jsMethodName = jsMethod.name();
+            Log.e(TAG, "getJSMethods: JSMethodName " + jsMethodName);
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            for (Class klz : parameterTypes) {
+                String parameterType = klz.getName();
+                Log.e(TAG, "getJSMethods: ParameterType " + parameterType);
+            }
+        }
+        try {
+            //JSObject object = clz.newInstance();
+            Constructor<? extends JSObject> constructor = clz.getConstructor(String.class);
+            JSObject jsObject = constructor.newInstance(constructorName);
+            Log.e(TAG, "getJSMethods: constructorName "+jsObject.getJSObjectName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }

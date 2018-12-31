@@ -46,7 +46,7 @@ public class DownloadApkDialog extends Dialog {
 		/**
 		 * Set the Dialog message from resource
 		 * 
-		 * @param title
+		 * @param
 		 * @return
 		 */
 		public Builder setMessage(int message) {

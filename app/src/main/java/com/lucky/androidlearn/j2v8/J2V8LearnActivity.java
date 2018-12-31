@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.eclipsesource.v8.JavaVoidCallback;
-import com.eclipsesource.v8.Releasable;
 import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
 import com.eclipsesource.v8.V8Object;
@@ -161,13 +160,10 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
         V8 runtime = V8.createV8Runtime();
         runtime.registerJavaMethod(new JavaVoidCallback() {
             @Override
-            public void invoke(V8Object v8Object, V8Array parameters) {
+            public void invoke(V8Object var1, V8Array parameters) {
                 if (parameters.length() > 0) {
                     Object object = parameters.get(0);
                     Log.e(TAG, "invoke: " + object);
-                    if (object instanceof Releasable) {
-                        ((Releasable) object).release();
-                    }
                 }
 
             }

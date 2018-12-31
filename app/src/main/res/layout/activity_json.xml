@@ -5,18 +5,28 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_json"
+        android:id="@+id/btn_config_json"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Json解析"
-        />
+        android:text="解析配置文件" />
+
+    <Button
+        android:id="@+id/btn_fastjson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FastJson" />
+
+    <Button
+        android:id="@+id/btn_gson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gson" />
 
     <Button
         android:id="@+id/btn_json_to_nodes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Json2Nodes"
-        />
+        android:text="Json2Nodes" />
 
 
 </LinearLayout>

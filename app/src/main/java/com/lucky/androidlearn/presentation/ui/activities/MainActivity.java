@@ -1,11 +1,15 @@
 package com.lucky.androidlearn.presentation.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
+import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
@@ -14,6 +18,7 @@ import com.lucky.androidlearn.crosswalk.CrossWalkActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
 import com.lucky.androidlearn.eventchange.AttributeChangeListenActivity;
+import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
@@ -34,6 +39,7 @@ import com.lucky.androidlearn.provider.MainProviderActivity;
 import com.lucky.androidlearn.reference.ReferenceActivity;
 import com.lucky.androidlearn.rxjava2.RxJavaActivity;
 import com.lucky.androidlearn.security.SecurityCheckActivity;
+import com.lucky.androidlearn.umeng.UMengActivity;
 import com.lucky.androidlearn.webservice.demo.WebServiceActivity;
 import com.lucky.androidlearn.widget.common.AppForegroundActivity;
 import com.lucky.androidlearn.launchmode.LaunchModeActivity;
@@ -44,6 +50,10 @@ import com.lucky.androidlearn.widget.material.MaterialWidgetActivity;
 import com.lucky.androidlearn.widget.screen.ScreenDensityActivity;
 import com.lucky.androidlearn.service.ServiceActivity;
 import com.lucky.androidlearn.xml.XmlActivity;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
+
+import java.nio.charset.Charset;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -69,11 +79,23 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getContentViewHeight();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mMainPresenter = new MainPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, new WelcomeMessageRepository());
         //startTrafficMonitor();
+        //UMConfigure.init(this, "5bdbef32b465f5b32400001d", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        //MobclickAgent.setDebugMode(true);
+        //MobclickAgent.openActivityDurationTrack(false);
+        //MobclickAgent.setSessionContinueMillis(10000);
+        //MobclickAgent.setCatchUncaughtExceptions(true);
+        String abc = "hello,123";
+//        byte[] bytes = abc.getBytes(Charset.defaultCharset());
+//        for (byte i:bytes){
+//            System.out.println(i);
+//        }
     }
 
     private void startTrafficMonitor(){
@@ -84,6 +106,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     protected void onResume() {
         super.onResume();
         //mMainPresenter.resume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int height = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getHeight();
+                int titleBarHeight = AppScreenMgr.getTitleBarHeight(MainActivity.this);
+                System.out.println("contentHeight "+height+"  titleBarHeight "+titleBarHeight);
+            }
+        }, 1000);
     }
 
     @Override
@@ -303,6 +333,26 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public void onNetWorkTrafficListen(){
         Intent intent = new Intent(this, NetWorkTrafficActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_exception_summary)
+    public void onExceptionSummaryClick(View view){
+        Intent intent = new Intent(this, ExceptionSummaryActivity.class);
+        startActivity(intent);
+    }
+
+    //btn_umeng
+    @OnClick(R.id.btn_umeng)
+    public void onUmengClick(View view){
+        Intent intent = new Intent(this, UMengActivity.class);
+        startActivity(intent);
+    }
+
+    private void getContentViewHeight(){
+        int screenHeight = AppScreenMgr.getScreenHeight(this);
+        int statusHeight = AppScreenMgr.getStatusHeight(this);
+        int statusBarHeight = AppScreenMgr.getStatusBarHeight(this);
+        System.out.println("screenHeight "+screenHeight+" statusHeight "+statusHeight+" statusBarHeight "+statusBarHeight);
     }
 
 

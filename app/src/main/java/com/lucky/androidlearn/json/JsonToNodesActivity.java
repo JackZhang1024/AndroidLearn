@@ -1,5 +1,9 @@
 package com.lucky.androidlearn.json;
 
+
+/*
+* https://blog.csdn.net/yfyyfbyfy/article/details/73719384
+* */
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +41,7 @@ public class JsonToNodesActivity extends AppCompatActivity implements View.OnCli
                     JSONObject jsonObject = new JSONObject(json);
                     JSONObject elementData = jsonObject.getJSONObject("element");
                     ZiRuNode rootZiRuNode = ZiRuNode.createZiRuNode(elementData, null);
+                    Log.e(TAG, "display:  "+rootZiRuNode.getNodeData().getViewId()+" viewName "+rootZiRuNode.getNodeData().getViewName());
                     display(rootZiRuNode);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -48,9 +53,9 @@ public class JsonToNodesActivity extends AppCompatActivity implements View.OnCli
 
     private void display(ZiRuNode ziRuNode){
         NodeData nodeData = ziRuNode.getNodeData();
-        if (nodeData.getChildren().size()>0){
+        if (nodeData.getChildren().size()>0) {
             for (ZiRuNode node:nodeData.getChildren()){
-                Log.e(TAG, "display: "+node.getNodeData().getViewId());
+                Log.e(TAG, "display:  "+node.getNodeData().getViewId()+" viewName "+node.getNodeData().getViewName());
                 display(node);
             }
         }
