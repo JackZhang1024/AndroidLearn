@@ -1,1 +1,9 @@
 http://bbs.bianzhirensheng.com/color01.html
+
+
+1 默认字体大小 选中字体大小(font)
+2 默认字体颜色 选中字体颜色(color)
+3 选项间距(float)
+4 选项文字(array)
+5 indicator 颜色
+6 TabLayout的背景颜色

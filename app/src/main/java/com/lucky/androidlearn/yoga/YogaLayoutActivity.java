@@ -2,17 +2,22 @@ package com.lucky.androidlearn.yoga;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.TypedValue;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.facebook.soloader.SoLoader;
 import com.facebook.yoga.YogaAlign;
+import com.facebook.yoga.YogaDirection;
 import com.facebook.yoga.YogaEdge;
 import com.facebook.yoga.YogaFlexDirection;
 import com.facebook.yoga.YogaJustify;
 import com.facebook.yoga.YogaNode;
+import com.facebook.yoga.YogaPositionType;
 import com.facebook.yoga.YogaWrap;
 import com.facebook.yoga.android.YogaLayout;
 import com.lucky.androidlearn.R;
@@ -20,6 +25,8 @@ import com.lucky.androidlearn.R;
 public class YogaLayoutActivity extends AppCompatActivity {
 
     YogaLayout mYogaLayout;
+    private TextView tvMusic;
+    private TextView tvMovie;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,8 +35,8 @@ public class YogaLayoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_yoga_learn);
         mYogaLayout = (YogaLayout) findViewById(R.id.yoga_layout);
         //createYogaLayout(mYogaLayout);
-        //createVerticalYogaLayout(mYogaLayout);
-        createComplexYogaLayout(mYogaLayout);
+        createVerticalYogaLayout(mYogaLayout);
+        //createComplexYogaLayout(mYogaLayout);
     }
 
     public void handYoGaNodeDefault(YogaNode yogaNode) {
@@ -44,7 +51,7 @@ public class YogaLayoutActivity extends AppCompatActivity {
     // FlexGrow相当于原生的layout_weight widthPercent是100 会直接占父容器的全部宽度
     // FlexGrow跟FlexDirection的方向有关系
     // yogaNode的padding设置只对YogaLayout起作用，其他控件不起作用
-    private void createYogaLayout(YogaLayout parentView){
+    private void createYogaLayout(YogaLayout parentView) {
         YogaLayout yogaLayout = new YogaLayout(this);
         parentView.addView(yogaLayout);
         YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
@@ -84,45 +91,73 @@ public class YogaLayoutActivity extends AppCompatActivity {
     }
 
 
-    private void createVerticalYogaLayout(YogaLayout parentView){
+    private void createVerticalYogaLayout(YogaLayout parentView) {
         YogaLayout yogaLayout = new YogaLayout(this);
         parentView.addView(yogaLayout);
         YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
         yogaNode.setFlexDirection(YogaFlexDirection.COLUMN);
-        yogaNode.setWrap(YogaWrap.NO_WRAP);
+//        yogaNode.setWrap(YogaWrap.NO_WRAP);
         //yogaNode.setJustifyContent(YogaJustify.SPACE_AROUND);
         yogaNode.setFlexGrow(1);
 //        yogaNode.setFlexShrink(0);
-        yogaNode.setAlignSelf(YogaAlign.AUTO);
+//        yogaNode.setAlignSelf(YogaAlign.AUTO);
+//        yogaNode.setHeightPercent(100);
 
-        TextView tvMusic = new TextView(this);
-        tvMusic.setText("Music");
+
+        ScrollView scrollView = new ScrollView(this);
+        yogaLayout.addView(scrollView);
+        YogaNode scrollViewNode = yogaLayout.getYogaNodeForView(scrollView);
+        scrollViewNode.setHeight(400);
+        scrollView.setBackgroundColor(Color.CYAN);
+
+        // scrollView 上添加YogaLayout
+        tvMusic = new TextView(this);
+        //tvMusic.setText("Music");
         tvMusic.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         yogaLayout.addView(tvMusic);
         YogaNode tvMusicNode = yogaLayout.getYogaNodeForView(tvMusic);
+        tvMusicNode.setPositionType(YogaPositionType.ABSOLUTE);
+        tvMusicNode.setPosition(YogaEdge.TOP, 200);
         //tvMusicNode.setHeight(100);
 //        tvMusicNode.setPadding(YogaEdge.TOP, 10);
 //        tvMusicNode.setPadding(YogaEdge.BOTTOM, 10);
-        tvMusicNode.setWidthPercent(40);
+//        tvMusicNode.setWidthPercent(40);
         //tvMusicNode.setHeightPercent(100);
-        tvMusicNode.setFlexGrow(1);
+//        tvMusicNode.setFlexGrow(1);
         //tvMusicNode.setMargin(YogaEdge.LEFT, 40);
 //        tvMusicNode.setFlexGrow(1);
         //tvMusicNode.setWidth(100);
 
-        TextView tvMovie = new TextView(this);
+        tvMovie = new TextView(this);
         tvMovie.setText("Movie");
         tvMovie.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         yogaLayout.addView(tvMovie);
         YogaNode tvMovieNode = yogaLayout.getYogaNodeForView(tvMovie);
-        tvMovieNode.setHeight(200);
+        tvMovieNode.setPositionType(YogaPositionType.ABSOLUTE);
+        tvMovieNode.setPosition(YogaEdge.BOTTOM, 200);
+        tvMovieNode.setWidth(1000);
+        //tvMovieNode.setHeight(400);
         //tvMovieNode.setHeightPercent(100);
-        //tvMovieNode.setWidth(100);
-        tvMovieNode.setWidthPercent(60);
+        //tvMovieNode.setWidthPercent(60);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tvMusic.setText("Muisc东风破");
+                tvMovie.setText("Movie神奇博物馆");
+            }
+        }, 200);
+    }
 
-    private void createComplexYogaLayout(YogaLayout parentView){
+    private void createComplexYogaLayout(YogaLayout parentView) {
+        YogaNode parentYogaNode = new YogaNode();
+        parentYogaNode.setData(parentView);
+        parentYogaNode.setFlexDirection(YogaFlexDirection.COLUMN);
+
         YogaLayout yogaLayout = new YogaLayout(this);
         yogaLayout.setBackgroundColor(Color.YELLOW);
         parentView.addView(yogaLayout);
