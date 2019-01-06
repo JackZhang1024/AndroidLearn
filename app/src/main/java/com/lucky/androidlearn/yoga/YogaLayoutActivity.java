@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.facebook.soloader.SoLoader;
@@ -16,6 +18,8 @@ import com.facebook.yoga.YogaNode;
 import com.facebook.yoga.YogaWrap;
 import com.facebook.yoga.android.YogaLayout;
 import com.lucky.androidlearn.R;
+
+import org.json.JSONObject;
 
 public class YogaLayoutActivity extends AppCompatActivity {
 
@@ -29,7 +33,8 @@ public class YogaLayoutActivity extends AppCompatActivity {
         mYogaLayout = (YogaLayout) findViewById(R.id.yoga_layout);
         //createYogaLayout(mYogaLayout);
         //createVerticalYogaLayout(mYogaLayout);
-        createComplexYogaLayout(mYogaLayout);
+        //createComplexYogaLayout(mYogaLayout);
+        createComplexZiRuTextView(mYogaLayout);
     }
 
     public void handYoGaNodeDefault(YogaNode yogaNode) {
@@ -147,5 +152,24 @@ public class YogaLayoutActivity extends AppCompatActivity {
         //tvMusicNode.setWidth(100);
 
     }
+
+    private void createComplexZiRuTextView(YogaLayout parentView){
+        ZiRuTextView textView = new ZiRuTextView(this);
+        parentView.addView(textView);
+        textView.setId(100001);
+        textView.setDuplicateParentStateEnabled(true);
+        YogaNode childNode = parentView.getYogaNodeForView(textView);
+        textView.setAllBorderColors("red", "red", "red", "red");
+        textView.setAllBorders(10, 10, 10, 10);
+        textView.setCornerRadius(true, 10, 10, 10, 10);
+        textView.setBackgroundColor(Color.YELLOW);
+        textView.setText("Hello World!");
+        textView.setGravity(Gravity.CENTER);
+        //yogaCreator.handYoGaNodeDefault(jsonObject.optJSONObject(ViewProperty.STYLE), childNode);
+        //yogaCreator.getTextDisplayStyle(jsonObject, textView);
+        //yogaCreator.getTextViewAlignContentStyle(true, styleJsonObj, childNode, textView);
+        //yogaCreator.handViewGroupYogaNode(styleJsonObj, childNode, textView);
+    }
+
 
 }
