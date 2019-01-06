@@ -159,12 +159,14 @@ public class YogaLayoutActivity extends AppCompatActivity {
         textView.setId(100001);
         textView.setDuplicateParentStateEnabled(true);
         YogaNode childNode = parentView.getYogaNodeForView(textView);
+        childNode.setMargin(YogaEdge.ALL, 20);
         textView.setAllBorderColors("red", "red", "red", "red");
         textView.setAllBorders(10, 10, 10, 10);
         textView.setCornerRadius(true, 10, 10, 10, 10);
         textView.setBackgroundColor(Color.YELLOW);
         textView.setText("Hello World!");
         textView.setGravity(Gravity.CENTER);
+        //textView.setSingleLine();
         //yogaCreator.handYoGaNodeDefault(jsonObject.optJSONObject(ViewProperty.STYLE), childNode);
         //yogaCreator.getTextDisplayStyle(jsonObject, textView);
         //yogaCreator.getTextViewAlignContentStyle(true, styleJsonObj, childNode, textView);
