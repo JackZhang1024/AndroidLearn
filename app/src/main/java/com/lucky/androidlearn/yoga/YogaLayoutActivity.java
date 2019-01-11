@@ -6,7 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.widget.GridLayout;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.soloader.SoLoader;
@@ -19,11 +20,12 @@ import com.facebook.yoga.YogaWrap;
 import com.facebook.yoga.android.YogaLayout;
 import com.lucky.androidlearn.R;
 
-import org.json.JSONObject;
-
 public class YogaLayoutActivity extends AppCompatActivity {
 
-    YogaLayout mYogaLayout;
+    private YogaLayout mYogaLayout;
+    private Button mBtnChangeBackground;
+    private ZiRuTextView textView;
+    private YogaNode mTvYogaNode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,10 +33,35 @@ public class YogaLayoutActivity extends AppCompatActivity {
         SoLoader.init(this, false);
         setContentView(R.layout.activity_yoga_learn);
         mYogaLayout = (YogaLayout) findViewById(R.id.yoga_layout);
+        mBtnChangeBackground = (Button) findViewById(R.id.btn_change_background);
         //createYogaLayout(mYogaLayout);
         //createVerticalYogaLayout(mYogaLayout);
         //createComplexYogaLayout(mYogaLayout);
-        createComplexZiRuTextView(mYogaLayout);
+//        createComplexZiRuTextView(mYogaLayout);
+//        mBtnChangeBackground.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mTvYogaNode.setWidth(200);
+//                mTvYogaNode.setHeight(200);
+//                textView.setWidth(200);
+//                textView.setHeight(200);
+////              mTvYogaNode.calculateLayout(200, 200);
+//                textView.setBackgroundColors(Color.GREEN);
+//            }
+//        });
+//        // ["1px","1px","1px","1px"]
+//        try {
+//            String styleJsonValue = "[\"1px\",\"1px\",\"1px\",\"1px\"]";
+//            JSONArray jsonArray = new JSONArray(styleJsonValue);
+//            for (int index = 0; index < jsonArray.length(); index++) {
+//                String value = jsonArray.getString(index);
+//                System.out.println("value "+value);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+        createInnerScrollLayout(mYogaLayout);
     }
 
     public void handYoGaNodeDefault(YogaNode yogaNode) {
@@ -49,7 +76,7 @@ public class YogaLayoutActivity extends AppCompatActivity {
     // FlexGrow相当于原生的layout_weight widthPercent是100 会直接占父容器的全部宽度
     // FlexGrow跟FlexDirection的方向有关系
     // yogaNode的padding设置只对YogaLayout起作用，其他控件不起作用
-    private void createYogaLayout(YogaLayout parentView){
+    private void createYogaLayout(YogaLayout parentView) {
         YogaLayout yogaLayout = new YogaLayout(this);
         parentView.addView(yogaLayout);
         YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
@@ -89,7 +116,7 @@ public class YogaLayoutActivity extends AppCompatActivity {
     }
 
 
-    private void createVerticalYogaLayout(YogaLayout parentView){
+    private void createVerticalYogaLayout(YogaLayout parentView) {
         YogaLayout yogaLayout = new YogaLayout(this);
         parentView.addView(yogaLayout);
         YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
@@ -127,7 +154,7 @@ public class YogaLayoutActivity extends AppCompatActivity {
     }
 
 
-    private void createComplexYogaLayout(YogaLayout parentView){
+    private void createComplexYogaLayout(YogaLayout parentView) {
         YogaLayout yogaLayout = new YogaLayout(this);
         yogaLayout.setBackgroundColor(Color.YELLOW);
         parentView.addView(yogaLayout);
@@ -153,24 +180,49 @@ public class YogaLayoutActivity extends AppCompatActivity {
 
     }
 
-    private void createComplexZiRuTextView(YogaLayout parentView){
-        ZiRuTextView textView = new ZiRuTextView(this);
+    private void createComplexZiRuTextView(YogaLayout parentView) {
+        textView = new ZiRuTextView(this);
         parentView.addView(textView);
         textView.setId(100001);
+        textView.setPadding(40, 40, 40, 40);
         textView.setDuplicateParentStateEnabled(true);
-        YogaNode childNode = parentView.getYogaNodeForView(textView);
-        childNode.setMargin(YogaEdge.ALL, 20);
+        mTvYogaNode = parentView.getYogaNodeForView(textView);
+        mTvYogaNode.setMargin(YogaEdge.ALL, 20);
         textView.setAllBorderColors("red", "red", "red", "red");
-        textView.setAllBorders(10, 10, 10, 10);
-        textView.setCornerRadius(true, 10, 10, 10, 10);
-        textView.setBackgroundColor(Color.YELLOW);
+        textView.setAllBorders(1, 1, 1, 1);
+        textView.setCornerRadius(true, 20, 20, 20, 20);
+        //textView.setBackgroundColor(Color.YELLOW);
+        textView.setBackgroundColors(Color.YELLOW);
         textView.setText("Hello World!");
         textView.setGravity(Gravity.CENTER);
         //textView.setSingleLine();
         //yogaCreator.handYoGaNodeDefault(jsonObject.optJSONObject(ViewProperty.STYLE), childNode);
         //yogaCreator.getTextDisplayStyle(jsonObject, textView);
-        //yogaCreator.getTextViewAlignContentStyle(true, styleJsonObj, childNode, textView);
+        //        //        //yogaCreator.getTextViewAlignContentStyle(true, styleJsonObj, childNode, textView);
         //yogaCreator.handViewGroupYogaNode(styleJsonObj, childNode, textView);
+    }
+
+    private void createInnerScrollLayout(YogaLayout parentView){
+        YogaLayout yogaLayout = new YogaLayout(this);
+        yogaLayout.setBackgroundColor(Color.YELLOW);
+        parentView.addView(yogaLayout);
+        YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
+        yogaNode.setFlexDirection(YogaFlexDirection.COLUMN);
+
+        ZiRuScrollView ziRuScrollView = new ZiRuScrollView(this);
+        yogaLayout.addView(ziRuScrollView);
+        YogaNode childNode = yogaLayout.getYogaNodeForView(ziRuScrollView);
+        childNode.setHeight(1000);
+        ziRuScrollView.setBackgroundColor(Color.BLUE);
+
+        ZiRuYogaLayout ziRuYogaLayout = new ZiRuYogaLayout(this);
+        yogaLayout.addView(ziRuYogaLayout);
+        YogaNode ziRuYogaNode = ziRuYogaLayout.getYogaNodeForView(ziRuYogaLayout);
+        //YogaNode ziRuYogaNode = new YogaNode();
+        //ziRuYogaNode.setData(ziRuYogaLayout);
+        ViewGroup childViewGroup = ziRuYogaLayout;
+        childViewGroup.setBackgroundColor(Color.RED);
+        ziRuYogaNode.setHeight(200);
     }
 
 

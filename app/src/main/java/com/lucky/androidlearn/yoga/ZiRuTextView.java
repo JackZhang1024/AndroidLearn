@@ -1,18 +1,23 @@
 package com.lucky.androidlearn.yoga;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import com.squareup.picasso.Picasso;
 
 public class ZiRuTextView extends AppCompatTextView {
 
@@ -27,41 +32,10 @@ public class ZiRuTextView extends AppCompatTextView {
     private int mBackgroundColor = -1;
     private PaintFlagsDrawFilter paintFlagsDrawFilter;
     private float mTopRightRadius, mBottomRightRadius, mBottomLeftRadius, mTopLeftRadius;
-    private int mTopBorderWidth, mRightBorderWidth, mBottomBorderWidth, mLeftBorderWidth;
+    private float mTopBorderWidth, mRightBorderWidth, mBottomBorderWidth, mLeftBorderWidth;
     private int mTopBorderColor, mRightBorderColor, mBottomBorderColor, mLeftBorderColor;
-    public static final int TEXT_ALIGN_LEFT = 0x00000001;
-    public static final int TEXT_ALIGN_RIGHT = 0x00000010;
-    public static final int TEXT_ALIGN_CENTER_VERTICAL = 0x00000100;
-    public static final int TEXT_ALIGN_CENTER_HORIZONTAL = 0x00001000;
-    public static final int TEXT_ALIGN_TOP = 0x00010000;
-    public static final int TEXT_ALIGN_BOTTOM = 0x00100000;
-
-    /**
-     * 文本中轴线X坐标
-     */
-    private float textCenterX;
-    /**
-     * 文本baseline线Y坐标
-     */
-    private float textBaselineY;
-    private Paint.FontMetrics fm;
-    /**
-     * 要显示的文字
-     */
-    private String text;
-    /**
-     * 文字的颜色
-     */
-    private int textColor;
-    /**
-     * 文字的大小
-     */
-    private int textSize;
-    /**
-     * 文字的方位
-     */
-    private int textAlign;
-    private int viewWidth, viewHeight;
+    private Bitmap mBackgroundBitmap;
+    private Matrix matrix = null;
 
     public ZiRuTextView(Context context) {
         this(context, null);
@@ -82,20 +56,16 @@ public class ZiRuTextView extends AppCompatTextView {
         mBorderColor = Color.GRAY;
         //抗锯齿
         paintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
-        //硬件加速
-        setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        textAlign = TEXT_ALIGN_CENTER_HORIZONTAL | TEXT_ALIGN_CENTER_VERTICAL;
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        viewWidth = w;
-        viewHeight = h;
         mRectF.left = 0;
         mRectF.top = 0;
         mRectF.right = w;
         mRectF.bottom = h;
+        matrix = new Matrix();
     }
 
     @Override
@@ -103,7 +73,7 @@ public class ZiRuTextView extends AppCompatTextView {
         int width = getWidth();
         int height = getHeight();
         int halfStrokeWidth = (int) (mStrokeWidth / 2 + 0.5f);
-        Log.e(TAG, "onDraw: 是否重绘.........");
+        adjustAllRadius(width, height);
         if (mSetRadius) {
             //绘制外边框
             Path path = new Path();
@@ -121,6 +91,19 @@ public class ZiRuTextView extends AppCompatTextView {
             int g = Color.green(mBackgroundColor);
             int b = Color.blue(mBackgroundColor);
             canvas.drawARGB(a, r, g, b);
+        }
+        if (mBackgroundBitmap != null) {
+            // 绘制背景图片
+            // 计算收缩比例
+            float bmpWidth = mBackgroundBitmap.getWidth();
+            float bmpHeight = mBackgroundBitmap.getHeight();
+            float xScale = width / bmpWidth;
+            float yScale = height / bmpHeight;
+            xScale = xScale == 0 ? 1 : xScale;
+            yScale = yScale == 0 ? 1 : yScale;
+            matrix.postScale(xScale, yScale);
+            Bitmap desiredBitmap = Bitmap.createBitmap(mBackgroundBitmap, 0, 0, mBackgroundBitmap.getWidth(), mBackgroundBitmap.getHeight(), matrix, true);
+            canvas.drawBitmap(desiredBitmap, 0, 0, mPaint);
         }
         if (mSetBorder) {
             if (mTopBorderWidth > 0) {
@@ -147,20 +130,21 @@ public class ZiRuTextView extends AppCompatTextView {
         super.onDraw(canvas);
     }
 
-    public void setCornerRadius(boolean setCornerRadius, float rightTop, float rightBottom, float leftBottom, float leftTop) {
+    public void setCornerRadius(boolean setCornerRadius, float topRadius, float rightRadius, float bottomRadius, float leftRadius) {
         this.mSetRadius = setCornerRadius;
-        this.mTopRightRadius = rightTop;
-        this.mBottomRightRadius = rightBottom;
-        this.mBottomLeftRadius = leftBottom;
-        this.mTopLeftRadius = leftTop;
+        this.mTopLeftRadius = topRadius;
+        this.mTopRightRadius = rightRadius;
+        this.mBottomRightRadius = bottomRadius;
+        this.mBottomLeftRadius = leftRadius;
     }
 
-    public void setAllBorders(int topBorderWidth, int rightBorderWidth, int bottomBorderWidth, int leftBorderWidth) {
+    public void setAllBorders(float topBorderWidth, float rightBorderWidth, float bottomBorderWidth, float leftBorderWidth) {
         mSetBorder = true;
         mTopBorderWidth = topBorderWidth;
         mRightBorderWidth = rightBorderWidth;
         mBottomBorderWidth = bottomBorderWidth;
         mLeftBorderWidth = leftBorderWidth;
+        invalidate();
     }
 
     public void setAllBorderColors(String topBorderColor, String rightBorderColor, String bottomBorderColor, String leftBorderColor) {
@@ -168,10 +152,12 @@ public class ZiRuTextView extends AppCompatTextView {
         mRightBorderColor = Color.parseColor(Colors.getHexColor(rightBorderColor));
         mBottomBorderColor = Color.parseColor(Colors.getHexColor(bottomBorderColor));
         mLeftBorderColor = Color.parseColor(Colors.getHexColor(leftBorderColor));
+        invalidate();
     }
 
     public void setBackgroundColors(int colorResourceId) {
         mBackgroundColor = colorResourceId;
+        invalidate();
     }
 
     private void setAllRadius() {
@@ -183,6 +169,32 @@ public class ZiRuTextView extends AppCompatTextView {
         radiis[5] = mBottomRightRadius;
         radiis[6] = mBottomLeftRadius;
         radiis[7] = mBottomLeftRadius;
+    }
+
+    // 调整圆弧大小
+    private void adjustAllRadius(int width, int height) {
+        int miniSize = Math.min(width, height);
+        float halfMiniSize = miniSize / 2;
+        if (mTopLeftRadius > halfMiniSize) {
+            radiis[0] = halfMiniSize;
+            radiis[1] = halfMiniSize;
+            mTopLeftRadius = halfMiniSize;
+        }
+        if (mTopRightRadius > halfMiniSize) {
+            radiis[2] = halfMiniSize;
+            radiis[3] = halfMiniSize;
+            mTopRightRadius = halfMiniSize;
+        }
+        if (mBottomRightRadius > halfMiniSize) {
+            radiis[4] = halfMiniSize;
+            radiis[5] = halfMiniSize;
+            mBottomRightRadius = halfMiniSize;
+        }
+        if (mBottomLeftRadius > halfMiniSize) {
+            radiis[6] = halfMiniSize;
+            radiis[7] = halfMiniSize;
+            mBottomLeftRadius = halfMiniSize;
+        }
     }
 
     // 顶部边框
@@ -264,97 +276,4 @@ public class ZiRuTextView extends AppCompatTextView {
         }
         canvas.drawPath(path, paint);
     }
-
-    /**
-     * 定位文本绘制的位置
-     */
-    private void setTextLocation() {
-        mPaint.setTextSize(textSize);
-        mPaint.setColor(textColor);
-        fm = mPaint.getFontMetrics();
-        //文本的宽度
-        float textWidth = mPaint.measureText(text);
-        float textCenterVerticalBaselineY = viewHeight / 2 - fm.descent + (fm.descent - fm.ascent) / 2;
-        switch (textAlign) {
-            case TEXT_ALIGN_CENTER_HORIZONTAL | TEXT_ALIGN_CENTER_VERTICAL:
-                textCenterX = (float) viewWidth / 2;
-                textBaselineY = textCenterVerticalBaselineY;
-                break;
-            case TEXT_ALIGN_LEFT | TEXT_ALIGN_CENTER_VERTICAL:
-                textCenterX = textWidth / 2;
-                textBaselineY = textCenterVerticalBaselineY;
-                break;
-            case TEXT_ALIGN_RIGHT | TEXT_ALIGN_CENTER_VERTICAL:
-                textCenterX = viewWidth - textWidth / 2;
-                textBaselineY = textCenterVerticalBaselineY;
-                break;
-            case TEXT_ALIGN_BOTTOM | TEXT_ALIGN_CENTER_HORIZONTAL:
-                textCenterX = viewWidth / 2;
-                textBaselineY = viewHeight - fm.bottom;
-                break;
-            case TEXT_ALIGN_TOP | TEXT_ALIGN_CENTER_HORIZONTAL:
-                textCenterX = viewWidth / 2;
-                textBaselineY = -fm.ascent;
-                break;
-            case TEXT_ALIGN_TOP | TEXT_ALIGN_LEFT:
-                textCenterX = textWidth / 2;
-                textBaselineY = -fm.ascent;
-                break;
-            case TEXT_ALIGN_BOTTOM | TEXT_ALIGN_LEFT:
-                textCenterX = textWidth / 2;
-                textBaselineY = viewHeight - fm.bottom;
-                break;
-            case TEXT_ALIGN_TOP | TEXT_ALIGN_RIGHT:
-                textCenterX = viewWidth - textWidth / 2;
-                textBaselineY = -fm.ascent;
-                break;
-            case TEXT_ALIGN_BOTTOM | TEXT_ALIGN_RIGHT:
-                textCenterX = viewWidth - textWidth / 2;
-                textBaselineY = viewHeight - fm.bottom;
-                break;
-        }
-    }
-
-    public void setShowText(String showText){
-        this.text = showText;
-    }
-
-//    /**
-//     * 设置文本内容
-//     *
-//     * @param text
-//     */
-//    public void setText(String text) {
-//        this.text = text;
-//        invalidate();
-//    }
-//
-//    /**
-//     * 设置文本大小
-//     *
-//     * @param textSizeSp 文本大小，单位是sp
-//     */
-//    public void setTextSize(int textSizeSp) {
-//        this.textSize = DisplayUtils.sp2px(getContext(), textSizeSp);
-//        //invalidate();
-//    }
-//
-//    /**
-//     * 设置文本的方位
-//     */
-//    public void setTextAlign(int textAlign) {
-//        this.textAlign = textAlign;
-//        //invalidate();
-//    }
-//
-//    /**
-//     * 设置文本的颜色
-//     *
-//     * @param textColor
-//     */
-//    public void setTextColor(int textColor) {
-//        this.textColor = textColor;
-//        //invalidate();
-//    }
-
 }
