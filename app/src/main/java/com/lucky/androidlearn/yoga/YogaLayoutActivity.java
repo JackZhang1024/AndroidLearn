@@ -6,8 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.soloader.SoLoader;
@@ -202,27 +202,65 @@ public class YogaLayoutActivity extends AppCompatActivity {
         //yogaCreator.handViewGroupYogaNode(styleJsonObj, childNode, textView);
     }
 
-    private void createInnerScrollLayout(YogaLayout parentView){
-        YogaLayout yogaLayout = new YogaLayout(this);
+    private void createInnerScrollLayout(YogaLayout parentView) {
+        ZiRuYogaLayout yogaLayout = new ZiRuYogaLayout(this);
         yogaLayout.setBackgroundColor(Color.YELLOW);
         parentView.addView(yogaLayout);
         YogaNode yogaNode = parentView.getYogaNodeForView(yogaLayout);
         yogaNode.setFlexDirection(YogaFlexDirection.COLUMN);
+        yogaNode.setAlignItems(YogaAlign.CENTER);
+        yogaNode.setMargin(YogaEdge.ALL, 40);
+        yogaNode.setFlexGrow(1);
 
         ZiRuScrollView ziRuScrollView = new ZiRuScrollView(this);
         yogaLayout.addView(ziRuScrollView);
-        YogaNode childNode = yogaLayout.getYogaNodeForView(ziRuScrollView);
-        childNode.setHeight(1000);
+        YogaNode scrollNode = yogaLayout.getYogaNodeForView(ziRuScrollView);
+        scrollNode.setMargin(YogaEdge.ALL, 20);
         ziRuScrollView.setBackgroundColor(Color.BLUE);
+        //scrollNode.setHeight(1000);
+        scrollNode.setWidth(1000);
 
-        ZiRuYogaLayout ziRuYogaLayout = new ZiRuYogaLayout(this);
-        yogaLayout.addView(ziRuYogaLayout);
-        YogaNode ziRuYogaNode = ziRuYogaLayout.getYogaNodeForView(ziRuYogaLayout);
+        scrollNode.setFlexGrow(1);
+        //scrollNode.setHeight(0);
+
+        //scrollNode.setFlexShrink(0);
+
+        // scrollView中添加YogaLayout
+        ZiRuYogaLayout scrollContentYogaLayout = new ZiRuYogaLayout(this);
+        scrollContentYogaLayout.setBackgroundColor(Color.GRAY);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, 1000);
+        ziRuScrollView.addView(scrollContentYogaLayout, layoutParams);
+        YogaNode scrollContentNode = scrollContentYogaLayout.getYogaNode();
+        //scrollContentNode.setData(scrollContentYogaLayout);
+        scrollContentNode.setFlexDirection(YogaFlexDirection.COLUMN);
+        scrollContentNode.setAlignItems(YogaAlign.CENTER);
+        scrollContentNode.setMargin(YogaEdge.ALL, 20);
+        //scrollContentNode.setHeightPercent(100);
+        //scrollContentNode.setHeight(500);
+//        scrollContentNode.setWidth(800);
+//        scrollContentNode.setHeightAuto();
+//        scrollContentNode.setHeight(0);
+
+//        scrollContentNode.setFlexGrow(1);
+//        scrollContentNode.setFlexShrink(0);
+
+        // 添加文字
+        ZiRuTextView ziRuTextView = new ZiRuTextView(this);
+        ziRuTextView.setBackgroundColor(Color.CYAN);
+        ziRuTextView.setText("1212");
+        scrollContentYogaLayout.addView(ziRuTextView);
+        YogaNode textYogaNode = scrollContentYogaLayout.getYogaNodeForView(ziRuTextView);
+        textYogaNode.setWidth(400);
+
+
+        ZiRuYogaLayout musicYogaLayout = new ZiRuYogaLayout(this);
+        musicYogaLayout.setBackgroundColor(Color.BLACK);
+        yogaLayout.addView(musicYogaLayout);
+        YogaNode musicYogaNode = yogaLayout.getYogaNodeForView(musicYogaLayout);
         //YogaNode ziRuYogaNode = new YogaNode();
         //ziRuYogaNode.setData(ziRuYogaLayout);
-        ViewGroup childViewGroup = ziRuYogaLayout;
-        childViewGroup.setBackgroundColor(Color.RED);
-        ziRuYogaNode.setHeight(200);
+        musicYogaNode.setWidth(400);
+        musicYogaNode.setHeight(200);
     }
 
 

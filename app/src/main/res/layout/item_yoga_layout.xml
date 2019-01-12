@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lucky.androidlearn.yoga.ZiRuYogaLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</com.lucky.androidlearn.yoga.ZiRuYogaLayout>

@@ -3,11 +3,7 @@ package com.lucky.androidlearn.widget.material;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.jingewenku.abrahamcaijin.commonutil.PicassoUtils;
 import com.lucky.androidlearn.R;
@@ -38,7 +34,7 @@ public class MaterialWidgetActivity extends AppCompatActivity {
     private void loadImageView() {
         String url = "http://pic14.nipic.com/20110605/1369025_165540642000_2.jpg";
         ImageView imageView = (ImageView) findViewById(R.id.img_boat);
-        PicassoUtils.getinstance().LoadImage(this, url, imageView,R.drawable.yanzi, R.drawable.yanzi,
+        PicassoUtils.getInstance().LoadImage(this, url, imageView,R.drawable.yanzi, R.drawable.yanzi,
                 PicassoUtils.PICASSO_BITMAP_SHOW_NORMAL_TYPE, 20.0f);
     }
 

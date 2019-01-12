@@ -16,7 +16,10 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
+
+import java.io.File;
 
 /**
  * @Description:主要功能:Picasso图片加载工具类
@@ -58,7 +61,7 @@ public class PicassoUtils {
      */
     public static String PICASSO_BITMAP_SHOW_NORMAL_TYPE = "PicassoUtils_Normal_Type";
 
-    public static PicassoUtils getinstance() {
+    public static PicassoUtils getInstance() {
         if (instance == null) {
             synchronized (PicassoUtils.class) {
                 if (instance == null) {
@@ -161,6 +164,17 @@ public class PicassoUtils {
             Picasso.with(context).load(path).resize(targetWidth, targetHeight).centerCrop().into(imageView);
         }
     }
+
+    public void loadImageBitmap(Context context, String url, Target target) {
+        Picasso.with(context).load(url).into(target);
+    }
+
+    public void loadLocalImageBitmap(Context context, String path, Target target) {
+        Picasso.with(context).load(new File(path)).into(target);
+    }
+
+
+
     //--------------------------------------------------
 
     /**
@@ -285,5 +299,7 @@ public class PicassoUtils {
             return "round : radius = " + radius;
         }
     }
+
+
 
 }
