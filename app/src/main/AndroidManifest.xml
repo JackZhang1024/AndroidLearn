@@ -707,6 +707,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+
+        <activity
+            android:name=".widget.common.ExpandRecycleViewActivity"
+            android:label="@string/RecyclerView"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.ExpandRecycleViewNodeActivity"
+            android:label="@string/RecyclerView"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

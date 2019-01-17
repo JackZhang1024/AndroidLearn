@@ -16,4 +16,17 @@
         android:layout_height="wrap_content"
         android:text="SmartRefrsh下拉刷新" />
 
+    <Button
+        android:id="@+id/btn_expand_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="可扩展列表" />
+
+
+    <Button
+        android:id="@+id/btn_yoga_expand_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yoga可扩展列表" />
+
 </LinearLayout>

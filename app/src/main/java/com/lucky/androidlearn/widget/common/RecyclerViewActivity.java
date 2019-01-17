@@ -31,4 +31,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
     public void onSmartRefreshClick(View view){
         startActivity(new Intent(this, SmartRefreshActivity.class));
     }
+
+    @OnClick(R.id.btn_expand_recycleview)
+    public void onExpandListViewClick(View view){
+        startActivity(new Intent(this, ExpandRecycleViewActivity.class));
+    }
+
+    @OnClick(R.id.btn_yoga_expand_recycleview)
+    public void onYogaExpandListViewClick(View view){
+        startActivity(new Intent(this, ExpandRecycleViewNodeActivity.class));
+    }
+
 }
