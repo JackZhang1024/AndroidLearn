@@ -2,6 +2,7 @@ package com.lucky.androidlearn.j2v8;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +31,7 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
     private Button mBtnCallJavaFunction;
     private Button mBtnCallJavaCallBackFunction;
     private Button mBtnShowAlertDialog;
+    private Button mBtnJSDebugger;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
         mBtnCallJavaCallBackFunction.setOnClickListener(this);
         mBtnShowAlertDialog = findViewById(R.id.btn_call_js_show_alert);
         mBtnShowAlertDialog.setOnClickListener(this);
+        mBtnJSDebugger = findViewById(R.id.btn_js_debugger);
+        mBtnJSDebugger.setOnClickListener(this);
     }
 
 
@@ -80,6 +84,9 @@ public class J2V8LearnActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.btn_call_js_show_alert:
                 executeCallAlertDialogFunction();
+                break;
+            case R.id.btn_js_debugger:
+                startActivity(new Intent(this, JSDebuggerActivity.class));
                 break;
         }
     }

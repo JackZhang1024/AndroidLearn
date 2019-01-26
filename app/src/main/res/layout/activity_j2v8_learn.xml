@@ -60,4 +60,11 @@
         android:text="显示Alert"
         />
 
+    <Button
+        android:id="@+id/btn_js_debugger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JS断点调试"
+        />
+
 </LinearLayout>

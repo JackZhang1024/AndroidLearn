@@ -720,6 +720,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".j2v8.JSDebuggerActivity"
+            android:label="@string/js_debugger"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

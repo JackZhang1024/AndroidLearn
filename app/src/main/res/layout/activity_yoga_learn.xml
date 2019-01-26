@@ -4,15 +4,37 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_change_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="改变背景色"
-        />
+        android:text="改变背景色" />
+
+    <Button
+        android:id="@+id/btn_scroll_display_none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="隐藏Block" />
+
+    <LinearLayout
+        android:id="@+id/ll_outer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorAccent"
+        >
+
+        <TextView
+            android:id="@+id/tv_inner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Hello"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
 
     <com.facebook.yoga.android.YogaLayout
         android:id="@+id/yoga_layout"
