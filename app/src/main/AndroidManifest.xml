@@ -726,6 +726,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".widget.common.ViewPagerActivity"
+            android:label="@string/RecyclerView"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <service
             android:name=".core.service.PollService"

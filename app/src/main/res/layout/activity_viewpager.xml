@@ -6,6 +6,18 @@
     android:orientation="vertical"
     tools:ignore="UnusedResources">
 
+    <Button
+        android:id="@+id/create_dynamic_pages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="动态创建"
+        />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

@@ -165,6 +165,11 @@ public class CommonWidgetActivity extends AppCompatActivity {
         startActivity(new Intent(this, ScrollConflictActivity.class));
     }
 
+    // btn_viewpager
+    @OnClick(R.id.btn_viewpager)
+    public void onViewPagerClick(View view){
+        startActivity(new Intent(this, ViewPagerActivity.class));
+    }
 
     @Override
     protected void onStart() {
