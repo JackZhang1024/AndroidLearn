@@ -117,4 +117,5 @@
     <string name="scroll_conflict">ScrollConflict</string>
     <string name="views_pager">ViewPager</string>
     <string name="js_debugger">J2V8 JS调试</string>
+    <string name="smart_refresh">SmartRefresh</string>
 </resources>

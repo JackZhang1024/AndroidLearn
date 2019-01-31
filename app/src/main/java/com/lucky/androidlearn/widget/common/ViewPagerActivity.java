@@ -52,13 +52,21 @@ public class ViewPagerActivity extends AppCompatActivity {
         for (int i = 0; i < 4; i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.layout_view_page, null, false);
             LinearLayout linearLayout = view.findViewById(R.id.ll_content);
-            IndexSwipeRefreshLayout smartRefreshLayout = view.findViewById(R.id.smart_refresh);
+            SmartRefreshLayout smartRefreshLayout = view.findViewById(R.id.smart_refresh);
             smartRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
             smartRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
             smartRefreshLayout.setEnableLoadmore(true);
             smartRefreshLayout.setEnableAutoLoadmore(true);
-            TextView tvTitle = view.findViewById(R.id.tv_title);
-            tvTitle.setText("我是 "+i);
+            // 当刷新布局不满的时候也可以上拉加载 setEnableLoadmoreWhenContentNotFull(true)
+            smartRefreshLayout.setEnableLoadmoreWhenContentNotFull(true);
+//            LinearLayout refreshLayout = view.findViewById(R.id.ll_refresh_content);
+//            for (int index = 0; index < 20; index++) {
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -2);
+//                View refreshItem = LayoutInflater.from(this).inflate(R.layout.layout_item_refresh, null, false);
+//                TextView tvItem = refreshItem.findViewById(R.id.tv_order);
+//                tvItem.setText("我是第 "+index+"个");
+//                refreshLayout.addView(refreshItem, layoutParams);
+//            }
             adapter.notifyPageChanges(linearLayout);
         }
     }

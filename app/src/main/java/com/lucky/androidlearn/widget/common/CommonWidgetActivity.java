@@ -171,6 +171,12 @@ public class CommonWidgetActivity extends AppCompatActivity {
         startActivity(new Intent(this, ViewPagerActivity.class));
     }
 
+    //smart_refresh
+    @OnClick(R.id.btn_smart_refresh)
+    public void onSmartRefreshClick(View view){
+        startActivity(new Intent(this, SmartRefreshActivity.class));
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
