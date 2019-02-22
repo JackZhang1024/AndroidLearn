@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
+import com.jingewenku.abrahamcaijin.commonutil.klog.KLog;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
@@ -19,8 +20,10 @@ import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
 import com.lucky.androidlearn.eventchange.AttributeChangeListenActivity;
 import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
+import com.lucky.androidlearn.filelearn.FileLearnActivity;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
+import com.lucky.androidlearn.hybrid.WebViewActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
 import com.lucky.androidlearn.j2v8.J2V8LearnActivity;
 import com.lucky.androidlearn.json.JsonLearnActivity;
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 //        for (byte i:bytes){
 //            System.out.println(i);
 //        }
+
     }
 
     private void startTrafficMonitor(){
@@ -345,6 +349,18 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @OnClick(R.id.btn_umeng)
     public void onUmengClick(View view){
         Intent intent = new Intent(this, UMengActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_webview)
+    public void onWebViewClick(View view){
+        Intent intent = new Intent(this, WebViewActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_file_learn)
+    public void onFileLearnClick(View view){
+        Intent intent = new Intent(this, FileLearnActivity.class);
         startActivity(intent);
     }
 

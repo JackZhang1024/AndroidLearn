@@ -251,6 +251,21 @@
             android:layout_marginTop="10dp"
             android:text="@string/umeng" />
 
+        <Button
+            android:id="@+id/btn_webview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/web_view" />
+
+
+        <Button
+            android:id="@+id/btn_file_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/file_learn" />
+
     </LinearLayout>
 
 

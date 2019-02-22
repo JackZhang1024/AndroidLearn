@@ -732,6 +732,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".hybrid.WebViewActivity"
+            android:label="@string/web_view"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".filelearn.FileLearnActivity"
+            android:label="@string/file_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	 <script>
+	 function InnerJavaModel(name, score) {
+         this.name = name;
+         this.score = score;
+         this.changeScore = changeScore;
+
+         function changeScore(score) {
+             this.score = score;
+         }
+     }
+     var model = new InnerJavaModel("lisi", 20);
+	 model.changeScore(100);
+	 //alert("result "+model.score);
+	 WebAppInterface.sayHello("Hello, Java. I am JavaScript");
+    </script>
+</head>
+<body>
+     <p>
+</body>
+</html>

@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.os.Process;
 import android.util.Log;
 
+import com.jingewenku.abrahamcaijin.commonutil.klog.KLog;
 import com.lucky.androidlearn.dagger2learn.AppModule;
 import com.lucky.androidlearn.dagger2learn.lesson04.AppComponent;
 import com.lucky.androidlearn.dagger2learn.lesson04.DaggerAppComponent;
@@ -55,6 +56,7 @@ public class AndroidApplication extends Application {
         }
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
         UMConfigure.init(this, "5bdbef32b465f5b32400001d", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+        KLog.init(true);
     }
 
     /**
