@@ -5,8 +5,9 @@ buildscript {
     // 配置kotlin第一步
     ext.kotlin_version = '1.2.30'
     repositories {
-        jcenter()
         google()
+        maven { url 'https://maven.google.com' }
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.1'
@@ -23,9 +24,9 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
-        mavenCentral()
+        maven { url 'https://maven.google.com' }
+        jcenter()
     }
 }
 
