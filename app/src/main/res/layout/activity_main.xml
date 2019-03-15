@@ -14,6 +14,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btn_performance_optimization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/performance_optimization"
+            />
 
         <Button
             android:id="@+id/btn_exception_summary"
@@ -265,6 +272,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/file_learn" />
+
+        <Button
+            android:id="@+id/btn_encrypt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/encrypt_decrypt"
+            />
+
 
     </LinearLayout>
 

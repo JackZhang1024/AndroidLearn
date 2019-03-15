@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.lucky.androidlearn.R;
+import com.lucky.androidlearn.exception.oom.OOMActivity;
 import com.lucky.androidlearn.exception.toast.ToastExceptionActivity;
 
 import butterknife.ButterKnife;
@@ -25,9 +26,14 @@ public class ExceptionSummaryActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_toast_exception)
-    public void onToastException(View view){
+    public void onToastException(View view) {
         Intent intent = new Intent(this, ToastExceptionActivity.class);
         startActivity(intent);
     }
 
+    @OnClick(R.id.btn_oom_creator)
+    public void onOOMCreatorException(View view) {
+        Intent intent = new Intent(this, OOMActivity.class);
+        startActivity(intent);
+    }
 }

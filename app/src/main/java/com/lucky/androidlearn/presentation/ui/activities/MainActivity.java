@@ -18,6 +18,7 @@ import com.lucky.androidlearn.annotation.SimpleButterKnifeActivity;
 import com.lucky.androidlearn.crosswalk.CrossWalkActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
+import com.lucky.androidlearn.encrypt.EncryptDecryptActivity;
 import com.lucky.androidlearn.eventchange.AttributeChangeListenActivity;
 import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
 import com.lucky.androidlearn.filelearn.FileLearnActivity;
@@ -35,6 +36,7 @@ import com.lucky.androidlearn.mvp.MVPMainActivity;
 import com.lucky.androidlearn.mvvm.MVVMMainActivity;
 import com.lucky.androidlearn.network.NetWorkTrafficActivity;
 import com.lucky.androidlearn.network.traffic.TrafficMonitorService;
+import com.lucky.androidlearn.performance.PerformanceOptimizationActivity;
 import com.lucky.androidlearn.permission.PermissionManageActivity;
 import com.lucky.androidlearn.presentation.presenters.MainPresenter;
 import com.lucky.androidlearn.presentation.presenters.impl.MainPresenterImpl;
@@ -361,6 +363,19 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @OnClick(R.id.btn_file_learn)
     public void onFileLearnClick(View view){
         Intent intent = new Intent(this, FileLearnActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_performance_optimization)
+    public void onPerformanceClick(View view){
+        Intent intent = new Intent(this, PerformanceOptimizationActivity.class);
+        startActivity(intent);
+    }
+
+    // btn_encrypt
+    @OnClick(R.id.btn_encrypt)
+    public void onEncryptDecryptClick(View view){
+        Intent intent = new Intent(this, EncryptDecryptActivity.class);
         startActivity(intent);
     }
 

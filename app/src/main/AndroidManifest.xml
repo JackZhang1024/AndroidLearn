@@ -744,6 +744,36 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+
+        <activity
+            android:name=".performance.PerformanceOptimizationActivity"
+            android:label="@string/performance_optimization"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".performance.MemoryOptimizationActivity"
+            android:label="@string/memory_optimization"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".okhttplearn.OkHttpLearnActivity"
+            android:label="@string/okhttp_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".encrypt.EncryptDecryptActivity"
+            android:label="@string/encrypt_decrypt"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".exception.oom.OOMActivity"
+            android:label="@string/oom_creator"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

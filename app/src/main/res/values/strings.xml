@@ -115,6 +115,13 @@
     <string name="flex_layout">FlexLayout</string>
     <string name="yoga_layout">YogaLayout</string>
     <string name="scroll_conflict">ScrollConflict</string>
+    <string name="performance_optimization">性能优化</string>
+    <string name="memory_optimization">MemoryOptimization</string>
+    <string name="okhttp_learn">OkhttpLearn</string>
+    <string name="encrypt_decrypt">加密解密处理</string>
+    <string name="aes_encrypt_decrypt">AES加密解密</string>
+    <string name="oom_creator">触发OOM</string>
+
     <string name="views_pager">ViewPager</string>
     <string name="js_debugger">J2V8 JS调试</string>
     <string name="smart_refresh">SmartRefresh</string>
@@ -122,3 +129,4 @@
     <string name="file_learn">文件处理</string>
 
 </resources>
+

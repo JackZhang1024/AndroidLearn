@@ -4,16 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--Toast 异常 此种异常一般出现在7.0以下手机-->
-    <Button
-        android:id="@+id/btn_toast_exception"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/toast_exception" />
 
     <Button
-        android:id="@+id/btn_oom_creator"
+        android:id="@+id/btn_aes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/oom_creator" />
+        android:text="@string/aes_encrypt_decrypt" />
+
+    <Button
+        android:id="@+id/btn_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/aes_encrypt_decrypt" />
+
+    <Button
+        android:id="@+id/btn_md5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/aes_encrypt_decrypt" />
+
 </LinearLayout>

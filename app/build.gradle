@@ -76,6 +76,7 @@ android {
         implementation files('libs/additionnal.jar')
         implementation files('libs/mail.jar')
         implementation files('libs/classes.jar')
+        //implementation files('libs/sun.misc.BASE64Decoder.jar')
         //implementation files('libs/j2v8_android-2.0.jar')
         implementation files('libs/ksoap2-android.jar')
         implementation "com.android.support:appcompat-v7:$supportVersion"
