@@ -1,6 +1,7 @@
 package com.lucky.androidlearn;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.location.LocationManager;
@@ -14,6 +15,8 @@ import com.lucky.androidlearn.dagger2learn.lesson04.DaggerAppComponent;
 import com.lukcyboy.simpleaar.SimpleAarLog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.lang.reflect.Field;
@@ -29,12 +32,22 @@ public class AndroidApplication extends Application {
     @Inject
     LocationManager locationManager;
     AppComponent appComponent;
+    private RefWatcher refWatcher;
 
     private static AndroidApplication mAndroidApplication;
 
     @Override
     public void onCreate() {
         super.onCreate();
+//        if (LeakCanary.isInAnalyzerProcess(this)){
+//            // 如果是LeakCanary进程 就不要走后面的流程 直接return
+//            return;
+//        }
+//        LeakCanary.install(this);
+
+        // 如果想检测出除了Activity的内存泄漏之外的内存泄漏 需要以下设置
+        setupRefWatcher();
+
         mAndroidApplication = this;
         appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         appComponent.inject(this);
@@ -57,6 +70,14 @@ public class AndroidApplication extends Application {
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
         UMConfigure.init(this, "5bdbef32b465f5b32400001d", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
         KLog.init(true);
+    }
+
+
+    private RefWatcher setupRefWatcher(){
+        if (LeakCanary.isInAnalyzerProcess(this)){
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
     }
 
     /**
@@ -89,5 +110,13 @@ public class AndroidApplication extends Application {
     public static AndroidApplication getInstances() {
         return mAndroidApplication;
     }
+
+
+
+    public static RefWatcher getRefWatcher(Context context){
+        AndroidApplication application = (AndroidApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
 
 }

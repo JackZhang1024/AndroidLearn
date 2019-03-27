@@ -127,6 +127,15 @@
     <string name="smart_refresh">SmartRefresh</string>
     <string name="web_view">WebView开发</string>
     <string name="file_learn">文件处理</string>
-
+    <string name="lru_algorithm">LRU算法实现</string>
+    <string name="scroll_conflict_demo1">外部拦截法</string>
+    <string name="scroll_conflict_demo2">内部拦截法</string>
+    <string name="water_fall">瀑布流</string>
+    <string name="trace_view">TraceView分析</string>
+    <string name="hierarchy_viewer">HierarchyViewer使用</string>
+    <string name="leakcanary">LeakCanary内存泄漏</string>
+    <string name="viewgraphic_optimization">视图优化</string>
+    <string name="view_merge">ViewMerge视图合并</string>
+    <string name="view_stub">ViewStub视图替换</string>
 </resources>
 

@@ -28,6 +28,7 @@ import com.lucky.androidlearn.hybrid.WebViewActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
 import com.lucky.androidlearn.j2v8.J2V8LearnActivity;
 import com.lucky.androidlearn.json.JsonLearnActivity;
+import com.lucky.androidlearn.lru.LRUActivity;
 import com.lucky.androidlearn.math.MathActivity;
 import com.lucky.androidlearn.media.MediaActivity;
 import com.lucky.androidlearn.multithread.MultiThreadActivity;
@@ -376,6 +377,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @OnClick(R.id.btn_encrypt)
     public void onEncryptDecryptClick(View view){
         Intent intent = new Intent(this, EncryptDecryptActivity.class);
+        startActivity(intent);
+    }
+
+    // btn_lru_algorithm
+    @OnClick(R.id.btn_lru_algorithm)
+    public void onLRUAlgorithmClick(View view){
+        Intent intent = new Intent(this, LRUActivity.class);
         startActivity(intent);
     }
 

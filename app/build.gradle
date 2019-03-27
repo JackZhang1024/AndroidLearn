@@ -14,9 +14,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //jackOptions.enabled = true // 支持Java8
-        ndk {
-            abiFilters "armeabi", "armeabi-v7a"
-        }
+//        ndk {
+//            abiFilters "armeabi", "armeabi-v7a"
+//        }
     }
     buildTypes {
         release {
@@ -151,6 +151,12 @@ android {
         // 类似CSStan
         implementation 'com.google.android:flexbox:1.1.0'
         implementation group: 'com.facebook.yoga.android', name: 'yoga-layout', version: '1.10.0'
+        // leakcanary
+        debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+        releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+        // Optional, if you use support library fragments:
+        debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+        implementation 'com.hanhuy.android:viewserver:1.0.3'
     }
 
     packagingOptions {
@@ -173,5 +179,5 @@ repositories {
 
 dependencies {
     implementation 'com.alibaba:fastjson:1.2.51'
-
+    //implementation 'com.hanhuy.android:viewserver:1.0.3'
 }

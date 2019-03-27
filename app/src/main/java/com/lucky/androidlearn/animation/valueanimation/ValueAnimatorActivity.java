@@ -1,11 +1,13 @@
 package com.lucky.androidlearn.animation.valueanimation;
 
+import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import com.lucky.androidlearn.R;
@@ -44,4 +46,26 @@ public class ValueAnimatorActivity extends AppCompatActivity {
         });
         valueAnimator.start();
     }
+
+    public class LLinearInterpolator implements Interpolator{
+
+
+        @Override
+        public float getInterpolation(float input) {
+            return input;
+        }
+    }
+
+
+    public class IntEvaluator implements TypeEvaluator<Integer>{
+
+
+        @Override
+        public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+            int startInt = startValue;
+            return (int)(startInt+(endValue-startValue)*fraction);
+        }
+    }
+
+
 }

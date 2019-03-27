@@ -17,6 +17,9 @@ import com.lucky.androidlearn.widget.common.fancygallery.FancyGalleryMainActivit
 import com.lucky.androidlearn.widget.common.helper.AlertDialogHelper;
 import com.lucky.androidlearn.widget.common.pulllistview.PullListViewActivity;
 import com.lucky.androidlearn.widget.common.scrollconflict.ScrollConflictActivity;
+import com.lucky.androidlearn.widget.common.scrollconflict.ScrollConflictDemo1Activity;
+import com.lucky.androidlearn.widget.common.scrollconflict.ScrollConflictDemo2Activity;
+import com.lucky.androidlearn.widget.common.scrollconflict.WaterFallActivity;
 import com.lucky.androidlearn.widget.constraintlayout.ConstraintLayoutActivity;
 import com.lucky.androidlearn.widget.marquee.MarqueeViewActivity;
 import com.lucky.androidlearn.widget.notification.NotificationActivity;
@@ -163,6 +166,23 @@ public class CommonWidgetActivity extends AppCompatActivity {
     @OnClick(R.id.btn_scroll_conflict)
     public void onScrollConflictClick(View view){
         startActivity(new Intent(this, ScrollConflictActivity.class));
+    }
+
+
+    @OnClick(R.id.btn_scroll_conflict_demo1)
+    public void onScrollConflictDemo1Click(View view){
+        startActivity(new Intent(this, ScrollConflictDemo1Activity.class));
+    }
+
+
+    @OnClick(R.id.btn_scroll_conflict_demo2)
+    public void onScrollConflictDemo2Click(View view){
+        startActivity(new Intent(this, ScrollConflictDemo2Activity.class));
+    }
+
+    @OnClick(R.id.btn_water_fall)
+    public void onWaterFallClick(View view){
+        startActivity(new Intent(this, WaterFallActivity.class));
     }
 
     // btn_viewpager

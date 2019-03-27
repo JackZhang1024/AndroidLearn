@@ -120,5 +120,23 @@
 	<string name="performance_optimization">パフォーマンスの最適化</string>
 	<string name="memory_optimization">メモリ最適化</string>
 	<string name="okhttp_learn">OkhttpLearn</string>
+	<string name="encrypt_decrypt">暗号化および復号化処理</string>
+	<string name="aes_encrypt_decrypt">AES暗号化と復号化</string>
+	<string name="oom_creator">OOMをトリガ</string>
+	<string name="views_pager">ViewPager</string>
+	<string name="js_debugger">J2V8 JSデバッグ</string>
+	<string name="smart_refresh">SmartRefresh</string>
+	<string name="web_view">WebView開発</string>
+	<string name="file_learn">ファイル処理</string>
+	<string name="lru_algorithm">LRUアルゴリズムの実装</string>
+	<string name="scroll_conflict_demo1">外部傍受</string>
+	<string name="scroll_conflict_demo2">内部傍受</string>
+	<string name="water_fall">滝の流れ</string>
+	<string name="trace_view">TraceView分析</string>
+	<string name="hierarchy_viewer">HierarchyViewer</string>
+	<string name="leakcanary">LeakCanaryのメモリリーク</string>
+	<string name="viewgraphic_optimization">ビューの最適化</string>
+	<string name="view_merge">ViewMergeビューマージ</string>
+	<string name="view_stub">ViewStubビューの置き換え</string>
 
 </resources>

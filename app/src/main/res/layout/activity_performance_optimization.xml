@@ -13,4 +13,31 @@
         />
 
 
+    <Button
+        android:id="@+id/btn_graphic_optimization"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="绘制优化"
+        />
+
+    <Button
+        android:id="@+id/btn_hierarchy_viewer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="HierarchyViewer"
+        />
+
+
+    <Button
+        android:id="@+id/btn_trace_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/trace_view"
+        />
+
+
+
 </LinearLayout>

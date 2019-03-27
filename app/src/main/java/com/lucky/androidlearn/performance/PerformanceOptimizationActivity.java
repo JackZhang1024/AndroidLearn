@@ -22,8 +22,29 @@ public class PerformanceOptimizationActivity extends AppCompatActivity {
 
 
     @OnClick(R.id.btn_memory_optimization)
-    public void onMemoryOptimizationClick(View view){
+    public void onMemoryOptimizationClick(View view) {
         Intent intent = new Intent(this, MemoryOptimizationActivity.class);
+        startActivity(intent);
+    }
+
+    //btn_graphic_optimization
+    @OnClick(R.id.btn_graphic_optimization)
+    public void onGraphicOptimizationClick(View view) {
+        Intent intent = new Intent(this, ViewGraphicOptimizationActivity.class);
+        startActivity(intent);
+    }
+
+    //btn_hierarchy_viewer
+    @OnClick(R.id.btn_hierarchy_viewer)
+    public void onHierarchyViewerClick(View view) {
+        Intent intent = new Intent(this, HierarchyViewerActivity.class);
+        startActivity(intent);
+    }
+
+    //btn_trace_view
+    @OnClick(R.id.btn_trace_view)
+    public void onTraceViewClick(View view) {
+        Intent intent = new Intent(this, TraceViewActivity.class);
         startActivity(intent);
     }
 }

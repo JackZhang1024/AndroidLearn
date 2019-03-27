@@ -280,6 +280,13 @@
             android:text="@string/encrypt_decrypt"
             />
 
+        <Button
+            android:id="@+id/btn_lru_algorithm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lru_algorithm"
+            />
+
 
     </LinearLayout>
 

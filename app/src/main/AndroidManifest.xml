@@ -774,6 +774,63 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".lru.LRUActivity"
+            android:label="@string/lru_algorithm"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.scrollconflict.ScrollConflictDemo1Activity"
+            android:label="@string/scroll_conflict_demo1"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.scrollconflict.ScrollConflictDemo2Activity"
+            android:label="@string/scroll_conflict_demo2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.scrollconflict.WaterFallActivity"
+            android:label="@string/water_fall"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".performance.TraceViewActivity"
+            android:label="@string/trace_view"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
+        <activity
+            android:name=".performance.HierarchyViewerActivity"
+            android:label="@string/hierarchy_viewer"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".performance.LeakCanaryActivity"
+            android:label="@string/leakcanary"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".performance.ViewGraphicOptimizationActivity"
+            android:label="@string/viewgraphic_optimization"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
+        <activity
+            android:name=".performance.ViewMergeActivity"
+            android:label="@string/view_merge"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

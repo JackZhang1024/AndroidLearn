@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -54,6 +55,12 @@ public class LearnStartService extends Service {
 
     private void doSomethings() {
         Log.e(TAG, "doSomethings: ");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("++++++++++++++++++++++");
+            }
+        }, 1000*6);
     }
 
     @Nullable

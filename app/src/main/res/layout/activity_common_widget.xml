@@ -131,6 +131,25 @@
             android:text="@string/scroll_conflict" />
 
         <Button
+            android:id="@+id/btn_scroll_conflict_demo1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scroll_conflict_demo1" />
+
+        <Button
+            android:id="@+id/btn_scroll_conflict_demo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scroll_conflict_demo2" />
+
+
+        <Button
+            android:id="@+id/btn_water_fall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/water_fall" />
+
+        <Button
             android:id="@+id/btn_viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

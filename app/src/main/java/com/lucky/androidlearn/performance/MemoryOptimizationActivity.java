@@ -1,5 +1,6 @@
 package com.lucky.androidlearn.performance;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,12 +31,11 @@ public class MemoryOptimizationActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        System.out.println("configurationChanged....");
+
+    @OnClick(R.id.btn_leakcanary)
+    public void onLeakCanaryClick(View view){
+        Intent intent = new Intent(this, LeakCanaryActivity.class);
+        startActivity(intent);
     }
-
-
 
 }

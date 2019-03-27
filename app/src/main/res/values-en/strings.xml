@@ -120,5 +120,23 @@
 	<string name="performance_optimization">Performance optimization</string>
 	<string name="memory_optimization">MemoryOptimization</string>
 	<string name="okhttp_learn">OkhttpLearn</string>
+	<string name="encrypt_decrypt">Encryption and decryption processing</string>
+	<string name="aes_encrypt_decrypt">AES encryption and decryption</string>
+	<string name="oom_creator">Trigger OOM</string>
+	<string name="views_pager">ViewPager</string>
+	<string name="js_debugger">J2V8 JS debugging</string>
+	<string name="smart_refresh">SmartRefresh</string>
+	<string name="web_view">WebView development</string>
+	<string name="file_learn">File processing</string>
+	<string name="lru_algorithm">LRU algorithm implementation</string>
+	<string name="scroll_conflict_demo1">External interception</string>
+	<string name="scroll_conflict_demo2">Internal interception</string>
+	<string name="water_fall">Waterfalls flow</string>
+	<string name="trace_view">TraceView analysis</string>
+	<string name="hierarchy_viewer">HierarchyViewer</string>
+	<string name="leakcanary">LeakCanary memory leak</string>
+	<string name="viewgraphic_optimization">View optimization</string>
+	<string name="view_merge">ViewMerge view merge</string>
+	<string name="view_stub">ViewStub view replacement</string>
 
 </resources>
