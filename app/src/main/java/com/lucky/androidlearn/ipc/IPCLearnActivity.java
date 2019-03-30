@@ -41,12 +41,14 @@ public class IPCLearnActivity extends AppCompatActivity {
     }
 
 
+    // socket通讯
     @OnClick(R.id.btn_ipc_socket)
     public void onSocketClick(){
 
 
     }
 
+    // provider通讯
     @OnClick(R.id.btn_ipc_contentprovider)
     public void onContentProviderClick(){
 

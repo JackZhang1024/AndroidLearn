@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/btn_okhttp_get"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get请求" />
+
+
+    <Button
+        android:id="@+id/btn_okhttp_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="POST请求" />
+
+    <Button
+        android:id="@+id/btn_okhttp_post_json"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="POST请求(JSON)" />
+
+    <Button
+        android:id="@+id/btn_okhttp_upload_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上传文件" />
+
+    <Button
+        android:id="@+id/btn_okhttp_download_files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下载文件" />
+
+    <Button
+        android:id="@+id/btn_okhttp_cookie_manage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cookie管理" />
+
+    <Button
+        android:id="@+id/btn_okhttp_add_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加请求头信息" />
+
+    <Button
+        android:id="@+id/btn_okhttp_https"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="https访问" />
+
+
+    <ImageView
+        android:id="@+id/iv_image_show"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
 
 </LinearLayout>

@@ -110,6 +110,7 @@ public class LaunchModeActivity extends AppCompatActivity {
     }
 
     // Scheme跳转协议
+    // AppLink操作
     private void launchAnotherApp() {
         if (AppApplicationMgr.isInstalled(this, "com.lucky.customviewlearn")) {
             String aciton = "com.aragoncs.launch";

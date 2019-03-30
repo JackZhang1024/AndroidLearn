@@ -37,6 +37,7 @@ import com.lucky.androidlearn.mvp.MVPMainActivity;
 import com.lucky.androidlearn.mvvm.MVVMMainActivity;
 import com.lucky.androidlearn.network.NetWorkTrafficActivity;
 import com.lucky.androidlearn.network.traffic.TrafficMonitorService;
+import com.lucky.androidlearn.okhttplearn.OkHttpLearnActivity;
 import com.lucky.androidlearn.performance.PerformanceOptimizationActivity;
 import com.lucky.androidlearn.permission.PermissionManageActivity;
 import com.lucky.androidlearn.presentation.presenters.MainPresenter;
@@ -63,6 +64,7 @@ import java.nio.charset.Charset;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.OkHttpClient;
 
 /**
  * MVP设计模式:
@@ -386,6 +388,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         Intent intent = new Intent(this, LRUActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_okhttp)
+    public void onOKHttpLearnClick(View view){
+        Intent intent = new Intent(this, OkHttpLearnActivity.class);
+        startActivity(intent);
+    }
+
 
     private void getContentViewHeight(){
         int screenHeight = AppScreenMgr.getScreenHeight(this);
