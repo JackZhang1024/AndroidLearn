@@ -1,7 +1,6 @@
 package com.lucky.androidlearn.presentation.ui.activities;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,6 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
-import com.jingewenku.abrahamcaijin.commonutil.klog.KLog;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
@@ -24,7 +22,7 @@ import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
 import com.lucky.androidlearn.filelearn.FileLearnActivity;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
-import com.lucky.androidlearn.hybrid.WebViewActivity;
+import com.lucky.androidlearn.hybrid.WebViewSummaryActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
 import com.lucky.androidlearn.j2v8.J2V8LearnActivity;
 import com.lucky.androidlearn.json.JsonLearnActivity;
@@ -58,13 +56,9 @@ import com.lucky.androidlearn.widget.screen.ScreenDensityActivity;
 import com.lucky.androidlearn.service.ServiceActivity;
 import com.lucky.androidlearn.xml.XmlActivity;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
-
-import java.nio.charset.Charset;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
 
 /**
  * MVP设计模式:
@@ -359,7 +353,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     @OnClick(R.id.btn_webview)
     public void onWebViewClick(View view){
-        Intent intent = new Intent(this, WebViewActivity.class);
+        Intent intent = new Intent(this, WebViewSummaryActivity.class);
+//        Intent intent = new Intent(this, NormalWebViewActivity.class);
         startActivity(intent);
     }
 

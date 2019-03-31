@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--// 1、页面在刷新进入时，请求权限唤起APP-->
+    <!-- 看起来这种方式不好使 在应用一进来就自动跳转到指定App页面  低版本没有试过 不止可行否  -->
+    <meta http-equiv="refresh" content="0;url=aragoncs://scan?clientId=1&userId=2">
+    <title>Title</title>
+    <script>
+
+        function isInIOS() {
+            var userAgent = window.navigator.userAgent;
+            alert("userAgent "+userAgent);
+            agents = ["iPhone", "iPad", "iPod"];
+            for (var index = 0; index < agents.length; index++) {
+                console.log("  "+agents[index]);
+                if (userAgent.indexOf(agents[index])>0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        alert("isIniOS "+isInIOS());
+
+        // 是否在微信内置浏览器中
+        function isInWx(){
+            var agent = window.navigator.userAgent.toLowerCase();
+            return agent.match(/MicroMessenger/i) == 'micromessenger';
+        }
+        alert("isInWx "+isInWx());
+    </script>
+</head>
+<body>
+<!-- 使用点击a链接跳转 只需要webView.setWebChromeClient 不能设置 setWebViewClient -->
+<p> <a href="aragoncs://scan?clientId=1&userId=2">open Android app</a></p>
+</body>
+</html>

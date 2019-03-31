@@ -5,10 +5,17 @@
     android:orientation="vertical">
 
    <Button
-       android:id="@+id/btn_https"
+       android:id="@+id/btn_trust_certificate"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="信任服务端证书"
+       android:text="信任单个证书"
+       />
+
+   <Button
+       android:id="@+id/btn_trust_all_certificates"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="信任所有证书"
        />
 
 </LinearLayout>

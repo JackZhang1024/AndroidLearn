@@ -138,5 +138,7 @@
 	<string name="viewgraphic_optimization">View optimization</string>
 	<string name="view_merge">ViewMerge view merge</string>
 	<string name="view_stub">ViewStub view replacement</string>
+	<string name="okhttps">Okhttps access</string>
+	<string name="webview_summary">Summary of WebView features</string>
 
 </resources>

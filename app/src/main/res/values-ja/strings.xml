@@ -138,5 +138,7 @@
 	<string name="viewgraphic_optimization">ビューの最適化</string>
 	<string name="view_merge">ViewMergeビューマージ</string>
 	<string name="view_stub">ViewStubビューの置き換え</string>
+	<string name="okhttps">Okhttpsアクセス</string>
+	<string name="webview_summary">WebView機能のまとめ</string>
 
 </resources>

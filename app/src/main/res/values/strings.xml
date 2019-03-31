@@ -138,5 +138,6 @@
     <string name="view_merge">ViewMerge视图合并</string>
     <string name="view_stub">ViewStub视图替换</string>
     <string name="okhttps">Okhttps访问</string>
+    <string name="webview_summary">WebView功能总结</string>
 </resources>
 

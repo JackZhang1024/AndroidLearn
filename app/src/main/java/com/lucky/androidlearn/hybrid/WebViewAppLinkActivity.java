@@ -1,12 +1,14 @@
 package com.lucky.androidlearn.hybrid;
 
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.CookieManager;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -69,51 +71,69 @@ webview.loadData(content, "text/html", "UTF-8"); // 加载定义的代码，并�
 
 *
 * */
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewAppLinkActivity extends AppCompatActivity {
 
     @BindView(R.id.webview)
-    InnerWebView mWebView;
+    WebView mWebView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview);
+        setContentView(R.layout.activity_normal_webview);
         ButterKnife.bind(this);
-        loadWebView("file:///android_asset/hello.html");
-//        loadWebView("file:///android_asset/applink.html");
-        InnerJavaModel model = new InnerJavaModel();
-        mWebView.setJavaScript("WebAppInterface", model);
-        loadJavaDataIntoJavascript();
+        //loadWebView("file:///android_asset/hello.html");
+        initWebView(mWebView);
+        loadWebView("file:///android_asset/applink.html");
+    }
+
+    private void initWebView(WebView webView) {
+        WebSettings settings = webView.getSettings();
+        settings.setBuiltInZoomControls(false);
+//        webView.setWebViewClient(new WebViewClient(){
+//
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
+        webView.setWebChromeClient(new WebChromeClient());
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setDefaultTextEncodingName("utf-8");
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            settings.setTextZoom(100);
+        } else {
+            settings.setTextSize(WebSettings.TextSize.NORMAL);
+        }
+        settings.setUseWideViewPort(true);
+        webView.setVerticalScrollBarEnabled(false);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            settings.setLoadsImagesAutomatically(false);
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            //https 与http 混合请求
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
+        }
+        try {//解决跨域问题
+            if (Build.VERSION.SDK_INT >= 16) {
+                Class<?> clazz = settings.getClass();
+                Method method = clazz.getMethod("setAllowUniversalAccessFromFileURLs", boolean.class);//利用反射机制去修改设置对象
+                if (method != null) {
+                    method.invoke(settings, true);//修改设置
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadWebView(String url) {
         mWebView.loadUrl(url);
     }
 
-
-    private void executeJavaScript() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                String jsFunction = "function changeName(name){model.name=name; alert(model.name)}; changeName('Han')";
-                mWebView.loadUrl("javascript:" + jsFunction);
-            }
-        }, 1000);
-    }
-
-    // 可以有两种方式向JS代码中传递参数
-    // 1. 利用setJavaScript方法将Java对象传递到JS代码中， 所有的操作都是方法 不能通过属性来操作
-    // 2. WebView.loadUrl("javascript:"+" function ") 通过调用JS方法来注入数据
-    private void loadJavaDataIntoJavascript(){
-         // visitCity
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                String jsFunction = "visitCity('beijing', 'kaoya ')";
-                mWebView.loadUrl("javascript:" + jsFunction);
-            }
-        }, 1000);
-    }
 
 
 

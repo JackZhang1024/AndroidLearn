@@ -12,6 +12,7 @@ import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -40,7 +41,24 @@ import okhttp3.logging.HttpLoggingInterceptor;
 // 信任所有证书和当前证书 https://blog.csdn.net/yukaihuaboke/article/details/78926166
 // okhttp 缓存请求 https://www.cnblogs.com/lenve/p/6063851.html
 // 缓存请求 https://www.jianshu.com/p/dbda0bb8d541
+// https 单向认证和双向认证 https://blog.csdn.net/u011394071/article/details/52880062
+// https://www.jianshu.com/p/64172ccfb73b
+/**
+ * 1.
+ *
+ * 2. 对于自签名网站的访问 可以选择忽略证书（忽略所有证书 包括自签名证书） 也可以选择信任证书（信任自签名证书）
+ * 忽略证书就意味着信任所有证书 会有风险
+ * 自签名由于不被信任，如果我们想用的话，意思就是我们自己信任此证书，则需要okHttpClient信任此证书，才能保证通信正常 （自己信任 出了问题自己处理 不能怪别人）
+ *
+ * 弘扬的Https双向认证 https https://blog.csdn.net/lmj623565791/article/details/48129405
+ * Intellij IDEA 创建JavaWeb项目
+ * https://blog.csdn.net/builder_taoge/article/details/79501694
+ *
+ *
+ *
+ */
 
+// TODO: 2019/3/31 后面再完善双向认证 Tomcat配置和Android客户端配置
 public class OkHttpsLearnActivity extends AppCompatActivity {
 
     private static final String TAG = "OkHttpsLearn";
@@ -54,11 +72,46 @@ public class OkHttpsLearnActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.btn_https)
+    @OnClick(R.id.btn_trust_certificate)
     public void onHttpsClick() {
         String url = "https://www.zhaoapi.cn/user/login";
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         setCertificate(builder, "zhaoping.cer");
+        OkHttpClient client = builder.build();
+        FormBody formBody = new FormBody.Builder()
+                .add("mobile", "jack")
+                .add("password", "1821057554")
+                .build();
+        Request request = new Request.Builder().url(url).post(formBody).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e(TAG, "onFailure: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.e(TAG, "onResponse: " + response.body().toString());
+            }
+        });
+    }
+
+    // 看证书的来源  服务器用的什么证书 CA证书  自签名证书
+    // CA证书 不用管 Android系统会自己处理 客户端这边只需要公钥
+    // 自签名证书 需要处理  可以选择忽略（有风险） 也可以选择信任证书
+    @OnClick(R.id.btn_trust_all_certificates)
+    public void trustAllCertificates(){
+        // https://hao.360.cn/?src=bm
+        // https://www.zhaoapi.cn/user/login
+        String url = "https://hao.360.cn/?src=bm";
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(15, TimeUnit.SECONDS);
+        builder.readTimeout(15, TimeUnit.SECONDS);
+        builder.writeTimeout(15, TimeUnit.SECONDS);
+        builder.addInterceptor(new LoggingInterceptor());
+        //builder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory());
+        //builder.hostnameVerifier(SSLSocketClient.getHostnameVerifier());
         OkHttpClient client = builder.build();
         FormBody formBody = new FormBody.Builder()
                 .add("mobile", "jack")
@@ -114,6 +167,7 @@ public class OkHttpsLearnActivity extends AppCompatActivity {
         }
 
     }
+
 
 
     // 1. certificate

@@ -17,7 +17,20 @@
 	 model.changeScore(100);
 	 //alert("result "+model.score);
 	 //查看是否能够获取属性
+	 var age = WebAppInterface.getAge();
+	 var name = WebAppInterface.getName();
+	 alert("WebInterface.age "+age+"  WebInterface.name  "+name);
 	 WebAppInterface.sayHello("Hello, Java. I am JavaScript");
+
+	 var city, meals;
+
+	 function visitCity(iCity, iMeals){
+	     city = iCity;
+	     meals = iMeals;
+	     alert("city "+city+" meals "+meals);
+	 }
+
+
     </script>
 </head>
 <body>
