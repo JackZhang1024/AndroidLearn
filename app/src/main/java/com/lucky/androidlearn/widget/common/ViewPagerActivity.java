@@ -12,18 +12,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lucky.androidlearn.R;
+import com.lucky.androidlearn.widget.WrapContentViewPager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zfz on 2017/12/1.
  */
 
 public class ViewPagerActivity extends AppCompatActivity {
-    private ViewPager mViewPager;
+    private WrapContentViewPager mViewPager;
     private Button mBtnCreatePages;
     private ZiRuViewPagerAdapter adapter;
 
@@ -33,17 +35,26 @@ public class ViewPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_viewpager);
         mViewPager = findViewById(R.id.viewpager);
         mBtnCreatePages = findViewById(R.id.create_dynamic_pages);
-        adapter = new ZiRuViewPagerAdapter();
-        adapter.setPageTitles(new ArrayList<String>());
+        adapter = new ZiRuViewPagerAdapter(createViewPagerViews());
+        //adapter.setPageTitles(new ArrayList<String>());
         ArrayList<ViewGroup> pages = new ArrayList<>();
-        adapter.setPages(pages);
+        //adapter.setPages(createViewPagerViews());
         mViewPager.setAdapter(adapter);
         mBtnCreatePages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createViewPages();
+                //createViewPages();
             }
         });
+    }
+
+    private List<ViewGroup> createViewPagerViews(){
+        List<ViewGroup> viewGroups = new ArrayList<>();
+        ViewGroup viewGroupOne = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.layout_viewpager_item_one, null, false);
+        ViewGroup viewGroupTwo = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.layout_viewpager_item_two, null, false);
+        viewGroups.add(viewGroupOne);
+        viewGroups.add(viewGroupTwo);
+        return viewGroups;
     }
 
 

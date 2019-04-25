@@ -12,7 +12,8 @@ public class ZiRuViewPagerAdapter extends PagerAdapter {
     private List<ViewGroup> mPageList = new ArrayList<>();
     private List<String> mPageTitles = new ArrayList<>();
 
-    public ZiRuViewPagerAdapter() {
+    public ZiRuViewPagerAdapter(List<ViewGroup> pages) {
+        this.mPageList = pages;
 
     }
 
