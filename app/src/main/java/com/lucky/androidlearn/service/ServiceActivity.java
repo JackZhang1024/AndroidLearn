@@ -91,13 +91,19 @@ public class ServiceActivity extends AppCompatActivity {
         bindService(intent, bindServiceConnection, Service.BIND_AUTO_CREATE);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(bindServiceConnection);
+        Log.e(TAG, "onDestroy: ....");
+    }
+
     private ServiceConnection bindServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.e(TAG, "onServiceConnected: ");
             LearnBindService.BindServiceBinder binder = (LearnBindService.BindServiceBinder) service;
             LearnBindService learnBindService = binder.getService();
-
         }
 
         @Override
@@ -118,9 +124,10 @@ public class ServiceActivity extends AppCompatActivity {
     }
 
     JobScheduler mJobScheduler;
+
     @OnClick(R.id.btn_start_location_jobservice)
     public void startLocationJobService() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             mJobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
             ComponentName componentName = new ComponentName(this, LocationJobService.class);
             JobInfo.Builder builder = new JobInfo.Builder(997, componentName);
@@ -148,14 +155,13 @@ public class ServiceActivity extends AppCompatActivity {
 
 
     @OnClick(R.id.btn_stop_location_jobservice)
-    public void stopLocationJobService(){
+    public void stopLocationJobService() {
         List<JobInfo> allJobs = mJobScheduler.getAllPendingJobs();
         for (JobInfo jobInfo : allJobs) {
             Log.d(TAG, String.format("Cancel %d", jobInfo.getId()));
             mJobScheduler.cancel(jobInfo.getId());
         }
     }
-
 
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.renderscript.RenderScript;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -126,28 +127,28 @@ public class OkHttpLearnActivity extends AppCompatActivity {
      */
     @OnClick(R.id.btn_okhttp_post)
     public void onHttpPostClick() {
+        String url = "http://ip.taobao.com/service/getIpInfo.php";
+        String ip = "123.139.19.151";
         OkHttpClient client = new OkHttpClient();
         // 请求参数 参数
         RequestBody requestBody = new FormBody.Builder()
-                .add("", "")
-                .add("", "")
+                .add("ip", ip)
                 .build();
         Request request = new Request.Builder()
-                .url("")
+                .url(url)
                 .post(requestBody)
-                .addHeader("", "")
-                .addHeader("", "")
                 .build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.e(TAG, "onFailure: "+e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
+                String result = response.body().toString();
+                Log.e(TAG, "onResponse: " + result);
             }
         });
     }
@@ -325,8 +326,8 @@ public class OkHttpLearnActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_okhttp_https)
-    public void onHttpsClick(){
-        Intent intent =  new Intent(this, OkHttpsLearnActivity.class);
+    public void onHttpsClick() {
+        Intent intent = new Intent(this, OkHttpsLearnActivity.class);
         startActivity(intent);
     }
 }

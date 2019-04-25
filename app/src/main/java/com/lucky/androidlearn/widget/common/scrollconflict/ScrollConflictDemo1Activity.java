@@ -19,6 +19,9 @@ import com.lucky.androidlearn.dagger2learn.lesson04.ToastManager;
 
 import java.util.ArrayList;
 
+/**
+ * 外部拦截法
+ */
 public class ScrollConflictDemo1Activity extends AppCompatActivity {
 
     HorizontalScrollViewEx mListContainer;

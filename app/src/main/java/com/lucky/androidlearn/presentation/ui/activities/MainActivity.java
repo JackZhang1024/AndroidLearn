@@ -17,6 +17,7 @@ import com.lucky.androidlearn.crosswalk.CrossWalkActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
 import com.lucky.androidlearn.encrypt.EncryptDecryptActivity;
+import com.lucky.androidlearn.eventbus.EventBusActivity;
 import com.lucky.androidlearn.eventchange.AttributeChangeListenActivity;
 import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
 import com.lucky.androidlearn.filelearn.FileLearnActivity;
@@ -354,7 +355,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @OnClick(R.id.btn_webview)
     public void onWebViewClick(View view){
         Intent intent = new Intent(this, WebViewSummaryActivity.class);
-//        Intent intent = new Intent(this, NormalWebViewActivity.class);
         startActivity(intent);
     }
 
@@ -390,6 +390,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         startActivity(intent);
     }
 
+
+    @OnClick(R.id.btn_eventbus_learn)
+    public void onEventBusLearnClick(View view){
+        Intent intent = new Intent(this, EventBusActivity.class);
+        startActivity(intent);
+    }
 
     private void getContentViewHeight(){
         int screenHeight = AppScreenMgr.getScreenHeight(this);

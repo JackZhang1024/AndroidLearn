@@ -49,6 +49,14 @@ public class CommonWidgetActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @OnClick(R.id.btn_flowlayout)
+    public void onFLowLabelLayoutClick(){
+        Intent intent = new Intent(this, FlowLayoutActivity.class);
+        startActivity(intent);
+    }
+
+
     @OnClick(R.id.btn_toast)
     public void onShowToastClick(View view) {
         new Handler().postDelayed(new Runnable() {

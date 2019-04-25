@@ -140,5 +140,9 @@
 	<string name="view_stub">ViewStub view replacement</string>
 	<string name="okhttps">Okhttps access</string>
 	<string name="webview_summary">Summary of WebView features</string>
+	<string name="flow_layout">Streaming label layout</string>
+	<string name="eventbus_learn">EventBus learning</string>
+	<string name="socket_ipc">SocketIPC communication</string>
+	<string name="looper_loop">Why does the loop infinite loop not block the main thread?</string>
 
 </resources>

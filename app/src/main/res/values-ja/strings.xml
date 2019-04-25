@@ -140,5 +140,9 @@
 	<string name="view_stub">ViewStubビューの置き換え</string>
 	<string name="okhttps">Okhttpsアクセス</string>
 	<string name="webview_summary">WebView機能のまとめ</string>
+	<string name="flow_layout">ストリーミングラベルレイアウト</string>
+	<string name="eventbus_learn">イベントバス学習</string>
+	<string name="socket_ipc">SocketIPC通信</string>
+	<string name="looper_loop">ループ無限ループがメインスレッドをブロックしないのはなぜですか？</string>
 
 </resources>

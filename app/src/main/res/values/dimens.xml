@@ -5,4 +5,6 @@
     <dimen name="game_time_seek_bar_thumb_radius">2dp</dimen>
     <dimen name="mainActivityListItemHeight">48dp</dimen>
     <dimen name="mainActivityListItemPadding">16dp</dimen>
+    <dimen name="button_x_px">200px</dimen>
+    <dimen name="button_y_px">100px</dimen>
 </resources>

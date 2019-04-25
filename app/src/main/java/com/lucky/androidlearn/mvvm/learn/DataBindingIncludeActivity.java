@@ -23,10 +23,10 @@ public class DataBindingIncludeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         activityDatabingInclueBinding = DataBindingUtil.setContentView(this, R.layout.activity_databing_inclue);
-        Content con = new Content("Title","SubTitle");
-        activityDatabingInclueBinding.setContent(con);
+        Content content = new Content("我是呵呵呵呵","SubTitle");
+        activityDatabingInclueBinding.setContent(content);
         //这个测试没有效果，不会显示toolbar的title/subTitle
-        activityDatabingInclueBinding.toolbar.setContent(con);
+        activityDatabingInclueBinding.toolbar.setContent(content);
         activityDatabingInclueBinding.toolbar.toolbar.setTitle("Title");
         activityDatabingInclueBinding.toolbar.toolbar.setSubtitle("SubTitle");
         //下面的代码也可以通过DataBinding绑定数据
@@ -38,5 +38,13 @@ public class DataBindingIncludeActivity extends AppCompatActivity {
                 finish();
             }
         });
+        activityDatabingInclueBinding.btnUpdateBind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                content.setTitle("我是呵呵呵呵");
+            }
+        });
+        activityDatabingInclueBinding.getContent();
+
     }
 }

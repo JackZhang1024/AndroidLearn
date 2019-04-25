@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 public class LearnBindService extends Service{
 
+    private static final String TAG = "LearnBindService";
 
     @Override
     public void onCreate() {
@@ -22,7 +24,14 @@ public class LearnBindService extends Service{
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.e(TAG, "onBind: ");
         return new BindServiceBinder();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.e(TAG, "onUnbind: ");
+        return super.onUnbind(intent);
     }
 
     class BindServiceBinder extends Binder{

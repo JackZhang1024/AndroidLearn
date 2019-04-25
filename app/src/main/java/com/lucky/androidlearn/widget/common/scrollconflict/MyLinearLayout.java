@@ -34,8 +34,6 @@ public class MyLinearLayout extends LinearLayout {
      * 3. 执行onTouchEvent 方法，处理事件
      *
      */
-
-
     /**
      * 分发事件的方法，最早执行
      */

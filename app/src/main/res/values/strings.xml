@@ -139,5 +139,10 @@
     <string name="view_stub">ViewStub视图替换</string>
     <string name="okhttps">Okhttps访问</string>
     <string name="webview_summary">WebView功能总结</string>
+    <string name="flow_layout">流式标签布局</string>
+    <string name="eventbus_learn">EventBus学习</string>
+    <string name="socket_ipc">SocketIPC通信</string>
+    <string name="looper_loop">Loop死循环为什么不阻塞主线程</string>
+    <string name="webview_newsdetail">WebView图文混排</string>
 </resources>
 

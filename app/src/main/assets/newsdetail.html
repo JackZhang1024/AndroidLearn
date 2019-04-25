@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>News Detail</title>
+    <!-- <meta name="viewport" content="width=device-width, minimum-scale=0.5, initial-scale=1.2, maximum-scale=2.0, user-scalable=1" />-->
+    <style>
+        <!--#header{-->
+                <!--text-align: center;-->
+                <!--background: transparent url('webBgLine.png') repeat-x scroll center-->
+                <!--bottom;-->
+                <!--padding-top: 6pt;-->
+                <!--margin-bottom: 5pt;-->
+                <!-- -webkit-background-size: 320px 2px;-->
+        <!--}-->
+        img {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+        .p_time {
+            display: inline;
+            color: #8e8e8e;
+        }
+        .p_author {
+            display: inline;
+            margin-left: 40px;
+            color: #8e8e8e;
+        }
+        .d_favor {
+            display: inline;
+            float: right;
+            margin-right: 20px;
+            width: 20px;
+            height:20px;
+        }
+    </style>
+    <!--<link rel="stylesheet" type="text/css" href="css.css" />-->
+    <script>
+        function doFavor() {
+            alert("TestFavor");
+            var newsId = FavorModel.getNewsId();
+            var isFavored = FavorModel.getIsFavored();
+            alert('newsId  '+newsId+' isFavored '+isFavored);
+            var imgFavor = document.getElementById("id_favor");
+            if (imgFavor.getAttribute("src") == "icon_yellow_star.png") {
+                imgFavor.setAttribute("src", "icon_white_star.png");
+                FavorModel.cancelFavor(newsId);
+                FavorModel.setIsFavored("0");
+            } else {
+                imgFavor.setAttribute("src", "icon_yellow_star.png");
+                FavorModel.doFavor(newsId);
+                FavorModel.setIsFavored("1");
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="header">
+    <h3 style="margin-left:10px; marin-top: 30px">
+        #title#
+    </h3>
+    <!--<div class="date">#time#</div>-->
+    <div style="margin-left: 10px; margin-top: 40px">
+        <p class="p_time">#time#</p>
+        <p class="p_author">作者：#author#</p>
+        <div class="d_favor"><img id="id_favor" src="icon_white_star.png" onclick="doFavor()"></div>
+    </div>
+</div>
+<div id="content">
+    #content#
+</div>
+<script>
+    var isFavored = FavorModel.getIsFavored();
+    var imgFavor = document.getElementById("id_favor");
+    if ("1" == isFavored) {
+        imgFavor.setAttribute("src", "icon_yellow_star.png");
+    } else {
+        imgFavor.setAttribute("src", "icon_white_star.png");
+    }
+</script>
+</body>
+</html>

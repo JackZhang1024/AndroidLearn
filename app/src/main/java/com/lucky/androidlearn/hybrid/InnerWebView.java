@@ -25,6 +25,11 @@ public class InnerWebView extends WebView {
         addJavascriptInterface(model, name);
     }
 
+    @android.webkit.JavascriptInterface
+    public void setFavorJavaScript(String name, FavorModel model) {
+        addJavascriptInterface(model, name);
+    }
+
     public void loadJSData(String jsData) {
         loadUrl(jsData);
     }
@@ -39,12 +44,14 @@ public class InnerWebView extends WebView {
         settings.setDomStorageEnabled(true);
         settings.setDefaultTextEncodingName("utf-8");
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK|WebSettings.LOAD_DEFAULT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             settings.setTextZoom(100);
         } else {
             settings.setTextSize(WebSettings.TextSize.NORMAL);
         }
-        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+//        settings.setUseWideViewPort(true); // 这个不好使
         setVerticalScrollBarEnabled(false);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             settings.setLoadsImagesAutomatically(false);

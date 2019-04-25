@@ -1,15 +1,20 @@
 package com.lucky.androidlearn.handler;
 
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.MessageQueue;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Switch;
 
 import com.lucky.androidlearn.R;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,11 +30,49 @@ import butterknife.OnClick;
 
 public class HandlerLearnActivity extends AppCompatActivity {
 
+    private static final String TAG = "HandlerLearnActivity";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler_learn);
         ButterKnife.bind(this);
+    }
+
+
+    // Looper 的loop
+    @OnClick(R.id.btn_looper_loop)
+    public void onLooperLoopClick(){
+        while (true) {
+            Log.e(TAG, "onLooperLoopClick: 测试耗时时间");
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Looper mainLooper = Looper.getMainLooper();
+                        final Looper me = mainLooper;
+                        final MessageQueue queue;
+                        Field fieldQueue = me.getClass().getDeclaredField("mQueue");
+                        fieldQueue.setAccessible(true);
+                        queue = (MessageQueue) fieldQueue.get(me);
+                        Method methodNext = queue.getClass().getDeclaredMethod("next");
+                        methodNext.setAccessible(true);
+                        Binder.clearCallingIdentity();
+                        for (; ; ) {
+                            Message msg = (Message) methodNext.invoke(queue);
+                            if (msg == null) {
+                                return;
+                            }
+                            msg.getTarget().dispatchMessage(msg);
+                            msg.recycle();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+        }
     }
 
 

@@ -136,11 +136,9 @@ public class MyListView extends ListView implements OnScrollListener {
         int lpheight = p.height;
         int childheigtspec;
         if (lpheight > 0) {
-            childheigtspec = MeasureSpec.makeMeasureSpec(lpheight,
-                    MeasureSpec.EXACTLY);
+            childheigtspec = MeasureSpec.makeMeasureSpec(lpheight, MeasureSpec.EXACTLY);
         } else {
-            childheigtspec = MeasureSpec.makeMeasureSpec(0,
-                    MeasureSpec.UNSPECIFIED);
+            childheigtspec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
         }
         child.measure(childwidthspec, childheigtspec);
     }

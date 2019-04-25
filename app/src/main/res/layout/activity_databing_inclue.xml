@@ -26,12 +26,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name" />
+            android:text="@{content.title}"
+            />
 
+        <!-- 双向绑定 当输入框的文字发生改变的时候 TextView上的文字内容也会发生改变 -->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="测试"
+            android:text="@={content.title}"
+            />
+
+        <!-- 重置内容 -->
+        <Button
+            android:id="@+id/btn_update_bind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="重置绑定内容"
             />
     </LinearLayout>
 

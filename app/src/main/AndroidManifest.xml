@@ -739,6 +739,12 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".hybrid.WebViewNewsDetailActivity"
+            android:label="@string/webview_newsdetail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".filelearn.FileLearnActivity"
             android:label="@string/file_learn"
             android:screenOrientation="portrait"
@@ -848,6 +854,28 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".ipc.socket.SocketIPCActivity"
+            android:label="@string/socket_ipc"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".widget.common.FlowLayoutActivity"
+            android:label="@string/flow_layout"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".eventbus.EventBusActivity"
+            android:label="@string/eventbus_learn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <service android:name=".ipc.socket.TCPServerService"
+            android:enabled="true"
+            android:exported="false"
+            />
 
         <service
             android:name=".core.service.PollService"
@@ -883,6 +911,9 @@
             android:enabled="true"
             android:exported="false"
             android:process=":remote" />
+
+        <service android:name=".service.LearnBindService"
+            />
 
         <service
             android:name=".service.MyJobService"

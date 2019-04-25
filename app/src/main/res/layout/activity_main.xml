@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/performance_optimization"
-            />
+            android:text="@string/performance_optimization" />
 
         <Button
             android:id="@+id/btn_exception_summary"
@@ -277,22 +276,26 @@
             android:id="@+id/btn_encrypt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/encrypt_decrypt"
-            />
+            android:text="@string/encrypt_decrypt" />
 
         <Button
             android:id="@+id/btn_lru_algorithm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lru_algorithm"
-            />
+            android:text="@string/lru_algorithm" />
 
 
         <Button
             android:id="@+id/btn_okhttp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/okhttp_learn"
+            android:text="@string/okhttp_learn" />
+
+        <Button
+            android:id="@+id/btn_eventbus_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/eventbus_learn"
             />
 
     </LinearLayout>

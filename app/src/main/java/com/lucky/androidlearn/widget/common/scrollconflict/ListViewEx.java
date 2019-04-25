@@ -40,6 +40,7 @@ public class ListViewEx extends ListView {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                // 不允许父容器进行拦截
                 mHorizontalScrollViewEx2.requestDisallowInterceptTouchEvent(true);
                 break;
             case MotionEvent.ACTION_MOVE:

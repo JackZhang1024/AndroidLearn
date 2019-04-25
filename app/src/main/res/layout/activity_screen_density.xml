@@ -8,35 +8,42 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/ic_density"
-        />
+        android:src="@drawable/screen_level" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="当前屏幕信息"
-        />
+        android:text="当前屏幕信息" />
 
     <TextView
         android:id="@+id/tv_screen_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="当前屏幕分辨率"
-        />
+        android:text="当前屏幕分辨率" />
 
     <TextView
         android:id="@+id/tv_screen_dpi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="当前屏幕DPI"
-        />
+        android:text="当前屏幕DPI" />
 
     <TextView
         android:id="@+id/tv_screen_dot_per_inch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="当前屏幕每英寸像素点个数"
-        />
+        android:text="当前屏幕每英寸像素点个数" />
 
+
+    <TextView
+        android:id="@+id/tv_smallest_screen_width"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="最小屏幕宽度" />
+
+    <Button
+        android:id="@+id/btn_values"
+        android:layout_width="@dimen/button_x_px"
+        android:layout_height="@dimen/button_y_px"
+        android:text="测试宽高限定符" />
 
 </LinearLayout>

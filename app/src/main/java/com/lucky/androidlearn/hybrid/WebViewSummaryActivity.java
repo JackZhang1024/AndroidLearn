@@ -39,4 +39,11 @@ public class WebViewSummaryActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.btn_webview_newdetail)
+    public void onWebViewNewsDetailClick(){
+        Intent intent = new Intent(this, WebViewNewsDetailActivity.class);
+        startActivity(intent);
+    }
+
+
 }

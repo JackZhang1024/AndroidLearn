@@ -8,6 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
+
+/**
+ * 外部拦截法
+ *
+ * 重写父容器的OnInterceptTouchEvent方法
+ *
+ * 当需要父容器进行拦截的时候就拦截 返回true 其他情况一般返回false
+ * 不进行拦截 把事件交给子容器区处理
+ *
+ */
 public class HorizontalScrollViewEx extends ViewGroup {
 
     private static final String TAG = "HorizontalScrollViewEx";
@@ -63,7 +73,6 @@ public class HorizontalScrollViewEx extends ViewGroup {
                     mScroller.abortAnimation();
                     return true;
                 }
-
                 break;
             case MotionEvent.ACTION_MOVE:
                 int deltaX = x - mLastXIntercept;

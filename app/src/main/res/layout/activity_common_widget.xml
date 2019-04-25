@@ -9,6 +9,12 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_flowlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/flow_layout" />
+
+        <Button
             android:id="@+id/btn_layout_gravity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/show_toast" />
-
 
         <Button
             android:id="@+id/btn_marqueeview"

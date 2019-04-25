@@ -6,6 +6,12 @@
 
 
     <Button
+        android:id="@+id/btn_looper_loop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/looper_loop" />
+
+    <Button
         android:id="@+id/btn_work_to_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

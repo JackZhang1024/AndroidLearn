@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.aidl.BookManagerActivity;
 import com.lucky.androidlearn.aidl.BookManagerService;
+import com.lucky.androidlearn.ipc.socket.SocketIPCActivity;
 import com.lucky.androidlearn.messager.MessengerActivity;
 
 import butterknife.ButterKnife;
@@ -44,8 +45,8 @@ public class IPCLearnActivity extends AppCompatActivity {
     // socket通讯
     @OnClick(R.id.btn_ipc_socket)
     public void onSocketClick(){
-
-
+        Intent intent = new Intent(this, SocketIPCActivity.class);
+        startActivity(intent);
     }
 
     // provider通讯

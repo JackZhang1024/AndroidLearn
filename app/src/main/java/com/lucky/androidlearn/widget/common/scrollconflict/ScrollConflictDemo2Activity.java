@@ -24,10 +24,8 @@ import java.util.ArrayList;
  * 父容器不拦截事件，所有的事件全部传递给子元素，如果子元素需要此事件就
  * 直接消耗掉，否则就交给父容器进行处理。
  *
- * 这种方法和Android中的事件分发机制不一样，需要配合requestDisallowInterceptTouchEvent
+ * 这种方法和Android中的事件分发机制不一样，需要配合getParent().requestDisallowInterceptTouchEvent
  * 方法才能正常工作，使用起来较外部拦截法稍显负责一点。
- *
- *
  *
  */
 

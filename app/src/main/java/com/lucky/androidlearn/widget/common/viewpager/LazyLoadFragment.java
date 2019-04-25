@@ -42,6 +42,7 @@ public abstract class LazyLoadFragment extends Fragment {
     public boolean prepareFetchData(boolean forceUpdate) {
         if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
             fetchData();
+            // 数据初始化之后机不在加载数据了
             isDataInitiated = true;
             return true;
         }

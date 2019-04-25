@@ -157,6 +157,9 @@ android {
         // Optional, if you use support library fragments:
         debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
         implementation 'com.hanhuy.android:viewserver:1.0.3'
+        // eventbus
+        compile'org.greenrobot:eventbus:3.0.0'
+
     }
 
     packagingOptions {

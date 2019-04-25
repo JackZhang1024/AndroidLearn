@@ -67,10 +67,10 @@ public class PullListViewActivity extends Activity {
             @Override
             public void onRefresh() {
                 // TODO Auto-generated method stub
-                new AsyncTask<Void, Void, Void>() {
+                new AsyncTask<Void, Void, Integer>() {
 
                     @Override
-                    protected Void doInBackground(Void... arg0) {
+                    protected Integer doInBackground(Void... arg0) {
                         // TODO Auto-generated method stub
                         try {
                             Thread.sleep(5000);
@@ -79,11 +79,11 @@ public class PullListViewActivity extends Activity {
                             e.printStackTrace();
                         }
                         list.addFirst("刷新后的内容");
-                        return null;
+                        return new Integer(0);
                     }
 
                     @Override
-                    protected void onPostExecute(Void result) {
+                    protected void onPostExecute(Integer result) {
                         super.onPostExecute(result);
                         adapter.notifyDataSetChanged();
                         listview.onRefreshComplete();

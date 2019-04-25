@@ -13,6 +13,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class BookManagerService extends Service {
 
     private static final String TAG = "BMS";
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
 
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<>();
 
@@ -40,11 +45,7 @@ public class BookManagerService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mBinder;
-    }
+
 
 
 }
