@@ -14,9 +14,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //jackOptions.enabled = true // 支持Java8
-        ndk {
-            abiFilters "armeabi", "armeabi-v7a"
-        }
+//        ndk {
+//            abiFilters "armeabi", "armeabi-v7a"
+//        }
     }
     buildTypes {
         release {

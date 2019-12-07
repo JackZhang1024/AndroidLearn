@@ -3,11 +3,21 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidLearn.iml" filepath="$PROJECT_DIR$/AndroidLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AndroidLearn-app.iml" filepath="$PROJECT_DIR$/app/AndroidLearn-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/AndroidLearn-repository.iml" filepath="$PROJECT_DIR$/repository/AndroidLearn-repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleaar/AndroidLearn-simpleaar.iml" filepath="$PROJECT_DIR$/simpleaar/AndroidLearn-simpleaar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleaar2/AndroidLearn-simpleaar2.iml" filepath="$PROJECT_DIR$/simpleaar2/AndroidLearn-simpleaar2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simplebutterknife-annotations/AndroidLearn-simplebutterknife-annotations.iml" filepath="$PROJECT_DIR$/simplebutterknife-annotations/AndroidLearn-simplebutterknife-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simplebutterknife-compiler/AndroidLearn-simplebutterknife-compiler.iml" filepath="$PROJECT_DIR$/simplebutterknife-compiler/AndroidLearn-simplebutterknife-compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/repository/CommonUtil/CommonUtil.iml" filepath="$PROJECT_DIR$/repository/CommonUtil/CommonUtil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GitHub-AndroidLearn.iml" filepath="$PROJECT_DIR$/GitHub-AndroidLearn.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" filepath="$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" filepath="$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" />
       <module fileurl="file://$PROJECT_DIR$/repository/repository.iml" filepath="$PROJECT_DIR$/repository/repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/CommonUtil/repository-CommonUtil.iml" filepath="$PROJECT_DIR$/repository/CommonUtil/repository-CommonUtil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/fancygallery/repository-fancygallery.iml" filepath="$PROJECT_DIR$/repository/fancygallery/repository-fancygallery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repository/materialdesign/repository-materialdesign.iml" filepath="$PROJECT_DIR$/repository/materialdesign/repository-materialdesign.iml" />
       <module fileurl="file://$PROJECT_DIR$/simpleaar/simpleaar.iml" filepath="$PROJECT_DIR$/simpleaar/simpleaar.iml" />
       <module fileurl="file://$PROJECT_DIR$/simpleaar2/simpleaar2.iml" filepath="$PROJECT_DIR$/simpleaar2/simpleaar2.iml" />
       <module fileurl="file://$PROJECT_DIR$/simplebutterknife-annotations/simplebutterknife-annotations.iml" filepath="$PROJECT_DIR$/simplebutterknife-annotations/simplebutterknife-annotations.iml" />
