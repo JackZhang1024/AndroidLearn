@@ -34,7 +34,7 @@ Android 高级部分通常涉及一些底层原理和开源框架相关的知识
 
 [Fresco图片框架](./总结/Android高级/Fresco.md)
 
-[AspectJ面向切面编程](./总结/Android高级/AspectJ.md)
+[AspectJ面向切面编程](总结/Android高级/AspectJ/AspectJ.md)
 
 
 
