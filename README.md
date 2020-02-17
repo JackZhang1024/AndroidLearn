@@ -18,7 +18,23 @@ Android 相关知识大体可分为 Java基础，Kotlin，Flutter， ReactNative
 
 ## Android高级
 
-[Android高级](./总结/Android高级/Android高级.md)
+Android 高级部分通常涉及一些底层原理和开源框架相关的知识，底层原理涉及App启动流程，App热更新，插件化，热修复等，开源框架一般涉及的有 RxJava， EventBus，Retrofit，OkHttp，Glide， Fresco，Volley等 
+
+[RxJava使用和原理分析](./总结/Android高级/RxJava.md)
+
+[EventBus使用和原理剖析](./总计/Android高级/EventBus.md)
+
+[OkHttp常见使用API和架构](./总结/Android高级/OkHttp.md)
+
+[Retrofit的API使用总结](./总结/Android高级/Retrofit.md)
+
+[Glide框架和API](./总结/Android高级/Glide.md)
+
+[图片加载框架Picasso](./总结/Android高级/Picasso.md)
+
+[Fresco图片框架](./总结/Android高级/Fresco.md)
+
+[AspectJ面向切面编程](./总结/Android高级/AspectJ.md)
 
 
 
