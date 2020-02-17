@@ -139,20 +139,21 @@
 2. 业务代码完成之后，我们先写一个注解，该注解就是我们实现侵入的标记, 然后用注解标记业务方法
 
 ```java
-		@Target(ElementType.METHOD)
-		@Retention(RetentionPolicy.RUNTIME)
-		public @interface BehaviorTrace {
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface BehaviorTrace {
     	String value();
     	int type();
-	  }
+}
+```
 
-   
-   // 摇一摇
+```java
+	 // 摇一摇
 		@BehaviorTrace(value = "摇一摇", type = 0)
 		@OnClick(R.id.btn_shake)
-    public void onShakeClick(){
-        SystemClock.sleep(2000);
-        Log.d(TAG, "onShakeClick: 美女：今晚有空吗？好热啊");
+		public void onShakeClick(){
+				SystemClock.sleep(2000);
+ 				Log.d(TAG, "onShakeClick: 美女：今晚有空吗？好热啊");
     }
 
     // 发红包
@@ -170,7 +171,6 @@
         SystemClock.sleep(1000);
         Log.d(TAG, "onSendAudio: 美女：去哪儿见面，期待马上见到你");
     }
-
 ```
 
 3. 注解写完之后，我们需要实现我们的侵入代码 
@@ -227,7 +227,7 @@ com.lucky.androidlearn D/AspectJActivity: onSendAudio: 美女：去哪儿见面�
 com.lucky.androidlearn D/BehaviorAspectJ: dealPoint: costTime 1002
 ```
 
-<img src="/Users/zhangfengzhou/Downloads/1488546236946_dc5a8e7d001111e798cc80e650026b90.jpg" style="zoom:180%;" />
+<img src="./images/1488546236946.jpg" style="zoom:200%;" />
 
 
 
