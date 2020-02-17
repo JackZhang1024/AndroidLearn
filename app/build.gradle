@@ -134,7 +134,8 @@ android {
         implementation(name: 'simpleaar-release', ext: 'aar')
 
         // 配置kotlin第四步
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+//        implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+        implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
         // CrossWalk
         //compile 'org.xwalk:xwalk_core_library:10.39.235.15'
@@ -146,10 +147,11 @@ android {
         // 测试J2V8
         //implementation(name: 'j2v8-4.8.2', ext: 'aar')
         //compile(name: 'j2v8-4.8.2', ext: 'aar')
-        compile 'com.umeng.sdk:common:1.5.3'
-        compile 'com.umeng.sdk:analytics:7.5.3'
+        implementation 'com.umeng.sdk:common:1.5.3'
+        implementation 'com.umeng.sdk:analytics:7.5.3'
         // 类似CSStan
         implementation 'com.google.android:flexbox:1.1.0'
+        implementation 'com.facebook.soloader:soloader:0.1.0+'
         implementation group: 'com.facebook.yoga.android', name: 'yoga-layout', version: '1.10.0'
         // leakcanary
         debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
@@ -158,8 +160,9 @@ android {
         debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
         implementation 'com.hanhuy.android:viewserver:1.0.3'
         // eventbus
-        compile'org.greenrobot:eventbus:3.0.0'
-
+        implementation 'org.greenrobot:eventbus:3.1.1'
+        //AOP面向切面编程，加入这行就不用在libs下引入jar包了，不然要写成compile file(libs/aspectjrt.jar)
+        implementation 'org.aspectj:aspectjrt:1.8.13'
     }
 
     packagingOptions {
@@ -183,4 +186,52 @@ repositories {
 dependencies {
     implementation 'com.alibaba:fastjson:1.2.51'
     //implementation 'com.hanhuy.android:viewserver:1.0.3'
+}
+
+
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
+final def log = project.logger
+final def variants = project.android.applicationVariants
+
+variants.all { variant ->
+    if (!variant.buildType.isDebuggable()) {
+        log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
+        return
+    }
+
+    JavaCompile javaCompile = variant.javaCompile
+    javaCompile.doLast {
+        String[] args = ["-showWeaveInfo",
+                         "-1.5",
+                         "-inpath", javaCompile.destinationDir.toString(),
+                         "-aspectpath", javaCompile.classpath.asPath,
+                         "-d", javaCompile.destinationDir.toString(),
+                         "-classpath", javaCompile.classpath.asPath,
+                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+        log.debug "ajc args: " + Arrays.toString(args)
+
+        MessageHandler handler = new MessageHandler(true)
+        new Main().run(args, handler)
+        for (IMessage message : handler.getMessages(null, true)) {
+            switch (message.getKind()) {
+                case IMessage.ABORT:
+                case IMessage.ERROR:
+                case IMessage.FAIL:
+                    log.error message.message, message.thrown
+                    break
+                case IMessage.WARNING:
+                    log.warn message.message, message.thrown
+                    break
+                case IMessage.INFO:
+                    log.info message.message, message.thrown
+                    break
+                case IMessage.DEBUG:
+                    log.debug message.message, message.thrown
+                    break
+            }
+        }
+    }
 }

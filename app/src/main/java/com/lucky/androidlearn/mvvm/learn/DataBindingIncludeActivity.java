@@ -22,7 +22,8 @@ public class DataBindingIncludeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        activityDatabingInclueBinding = DataBindingUtil.setContentView(this, R.layout.activity_databing_inclue);
+        activityDatabingInclueBinding = ActivityDatabingInclueBinding.inflate(getLayoutInflater());
+//        activityDatabingInclueBinding = DataBindingUtil.setContentView(this, R.layout.activity_databing_inclue);
         Content content = new Content("我是呵呵呵呵","SubTitle");
         activityDatabingInclueBinding.setContent(content);
         //这个测试没有效果，不会显示toolbar的title/subTitle

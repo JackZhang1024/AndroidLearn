@@ -3,14 +3,15 @@
 buildscript {
 
     // 配置kotlin第一步
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.3.50'
     repositories {
         google()
-        maven { url 'https://maven.google.com'}
+        mavenCentral()
         jcenter()
+        maven { url 'https://maven.google.com'}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         classpath 'me.tatarka:gradle-retrolambda:3.6.1'
         // Dagger2自动代码生成
         // classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
@@ -19,15 +20,21 @@ buildscript {
 
         // 配置kotlin第二步
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // 配置AspectJ 第一步
+        classpath 'org.aspectj:aspectjtools:1.8.13'
+        classpath 'org.aspectj:aspectjweaver:1.8.13'
     }
 }
 
 allprojects {
     repositories {
         google()
-        maven { url 'https://maven.google.com' }
-        //maven { url 'https://jitpack.io' }
+        mavenCentral()
         jcenter()
+        maven { url 'https://maven.google.com' }
+
+        //maven { url 'https://jitpack.io' }
     }
 }
 
@@ -36,7 +43,7 @@ ext {
     androidCompileTestSdkVersion = 26
     androidMiniSdkVersion = 21
     androidTargetSdkVersion = 26
-    androidBuildToolsVersion = "27.0.3"
+    androidBuildToolsVersion = "28.0.3"
     appVersionName = "2.0"
     appVersionCode = 2
 
