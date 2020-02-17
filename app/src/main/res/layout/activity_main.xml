@@ -298,6 +298,13 @@
             android:text="@string/eventbus_learn"
             />
 
+        <Button
+            android:id="@+id/btn_aspectj_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aspectj_demo"
+            />
+
     </LinearLayout>
 
 

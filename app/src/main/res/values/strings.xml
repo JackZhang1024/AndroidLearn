@@ -121,7 +121,6 @@
     <string name="encrypt_decrypt">加密解密处理</string>
     <string name="aes_encrypt_decrypt">AES加密解密</string>
     <string name="oom_creator">触发OOM</string>
-
     <string name="views_pager">ViewPager</string>
     <string name="js_debugger">J2V8 JS调试</string>
     <string name="smart_refresh">SmartRefresh</string>
@@ -144,5 +143,6 @@
     <string name="socket_ipc">SocketIPC通信</string>
     <string name="looper_loop">Loop死循环为什么不阻塞主线程</string>
     <string name="webview_newsdetail">WebView图文混排</string>
+    <string name="aspectj_demo">AspectJ示例</string>
 </resources>
 

@@ -23,7 +23,7 @@ public class DataBindingRVActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        activityDatabingInclueBinding = DataBindingUtil.setContentView(this, R.layout.activity_databinding_recycleview);
+        activityDatabingInclueBinding = ActivityDatabindingRecycleviewBinding.inflate  (getLayoutInflater());
         Content con = new Content("Title", "SubTitle");
         activityDatabingInclueBinding.setContent(con);
         //这个测试没有效果，不会显示toolbar的title/subTitle

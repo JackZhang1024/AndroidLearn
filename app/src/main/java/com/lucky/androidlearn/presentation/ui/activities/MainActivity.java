@@ -13,6 +13,7 @@ import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.AnimationMainActivity;
 import com.lucky.androidlearn.annotation.AnnotationActivity;
 import com.lucky.androidlearn.annotation.SimpleButterKnifeActivity;
+import com.lucky.androidlearn.aspectj.AspectJActivity;
 import com.lucky.androidlearn.crosswalk.CrossWalkActivity;
 import com.lucky.androidlearn.dagger2learn.DaggerLearnMainActivity;
 import com.lucky.androidlearn.domain.executor.impl.ThreadExecutor;
@@ -394,6 +395,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @OnClick(R.id.btn_eventbus_learn)
     public void onEventBusLearnClick(View view){
         Intent intent = new Intent(this, EventBusActivity.class);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.btn_aspectj_learn)
+    public void onAspectJLearnClick(){
+        Intent intent = new Intent(this, AspectJActivity.class);
         startActivity(intent);
     }
 
