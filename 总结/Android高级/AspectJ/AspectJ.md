@@ -148,13 +148,14 @@ public @interface BehaviorTrace {
 ```
 
 ```java
-	 // 摇一摇
-		@BehaviorTrace(value = "摇一摇", type = 0)
-		@OnClick(R.id.btn_shake)
-		public void onShakeClick(){
-				SystemClock.sleep(2000);
- 				Log.d(TAG, "onShakeClick: 美女：今晚有空吗？好热啊");
+    // 摇一摇
+    @BehaviorTrace(value = "摇一摇", type = 0)
+    @OnClick(R.id.btn_shake)
+    public void onShakeClick(){
+        SystemClock.sleep(2000);
+        Log.d(TAG, "onShakeClick: 美女：今晚有空吗？好热啊");
     }
+
 
     // 发红包
     @BehaviorTrace(value = "发送包", type = 1)
@@ -164,6 +165,7 @@ public @interface BehaviorTrace {
         Log.d(TAG, "onSendRedPackage: 美女：亲爱的，我爱你哟，么么哒");
     }
 
+
     // 发语音
     @BehaviorTrace(value = "发语音", type = 2)
     @OnClick(R.id.btn_audio)
@@ -171,7 +173,10 @@ public @interface BehaviorTrace {
         SystemClock.sleep(1000);
         Log.d(TAG, "onSendAudio: 美女：去哪儿见面，期待马上见到你");
     }
+
 ```
+
+
 
 3. 注解写完之后，我们需要实现我们的侵入代码 
 
@@ -228,6 +233,8 @@ com.lucky.androidlearn D/BehaviorAspectJ: dealPoint: costTime 1002
 ```
 
 <img src="./images/1488546236946.jpg" style="zoom:200%;" />
+
+
 
 
 
