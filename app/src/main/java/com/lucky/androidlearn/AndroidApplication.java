@@ -113,6 +113,7 @@ public class AndroidApplication extends Application {
 
 
 
+    // https://www.cnblogs.com/baiqiantao/p/10125084.html
     public static RefWatcher getRefWatcher(Context context){
         AndroidApplication application = (AndroidApplication) context.getApplicationContext();
         return application.refWatcher;

@@ -3,6 +3,7 @@ package com.lucky.kotlin
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.lucky.androidlearn.R
+import kotlinx.android.synthetic.main.activity_kotlinlearn.*
 
 class KotlinLearnMainActivity : AppCompatActivity() {
 
@@ -34,6 +35,9 @@ class KotlinLearnMainActivity : AppCompatActivity() {
         printProduct("2", "3")
         printProduct("1", "a")
         printProduct("f", "e")
+        btn_kotlin_01.setOnClickListener {
+            println("hello world hahaahd")
+        }
 
     }
 

@@ -15,6 +15,18 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_aspectj_learn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aspectj_demo" />
+
+        <Button
+            android:id="@+id/btn_hot_fix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hot_fix" />
+
+        <Button
             android:id="@+id/btn_performance_optimization"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -295,15 +307,7 @@
             android:id="@+id/btn_eventbus_learn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/eventbus_learn"
-            />
-
-        <Button
-            android:id="@+id/btn_aspectj_learn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/aspectj_demo"
-            />
+            android:text="@string/eventbus_learn" />
 
     </LinearLayout>
 

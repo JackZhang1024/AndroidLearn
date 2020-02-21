@@ -24,6 +24,7 @@ import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
 import com.lucky.androidlearn.filelearn.FileLearnActivity;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
+import com.lucky.androidlearn.hotfix.HotFixActivity;
 import com.lucky.androidlearn.hybrid.WebViewSummaryActivity;
 import com.lucky.androidlearn.ipc.IPCLearnActivity;
 import com.lucky.androidlearn.j2v8.J2V8LearnActivity;
@@ -402,6 +403,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @OnClick(R.id.btn_aspectj_learn)
     public void onAspectJLearnClick(){
         Intent intent = new Intent(this, AspectJActivity.class);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.btn_hot_fix)
+    public void onHotFixClick(){
+        Intent intent = new Intent(this, HotFixActivity.class);
         startActivity(intent);
     }
 

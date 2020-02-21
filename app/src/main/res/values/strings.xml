@@ -144,5 +144,6 @@
     <string name="looper_loop">Loop死循环为什么不阻塞主线程</string>
     <string name="webview_newsdetail">WebView图文混排</string>
     <string name="aspectj_demo">AspectJ示例</string>
+    <string name="hot_fix">热修复</string>
 </resources>
 

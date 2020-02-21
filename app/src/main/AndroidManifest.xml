@@ -55,10 +55,10 @@
                 <meta-data android:value="AndroidLearn" android:name="UMENG_CHANNEL"/>-->
 
         <!-- android:excludeFromRecents="true" -->
-        <activity android:name=".presentation.ui.activities.MainActivity">
+        <activity android:name="com.lucky.news.splash.SplashActivity" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -66,8 +66,23 @@
         </activity>
 
         <activity
+            android:name=".presentation.ui.activities.MainActivity"
+            android:label="@string/common_view" />
+
+        <activity
+            android:name="com.lucky.news.main.NewsMainActivity"
+            android:theme="@style/NewsTheme"
+            />
+
+        <activity
+            android:name=".jindong.JingdongActivity"
+            android:theme="@style/NewsTheme"
+            />
+
+        <activity
             android:name=".widget.common.CommonWidgetActivity"
             android:label="@string/common_view" />
+
         <activity
             android:name=".widget.material.MaterialWidgetActivity"
             android:label="@string/material_view" />
@@ -884,6 +899,10 @@
             android:label="@string/aspectj_demo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
+            />
+
+        <activity android:name=".hotfix.HotFixActivity"
+
             />
 
         <service

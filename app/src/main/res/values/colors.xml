@@ -164,5 +164,5 @@
     <color name="rippelColor">#FFFFFF</color>
     <color name="fadeTransparent">#99000000</color>
     <color name="main_bottom_tab_textcolor_normal">#999999</color>
-    <color name="main_bottom_tab_textcolor_selected">#46c01b</color>
+    <color name="main_bottom_tab_textcolor_selected">#13227a</color>
 </resources>
