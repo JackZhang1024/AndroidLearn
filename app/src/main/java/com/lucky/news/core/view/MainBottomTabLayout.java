@@ -24,7 +24,7 @@ public class MainBottomTabLayout extends LinearLayout {
     private int mSelectedPosition;
     private float mSelectionOffset;
 
-    private String mTitles[] = {"首页", "视频", "社区", "我的"};
+    private String mTitles[] = {"首页", "视频", "实验", "我的"};
     private int mIconRes[][] = {
         {R.drawable.index_normal, R.drawable.index_selected},
         {R.drawable.video_normal, R.drawable.video_selected},

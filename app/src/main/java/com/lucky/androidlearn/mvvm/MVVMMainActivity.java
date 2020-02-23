@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.lucky.androidlearn.R;
+import com.lucky.androidlearn.databinding.ActivityDatabingInclueBinding;
 import com.lucky.androidlearn.mvvm.learn.DataBindingRVActivity;
 import com.lucky.androidlearn.mvvm.learn.MVVMLearnActivity;
 

@@ -22,7 +22,7 @@ public class DataBindingIncludeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        activityDatabingInclueBinding = ActivityDatabingInclueBinding.inflate(getLayoutInflater());
+        activityDatabingInclueBinding = DataBindingUtil.setContentView(this, R.layout.activity_databing_inclue);
 //        activityDatabingInclueBinding = DataBindingUtil.setContentView(this, R.layout.activity_databing_inclue);
         Content content = new Content("我是呵呵呵呵","SubTitle");
         activityDatabingInclueBinding.setContent(content);

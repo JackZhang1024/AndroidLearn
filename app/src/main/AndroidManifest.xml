@@ -763,7 +763,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".filelearn.FileLearnActivity"
+            android:name=".filelearn.FileProcessLearnActivity"
             android:label="@string/file_learn"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

@@ -5,12 +5,18 @@
     android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/btn_package_files"
+    <TextView
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PackageFiles"
+        android:layout_marginBottom="20dp"
+        android:text="dad"
         />
 
-
+    <Button
+        android:id="@+id/btn_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="哈哈"
+        />
 </LinearLayout>

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.lucky.androidlearn.R
 import kotlinx.android.synthetic.main.activity_kotlinlearn.*
 
-class KotlinLearnMainActivity : AppCompatActivity() {
+class KotlinLearnMainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

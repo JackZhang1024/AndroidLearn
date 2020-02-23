@@ -30,10 +30,6 @@ class HomeFragmentAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapt
     }
 
 
-//    constructor (fragmentManager: FragmentManager) : super(fragmentManager) {
-//
-//    }
-
     override fun getItem(position: Int): Fragment {
         return mHomePageFragments[position]
     }

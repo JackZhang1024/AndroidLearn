@@ -21,7 +21,7 @@ import com.lucky.androidlearn.encrypt.EncryptDecryptActivity;
 import com.lucky.androidlearn.eventbus.EventBusActivity;
 import com.lucky.androidlearn.eventchange.AttributeChangeListenActivity;
 import com.lucky.androidlearn.exception.ExceptionSummaryActivity;
-import com.lucky.androidlearn.filelearn.FileLearnActivity;
+import com.lucky.androidlearn.filelearn.FileProcessLearnActivity;
 import com.lucky.androidlearn.handler.HandlerLearnActivity;
 import com.lucky.androidlearn.handler.HandlerThreadActivity;
 import com.lucky.androidlearn.hotfix.HotFixActivity;
@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     @OnClick(R.id.btn_file_learn)
     public void onFileLearnClick(View view){
-        Intent intent = new Intent(this, FileLearnActivity.class);
+        Intent intent = new Intent(this, FileProcessLearnActivity.class);
         startActivity(intent);
     }
 

@@ -14,9 +14,12 @@ import android.widget.LinearLayout
 import com.flyco.tablayout.SlidingTabLayout
 import com.lucky.androidlearn.R
 import com.lucky.androidlearn.jindong.util.StatusBarUtil
+import com.lucky.androidlearn.messager.Constants
+import com.lucky.news.core.NewsConstant
 import com.lucky.news.core.adapter.CommonFragmentPagerAdapter
 import java.util.*
 
+// https://github.com/huchenme/github-trending-api
 class SquareFragment : Fragment() {
 
     private val TAG: String by lazy {
@@ -52,13 +55,50 @@ class SquareFragment : Fragment() {
 
     private fun getFragments(): List<Fragment> {
         val fragments = ArrayList<Fragment>()
-        fragments.add(ChannelFragment())
-        fragments.add(ChannelFragment())
-        fragments.add(ChannelFragment())
-        fragments.add(ChannelFragment())
-        fragments.add(ChannelFragment())
-        fragments.add(ChannelFragment())
-        fragments.add(ChannelFragment())
+        val javaFragment = ChannelFragment()
+        javaFragment.arguments = Bundle().apply {
+            putString(NewsConstant.CHANNEL_ARGUMENTS, NewsConstant.CHANNEL_TYPE_JAVA)
+        }
+        fragments.add(javaFragment)
+
+        val androidFragment = ChannelFragment()
+        androidFragment.arguments = Bundle().apply {
+            putString(NewsConstant.CHANNEL_ARGUMENTS, NewsConstant.CHANNEL_TYPE_ANDROID)
+        }
+        fragments.add(androidFragment)
+
+
+        val kotlinFragment = ChannelFragment()
+        kotlinFragment.arguments = Bundle().apply {
+            putString(NewsConstant.CHANNEL_ARGUMENTS, NewsConstant.CHANNEL_TYPE_KOTLIN)
+        }
+        fragments.add(kotlinFragment)
+
+
+        val rxJavaFragment = ChannelFragment()
+        rxJavaFragment.arguments = Bundle().apply {
+            putString(NewsConstant.CHANNEL_ARGUMENTS, NewsConstant.CHANNEL_TYPE_RXJAVA)
+        }
+        fragments.add(rxJavaFragment)
+
+        val frameFragment = ChannelFragment()
+        frameFragment.arguments = Bundle().apply {
+            putString(NewsConstant.CHANNEL_ARGUMENTS, NewsConstant.CHANNEL_TYPE_FRAME)
+        }
+        fragments.add(frameFragment)
+
+        val discussionFragment = ChannelFragment()
+        discussionFragment.arguments = Bundle().apply {
+            putString(NewsConstant.CHANNEL_ARGUMENTS, NewsConstant.CHANNEL_TYPE_DISCUSSION)
+        }
+        fragments.add(discussionFragment)
+
+        val githubFragment = ChannelFragment()
+        githubFragment.arguments = Bundle().apply {
+            putString(NewsConstant.CHANNEL_ARGUMENTS, NewsConstant.CHANNEL_TYPE_GITHUB)
+        }
+        fragments.add(githubFragment)
+
         return fragments
     }
 
@@ -66,7 +106,6 @@ class SquareFragment : Fragment() {
         // 重新计算 slidingTabLayout的高度
         val child: View? = view?.findViewById(R.id.tablayout)
         val params: LinearLayout.LayoutParams = child?.layoutParams as LinearLayout.LayoutParams
-        Log.e(TAG ,"params "+params.topMargin+" height  "+params.height)
         val topMargin = StatusBarUtil.getStatusBarHeight(context)
         params.height = params.height + topMargin
         child.run {

@@ -22,7 +22,7 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
         //notifyDataSetChanged();
     }
 
-    public void setPageTitles(List<String> pageTitles){
+    public void setPageTitles(List<String> pageTitles) {
         this.mPageTitles = pageTitles;
     }
 
@@ -44,4 +44,6 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
         }
         return "";
     }
+
+
 }

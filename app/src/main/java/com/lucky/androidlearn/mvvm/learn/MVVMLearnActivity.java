@@ -35,7 +35,7 @@ public class MVVMLearnActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 通过DataBing加载的布局都会生成一个以Bing结尾的Bing对象，例如ActivityMvvmLearnBing, 这个类的名称和加载的布局名称有关
-        mvvmLearnBinding = ActivityMvvmLearnBinding.inflate(getLayoutInflater());
+        mvvmLearnBinding = DataBindingUtil.setContentView(this, R.layout.activity_mvvm_learn);
         // 绑定基本数据类型
         mvvmLearnBinding.setContent("七里香");
         mvvmLearnBinding.setEnabled(true);
