@@ -1,18 +1,19 @@
 package com.lucky.androidlearn.jindong;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.jindong.constant.ImageList;
 import com.lucky.androidlearn.jindong.util.StatusBarUtil;

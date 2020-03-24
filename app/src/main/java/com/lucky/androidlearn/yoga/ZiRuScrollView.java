@@ -1,7 +1,7 @@
 package com.lucky.androidlearn.yoga;
 
 import android.content.Context;
-import android.support.v4.widget.NestedScrollView;
+import androidx.core.widget.NestedScrollView;
 import android.util.AttributeSet;
 
 public class ZiRuScrollView extends NestedScrollView implements NestedScrollView.OnScrollChangeListener {

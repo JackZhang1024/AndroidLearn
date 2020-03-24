@@ -1,19 +1,18 @@
 package com.lucky.androidlearn.mvvm.learn;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableArrayMap;
-import android.databinding.ObservableList;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableArrayMap;
+
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.databinding.ActivityMvvmLearnBinding;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;

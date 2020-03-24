@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -25,9 +23,13 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.jingewenku.abrahamcaijin.commonutil.DensityUtils;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.core.util.TimeUtil;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

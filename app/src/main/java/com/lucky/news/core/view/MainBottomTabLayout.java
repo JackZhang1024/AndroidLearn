@@ -3,13 +3,15 @@ package com.lucky.news.core.view;
 import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.lucky.androidlearn.R;
 
 public class MainBottomTabLayout extends LinearLayout {

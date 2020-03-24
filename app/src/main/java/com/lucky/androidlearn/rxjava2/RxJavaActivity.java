@@ -2,9 +2,9 @@ package com.lucky.androidlearn.rxjava2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.rxjava.ObserverActivity;
@@ -12,12 +12,6 @@ import com.lucky.androidlearn.rxjava2.search.RealTimeSearchActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * RxJava 响应式编程是利用可观测序列构建成的一种异步，基于事件的程序。

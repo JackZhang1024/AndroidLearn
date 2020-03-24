@@ -1,10 +1,9 @@
 package com.lucky.androidlearn.eventbus;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
-import org.greenrobot.eventbus.EventBus;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EventBusActivity extends AppCompatActivity {
 

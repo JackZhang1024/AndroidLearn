@@ -1,9 +1,7 @@
-package com.lucky.androidlearn.dagger2learn.lesson04;
+package com.lucky.androidlearn.dagger2learn.learn04;
 
 import android.content.Context;
 import android.widget.Toast;
-
-import com.lucky.androidlearn.AndroidApplication;
 
 public class ToastManager {
 

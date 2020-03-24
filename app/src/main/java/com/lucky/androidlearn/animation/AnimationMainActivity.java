@@ -2,17 +2,14 @@ package com.lucky.androidlearn.animation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.animation.curveanimation.CurveAnimationMainActivity;
 import com.lucky.androidlearn.animation.objectanimation.ObjectorAnimationActivity;
 import com.lucky.androidlearn.animation.transitionanimation.TransitionMainStartActivity;
-import com.lucky.androidlearn.animation.transitionanimation.TransitionStartActivity;
 import com.lucky.androidlearn.animation.valueanimation.ValueAnimatorActivity;
 import com.lucky.androidlearn.animation.viewanimation.ViewAnimationActivity;
 

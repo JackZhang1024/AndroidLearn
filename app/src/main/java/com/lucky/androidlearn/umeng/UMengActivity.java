@@ -8,14 +8,14 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.AndroidApplication;
 import com.lucky.androidlearn.R;
-import com.lucky.androidlearn.presentation.ui.activities.MainActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Method;

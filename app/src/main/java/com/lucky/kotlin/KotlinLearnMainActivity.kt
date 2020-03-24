@@ -1,7 +1,7 @@
 package com.lucky.kotlin
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.lucky.androidlearn.R
 import kotlinx.android.synthetic.main.activity_kotlinlearn.*
 

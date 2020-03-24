@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.lucky.androidlearn">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -55,13 +56,15 @@
                 <meta-data android:value="AndroidLearn" android:name="UMENG_CHANNEL"/>-->
 
         <!-- android:excludeFromRecents="true" -->
-        <activity android:name="com.lucky.news.splash.SplashActivity" android:theme="@style/SplashTheme">
+        <activity
+            android:name="com.lucky.news.splash.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
 
@@ -71,13 +74,11 @@
 
         <activity
             android:name="com.lucky.news.main.NewsMainActivity"
-            android:theme="@style/NewsTheme"
-            />
+            android:theme="@style/NewsTheme" />
 
         <activity
             android:name=".jindong.JingdongActivity"
-            android:theme="@style/NewsTheme"
-            />
+            android:theme="@style/NewsTheme" />
 
         <activity
             android:name=".widget.common.CommonWidgetActivity"
@@ -570,14 +571,20 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".dagger2learn.lesson04.Dagger2Main4Activity"
+            android:name=".dagger2learn.learn04.Dagger2Main4Activity"
             android:label="@string/dagger2_learn_4"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".dagger2learn.lesson04.Dagger2Main5Activity"
+            android:name=".dagger2learn.learn04.Dagger2Main5Activity"
             android:label="@string/dagger2_learn_5"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".dagger2learn.learn05.Dagger2Main6Activity"
+            android:label="@string/dagger2_learn_6"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -890,20 +897,34 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <service android:name=".ipc.socket.TCPServerService"
+        <service
+            android:name=".ipc.socket.TCPServerService"
             android:enabled="true"
-            android:exported="false"
-            />
+            android:exported="false" />
 
-        <activity android:name=".aspectj.AspectJActivity"
+        <activity
+            android:name=".aspectj.AspectJActivity"
             android:label="@string/aspectj_demo"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".hotfix.HotFixActivity" />
+
+        <activity android:name=".loadmore.PullRefreshLoadMoreActivity"/>
+
+        <activity android:name=".loadmore.PullRefreshLoadMoreNewActivity"/>
+
+        <activity android:name=".hybrid.WebAnotherProcessActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
+            android:process=":h5"
             />
 
-        <activity android:name=".hotfix.HotFixActivity"
+        <activity android:name=".hybrid.VsonicBrowserActivity" />
 
-            />
+        <activity android:name=".loadsir.LoadSirActivity"/>
+
+        <activity android:name=".loadsir.LoadSirFragmentActivity"/>
 
         <service
             android:name=".core.service.PollService"
@@ -940,8 +961,7 @@
             android:exported="false"
             android:process=":remote" />
 
-        <service android:name=".service.LearnBindService"
-            />
+        <service android:name=".service.LearnBindService" />
 
         <service
             android:name=".service.MyJobService"
@@ -965,7 +985,7 @@
             android:exported="false" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.lucky.androidlearn.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -976,7 +996,12 @@
 
         <provider
             android:name="com.lucky.androidlearn.provider.BooksProvider"
-            android:authorities="com.lucky.androidlearn.provider" />
+            android:authorities="com.lucky.androidlearn.provider"
+            android:exported="true"
+            >
+
+        </provider>
+
 
     </application>
 

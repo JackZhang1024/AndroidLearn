@@ -2,13 +2,9 @@ package com.lucky.androidlearn.service;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v4.app.JobIntentService;
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
 import android.util.Log;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Logger;
 
 public class MyJobService extends JobIntentService {
 

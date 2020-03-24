@@ -29,4 +29,18 @@
         android:layout_height="wrap_content"
         android:text="Yoga可扩展列表" />
 
+    <Button
+        android:id="@+id/btn_load_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="定制化的上拉加载更多列表"
+        />
+
+    <Button
+        android:id="@+id/btn_load_more_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="新定制化的上拉加载更多列表"
+        />
+
 </LinearLayout>

@@ -78,11 +78,11 @@
         <!--自动改变数据的list/map -->
         <variable
             name="observablelist"
-            type="android.databinding.ObservableList&lt;String&gt;"/>
+            type="androidx.databinding.ObservableList&lt;String&gt;"/>
 
         <variable
             name="observablemap"
-            type="android.databinding.ObservableMap&lt;String,String&gt;"/>
+            type="androidx.databinding.ObservableMap&lt;String,String&gt;"/>
 
 
     </data>

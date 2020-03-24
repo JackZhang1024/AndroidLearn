@@ -3,11 +3,11 @@ package com.lucky.news.main
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
 import android.view.*
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.lucky.androidlearn.R
 import com.lucky.androidlearn.jindong.util.StatusBarUtil
 import com.lucky.news.core.view.MainBottomTabLayout
@@ -32,14 +32,14 @@ class NewsMainActivity : AppCompatActivity() {
         private var mPager: ViewPager? = null
         private var mTabLayout: MainBottomTabLayout? = null
 
-        override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val view: View? = inflater?.inflate(R.layout.fragment_news_bottomlayout_main, container, false)
             setupViews(view)
             return view
         }
 
 
-        override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
         }
@@ -47,7 +47,7 @@ class NewsMainActivity : AppCompatActivity() {
         private fun setupViews(view: View?) {
             mPager = view?.findViewById(R.id.tab_pager)
             mTabLayout = view?.findViewById(R.id.main_bottom_tablayout)
-            mAdapter = HomeFragmentAdapter(fragmentManager)
+            mAdapter = HomeFragmentAdapter(fragmentManager!!)
             mPager!!.adapter = mAdapter
             mTabLayout!!.setViewPager(mPager)
         }

@@ -21,9 +21,9 @@ import dagger.Provides;
 public class AppModule {
     private AndroidApplication myApplication;
 
-    public AppModule(){
-
-    }
+//    public AppModule(){
+//
+//    }
 
     public AppModule(AndroidApplication application){
         myApplication=application;

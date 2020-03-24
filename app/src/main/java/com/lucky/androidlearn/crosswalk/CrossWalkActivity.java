@@ -1,11 +1,9 @@
 package com.lucky.androidlearn.crosswalk;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
 
 public class CrossWalkActivity extends AppCompatActivity { // extends XWalkActivity

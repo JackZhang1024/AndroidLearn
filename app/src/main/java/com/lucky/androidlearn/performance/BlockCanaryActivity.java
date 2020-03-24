@@ -1,8 +1,9 @@
 package com.lucky.androidlearn.performance;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 // https://blog.csdn.net/qq_29201493/article/details/80326297
 // 监测应用卡顿问题

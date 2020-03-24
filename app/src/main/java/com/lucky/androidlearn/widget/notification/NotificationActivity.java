@@ -3,7 +3,6 @@ package com.lucky.androidlearn.widget.notification;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,17 +13,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.lucky.androidlearn.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
-import java.io.File;
+import com.lucky.androidlearn.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -84,7 +81,7 @@ public class NotificationActivity extends AppCompatActivity {
         builder.setContentText("BigTextStyle演示示例");
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-        android.support.v4.app.NotificationCompat.BigTextStyle style = new android.support.v4.app.NotificationCompat.BigTextStyle();
+        androidx.core.app.NotificationCompat.BigTextStyle style = new androidx.core.app.NotificationCompat.BigTextStyle();
         style.bigText("这里是点击通知后要显示的正文，可以换行可以显示很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长");
         style.setBigContentTitle("点击后的标题");
         //SummaryText没什么用 可以不设置 style.setSummaryText("末尾只一行的文字内容");
@@ -107,7 +104,7 @@ public class NotificationActivity extends AppCompatActivity {
         builder.setContentText("InboxStyle演示示例");
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-        android.support.v4.app.NotificationCompat.InboxStyle style = new android.support.v4.app.NotificationCompat.InboxStyle();
+        androidx.core.app.NotificationCompat.InboxStyle style = new androidx.core.app.NotificationCompat.InboxStyle();
         style.setBigContentTitle("BigContentTitle")
                 .addLine("第一行，第一行，第一行，第一行，第一行，第一行，第一行")
                 .addLine("第二行")
@@ -135,7 +132,7 @@ public class NotificationActivity extends AppCompatActivity {
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-        android.support.v4.app.NotificationCompat.BigPictureStyle style = new android.support.v4.app.NotificationCompat.BigPictureStyle();
+        androidx.core.app.NotificationCompat.BigPictureStyle style = new androidx.core.app.NotificationCompat.BigPictureStyle();
         style.setBigContentTitle("BigContentTitle");
         style.setSummaryText("SummaryText");
         style.bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
@@ -185,7 +182,7 @@ public class NotificationActivity extends AppCompatActivity {
     @OnClick(R.id.btn_push_media)
     public void mediaStyle() {
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
-        android.support.v7.app.NotificationCompat.Builder builder = new android.support.v7.app.NotificationCompat.Builder(this);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"media");
         builder.setContentTitle("MediaStyle");
         builder.setContentText("Song Title");
         builder.setSmallIcon(R.mipmap.ic_launcher);
@@ -199,15 +196,15 @@ public class NotificationActivity extends AppCompatActivity {
         builder.addAction(R.drawable.stop, "", null);
         builder.addAction(R.drawable.play, "", pIntent);
         builder.addAction(R.drawable.next, "", null);
-        android.support.v7.app.NotificationCompat.MediaStyle style = new android.support.v7.app.NotificationCompat.MediaStyle();
-        style.setMediaSession(new MediaSessionCompat(this, "MediaSession",
-                new ComponentName(TargetActivity.class.getName(), Intent.ACTION_MEDIA_BUTTON), null).getSessionToken());
-        //CancelButton在5.0以下的机器有效
-        style.setCancelButtonIntent(pIntent);
-        style.setShowCancelButton(true);
-        //设置要现实在通知右方的图标 最多三个
-        style.setShowActionsInCompactView(2, 3);
-        builder.setStyle(style);
+        Notification.MediaStyle style = new Notification.MediaStyle();
+//        style.setMediaSession(new MediaSession.Token(this, "MediaSession",
+//                new ComponentName(TargetActivity.class.getName(), Intent.ACTION_MEDIA_BUTTON), null).getSessionToken());
+//        //CancelButton在5.0以下的机器有效
+//        style.setCancelButtonIntent(pIntent);
+//        style.setShowCancelButton(true);
+//        //设置要现实在通知右方的图标 最多三个
+//        style.setShowActionsInCompactView(2, 3);
+//        builder.setStyle(style);
         builder.setShowWhen(false);
         Notification notification = builder.build();
         managerCompat.notify(MEDIA_NOTIFICATION, notification);

@@ -1,12 +1,9 @@
-package com.lucky.androidlearn.dagger2learn.lesson04;
+package com.lucky.androidlearn.dagger2learn.learn04;
 
 import android.content.Context;
 
-import com.lucky.androidlearn.AndroidApplication;
-
 import dagger.Module;
 import dagger.Provides;
-import dagger.Subcomponent;
 
 @Module
 public class ToastManagerModule {

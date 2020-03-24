@@ -73,6 +73,7 @@
     <string name="dagger2_learn_3">Dagger2学习-基础3</string>
     <string name="dagger2_learn_4">Dagger2学习-基础4</string>
     <string name="dagger2_learn_5">Dagger2学习-基础5</string>
+    <string name="dagger2_learn_6">Dagger2学习-基础6</string>
     <string name="load_network_data">加载网络数据</string>
     <string name="curve_animation">CurveAnimation</string>
     <string name="start_service">Start_Service</string>

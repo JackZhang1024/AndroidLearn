@@ -23,6 +23,7 @@ import com.lucky.androidlearn.multithread.MultiThreadActivity
 import com.lucky.androidlearn.mvc.MVCMainActivity
 import com.lucky.androidlearn.mvp.MVPMainActivity
 import com.lucky.androidlearn.mvvm.MVVMMainActivity
+import com.lucky.androidlearn.widget.common.CommonWidgetActivity
 import com.lucky.kotlin.KotlinLearnMainActivity
 import com.lucky.news.core.NewsConstant
 
@@ -65,6 +66,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
     },
     ANIMATION("Animation动画", NewsConstant.IMG_LOVELY, AnimationMainActivity::class.java, true) {
         override fun channelName(): String = "animation"
+
+        override fun channelType() = "android"
+    },
+    COMMON_WIDGET("常见控件", NewsConstant.IMG_LOVELY, CommonWidgetActivity::class.java, true) {
+        override fun channelName(): String = "widget"
 
         override fun channelType() = "android"
     },

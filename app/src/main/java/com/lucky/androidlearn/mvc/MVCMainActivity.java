@@ -1,32 +1,20 @@
 package com.lucky.androidlearn.mvc;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
-import com.lucky.androidlearn.domain.model.TaobaoBean;
 import com.lucky.androidlearn.mvc.model.OnRequestCallBack;
 import com.lucky.androidlearn.mvc.model.WeatherModel;
 import com.lucky.androidlearn.mvc.model.WeatherModelImpl;
-import com.lucky.androidlearn.mvc.model.WeatherModelService;
 import com.lucky.androidlearn.mvc.model.bean.WeatherModelBean;
-import com.lucky.androidlearn.storage.WelcomeMessageService;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Retrofit 必学必会知识

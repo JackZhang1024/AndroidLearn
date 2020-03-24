@@ -1,12 +1,10 @@
 package com.lucky.androidlearn.widget.common.scrollconflict;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
-import android.widget.Scroller;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 

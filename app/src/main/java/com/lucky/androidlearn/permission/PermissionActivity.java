@@ -1,15 +1,11 @@
 package com.lucky.androidlearn.permission;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Process;
-import android.support.annotation.Nullable;
-import android.support.v4.content.PermissionChecker;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppLogMessageMgr;
 import com.jingewenku.abrahamcaijin.commonutil.AppPhoneMgr;

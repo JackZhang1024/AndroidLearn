@@ -1,12 +1,13 @@
 package com.jingewenku.abrahamcaijin.commonutil;
 
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * @Description:主要功能:Snackbar工具类
@@ -93,7 +94,7 @@ public class SnackbarUtils {
      * @param type
      * @return
      */
-    public static Snackbar LongSnackbar(View view, String message,int type){
+    public static Snackbar LongSnackbar(View view, String message, int type){
         Snackbar snackbar = Snackbar.make(view,message, Snackbar.LENGTH_LONG);
         switchType(snackbar,type);
         return snackbar;

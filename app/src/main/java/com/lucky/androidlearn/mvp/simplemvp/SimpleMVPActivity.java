@@ -1,14 +1,16 @@
 package com.lucky.androidlearn.mvp.simplemvp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.mvp.simplemvp.presenter.IPresenter;
 import com.lucky.androidlearn.mvp.simplemvp.presenter.LoadNetWorkDataPresenter;
 import com.lucky.androidlearn.mvp.simplemvp.view.LoadDataView;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

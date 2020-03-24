@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="UnusedResources">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview_search"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -33,5 +33,5 @@
                 android:text="搜索" />
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

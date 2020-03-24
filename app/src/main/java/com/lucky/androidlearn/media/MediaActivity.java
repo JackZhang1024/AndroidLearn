@@ -2,8 +2,9 @@ package com.lucky.androidlearn.media;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.media.image.ImageActivity;

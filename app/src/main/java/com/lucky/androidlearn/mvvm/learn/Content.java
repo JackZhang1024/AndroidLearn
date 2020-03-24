@@ -1,7 +1,7 @@
 package com.lucky.androidlearn.mvvm.learn;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import com.lucky.androidlearn.BR;
 
@@ -26,7 +26,7 @@ public class Content extends BaseObservable{
 
     public void setTitle(String title) {
         this.title = title;
-        notifyPropertyChanged(BR.title);
+        notifyPropertyChanged(BR._all);
     }
 
     @Bindable
@@ -36,6 +36,7 @@ public class Content extends BaseObservable{
 
     public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
-        notifyPropertyChanged(BR.subTitle);
+        notifyPropertyChanged(BR._all);
     }
+
 }

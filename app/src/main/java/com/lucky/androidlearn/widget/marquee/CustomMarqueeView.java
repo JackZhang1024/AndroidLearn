@@ -7,9 +7,8 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -19,11 +18,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.lucky.androidlearn.R;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
-
-import javax.security.auth.login.LoginException;
 
 public class CustomMarqueeView extends FrameLayout implements View.OnClickListener {
 

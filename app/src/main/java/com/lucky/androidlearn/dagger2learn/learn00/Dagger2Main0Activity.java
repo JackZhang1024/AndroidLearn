@@ -1,12 +1,12 @@
 package com.lucky.androidlearn.dagger2learn.learn00;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.dagger2learn.learn00.model.Pot;
-import com.lucky.androidlearn.dagger2learn.learn00.model.Rose;
 
 import javax.inject.Inject;
 

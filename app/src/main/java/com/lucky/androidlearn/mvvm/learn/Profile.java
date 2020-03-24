@@ -1,9 +1,8 @@
 package com.lucky.androidlearn.mvvm.learn;
 
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.widget.ImageView;
 
-import com.jingewenku.abrahamcaijin.commonutil.PicassoUtils;
 import com.squareup.picasso.Picasso;
 
 /**

@@ -47,4 +47,11 @@
         android:text="@string/dagger2_learn_5" />
 
 
+    <Button
+        android:id="@+id/btn_dagger2_6_learn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dagger2_learn_6" />
+
 </LinearLayout>

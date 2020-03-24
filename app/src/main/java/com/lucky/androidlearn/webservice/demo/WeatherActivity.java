@@ -1,16 +1,18 @@
 package com.lucky.androidlearn.webservice.demo;
 
-import java.util.HashMap;
-
-import org.ksoap2.serialization.SoapObject;
-
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.webservice.utils.ProgressDialogUtils;
 import com.lucky.androidlearn.webservice.utils.WebServiceUtils;
+
+import org.ksoap2.serialization.SoapObject;
+
+import java.util.HashMap;
 
 public class WeatherActivity extends AppCompatActivity {
 	@Override

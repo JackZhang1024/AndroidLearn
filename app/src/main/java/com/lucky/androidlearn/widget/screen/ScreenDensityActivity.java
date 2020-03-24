@@ -2,14 +2,13 @@ package com.lucky.androidlearn.widget.screen;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
 
-import com.lucky.androidlearn.R;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
+import com.lucky.androidlearn.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -8,21 +8,42 @@
         android:id="@+id/btn_applink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WebView AppLink"
-        />
+        android:text="WebView AppLink" />
 
     <Button
         android:id="@+id/btn_webview_js"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WebView JS交互处理"
-        />
+        android:text="WebView JS交互处理" />
 
     <Button
         android:id="@+id/btn_webview_newdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WebView 新闻图文混排"
-        />
+        android:text="WebView 新闻图文混排" />
+
+    <Button
+        android:id="@+id/btn_webview_process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="另外一个进程中启动WebView" />
+
+    <Button
+        android:id="@+id/btn_vsonic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="vsonic" />
+
+    <Button
+        android:id="@+id/btn_preload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="preload" />
+
+    <Button
+        android:id="@+id/btn_offline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="offline" />
 
 </LinearLayout>

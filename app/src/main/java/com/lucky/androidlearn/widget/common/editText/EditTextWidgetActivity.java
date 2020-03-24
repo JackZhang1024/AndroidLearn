@@ -2,13 +2,9 @@ package com.lucky.androidlearn.widget.common.editText;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
 
 import butterknife.ButterKnife;

@@ -1,12 +1,13 @@
 package com.lucky.androidlearn.encrypt;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

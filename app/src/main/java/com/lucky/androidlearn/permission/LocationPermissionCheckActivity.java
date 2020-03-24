@@ -5,17 +5,16 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
-import android.support.annotation.Nullable;
-import android.support.v4.content.PermissionChecker;
-import android.support.v7.app.AppCompatActivity;
 
-import com.jingewenku.abrahamcaijin.commonutil.AppManager;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.PermissionChecker;
+
 import com.jingewenku.abrahamcaijin.commonutil.AppPhoneMgr;
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.widget.common.helper.AlertDialogHelper;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

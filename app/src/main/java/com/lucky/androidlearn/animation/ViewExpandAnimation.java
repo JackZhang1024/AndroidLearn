@@ -1,12 +1,9 @@
 package com.lucky.androidlearn.animation;
 
 import android.graphics.Matrix;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.LinearLayout;
-
 
 public class ViewExpandAnimation extends Animation {
     private static final String TAG = "ViewExpandAnimation";

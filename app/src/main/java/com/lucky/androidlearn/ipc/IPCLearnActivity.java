@@ -2,12 +2,12 @@ package com.lucky.androidlearn.ipc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.aidl.BookManagerActivity;
-import com.lucky.androidlearn.aidl.BookManagerService;
 import com.lucky.androidlearn.ipc.socket.SocketIPCActivity;
 import com.lucky.androidlearn.messager.MessengerActivity;
 

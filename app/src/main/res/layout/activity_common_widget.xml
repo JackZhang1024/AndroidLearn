@@ -87,6 +87,18 @@
             android:text="RecycleView" />
 
         <Button
+            android:id="@+id/btn_loadsir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LoadSir" />
+
+        <Button
+            android:id="@+id/btn_loadsir_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LoadSirFragment" />
+
+        <Button
             android:id="@+id/btn_fancygallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,8 +1,9 @@
 package com.lucky.androidlearn.dagger2learn.learn01;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.dagger2learn.learn01.model.ChainPot;
 import com.lucky.androidlearn.dagger2learn.learn01.model.Pot;

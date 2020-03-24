@@ -1,18 +1,16 @@
 package com.lucky.androidlearn.json;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.jingewenku.abrahamcaijin.commonutil.AppFileMgr;
-import com.jingewenku.abrahamcaijin.commonutil.AppLogMessageMgr;
 import com.jingewenku.abrahamcaijin.commonutil.AppResourceMgr;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.json.node.ZiRuViewItemData;
@@ -20,8 +18,6 @@ import com.lucky.androidlearn.json.node.ZiRuViewItemData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

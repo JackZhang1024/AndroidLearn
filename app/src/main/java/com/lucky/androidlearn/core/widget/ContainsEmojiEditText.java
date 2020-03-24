@@ -1,15 +1,15 @@
 package com.lucky.androidlearn.core.widget;
 
-import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import android.content.Context;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatEditText;
+
+import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 
 public class ContainsEmojiEditText extends AppCompatEditText {
     //输入表情前的光标位置

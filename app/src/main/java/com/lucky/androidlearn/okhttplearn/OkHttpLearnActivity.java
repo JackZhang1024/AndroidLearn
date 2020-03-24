@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.renderscript.RenderScript;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
-import com.lucky.androidlearn.core.util.BitmapUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +37,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import okio.Okio;
 
 /**
  * 1. okhttp http://blog.csdn.net/hello_1s/article/details/76641527

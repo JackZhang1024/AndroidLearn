@@ -3,14 +3,17 @@ package com.lucky.androidlearn.widget.common;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.R;
+import com.lucky.androidlearn.loadsir.LoadSirActivity;
+import com.lucky.androidlearn.loadsir.LoadSirFragmentActivity;
 import com.lucky.androidlearn.widget.bottomlayout.BottomLayoutActivity;
 import com.lucky.androidlearn.widget.common.editText.EditTextWidgetActivity;
 import com.lucky.androidlearn.widget.common.fancygallery.FancyGalleryMainActivity;
@@ -44,14 +47,14 @@ public class CommonWidgetActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_layout_gravity)
-    public void onLayoutGravityClick(View view){
+    public void onLayoutGravityClick(View view) {
         Intent intent = new Intent(this, LayoutGravityActivity.class);
         startActivity(intent);
     }
 
 
     @OnClick(R.id.btn_flowlayout)
-    public void onFLowLabelLayoutClick(){
+    public void onFLowLabelLayoutClick() {
         Intent intent = new Intent(this, FlowLayoutActivity.class);
         startActivity(intent);
     }
@@ -68,7 +71,7 @@ public class CommonWidgetActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_close_activity)
-    public void closeActivity(View view){
+    public void closeActivity(View view) {
         finish();
     }
 
@@ -135,6 +138,17 @@ public class CommonWidgetActivity extends AppCompatActivity {
         startActivity(new Intent(this, RecyclerViewActivity.class));
     }
 
+    @OnClick(R.id.btn_loadsir)
+    public void onLoadSirClick(View view) {
+        startActivity(new Intent(this, LoadSirActivity.class));
+    }
+
+
+    @OnClick(R.id.btn_loadsir_fragment)
+    public void onLoadSirFragmentClick(View view) {
+        startActivity(new Intent(this, LoadSirFragmentActivity.class));
+    }
+
     @OnClick(R.id.btn_fancygallery)
     public void onFancyGalleryClick(View view) {
         startActivity(new Intent(this, FancyGalleryMainActivity.class));
@@ -161,47 +175,47 @@ public class CommonWidgetActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_flex_layout)
-    public void onFlexLayoutClick(View view){
+    public void onFlexLayoutClick(View view) {
         startActivity(new Intent(this, FlexLayoutActivity.class));
     }
 
     // btn_yoga_layout
     @OnClick(R.id.btn_yoga_layout)
-    public void onYogaLayoutClick(View view){
+    public void onYogaLayoutClick(View view) {
         startActivity(new Intent(this, YogaLayoutActivity.class));
     }
 
     @OnClick(R.id.btn_scroll_conflict)
-    public void onScrollConflictClick(View view){
+    public void onScrollConflictClick(View view) {
         startActivity(new Intent(this, ScrollConflictActivity.class));
     }
 
 
     @OnClick(R.id.btn_scroll_conflict_demo1)
-    public void onScrollConflictDemo1Click(View view){
+    public void onScrollConflictDemo1Click(View view) {
         startActivity(new Intent(this, ScrollConflictDemo1Activity.class));
     }
 
 
     @OnClick(R.id.btn_scroll_conflict_demo2)
-    public void onScrollConflictDemo2Click(View view){
+    public void onScrollConflictDemo2Click(View view) {
         startActivity(new Intent(this, ScrollConflictDemo2Activity.class));
     }
 
     @OnClick(R.id.btn_water_fall)
-    public void onWaterFallClick(View view){
+    public void onWaterFallClick(View view) {
         startActivity(new Intent(this, WaterFallActivity.class));
     }
 
     // btn_viewpager
     @OnClick(R.id.btn_viewpager)
-    public void onViewPagerClick(View view){
+    public void onViewPagerClick(View view) {
         startActivity(new Intent(this, ViewPagerActivity.class));
     }
 
     //smart_refresh
     @OnClick(R.id.btn_smart_refresh)
-    public void onSmartRefreshClick(View view){
+    public void onSmartRefreshClick(View view) {
         startActivity(new Intent(this, SmartRefreshActivity.class));
     }
 

@@ -1,15 +1,16 @@
 package com.lucky.androidlearn.mvp.retrofit;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.mvc.model.bean.WeatherItem;
 import com.lucky.androidlearn.mvp.baseimpl.BaseActivity;
-import com.orhanobut.logger.Logger;
-import org.w3c.dom.Text;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

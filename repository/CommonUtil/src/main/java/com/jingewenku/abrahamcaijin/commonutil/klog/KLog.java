@@ -11,7 +11,7 @@ package com.jingewenku.abrahamcaijin.commonutil.klog;
  * @version: 1.0.0
  */
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.socks.library.klog.BaseLog;

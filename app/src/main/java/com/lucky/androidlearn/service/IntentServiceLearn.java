@@ -2,7 +2,7 @@ package com.lucky.androidlearn.service;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by zfz on 2018/4/1.

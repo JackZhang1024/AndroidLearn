@@ -1,22 +1,21 @@
 package com.lucky.androidlearn.annotation;
 
 import android.os.Bundle;
-import android.support.annotation.AnyRes;
-import android.support.annotation.BoolRes;
-import android.support.annotation.ColorRes;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.Size;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.lucky.androidlearn.R;
+import androidx.annotation.AnyRes;
+import androidx.annotation.BoolRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.Size;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
+import com.lucky.androidlearn.R;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

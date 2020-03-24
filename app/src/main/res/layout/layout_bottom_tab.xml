@@ -6,7 +6,7 @@
     android:background="@null"
     android:orientation="vertical">
 
-    <org.cocos2dx.cpp.core.ui.widget.TabIconView
+    <com.lucky.androidlearn.widget.bottomlayout.TabIconView
         android:id="@+id/bottom_tab_icon"
         android:layout_width="32dp"
         android:layout_height="28dp"

@@ -1,8 +1,7 @@
 package com.lucky.androidlearn.mvp.retrofit;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
-import com.lucky.androidlearn.mvc.model.WeatherModelService;
 import com.lucky.androidlearn.mvc.model.bean.WeatherItem;
 import com.lucky.androidlearn.mvc.model.bean.WeatherModelBean;
 import com.lucky.androidlearn.mvp.RetrofitExceptionHandler;

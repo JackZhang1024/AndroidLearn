@@ -1,10 +1,11 @@
 package com.lucky.androidlearn.rxjava2;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.rxjava2.task.LoadBookListTask;
@@ -24,7 +25,9 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author zfz
- *         Created by zfz on 2018/3/18.
+ * Created by zfz on 2018/3/18.
+ *
+ * https://www.cnblogs.com/ganchuanpu/p/7136150.html
  */
 
 public class RxJavaMergeActivity extends AppCompatActivity {

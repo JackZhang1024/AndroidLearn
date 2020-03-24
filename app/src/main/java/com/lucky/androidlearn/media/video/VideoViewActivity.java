@@ -3,12 +3,14 @@ package com.lucky.androidlearn.media.video;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.v4.os.EnvironmentCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

@@ -1,20 +1,15 @@
 package com.lucky.news.main.square
 
-import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.flyco.tablayout.SlidingTabLayout
 import com.lucky.androidlearn.R
 import com.lucky.androidlearn.jindong.util.StatusBarUtil
-import com.lucky.androidlearn.messager.Constants
 import com.lucky.news.core.NewsConstant
 import com.lucky.news.core.adapter.CommonFragmentPagerAdapter
 import java.util.*
@@ -26,12 +21,12 @@ class SquareFragment : Fragment() {
         SquareFragment::class.java.simpleName
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_square, container, false)
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addMarginTop(view)
         initViewData(view)
@@ -42,8 +37,8 @@ class SquareFragment : Fragment() {
     private lateinit var pagerAdapter: CommonFragmentPagerAdapter
     private val mTabTitles = listOf("Java", "Android", "Kotlin", "RxJava", "架构", "杂谈", "GitHub")
 
-    private fun initViewData(view: View?) {
-        mSlidingTabLayout = view!!.findViewById(R.id.tablayout)
+    private fun initViewData(view: View) {
+        mSlidingTabLayout = view.findViewById(R.id.tablayout)
         mViewPager = view.findViewById(R.id.main_vp_container)
         pagerAdapter = CommonFragmentPagerAdapter(childFragmentManager)
         pagerAdapter.setFragments(getFragments())

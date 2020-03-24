@@ -1,5 +1,17 @@
 package com.lucky.androidlearn.xml;
 
+import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.lucky.androidlearn.R;
+
+import org.w3c.dom.Document;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -7,20 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-
-import android.content.res.AssetManager;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-
-import com.lucky.androidlearn.R;
-
-import junit.framework.Assert;
 
 public class XmlActivity extends AppCompatActivity {
 

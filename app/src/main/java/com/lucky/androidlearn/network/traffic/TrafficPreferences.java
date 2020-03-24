@@ -3,8 +3,6 @@ package com.lucky.androidlearn.network.traffic;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.lucky.androidlearn.dagger2learn.lesson04.SharePreferenceManager;
-
 public class TrafficPreferences {
 
     // 应用下载流量

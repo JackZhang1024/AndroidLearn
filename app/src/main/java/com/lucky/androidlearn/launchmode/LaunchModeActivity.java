@@ -2,32 +2,28 @@ package com.lucky.androidlearn.launchmode;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppApplicationMgr;
 import com.jingewenku.abrahamcaijin.commonutil.AppToastMgr;
 import com.lucky.androidlearn.BuildConfig;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.core.util.MIMEUtil;
-import com.lucky.androidlearn.dagger2learn.lesson04.ToastManager;
 
 import java.io.File;
 import java.util.List;
-
-import javax.activation.MimeType;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

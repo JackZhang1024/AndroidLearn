@@ -2,7 +2,8 @@ package com.lucky.androidlearn.widget.common.helper;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Created by zfz on 2017/12/24.

@@ -1,13 +1,12 @@
 package com.lucky.news.main.square
 
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.jingewenku.abrahamcaijin.commonutil.PicassoUtils
+import androidx.recyclerview.widget.RecyclerView
 import com.lucky.androidlearn.R
 import com.lucky.news.main.square.data.ChannelItemModel
 import com.squareup.picasso.Picasso
@@ -20,19 +19,31 @@ class SquareAdapter : RecyclerView.Adapter<SquareViewHolder>() {
         this.items = listData
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SquareViewHolder {
-        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.layout_square_item, parent, false)
-        return SquareViewHolder(itemView)
-    }
+//    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SquareViewHolder {
+//        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.layout_square_item, parent, false)
+//        return SquareViewHolder(itemView)
+//    }
+//
+//    override fun onBindViewHolder(holder: SquareViewHolder?, position: Int) {
+//        holder?.setItemData(items!![position])
+//    }
+//
+//    override fun getItemCount(): Int {
+//        return items?.size ?: 0
+//    }
 
-    override fun onBindViewHolder(holder: SquareViewHolder?, position: Int) {
-        holder?.setItemData(items!![position])
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SquareViewHolder {
+        val itemView = LayoutInflater.from(p0.context).inflate(R.layout.layout_square_item, p0, false)
+        return SquareViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
         return items?.size ?: 0
     }
 
+    override fun onBindViewHolder(holder: SquareViewHolder, p1: Int) {
+        holder?.setItemData(items!![p1])
+    }
 }
 
 class SquareViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

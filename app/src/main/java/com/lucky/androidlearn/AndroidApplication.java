@@ -9,9 +9,14 @@ import android.os.Process;
 import android.util.Log;
 
 import com.jingewenku.abrahamcaijin.commonutil.klog.KLog;
+import com.kingja.loadsir.callback.SuccessCallback;
+import com.kingja.loadsir.core.LoadSir;
 import com.lucky.androidlearn.dagger2learn.AppModule;
-import com.lucky.androidlearn.dagger2learn.lesson04.AppComponent;
-import com.lucky.androidlearn.dagger2learn.lesson04.DaggerAppComponent;
+import com.lucky.androidlearn.dagger2learn.learn04.AppComponent;
+import com.lucky.androidlearn.dagger2learn.learn04.DaggerAppComponent;
+import com.lucky.androidlearn.loadsir.loadcallback.EmptyCallback;
+import com.lucky.androidlearn.loadsir.loadcallback.ErrorCallback;
+import com.lucky.androidlearn.loadsir.loadcallback.LoadingCallback;
 import com.lukcyboy.simpleaar.SimpleAarLog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -46,13 +51,14 @@ public class AndroidApplication extends Application {
 //        LeakCanary.install(this);
 
         // 如果想检测出除了Activity的内存泄漏之外的内存泄漏 需要以下设置
-        setupRefWatcher();
+        //setupRefWatcher();
 
         mAndroidApplication = this;
         appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         appComponent.inject(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
         Log.e(TAG, "onCreate: 进程ID " + Process.myPid());
+
         SimpleAarLog.getInstance();
         //友盟统计
         //UMConfigure.init(this, "5bdbef32b465f5b32400001d", "AndroidLearn", UMConfigure.DEVICE_TYPE_PHONE, null);
@@ -61,8 +67,8 @@ public class AndroidApplication extends Application {
         try {
             Class<?> aClass = Class.forName("com.umeng.commonsdk.UMConfigure");
             Field[] fs = aClass.getDeclaredFields();
-            for (Field f:fs){
-                Log.e("xxxxxx","ff="+f.getName()+"   "+f.getType().getName());
+            for (Field f : fs) {
+                Log.e("xxxxxx", "ff=" + f.getName() + "   " + f.getType().getName());
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -70,11 +76,12 @@ public class AndroidApplication extends Application {
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
         UMConfigure.init(this, "5bdbef32b465f5b32400001d", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
         KLog.init(true);
+        initLoadSir();
     }
 
 
-    private RefWatcher setupRefWatcher(){
-        if (LeakCanary.isInAnalyzerProcess(this)){
+    private RefWatcher setupRefWatcher() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
             return RefWatcher.DISABLED;
         }
         return LeakCanary.install(this);
@@ -111,10 +118,17 @@ public class AndroidApplication extends Application {
         return mAndroidApplication;
     }
 
-
+    public void initLoadSir() {
+        LoadSir.beginBuilder()
+                .addCallback(new LoadingCallback())
+                .addCallback(new ErrorCallback())
+                .addCallback(new EmptyCallback())
+                .setDefaultCallback(LoadingCallback.class)
+                .commit();
+    }
 
     // https://www.cnblogs.com/baiqiantao/p/10125084.html
-    public static RefWatcher getRefWatcher(Context context){
+    public static RefWatcher getRefWatcher(Context context) {
         AndroidApplication application = (AndroidApplication) context.getApplicationContext();
         return application.refWatcher;
     }

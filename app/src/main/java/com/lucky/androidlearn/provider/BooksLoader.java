@@ -4,8 +4,9 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import com.lucky.androidlearn.provider.model.Book;
 

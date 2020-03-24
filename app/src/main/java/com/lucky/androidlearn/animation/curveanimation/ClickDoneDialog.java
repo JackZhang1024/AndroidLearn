@@ -1,13 +1,12 @@
 package com.lucky.androidlearn.animation.curveanimation;
 
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
-import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
-import android.support.v7.app.AlertDialog;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AlertDialog;
 
 import com.lucky.androidlearn.R;
 

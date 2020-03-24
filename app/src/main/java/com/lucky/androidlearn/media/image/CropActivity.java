@@ -5,12 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.kevin.crop.UCrop;
 import com.kevin.crop.util.BitmapLoadUtils;
@@ -22,6 +23,7 @@ import com.kevin.crop.view.UCropView;
 import com.lucky.androidlearn.R;
 
 import java.io.OutputStream;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

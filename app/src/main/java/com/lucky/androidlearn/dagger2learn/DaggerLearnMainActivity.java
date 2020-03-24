@@ -2,14 +2,19 @@ package com.lucky.androidlearn.dagger2learn;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.dagger2learn.learn00.Dagger2Main0Activity;
 import com.lucky.androidlearn.dagger2learn.learn01.Dagger2MainActivity;
 import com.lucky.androidlearn.dagger2learn.learn02.Dagger2Main2Activity;
 import com.lucky.androidlearn.dagger2learn.learn03.Dagger2Main3Activity;
-import com.lucky.androidlearn.dagger2learn.lesson04.Dagger2Main4Activity;
+import com.lucky.androidlearn.dagger2learn.learn04.Dagger2Main4Activity;
+import com.lucky.androidlearn.dagger2learn.learn04.Dagger2Main5Activity;
+import com.lucky.androidlearn.dagger2learn.learn05.Dagger2Main6Activity;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -60,7 +65,15 @@ public class DaggerLearnMainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_dagger2_5_learn)
     public void onDagger25Learn() {
-//        Intent intent = new Intent(this, Dagger2MainActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, Dagger2Main5Activity.class);
+        startActivity(intent);
     }
+
+    @OnClick(R.id.btn_dagger2_6_learn)
+    public void onDagger26Learn() {
+        Intent intent = new Intent(this, Dagger2Main6Activity.class);
+        startActivity(intent);
+    }
+
+
 }

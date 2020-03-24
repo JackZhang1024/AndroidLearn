@@ -2,18 +2,20 @@ package com.lucky.androidlearn.permission;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.jingewenku.abrahamcaijin.commonutil.AppLogMessageMgr;
 import com.jingewenku.abrahamcaijin.commonutil.AppPhoneMgr;
 import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.widget.common.helper.AlertDialogHelper;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.tbruyelle.rxpermissions2.RxPermissionsFragment;
+
 import io.reactivex.functions.Consumer;
 
 /**

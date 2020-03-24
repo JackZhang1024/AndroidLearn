@@ -1,8 +1,7 @@
 package com.lucky.androidlearn.mvvm.learn;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.databinding.Observable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import com.lucky.androidlearn.BR;
 

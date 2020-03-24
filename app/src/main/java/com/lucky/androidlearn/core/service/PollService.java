@@ -2,23 +2,16 @@ package com.lucky.androidlearn.core.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.audiofx.LoudnessEnhancer;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.lucky.androidlearn.core.util.AppRunningForegroundUtils;
-
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.security.auth.login.LoginException;
 
 /**
  * Created by zfz on 2017/11/14.
