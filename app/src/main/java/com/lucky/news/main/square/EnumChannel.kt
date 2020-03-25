@@ -8,6 +8,8 @@ import com.lucky.androidlearn.encrypt.EncryptDecryptActivity
 import com.lucky.androidlearn.eventbus.EventBusActivity
 import com.lucky.androidlearn.exception.ExceptionSummaryActivity
 import com.lucky.androidlearn.filelearn.FileProcessLearnActivity
+import com.lucky.androidlearn.fragmentation.FragmentationActivity
+import com.lucky.androidlearn.fragmentation.FragmentationViewPagerActivity
 import com.lucky.androidlearn.handler.HandlerLearnActivity
 import com.lucky.androidlearn.hotfix.HotFixActivity
 import com.lucky.androidlearn.hybrid.WebViewSummaryActivity
@@ -76,6 +78,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
     },
     ASPECTJ("AspectJ", NewsConstant.IMG_LOVELY, AspectJActivity::class.java, true) {
         override fun channelName(): String = "aspectJ"
+
+        override fun channelType() = "android"
+    },
+    FRAGMENTATION("Fragmentation", NewsConstant.IMG_LOVELY, FragmentationActivity::class.java, true) {
+        override fun channelName(): String = "fragmentation"
 
         override fun channelType() = "android"
     },

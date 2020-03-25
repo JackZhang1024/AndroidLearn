@@ -891,6 +891,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <activity android:name=".fragmentation.FragmentationViewPagerActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
+        <activity android:name=".fragmentation.FragmentationMultiFragmentInActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
+        <activity android:name=".fragmentation.FragmentationActivity"/>
+
         <activity
             android:name=".eventbus.EventBusActivity"
             android:label="@string/eventbus_learn"

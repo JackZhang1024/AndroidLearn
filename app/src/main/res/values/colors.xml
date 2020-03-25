@@ -165,4 +165,5 @@
     <color name="fadeTransparent">#99000000</color>
     <color name="main_bottom_tab_textcolor_normal">#999999</color>
     <color name="main_bottom_tab_textcolor_selected">#13227a</color>
+    <color name="tab_unselect">#c9c9c9</color>
 </resources>
