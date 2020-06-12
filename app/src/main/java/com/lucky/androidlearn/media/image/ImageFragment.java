@@ -50,7 +50,7 @@ public class ImageFragment extends PictureSelectFragment {
 
     @Override
     public int[] getPhotoMaxResultSize() {
-        return new int[]{500, 500};
+        return new int[]{1024, 800};
     }
 
     @OnClick(R.id.btn_inside_camera)

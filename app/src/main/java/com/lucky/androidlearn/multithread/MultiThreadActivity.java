@@ -1,12 +1,16 @@
 package com.lucky.androidlearn.multithread;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
+import com.lucky.androidlearn.dagger2learn.learn04.ToastManager;
+import com.lucky.androidlearn.exception.toast.ToastUtil;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,9 +58,26 @@ public class MultiThreadActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             int index = i;
             executorService.submit(() -> System.out.println("i:" + index +
-                    " executorService  "+Thread.currentThread().getName()));
+                    " executorService  " + Thread.currentThread().getName()));
         }
         executorService.shutdown();
     }
+
+    @OnClick({R.id.btn_asynctask})
+    public void onAsyncTaskClick(View view) {
+        //Toast.makeText(this,"AsyncTask", Toast.LENGTH_SHORT).show();
+        for (int index=0; index< 5; index++){
+            MultiAsyncTask asyncTask = new MultiAsyncTask();
+            // 多个线程按照创建的顺序依次执行
+            asyncTask.execute(String.format("Task %s", index));
+            // 多个线程同时进行
+            //asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, String.format("Task %s", index));
+        }
+    }
+
+
+
+
+
 
 }

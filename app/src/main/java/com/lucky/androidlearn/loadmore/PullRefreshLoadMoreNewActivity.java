@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 
 // 下拉刷新和上拉加载更多
 // smartRefreshLayout作为下拉刷新布局
+// 没有更多数据
 public class PullRefreshLoadMoreNewActivity extends AppCompatActivity {
 
     @BindView(R.id.smartRefreshLayout)

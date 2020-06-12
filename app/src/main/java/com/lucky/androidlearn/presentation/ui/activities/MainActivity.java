@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.jingewenku.abrahamcaijin.commonutil.AppScreenMgr;
 import com.lucky.androidlearn.R;

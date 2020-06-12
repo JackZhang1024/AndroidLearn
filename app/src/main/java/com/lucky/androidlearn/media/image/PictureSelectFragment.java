@@ -49,6 +49,7 @@ public abstract class PictureSelectFragment extends Fragment {
         super.onAttach(activity);
         mActivity = activity;
         mTempPhotoPath = Environment.getExternalStorageDirectory().getAbsoluteFile() + File.separator + "photo.png";
+        //mTempPhotoPath = Environment.getDataDirectory().getAbsoluteFile() + File.separator + "photo.png";
         initBottomSheetDialog();
     }
 

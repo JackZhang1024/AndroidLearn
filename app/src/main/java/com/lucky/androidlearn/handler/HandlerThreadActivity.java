@@ -46,6 +46,7 @@ public class HandlerThreadActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+            //
             mHandlerThreadHandler = new Handler(handlerThread.getLooper()) {
 
                 private static final String TAG = "HandlerThreadHandler";

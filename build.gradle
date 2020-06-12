@@ -39,11 +39,11 @@ allprojects {
 }
 
 ext {
-    androidCompileSdkVersion = 28
-    androidCompileTestSdkVersion = 28
+    androidCompileSdkVersion = 29
+    androidCompileTestSdkVersion = 29
     androidMiniSdkVersion = 21
-    androidTargetSdkVersion = 28
-    androidBuildToolsVersion = "28.0.3"
+    androidTargetSdkVersion = 29
+    androidBuildToolsVersion = "29.0.2"
     appVersionName = "2.0"
     appVersionCode = 2
 

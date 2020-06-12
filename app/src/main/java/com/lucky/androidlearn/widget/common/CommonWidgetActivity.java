@@ -26,6 +26,7 @@ import com.lucky.androidlearn.widget.common.scrollconflict.WaterFallActivity;
 import com.lucky.androidlearn.widget.constraintlayout.ConstraintLayoutActivity;
 import com.lucky.androidlearn.widget.marquee.MarqueeViewActivity;
 import com.lucky.androidlearn.widget.notification.NotificationActivity;
+import com.lucky.androidlearn.window.WindowManagerActivity;
 import com.lucky.androidlearn.yoga.YogaLayoutActivity;
 
 import butterknife.ButterKnife;

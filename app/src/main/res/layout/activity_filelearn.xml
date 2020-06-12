@@ -12,5 +12,12 @@
         android:text="PackageFiles"
         />
 
+    <Button
+        android:id="@+id/btn_make_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MakeFile"
+        android:onClick="makeFile"
+        />
 
 </LinearLayout>

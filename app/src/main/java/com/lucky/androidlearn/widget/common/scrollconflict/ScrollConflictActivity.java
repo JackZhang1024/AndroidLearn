@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 
+
+// https://blog.csdn.net/fessible_max/article/details/79208580
+
 public class ScrollConflictActivity extends AppCompatActivity {
      
 	private NoScrollListView noScorllView;

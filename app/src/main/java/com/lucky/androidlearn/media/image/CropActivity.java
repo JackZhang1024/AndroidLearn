@@ -154,7 +154,7 @@ public class CropActivity extends AppCompatActivity {
 
         @Override
         public void onLoadComplete() {
-            Animation fadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.crop_fade_in);
+            Animation fadeInAnimation = AnimationUtils.loadAnimation(CropActivity.this, R.anim.crop_fade_in);
             fadeInAnimation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {

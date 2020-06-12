@@ -25,7 +25,10 @@ import com.lucky.androidlearn.multithread.MultiThreadActivity
 import com.lucky.androidlearn.mvc.MVCMainActivity
 import com.lucky.androidlearn.mvp.MVPMainActivity
 import com.lucky.androidlearn.mvvm.MVVMMainActivity
+import com.lucky.androidlearn.plugin.hookplugin.HookPluginMainActivity
+import com.lucky.androidlearn.proxy.DynamicProxyActivity
 import com.lucky.androidlearn.widget.common.CommonWidgetActivity
+import com.lucky.androidlearn.window.WindowManagerActivity
 import com.lucky.kotlin.KotlinLearnMainActivity
 import com.lucky.news.core.NewsConstant
 
@@ -73,6 +76,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
     },
     COMMON_WIDGET("常见控件", NewsConstant.IMG_LOVELY, CommonWidgetActivity::class.java, true) {
         override fun channelName(): String = "widget"
+
+        override fun channelType() = "android"
+    },
+    WINDOW_MANAGER("窗口管理", NewsConstant.IMG_LOVELY, WindowManagerActivity::class.java, true) {
+        override fun channelName(): String = "window"
 
         override fun channelType() = "android"
     },
@@ -131,6 +139,18 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
 
         override fun channelType() = "android"
     },
+    DYNAMIC("动态Hook", NewsConstant.IMG_LOVELY, DynamicProxyActivity::class.java, true) {
+        override fun channelName(): String = "动态Hook"
+
+        override fun channelType() = "android"
+    },
+
+    HOOK_PLUGIN("Hook方式启动插件", NewsConstant.IMG_LOVELY, HookPluginMainActivity::class.java, true) {
+        override fun channelName(): String = "Hook方式启动插件"
+
+        override fun channelType() = "android"
+    },
+
     LAUNCH_MODE("Activity启动模式", NewsConstant.IMG_LOVELY, LaunchModeActivity::class.java, true) {
         override fun channelName(): String = "launch_mode"
 

@@ -36,6 +36,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -935,6 +936,21 @@
         <activity android:name=".loadsir.LoadSirActivity"/>
 
         <activity android:name=".loadsir.LoadSirFragmentActivity"/>
+
+        <activity android:name=".proxy.DynamicProxyActivity" />
+
+        <!--  利用Hook的方式进行插件化      -->
+        <activity android:name=".plugin.hookplugin.HookPluginMainActivity"/>
+
+        <!--  代理ProxyActivity      -->
+        <activity android:name=".plugin.hookplugin.ProxyActivity"/>
+
+        <!--  代理形式的插件化       -->
+        <activity android:name=".plugin.proxyplugin.DelegatePluginActivity"/>
+
+        <activity android:name=".window.WindowManagerActivity"/>
+
+        <activity android:name=".type.TypeAndInterfaceActivity"/>
 
         <service
             android:name=".core.service.PollService"

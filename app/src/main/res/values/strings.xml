@@ -146,5 +146,6 @@
     <string name="webview_newsdetail">WebView图文混排</string>
     <string name="aspectj_demo">AspectJ示例</string>
     <string name="hot_fix">热修复</string>
+    <string name="windowmanager">浮动窗口</string>
 </resources>
 
