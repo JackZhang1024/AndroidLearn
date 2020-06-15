@@ -194,6 +194,8 @@ android {
 
         implementation 'me.yokeyword:fragmentationx:1.0.2'
 
+        // markdown 渲染
+        implementation 'com.github.tiagohm.MarkdownView:library:0.19.0'
     }
 
     packagingOptions {
@@ -216,7 +218,6 @@ repositories {
 
 dependencies {
     implementation 'com.alibaba:fastjson:1.2.59'
-    implementation project(path: ':standard')
 }
 
 

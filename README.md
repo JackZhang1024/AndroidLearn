@@ -10,7 +10,7 @@ Android基础通常包括Java基础，Android基础两部分，Java基础是Andr
 
 Java 基础通常考察范围包括类，对象，泛型，集合，线程，反射，代理，注解，类加载过程
 
-[Java类，接口和对象](./总结/Android基础/Java类和接口.md)
+[Java类，接口和对象](./总结/Android基础/Java类和接口/Java类和接口.md)
 
 [Java泛型](./总结/Android基础/Java泛型/Java泛型.md)
 

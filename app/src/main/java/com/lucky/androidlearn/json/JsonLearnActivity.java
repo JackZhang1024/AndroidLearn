@@ -1,40 +1,28 @@
 package com.lucky.androidlearn.json;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jingewenku.abrahamcaijin.commonutil.AppResourceMgr;
 import com.lucky.androidlearn.R;
-import com.lucky.androidlearn.json.node.ZiRuViewItemData;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class JsonLearnActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "JsonLearnActivity";
     private Button mBtnParseJson;
-    private Button mBtnJson2Nodes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
         mBtnParseJson = findViewById(R.id.btn_config_json);
-        mBtnJson2Nodes = findViewById(R.id.btn_json_to_nodes);
         mBtnParseJson.setOnClickListener(this);
-        mBtnJson2Nodes.setOnClickListener(this);
     }
 
     @Override
@@ -43,9 +31,6 @@ public class JsonLearnActivity extends AppCompatActivity implements View.OnClick
             case R.id.btn_config_json:
                 //parseJson();
                 parseConfigJSON();
-                break;
-            case R.id.btn_json_to_nodes:
-                startActivity(new Intent(this, JsonToNodesActivity.class));
                 break;
         }
     }
@@ -111,9 +96,8 @@ public class JsonLearnActivity extends AppCompatActivity implements View.OnClick
                         "[{\"viewId\":17537,\"viewType\":\"TextView\",\"layoutId\":2,\"value\":\"交易状态：\"},{\"viewId\":72261,\"viewType\":\"TextView\",\"layoutId\":3,\"value\":\"成功\"}]," +
                         "[{\"viewId\":44776,\"viewType\":\"TextView\",\"layoutId\":2,\"value\":\"支付手机：\"},{\"viewId\":83874,\"viewType\":\"TextView\",\"layoutId\":3,\"value\":\"181111111111\"}]]";
         Gson gson = new Gson();
-        List<List<ZiRuViewItemData>> datas = gson.fromJson(json, new TypeToken<ArrayList<ArrayList<ZiRuViewItemData>>>() {}.getType());
-        System.out.println("size " + datas.size());
-
+        //List<List<ZiRuViewItemData>> datas = gson.fromJson(json, new TypeToken<ArrayList<ArrayList<ZiRuViewItemData>>>() {}.getType());
+        //System.out.println("size " + datas.size());
     }
 
     class Notification {

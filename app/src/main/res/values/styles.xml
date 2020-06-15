@@ -20,8 +20,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="JingDongTheme" parent="android:Theme.Light">
 
+    <style name="JingDongTheme" parent="android:Theme.Light">
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

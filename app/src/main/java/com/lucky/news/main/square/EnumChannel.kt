@@ -19,6 +19,7 @@ import com.lucky.androidlearn.jindong.JingdongActivity
 import com.lucky.androidlearn.json.JsonLearnActivity
 import com.lucky.androidlearn.launchmode.LaunchModeActivity
 import com.lucky.androidlearn.lru.LRUActivity
+import com.lucky.androidlearn.markdown.MarkdownActivity
 import com.lucky.androidlearn.math.MathActivity
 import com.lucky.androidlearn.media.MediaActivity
 import com.lucky.androidlearn.multithread.MultiThreadActivity
@@ -106,6 +107,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
     },
     EXCEPTION("Exception", NewsConstant.IMG_LOVELY, ExceptionSummaryActivity::class.java, true) {
         override fun channelName(): String = "exception"
+
+        override fun channelType() = "android"
+    },
+    MARK_DOWN("Markdown", NewsConstant.IMG_LOVELY, MarkdownActivity::class.java, true) {
+        override fun channelName(): String = "markdown"
 
         override fun channelType() = "android"
     },

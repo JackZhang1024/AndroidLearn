@@ -952,6 +952,8 @@
 
         <activity android:name=".type.TypeAndInterfaceActivity"/>
 
+        <activity android:name=".markdown.MarkdownActivity"/>
+
         <service
             android:name=".core.service.PollService"
             android:enabled="true"

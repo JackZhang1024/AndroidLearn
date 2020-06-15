@@ -22,11 +22,4 @@
         android:layout_height="wrap_content"
         android:text="Gson" />
 
-    <Button
-        android:id="@+id/btn_json_to_nodes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Json2Nodes" />
-
-
 </LinearLayout>

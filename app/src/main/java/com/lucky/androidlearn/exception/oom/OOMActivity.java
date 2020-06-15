@@ -38,8 +38,8 @@ public class OOMActivity extends AppCompatActivity {
         } catch (OutOfMemoryError e) {
             Log.e(TAG, "onOOMCreatorException: 发生OOM了啊");
         }
-
     }
+
 
 
 }
