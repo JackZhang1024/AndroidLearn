@@ -1128,4 +1128,84 @@ static class SingleTon<T> {
     结论：
     在第一段代码中，我们可能期望能够获得真实的泛型参数，但是仅仅获得了声明时泛型参数占位符。getTypeParameters 方法的 Javadoc 也是这么解释的：仅返回声明时的泛型参数。所以，通过 getTypeParamters 方法无法获得运行时的泛型信息。运行时获取泛型类型信息，其中最关键的差别是本节的变量声明多了一对大括号。有一定 Java 基础的同学都能看出本节的变量声明其实是创建了一个匿名内部类。这个类是 HashMap 的子类，泛型参数限定为了 String 和 Integer。其实在“泛型擦除”一节，我们已经提到，Java 引入泛型擦除的原因是避免因为引入泛型而导致运行时创建不必要的类。那我们其实就可以通过定义类的方式，在类信息中保留泛型信息，从而在运行时获得这些泛型信息。简而言之，Java 的泛型擦除是有范围的，即类定义中的泛型是不会被擦除的。
 
+11. 多个泛型边界
+
+    Java泛型编程的边界可以是多个，使用如<T extends A & B & C>语法来声明，其中只能有一个是类，并且只能是extends后面的第一个为类，其他的均只能为接口(和类/接口中的extends意义不同)。
+
+    ```java
+    interface Swim {
+       void swim();
+    }
+    
+    interface Fly {
+       void fly();
+    }
+    
+    static class Animal {
+        private String name;
+    
+        public Animal(String name){
+            this.name = name;
+        }
+    
+        public void setName(String name) {
+            this.name = name;
+        }
+    
+        public String getName() {
+            return name;
+        }
+    }
+    
+    static class LittleAnimal extends Animal implements Swim, Fly {
+         public LittleAnimal(String name) {
+             super(name);
+         }
+    
+         @Override
+         public void swim() {
+             System.out.println("LittleAnimal swim");
+         }
+    
+         @Override
+         public void fly() {
+             System.out.println("LittleAnimal fly");
+         }    
+    }
+    
+    // 泛型参数继承实现有多个，第一个必须是类
+    static class Duck<T extends Animal & Swim & Fly> {
+         private T t;
+    
+         public void setT(T t) {
+             this.t = t;
+         }
+    
+         public T getT() {
+             return t;
+         }
+    
+         // 对Swim接口实现类进行调用
+         public void swim(){
+             t.swim();
+         }
+         // 对Fly接口实现类进行调用
+         public void fly(){
+             t.fly();
+         }   
+    }
+           
+    Duck<LittleAnimal> animalDuck = new Duck<>();
+    animalDuck.setT(new LittleAnimal("Little Duck"));
+    animalDuck.swim();
+    animalDuck.fly();
+    ```
+
+    输出结果：
+
+    ```java 
+    LittleAnimal swim
+    LittleAnimal fly
+    ```
+
     
