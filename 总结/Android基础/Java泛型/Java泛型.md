@@ -1,12 +1,12 @@
-# Java泛型
+## Java泛型
 
-#### 泛型出现的意义：
+### 1. 泛型出现的意义
 
  Java 泛型一般常见于Java集合中，比如ArrayList、Map等，这些集合的存在可以对不同类型的对象进行统一的操作。正常情况下是可以用Object来接收任何对象，但是存在局限性，比如对某个类对象要进行一项具体的操作， 那么利用Object来接， 就存在问题，需要强制
 
 类型转换。
 
-#### 泛型擦除：
+### 2. 泛型擦除
 泛型擦除的意思就是在编译阶段将原有的泛型参数类型擦除掉了，只保留一个最初始的状态，可以认为是泛型参数就是Object，但是只能处理一般的情况。
 
 我们先观察下面一段代码，了解下什么是泛型擦除：
@@ -89,9 +89,7 @@ static class DogWatcher<T> {
 }
 ```
 
-这也是可以运行的，可以输出`bark...`
-
-但是这么写肯定不合适，我们需要的是在编译的时候就可以通过，就可以顺利调用相关对象的代码。其实我们可以进行如下修改：
+这也是可以运行的，可以输出`bark...` 但是这么写肯定不合适，我们需要的是在编译的时候就可以通过，就可以顺利调用相关对象的代码。其实我们可以进行如下修改：
 
 ```java 
 static class DogWatcher<T extends Dog> {
@@ -109,7 +107,7 @@ static class DogWatcher<T extends Dog> {
 
 通过如上修改，我们就可以不用判断类型，就可以直接调用Dog对象的方法了，因为我们使用了`边界限定符`。`T extends Dog`表示的就是T是Dog的子类，所以可以正常调用Dog的方法。
 
-#### 泛型使用场景：(泛型类，泛型接口，泛型方法)
+### 3. 泛型使用场景
 
 1. 泛型类
 
@@ -170,7 +168,7 @@ static class DogWatcher<T extends Dog> {
    }
    ```
 
-#### Extends和Super边界限定符的使用
+### 4. Extends和Super边界限定符的使用
 
 ```java 
 static class Fruit {
@@ -262,7 +260,7 @@ for (int i=0; i< destList.size(); i++){
 
 总结：PECS （Producer Extends Consumer Super），如果从集合中只是读取某个对象 就可以使用通配符 `? extends` , 如果从集合中只是写入某个对象 就可以使用通配符 `? super ` 。如果既想读取又想写入数据，那就不要使用通配符, 指定到具体的类。可以将PECS原则称之为Get Extends Put Super Principle （GEPS）原则 ，意思就是说我们在获取（读取）元素的时候使用Extends 边界限定符 如果在添加（写入）某个元素的时候 使用Super 边界限定符。
 
-#### 泛型擦除带来的问题
+### 5. 泛型擦除带来的问题
 
 泛型不能用于显式地引用运行时类型的操作之中，例如 转型，instanceOf 和 new操作（包括new一个对象或者new一个数组）
 因为所有关于参数的类型信息都在运行时丢失了，所以在运行时需要获取类型的信息的操作都无法进行工作
@@ -343,7 +341,7 @@ static class SingleTon<T> {
 }
 ```
 
-#### 常见的泛型知识总结：
+### 6. 常见的泛型知识总结
 
 1. 常见的比较类型的泛型使用 
 
@@ -410,9 +408,8 @@ static class SingleTon<T> {
 
 2. 泛型的好处
 
-   1. 不用考虑类型转换的问题 有类型转换问题在编译阶段就会报错
-
-   2. 使用泛型可以满足算法的普遍性 也就是说一种算法可以在多种数据类型下使用
+   - 不用考虑类型转换的问题 有类型转换问题在编译阶段就会报错
+   - 使用泛型可以满足算法的普遍性 也就是说一种算法可以在多种数据类型下使用
 
    ```java 
    public static void main(String[] args) {
@@ -465,120 +462,117 @@ static class SingleTon<T> {
 
 4. 泛型接口
 
-   一般情况下，实现了泛型接口，这个类必须是泛型类，而泛型类必须带有将要传递给泛型接口的类型参数
-
    ```java 
-public class MyGenType<T> implements MinMax<T>{} 正确，
+   public class MyGenType<T> implements MinMax<T>{} 正确，
    public class MyGneType implements MinMax<T> 错误
-```
-   
-第二种情况，因为没有给MyGenType声明类型参数，所以无法给MinMax接口传递类型参数, 对于这种情况，标识符T是未知的，编译器会报错。`public class MyGenType implements MinMax<Integer>` 正确，如果某个类实现了具有具体类型的泛型接口 , 那么实现类就不需要进行泛型化。
-   
-泛型接口具有的两个优势：
-   
-1. 可以针对不同的数据类型进行接口实现
-   
-   2. 可以对实现接口的数据类型进行限制
-   
+   ```
+
+    一般情况下，实现了泛型接口，这个类必须是泛型类，而泛型类必须带有将要传递给泛型接口的类型参数。 如上第二种情况，因为没有给MyGenType声明类型参数，所以无法给MinMax接口传递类型参数, 对于这种情况，标识符T是未知的，编译器会报错。`public class MyGenType implements MinMax<Integer>` 正确，如果某个类实现了具有具体类型的泛型接口 , 那么实现类就不需要进行泛型化。
+
+   泛型接口具有的两个优势：
+
+   - 可以针对不同的数据类型进行接口实现
+   - 可以对实现接口的数据类型进行限制
+
    泛型接口通用语法：
+
+   `interface interface-name<type-param-list>{}`， `type-param-list`是由逗号分隔的类型参数列表，当实现泛型接口时，必须指定类型参数，`class class-name<type-param-list> implements interface-name<type-ara-list>`  
    
-   `interface interface-name<type-param-list>{}`， `type-param-list`是由逗号分隔的类型参数列表，当实现泛型接口时，必须指定类型参数，`class class-name<type-param-list> implements interface-name<type-ara-list>`
-   
-      ```java 
+   ```java
    //泛型接口是指的是在接口的命名处后面加上类型参数
    //Comparable是类型参数的上界 Comparable指定了将要进行比较的对象类型是实现Comparable接口
    public interface MinMax<T extends Comparable<T>> {
-        T min();
-   
-        T max();
+           T min();
+      
+           T max();
    }
-      ```
+   ```
    
    总结：泛型接口实现类的命名是从左向右看的，MyMinMax实现了MinMax接口 MyMinMax类传递给MinMax接口的类型参数T，而MinMax泛型接口参数T是实现了Comparable接口，所以泛型类MyMinMax的类型参数T必须实现Comparable接口，而一旦泛型类的类型参数确定之后 就不需要在implements子句中进行指定，一旦确定了类型参数 就可以不加修改的传递给接口
    
    ```java
    public static class MyMinMax<T extends Comparable<T>> implements MinMax<T> {
-       private T[] values;
-       public MyMinMax(T[] values) {
-           this.values = values;
-       }
-   
-       @Override
-       public T min() {
-           T minVal = values[0];
-           for (int index = 1; index < values.length; index++) {
-               if (values[index].compareTo(minVal) < 0) {
-                   minVal = values[index];
-               }
-           }
-           return minVal;
-       }
-   
-       @Override
-       public T max() {
-           T maxVal = values[0];
-           for (int index = 1; index < values.length; index++) {
-               if (values[index].compareTo(maxVal) > 0) {
-                   maxVal = values[index];
-               }
-           }
-           return maxVal;
-       }
+          private T[] values;
+          public MyMinMax(T[] values) {
+              this.values = values;
+          }
+      
+          @Override
+          public T min() {
+              T minVal = values[0];
+              for (int index = 1; index < values.length; index++) {
+                  if (values[index].compareTo(minVal) < 0) {
+                      minVal = values[index];
+                  }
+              }
+              return minVal;
+          }
+      
+          @Override
+          public T max() {
+              T maxVal = values[0];
+              for (int index = 1; index < values.length; index++) {
+                  if (values[index].compareTo(maxVal) > 0) {
+                      maxVal = values[index];
+                  }
+              }
+              return maxVal;
+          }
    }  
    ```
    
-   ```java 
+   ```java
    public static class MyIntegerMinMax implements MinMax<Integer> {
-       private Integer[] values ;
-       public MyIntegerMinMax(Integer[] vals) {
-           this.values = vals;
-       }
-   
-       @Override
-       public Integer min() {
-           Integer minVal = values[0];
-           for (int index = 1; index < values.length; index++) {
-               if (values[index].compareTo(minVal) < 0) {
-                   minVal = values[index];
-               }
-           }
-           return minVal;
-       }
-   
-       @Override
-       public Integer max() {
-           Integer maxVal = values[0];
-           for (int index = 1; index < values.length; index++) {
-               if (values[index].compareTo(maxVal) > 0) {
-                   maxVal = values[index];
-               }
-           }
-           return maxVal;
-       }
+          private Integer[] values ;
+          public MyIntegerMinMax(Integer[] vals) {
+              this.values = vals;
+          }
+      
+          @Override
+          public Integer min() {
+              Integer minVal = values[0];
+              for (int index = 1; index < values.length; index++) {
+                  if (values[index].compareTo(minVal) < 0) {
+                      minVal = values[index];
+                  }
+              }
+              return minVal;
+          }
+      
+          @Override
+          public Integer max() {
+              Integer maxVal = values[0];
+              for (int index = 1; index < values.length; index++) {
+                  if (values[index].compareTo(maxVal) > 0) {
+                      maxVal = values[index];
+                  }
+              }
+              return maxVal;
+          }
    }  
    ```
    
-   ```java 
-   public static void main(String[] args) {
-       Integer[] values = new Integer[]{1, 2, 3, 4};
-       MyMinMax<Integer> myMinMax1 = new MyMinMax<Integer>(values);
-       System.out.println("MinVal " + myMinMax1.min());
-       System.out.println("MaxVal " + myMinMax1.max());
-       String[] values2 = new String[]{"zx", "yu", "dz", "ac"};
-       MyMinMax<String> myMinMax2 = new MyMinMax<>(values2);
-       System.out.println("MinValStr " + myMinMax2.min());
-       System.out.println("MaxValStr " + myMinMax2.max());
-   
-       Integer[] values3= new Integer[]{1, 2, 3, 6, 3};
-       MyIntegerMinMax myIntegerMinMax = new MyIntegerMinMax(values3);
-       System.out.println("MinValInteger "+myIntegerMinMax.min());
-       System.out.println("MaxValInteger "+myIntegerMinMax.max());
+   ```java
+    public static void main(String[] args) {
+          Integer[] values = new Integer[]{1, 2, 3, 4};
+          MyMinMax<Integer> myMinMax1 = new MyMinMax<Integer>(values);
+          System.out.println("MinVal " + myMinMax1.min());
+          System.out.println("MaxVal " + myMinMax1.max());
+          String[] values2 = new String[]{"zx", "yu", "dz", "ac"};
+          MyMinMax<String> myMinMax2 = new MyMinMax<>(values2);
+          System.out.println("MinValStr " + myMinMax2.min());
+          System.out.println("MaxValStr " + myMinMax2.max());
+      
+          Integer[] values3= new Integer[]{1, 2, 3, 6, 3};
+          MyIntegerMinMax myIntegerMinMax = new MyIntegerMinMax(values3);
+          System.out.println("MinValInteger "+myIntegerMinMax.min());
+          System.out.println("MaxValInteger "+myIntegerMinMax.max());
    }
    ```
    
    输出结果
    
-   ```java 
+   ```java
    MinVal 1
    MaxVal 4
    MinValStr ac
@@ -590,104 +584,105 @@ public class MyGenType<T> implements MinMax<T>{} 正确，
 5. 泛型层次 (泛型的层次结构)
 
    泛型类可以是类层次的一部分，就像非泛型类那样。因此，泛型类可以作为超类或子类。
-   1. 泛型和非泛型层次之间的关键区别是:  在泛型层次中，类层次中的所有子类都必须向上传递超类所有类型参数。这与必须沿着类层次向上传递构造参数类似
-
-   ```java 
-   public static class GenOne<T> {
-       T t;
-       public GenOne(T t) {
-            this.t = t;
-       }
    
-       public T getT() {
-           return t;
-       }
+   泛型和非泛型层次之间的关键区别是:  在泛型层次中，类层次中的所有子类都必须向上传递超类所有类型参数。这与必须沿着类层次向上传递构造参数类似
    
-       public void setT(T t) {
-           this.t = t;
-       }
-   }
-   
-   public static class GenTwo<T> extends GenOne<T> {
-       public GenTwo(T t) {
-           super(t);
-       }
-   }
-   
-   public static class GenThree<T, V> extends GenOne<T> {
-       private V number;
-   
-       public GenThree(T t, V num) {
-           super(t);
-           this.number = num;
-       }
-   
-       public V getNumber() {
-           return number;
-       }
-   
-       public void setNumber(V number) {
-           this.number = number;
-       }
-   }
-   
-   // 普通类型作为泛型类的超类
-   public static class NonGen {
-        private int num;
-   
-        public NonGen(int num) {
-            this.num = num;
-        }
-   
-        public int getNum() {
-            return num;
-        }
-   
-        public void setNum(int num) {
-            this.num = num;
-        }
-   }
-   
-   public static class GenFour<T> extends NonGen{
-        private T t;
-   
-        public GenFour(int num, T t) {
-            super(num);
-            this.t = t;
-        }
-   
-        public T getT() {
-            return t;
-        }
-   
-        public void setT(T t) {
-            this.t = t;
-        }
-   }
-   
-   public static class GenFive extends GenFour<String>{
-       public GenFive(int num, String s) {
-           super(num, s);
-       }
-   }
-   
+   ```java
+    public static class GenOne<T> {
+          T t;
+          public GenOne(T t) {
+               this.t = t;
+          }
+      
+          public T getT() {
+              return t;
+          }
+      
+          public void setT(T t) {
+              this.t = t;
+          }
+      }
+      
+      public static class GenTwo<T> extends GenOne<T> {
+          public GenTwo(T t) {
+              super(t);
+          }
+      }
+      
+      public static class GenThree<T, V> extends GenOne<T> {
+          private V number;
+      
+          public GenThree(T t, V num) {
+              super(t);
+              this.number = num;
+          }
+      
+          public V getNumber() {
+              return number;
+          }
+      
+          public void setNumber(V number) {
+              this.number = number;
+          }
+      }
+      
+      // 普通类型作为泛型类的超类
+      public static class NonGen {
+           private int num;
+      
+           public NonGen(int num) {
+               this.num = num;
+           }
+      
+           public int getNum() {
+               return num;
+           }
+      
+           public void setNum(int num) {
+               this.num = num;
+           }
+      }
+      
+      public static class GenFour<T> extends NonGen{
+           private T t;
+      
+           public GenFour(int num, T t) {
+               super(num);
+               this.t = t;
+           }
+      
+           public T getT() {
+               return t;
+           }
+      
+           public void setT(T t) {
+               this.t = t;
+           }
+      }
+      
+      public static class GenFive extends GenFour<String>{
+          public GenFive(int num, String s) {
+              super(num, s);
+          }
+      }
+      
    public static void main(String[] args) {
-        GenTwo<Integer> genTwo = new GenTwo<>(12);
-        System.out.println(genTwo.getT());
-   
-        GenThree<String, Integer> genTree = new GenThree<>("Hello World!", 20);
-        System.out.println(genTree.getT());
-        System.out.println(genTree.getNumber());
-   
-        GenFour<String> genFour = new GenFour<>(12, "Nice To meet You");
-        System.out.println(genFour.getT());
-        System.out.println(genFour.getNum());
+           GenTwo<Integer> genTwo = new GenTwo<>(12);
+           System.out.println(genTwo.getT());
+      
+           GenThree<String, Integer> genTree = new GenThree<>("Hello World!", 20);
+           System.out.println(genTree.getT());
+           System.out.println(genTree.getNumber());
+      
+           GenFour<String> genFour = new GenFour<>(12, "Nice To meet You");
+           System.out.println(genFour.getT());
+           System.out.println(genFour.getNum());
    }
    ```
-
+   
    输出结果：
-
-   ```java 
+   
+   ```java
    12
    Hello World!
    20
