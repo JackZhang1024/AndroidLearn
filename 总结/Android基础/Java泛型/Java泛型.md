@@ -938,4 +938,126 @@ static class SingleTon<T> {
    }
    ```
 
+9. 根据泛型类型参数创建实例
+
+   ```java 
+   interface Presenter {
+       void setView(View v);
+   
+       void fetchData();
+   }
+   
+   interface View {
+       void showLoading();
+   
+       void showSuccess();
+   
+       void showFail();
+   
+       void dismissLoading();
+   }
+   
+   static class Activity<V extends View, P extends Presenter> {
+       private V v;
+       private P p;
+   
+       public void onCreate() {
+           // 需要获取到V和P泛型类型变量的实例
+           // 根据子类传递过来的泛型类型参数 来实例化对应的变量
+           ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+           Type[] arguments = parameterizedType.getActualTypeArguments();
+           if (arguments.length > 1) {
+               Type argument1 = arguments[0];
+               Class clazz1 = ((Class) argument1).asSubclass(View.class);
+               System.out.println("clazz1 " + clazz1.getName());
+               try {
+                  v = (V) clazz1.newInstance();
+               } catch (Exception e) {
+                  e.printStackTrace();
+               }
+               Type argument2 = arguments[1];
+               Class clazz2 = ((Class) argument2).asSubclass(Presenter.class);
+               System.out.println("clazz2 " + clazz2.getName());
+               try {
+                   p = (P) clazz2.newInstance();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+                p.setView(v);
+           }
+           if (p != null) {
+                p.fetchData();
+           }
+      }
+   }
+   
+   static class MallPresenter implements Presenter {
+        private View view;
+   
+        @Override
+        public void fetchData() {
+            view.showLoading();
+            try {
+                   Thread.sleep(2000);
+                   System.out.println("Mall fetchData...");
+                   view.showSuccess();
+            } catch (Exception e){
+                   view.showFail();
+            } finally {
+                   view.dismissLoading();
+            }
+       }
+   
+       @Override
+       public void setView(View v) {
+            view = v;
+       }
+   }
+   
+   static class MallView implements View {
+        @Override
+        public void showSuccess() {
+            System.out.println("加载成功");
+        }
+   
+        @Override
+        public void showFail() {
+            System.out.println("加载失败");
+        }
+   
+        @Override
+        public void showLoading() {
+            System.out.println("正在加载....");
+        }
+   
+        @Override
+        public void dismissLoading() {
+               System.out.println("结束加载....");
+        }
+   }
+   
+   static class MallActivity extends Activity<MallView, MallPresenter> {
+        @Override
+        public void onCreate() {
+            super.onCreate();
+        }
+   }
+   
+   public static void main(String[] args) {
+        MallActivity mallActivity = new MallActivity();
+        mallActivity.onCreate();
+   }
+   ```
+
+   输出结果：
+
+   ```java 
+   clazz1 generic.GenericLearn12$MallView
+   clazz2 generic.GenericLearn12$MallPresenter
+   正在加载....
+   Mall fetchData...
+   加载成功
+   结束加载....
+   ```
+
    
