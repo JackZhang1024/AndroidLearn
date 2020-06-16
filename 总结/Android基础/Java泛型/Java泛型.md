@@ -1060,4 +1060,72 @@ static class SingleTon<T> {
    结束加载....
    ```
 
-   
+10. 运行时获取泛型信息
+
+    ```java 
+    List<String> list = new ArrayList<>();
+    Map<Integer, String> map = new HashMap<>();
+    System.out.println("list "+Arrays.toString(list.getClass().getTypeParameters()));
+    System.out.println("map "+Arrays.toString(map.getClass().getTypeParameters()));
+    ```
+
+    输出结果：
+
+    ```java 
+    list [E]
+    map [K, V]
+    ```
+
+    修改代码
+
+    ```java
+    ArrayList<String> listData = new ArrayList<String>(){};
+    HashMap<Integer, String> mapData = new HashMap<Integer, String>(){};
+    //Type type =listData.getClass().getGenericSuperclass();
+    Type type =mapData.getClass().getGenericSuperclass();
+    ParameterizedType parameterizedType = ParameterizedType.class.cast(type);
+    for (Type argument: parameterizedType.getActualTypeArguments()){
+        System.out.println("argument "+argument.getTypeName());
+    }
+    ```
+
+    输出结果：
+
+    ```java 
+    argument java.lang.Integer
+    argument java.lang.String
+    ```
+
+    一般类运行时泛型参数获取
+
+    ```java 
+    static class Holder<T> {
+         private  T t ;
+    
+         public void setT(T t) {
+             this.t = t;
+         }
+    
+         public T getT() {
+             return t;
+         }
+    }
+    
+    Holder<String> holder = new Holder<String>(){};
+    Type holderType = holder.getClass().getGenericSuperclass();
+    ParameterizedType  holderParameterizedType = ParameterizedType.class.cast(holderType);
+    for (Type argument: holderParameterizedType.getActualTypeArguments()){
+        System.out.println("holder argument "+argument.getTypeName());
+    }
+    ```
+
+    输出结果：
+
+    ```java
+    holder argument java.lang.String
+    ```
+
+    结论：
+    在第一段代码中，我们可能期望能够获得真实的泛型参数，但是仅仅获得了声明时泛型参数占位符。getTypeParameters 方法的 Javadoc 也是这么解释的：仅返回声明时的泛型参数。所以，通过 getTypeParamters 方法无法获得运行时的泛型信息。运行时获取泛型类型信息，其中最关键的差别是本节的变量声明多了一对大括号。有一定 Java 基础的同学都能看出本节的变量声明其实是创建了一个匿名内部类。这个类是 HashMap 的子类，泛型参数限定为了 String 和 Integer。其实在“泛型擦除”一节，我们已经提到，Java 引入泛型擦除的原因是避免因为引入泛型而导致运行时创建不必要的类。那我们其实就可以通过定义类的方式，在类信息中保留泛型信息，从而在运行时获得这些泛型信息。简而言之，Java 的泛型擦除是有范围的，即类定义中的泛型是不会被擦除的。
+
+    
