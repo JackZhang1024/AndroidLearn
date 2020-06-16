@@ -601,15 +601,15 @@ static class SingleTon<T> {
           public void setT(T t) {
               this.t = t;
           }
-      }
+   }
       
-      public static class GenTwo<T> extends GenOne<T> {
+   public static class GenTwo<T> extends GenOne<T> {
           public GenTwo(T t) {
               super(t);
           }
-      }
+   }
       
-      public static class GenThree<T, V> extends GenOne<T> {
+   public static class GenThree<T, V> extends GenOne<T> {
           private V number;
       
           public GenThree(T t, V num) {
@@ -624,10 +624,10 @@ static class SingleTon<T> {
           public void setNumber(V number) {
               this.number = number;
           }
-      }
+   }
       
-      // 普通类型作为泛型类的超类
-      public static class NonGen {
+   // 普通类型作为泛型类的超类
+   public static class NonGen {
            private int num;
       
            public NonGen(int num) {
@@ -641,9 +641,9 @@ static class SingleTon<T> {
            public void setNum(int num) {
                this.num = num;
            }
-      }
+   }
       
-      public static class GenFour<T> extends NonGen{
+   public static class GenFour<T> extends NonGen {
            private T t;
       
            public GenFour(int num, T t) {
@@ -658,25 +658,25 @@ static class SingleTon<T> {
            public void setT(T t) {
                this.t = t;
            }
-      }
+   }
       
-      public static class GenFive extends GenFour<String>{
+   public static class GenFive extends GenFour<String>{
           public GenFive(int num, String s) {
               super(num, s);
           }
-      }
+   }
       
    public static void main(String[] args) {
-           GenTwo<Integer> genTwo = new GenTwo<>(12);
-           System.out.println(genTwo.getT());
+          GenTwo<Integer> genTwo = new GenTwo<>(12);
+          System.out.println(genTwo.getT());
       
-           GenThree<String, Integer> genTree = new GenThree<>("Hello World!", 20);
-           System.out.println(genTree.getT());
-           System.out.println(genTree.getNumber());
+          GenThree<String, Integer> genTree = new GenThree<>("Hello World!", 20);
+          System.out.println(genTree.getT());
+          System.out.println(genTree.getNumber());
       
-           GenFour<String> genFour = new GenFour<>(12, "Nice To meet You");
-           System.out.println(genFour.getT());
-           System.out.println(genFour.getNum());
+          GenFour<String> genFour = new GenFour<>(12, "Nice To meet You");
+          System.out.println(genFour.getT());
+          System.out.println(genFour.getNum());
    }
    ```
    
