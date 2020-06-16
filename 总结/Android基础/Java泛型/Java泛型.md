@@ -1,20 +1,23 @@
-### Java泛型
+# Java泛型
 
-泛型出现的意义：
-Java 泛型一般常见于Java集合中，比如ArrayList,Map等，这些集合的存在可以对不同类型的对象进行统一的操作。正常情况下是可以用Object来接收任何对象 但是存在局限性，比如对某一类对象进行一个具体的操作，那么利用Object来接，就存在问题。
+#### 泛型出现的意义：
 
-泛型擦除：
-泛型擦除的意思就是在编译阶段将原有的泛型参数类型擦除掉了，只是一个最初始的状态，可以认为是泛型参数就是Object，但是只能处理一般的情况。
+ Java 泛型一般常见于Java集合中，比如ArrayList、Map等，这些集合的存在可以对不同类型的对象进行统一的操作。正常情况下是可以用Object来接收任何对象，但是存在局限性，比如对某个类对象要进行一项具体的操作， 那么利用Object来接， 就存在问题，需要强制
+
+类型转换。
+
+#### 泛型擦除：
+泛型擦除的意思就是在编译阶段将原有的泛型参数类型擦除掉了，只保留一个最初始的状态，可以认为是泛型参数就是Object，但是只能处理一般的情况。
 
 我们先观察下面一段代码，了解下什么是泛型擦除：
 
 ```java 
-public static void main(String[] args){
-        ArrayList<Integer> integers = new ArrayList<>();
-        ArrayList<String> strings = new ArrayList<>();
-        Class iClass = integers.getClass();
-        Class sClass = strings.getClass();
-        System.out.println("iClass == sClass "+(iClass == sClass)); 
+public static void main(String[] args) {
+    ArrayList<Integer> integers = new ArrayList<>();
+    ArrayList<String> strings = new ArrayList<>();
+    Class iClass = integers.getClass();
+    Class sClass = strings.getClass();
+    System.out.println("iClass == sClass "+(iClass == sClass)); 
 }
 ```
 
@@ -28,37 +31,37 @@ iClass == sClass true
 
 ```java
 public static void main(String[] args) {
-     	ArrayList var9 = new ArrayList();
-    	ArrayList var10 = new ArrayList();
-    	Class var11 = var9.getClass();
-    	Class var12 = var10.getClass();
-    	System.out.println("iClass == sClass " + (var11 == var12));
+    ArrayList var9 = new ArrayList();
+    ArrayList var10 = new ArrayList();
+    Class var11 = var9.getClass();
+    Class var12 = var10.getClass();
+    System.out.println("iClass == sClass " + (var11 == var12));
 }
 ```
 
 可以看到，在字节码中，`ArrayList var9 = new ArrayList();ArrayList var10 = new ArrayList();`  这两句已经没有类型相关的内容了，根据后面的输出结果来看，我们可以确定在编译之后，我们能知道的是这个就是一个集合列表而已，其他的不知道。
 
-注意：在实践中，发现Intellij Idea 中生成的字节码是还是有相关的类型信息，但是我们利用命令行编译生成字节码的时候，会发现是没有相关类型信息的。操作就是切换到src目录，执行命令`javac generic/GenericLearn09.java` 生成字节码，然后执行`java generic/GenericLearn09` 最后输出结果`iClass == sClass true`
+注意：在实践中，发现Intellij Idea 中生成的字节码是还是有相关的泛型参数信息，但是我们利用命令行编译生成字节码的时候，会发现是没有相关类型信息的。操作就是切换到src目录，执行命令`javac generic/GenericLearn09.java` 生成字节码，然后执行`java generic/GenericLearn09` 最后输出结果`iClass == sClass true`
 
 我们再来看一个泛型擦除的例子
 
 ```java 
 static class Dog {
-        public void bark() {
-            System.out.println("bark...");
-        }
+    public void bark() {
+        System.out.println("bark...");
+    }
 }
 
 static class DogWatcher<T> {
-        private T t;
+    private T t;
 
-        public DogWatcher(T t) {
-            this.t = t;
-        }
+    public DogWatcher(T t) {
+        this.t = t;
+    }
 
-        public void doBark() {
-            //t.bark(); /// 这里不能编译通过
-        }
+    public void doBark() {
+        //t.bark(); /// 这里不能编译通过
+    }
 }
 
 Dog dog = new Dog();
@@ -69,20 +72,20 @@ dogWatcher.doBark();
 观察DogWatcher，这个类并不能执行Dog对象的bark()方法，因为编译都过不去，就是因为泛型擦除。在编译后，并不能确定T类型的对象就是Dog类型的对象，也有可能是其他类型的对象。但是在运行期间是可以确定类型的，我们可以对代码进行如下修改：
 
 ```java 
- static class DogWatcher<T> {
-        private T t;
-        
-   			public DogWatcher(T t) {
+static class DogWatcher<T> {
+     private T t;
+       
+   	 public DogWatcher(T t) {
             this.t = t;
-        }
+     }
    
-        public void doBark() {
-            //t.bark(); /// 这里不能编译通过
-            if (t instanceof Dog){
-                Dog dog = (Dog)t;
-                dog.bark();
-            }
-        }
+     public void doBark() {
+         //t.bark(); /// 这里不能编译通过
+         if (t instanceof Dog) {
+               Dog dog = (Dog)t;
+               dog.bark();
+         }
+     }
 }
 ```
 
@@ -91,23 +94,22 @@ dogWatcher.doBark();
 但是这么写肯定不合适，我们需要的是在编译的时候就可以通过，就可以顺利调用相关对象的代码。其实我们可以进行如下修改：
 
 ```java 
-  static class DogWatcher<T extends Dog> {
-//    static class DogWatcher<T> {
-        private T t;
+static class DogWatcher<T extends Dog> {
+    private T t;
 
-        public DogWatcher(T t) {
-            this.t = t;
-        }
+    public DogWatcher(T t) {
+        this.t = t;
+    }
 
-        public void doBark() {
-            t.bark(); /// 这里不能编译通过
-        }
+    public void doBark() {
+        t.bark(); /// 这里可以编译通过
+    }
 }
 ```
 
-通过如上修改，我们就可以不用判断类型，就可以直接调用Dog对象的方法了，因为我们使用了`边界限定符`。T extends Dog`表示的就是`T是Dog的子类`，所以可以正常调用Dog的方法。
+通过如上修改，我们就可以不用判断类型，就可以直接调用Dog对象的方法了，因为我们使用了`边界限定符`。`T extends Dog`表示的就是T是Dog的子类，所以可以正常调用Dog的方法。
 
-在泛型这块的知识中，我们常见的泛型使用场景有这些：1. 泛型类 2. 泛型接口 3. 泛型方法
+#### 泛型使用场景：(泛型类，泛型接口，泛型方法)
 
 1. 泛型类
 
@@ -134,21 +136,21 @@ dogWatcher.doBark();
 
    ```java 
    interface IAddInterface<T> {
-           T add(T k, T v);
+       T add(T k, T v);
    }
    
    static class IntegerAdd implements IAddInterface<Integer> {
-           @Override
-           public Integer add(Integer k, Integer v) {
-               return k + v;
-           }
+        @Override
+        public Integer add(Integer k, Integer v) {
+            return k + v;
+        }
    }
    
    static class StringAdd implements IAddInterface<String> {
-           @Override
-           public String add(String k, String v) {
-               return new StringBuilder(k).append(v).toString();
-           }
+        @Override
+        public String add(String k, String v) {
+            return new StringBuilder(k).append(v).toString();
+        }
    }
    ```
 
@@ -156,19 +158,19 @@ dogWatcher.doBark();
 
    ```java 
    static class MethodWrapper {
-           // 获取泛型类型的返回数据
-           public <T> T getMethodData(T t) {
-               return t;
-           }
+       // 获取泛型类型的返回数据 泛型类型放在返回值的前面
+       public <T> T getMethodData(T t) {
+           return t;
+       }
    
-           // 设置泛型类型的参数
-           public <T> void setMethodData(T t) {
+       // 设置泛型类型的参数
+       public <T> void setMethodData(T t) {
    
-           }
+       }
    }
    ```
 
-Extends和Super边界限定符的使用
+#### Extends和Super边界限定符的使用
 
 ```java 
 static class Fruit {
@@ -189,16 +191,16 @@ static class Orange extends Fruit {
 
 }
 
-// 这样写没有问题
+// 这样写没有问题 因为指定了泛型参数就是Fruit
 ArrayList<Fruit> fruits = new ArrayList<>();
 fruits.add(new Apple());
 fruits.add(new Orange());
 
 // extends的使用
 // ? extends Fruit 的意思就是说元素的类型是Fruit的任何子类
-// 但是add的时候 添加的元素是 ？extends Fruit 相当于任何一个Fruit的子类型 
-// 结果就是add添加的时候 不知道具体要添加那种Fruit的子类 可能是子类Apple，也
-// 有可能是子类Orange  所以不能添加同时Object也不能添加
+// 但是add的时候 添加的元素是 ？extends Fruit 这个要当做一个整体来看
+// 相当于任何一个Fruit的子类型 结果就是add添加时候 不知道具体要添加那种Fruit的子类 可能是子类Apple，也
+// 有可能是子类Orange  所以不能添加，同时Object也不能添加
 // null 可以添加是因为null 是可以是任何类型
 List<? extends Fruit> fruits2 = new ArrayList<>();
 //fruits2.add(new Apple());
@@ -231,51 +233,49 @@ Object apple = fruits3.get(0);
 //extends和super的经典使用
 //JDK中Collections工具类中的copy方法
 public static <T> void copy(List<? super T> dest, List<? extends T> src) {
-      int srcSize = src.size();
-      if (srcSize > dest.size())
-            throw new IndexOutOfBoundsException("Source does not fit in dest");
-      if (srcSize < COPY_THRESHOLD || (src instanceof RandomAccess && dest instanceof RandomAccess)) {
+    int srcSize = src.size();
+    if (srcSize > dest.size())
+       throw new IndexOutOfBoundsException("Source does not fit in dest");
+    if (srcSize < COPY_THRESHOLD || (src instanceof RandomAccess && dest instanceof RandomAccess)) {
             for (int i=0; i<srcSize; i++)
                 dest.set(i, src.get(i));
-      } else {
-            ListIterator<? super T> di=dest.listIterator();
-            ListIterator<? extends T> si=src.listIterator();
-            for (int i=0; i<srcSize; i++) {
-                di.next();
-                di.set(si.next());
-            }
+    } else {
+         ListIterator<? super T> di=dest.listIterator();
+         ListIterator<? extends T> si=src.listIterator();
+         for (int i=0; i<srcSize; i++) {
+             di.next();
+             di.set(si.next());
+         }
       }
+}
+
+// 列表拷贝
+List<String> srcList = new ArrayList<>();
+srcList.add("beijing");
+srcList.add("shanghai");
+List<String> destList = Arrays.asList(new String[srcList.size()]);
+Collections.copy(destList, srcList);
+for (int i=0; i< destList.size(); i++){
+    System.out.println("element "+destList.get(i));
 }
 ```
 
-总结：
+总结：PECS （Producer Extends Consumer Super），如果从集合中只是读取某个对象 就可以使用通配符 `? extends` , 如果从集合中只是写入某个对象 就可以使用通配符 `? super ` 。如果既想读取又想写入数据，那就不要使用通配符, 指定到具体的类。可以将PECS原则称之为Get Extends Put Super Principle （GEPS）原则 ，意思就是说我们在获取（读取）元素的时候使用Extends 边界限定符 如果在添加（写入）某个元素的时候 使用Super 边界限定符。
 
-```
-// PECS （Producer Extends Consumer Super）
-// 如果从集合中只是读取某个对象 就可以使用通配符 ? extends
-// 如果从集合中只是写入某个对象 就可以使用通配符 ？super
-// 如果既想读取又想写入数据，那就不要使用通配符 指定到具体的类
-或者可以将PECS原则称之为Get Extends Put Super Principle 原则 
-意思就是说我们在获取（读取）元素的时候使用Extends 边界限定符 如果在添加（写入）某个元素的时候 使用Super 边界限定符
-```
+#### 泛型擦除带来的问题
 
-```
-// 泛型的使用场景？？？
-// 泛型擦除带来的问题
-// 泛型不能用于显式地引用运行时类型的操作之中，例如 转型，instanceOf 和 new操作（包括new一个对象或者new一个数组）
-// 因为所有关于参数的类型信息都在运行时丢失了，所以在运行时需要获取类型的信息的操作都无法进行工作
-// 如下：
-// if (obj instance T)
-// T t = new T()
-// T[] ts = new T[6]
+泛型不能用于显式地引用运行时类型的操作之中，例如 转型，instanceOf 和 new操作（包括new一个对象或者new一个数组）
+因为所有关于参数的类型信息都在运行时丢失了，所以在运行时需要获取类型的信息的操作都无法进行工作
+如下：
+
+```java if (obj instance T)
+if (obj instance T) // 不能通过编译
+T t = new T() // 不能通过编译
+T[] ts = new T[6] // 不能通过编译
 ```
 
-```
-// 解决擦除带来的问题
-// 1. 解决instanceOf
-// 使用instanceOf 会失败，因为类型信息已经被擦除，因此我们可以引入类型标签 Class<T>
-// 就可以动态的 isInstance().
-```
+解决擦除带来的问题
+1. 解决instanceOf问题，使用instanceOf 会失败，因为类型信息已经被擦除，因此我们可以引入类型标签 `Class<T>`就可以动态的 isInstance().
 
 ```java
 static class A {}
@@ -283,21 +283,21 @@ static class A {}
 static class B extends A {}
 
 static class TestInstance<T> {
-   private Class<T> t;
+    private Class<T> t;
 
-   public TestInstance(Class<T> t) {
-       this.t = t;
-   }
+    public TestInstance(Class<T> t) {
+        this.t = t;
+    }
 
-   public boolean compare(Object object) {
-       return t.isInstance(object);
-   }
+    public boolean compare(Object object) {
+        return t.isInstance(object);
+    }
 }
 ```
 
+2. 解决创建对象的问题，因为不能使用new关键字来创建泛型T对象，可以使用工厂来解决
+
 ```java
-// 创建类型实例
-// 解决办法是使用工厂
 interface Factory<T> {
     T create();
 }
@@ -317,8 +317,10 @@ static class ProductFactory implements Factory<String>{
    }
 }
 
-new Product<String>(new ProductFactory());
+Product product = new Product<String>(new ProductFactory());
 ```
+
+3. 解决创建泛型数组
 
 ```java 
 // 解决创建泛型数组
@@ -341,7 +343,7 @@ static class SingleTon<T> {
 }
 ```
 
-常见的泛型知识总结：
+#### 常见的泛型知识总结：
 
 1. 常见的比较类型的泛型使用 
 
@@ -386,7 +388,7 @@ static class SingleTon<T> {
         List<Dog> dogs = new ArrayList<>();
         dogs.add(new Dog(10));
         dogs.add(new Dog(2));
-        //mySortFunction接收的参数是Animal列表， 元素可以是Animal的自身或者子类 
+        //mySortFunction接收的参数是Animal列表，元素可以是Animal的自身或者子类 
         animals = mySortFunction(animals);
         //mySortFunction(dogs)方法不能执行 类型不兼容
         //为什么mySortFunction不能接收Dog列表, 期待的参数列表是Animal列表，而提供的是Dog列表，
@@ -414,20 +416,20 @@ static class SingleTon<T> {
 
    ```java 
    public static void main(String[] args) {
-           Integer[] nums = new Integer[]{1, 2, 3, 4, 6};
-           System.out.println(isIn(1, nums));
+       Integer[] nums = new Integer[]{1, 2, 3, 4, 6};
+       System.out.println(isIn(1, nums));
    
-           String[] values = new String[]{"1", "2", "3", "4"};
-           System.out.println(isIn("2", values));
+       String[] values = new String[]{"1", "2", "3", "4"};
+       System.out.println(isIn("2", values));
    }
    
    public static <T extends Comparable<T>, V extends T> boolean isIn(T t, V[] v){
-           for (V value: v){
-                if(value.equals(t)){
-                   return true;
-                }
+       for (V value: v) {
+           if(value.equals(t)) {
+              return true;
            }
-           return false;
+       }
+       return false;
    }
    ```
 
@@ -463,211 +465,223 @@ static class SingleTon<T> {
 
 4. 泛型接口
 
-   一般情况下，实现了泛型接口，这个类必须是泛型类，而泛型类必须带有将要传递给泛型接口的类型参数public class MyGenType<T> implements MinMax<T>{} 正确，public class MyGneType implements MinMax<T> 错误 因为没有给MyGenType声明类型参数，所以无法给MinMax接口传递类型参数, 对于这种情况，标识符T是未知的，编译器会报错。public class MyGenType implements MinMax<Integer> 正确，如果某个类实现了具有具体类型的泛型接口 那么实现类就不需要进行泛型化
+   一般情况下，实现了泛型接口，这个类必须是泛型类，而泛型类必须带有将要传递给泛型接口的类型参数
 
-   泛型接口具有的两个优势：
-
-   1. 可以针对不同的数据类型进行接口实现
-
+   ```java 
+public class MyGenType<T> implements MinMax<T>{} 正确，
+   public class MyGneType implements MinMax<T> 错误
+```
+   
+第二种情况，因为没有给MyGenType声明类型参数，所以无法给MinMax接口传递类型参数, 对于这种情况，标识符T是未知的，编译器会报错。`public class MyGenType implements MinMax<Integer>` 正确，如果某个类实现了具有具体类型的泛型接口 , 那么实现类就不需要进行泛型化。
+   
+泛型接口具有的两个优势：
+   
+1. 可以针对不同的数据类型进行接口实现
+   
    2. 可以对实现接口的数据类型进行限制
-
+   
    泛型接口通用语法：
-
-   interface interface-name<type-param-list>{}， type-param-list是由逗号分隔的类型参数列表，当实现泛型接口时，必须指定类型参数，class class-name<type-param-list> implements interface-name<type-ara-list>
-
+   
+   `interface interface-name<type-param-list>{}`， `type-param-list`是由逗号分隔的类型参数列表，当实现泛型接口时，必须指定类型参数，`class class-name<type-param-list> implements interface-name<type-ara-list>`
+   
       ```java 
-//泛型接口是指的是在接口的命名处后面加上类型参数
-//Comparable是类型参数的上界 Comparable指定了将要进行比较的对象类型是实现Comparable接口
-public interface MinMax<T extends Comparable<T>> {
+   //泛型接口是指的是在接口的命名处后面加上类型参数
+   //Comparable是类型参数的上界 Comparable指定了将要进行比较的对象类型是实现Comparable接口
+   public interface MinMax<T extends Comparable<T>> {
         T min();
-
+   
         T max();
-}
-
-//泛型接口实现类的命名是从左向右看的
-//MyMinMax实现了MinMax接口 MyMinMax类传递给MinMax接口的类型参数T
-//而MinMax泛型接口参数T是实现了Comparable接口
-//所以泛型类MyMinMax的类型参数T必须实现Comparable接口
-//而一旦泛型类的类型参数确定之后 就不需要在implements子句中进行指定
-//一旦确定了类型参数 就可以不加修改的传递给接口
-public static class MyMinMax<T extends Comparable<T>> implements MinMax<T> {
-        private T[] values;
-
-        public MyMinMax(T[] values) {
-            this.values = values;
-        }
-
-        @Override
-        public T min() {
-            T minVal = values[0];
-            for (int index = 1; index < values.length; index++) {
-                if (values[index].compareTo(minVal) < 0) {
-                    minVal = values[index];
-                }
-            }
-            return minVal;
-        }
-
-        @Override
-        public T max() {
-            T maxVal = values[0];
-            for (int index = 1; index < values.length; index++) {
-                if (values[index].compareTo(maxVal) > 0) {
-                    maxVal = values[index];
-                }
-            }
-            return maxVal;
-        }
- }
-
-public static class MyIntegerMinMax implements MinMax<Integer> {
-        private Integer[] values ;
-
-        public MyIntegerMinMax(Integer[] vals) {
-            this.values = vals;
-        }
-
-        @Override
-        public Integer min() {
-            Integer minVal = values[0];
-            for (int index = 1; index < values.length; index++) {
-                if (values[index].compareTo(minVal) < 0) {
-                    minVal = values[index];
-                }
-            }
-            return minVal;
-        }
-
-        @Override
-        public Integer max() {
-            Integer maxVal = values[0];
-            for (int index = 1; index < values.length; index++) {
-                if (values[index].compareTo(maxVal) > 0) {
-                    maxVal = values[index];
-                }
-            }
-            return maxVal;
-        }
-}
-
-public static void main(String[] args) {
+   }
+      ```
+   
+   总结：泛型接口实现类的命名是从左向右看的，MyMinMax实现了MinMax接口 MyMinMax类传递给MinMax接口的类型参数T，而MinMax泛型接口参数T是实现了Comparable接口，所以泛型类MyMinMax的类型参数T必须实现Comparable接口，而一旦泛型类的类型参数确定之后 就不需要在implements子句中进行指定，一旦确定了类型参数 就可以不加修改的传递给接口
+   
+   ```java
+   public static class MyMinMax<T extends Comparable<T>> implements MinMax<T> {
+       private T[] values;
+       public MyMinMax(T[] values) {
+           this.values = values;
+       }
+   
+       @Override
+       public T min() {
+           T minVal = values[0];
+           for (int index = 1; index < values.length; index++) {
+               if (values[index].compareTo(minVal) < 0) {
+                   minVal = values[index];
+               }
+           }
+           return minVal;
+       }
+   
+       @Override
+       public T max() {
+           T maxVal = values[0];
+           for (int index = 1; index < values.length; index++) {
+               if (values[index].compareTo(maxVal) > 0) {
+                   maxVal = values[index];
+               }
+           }
+           return maxVal;
+       }
+   }  
+   ```
+   
+   ```java 
+   public static class MyIntegerMinMax implements MinMax<Integer> {
+       private Integer[] values ;
+       public MyIntegerMinMax(Integer[] vals) {
+           this.values = vals;
+       }
+   
+       @Override
+       public Integer min() {
+           Integer minVal = values[0];
+           for (int index = 1; index < values.length; index++) {
+               if (values[index].compareTo(minVal) < 0) {
+                   minVal = values[index];
+               }
+           }
+           return minVal;
+       }
+   
+       @Override
+       public Integer max() {
+           Integer maxVal = values[0];
+           for (int index = 1; index < values.length; index++) {
+               if (values[index].compareTo(maxVal) > 0) {
+                   maxVal = values[index];
+               }
+           }
+           return maxVal;
+       }
+   }  
+   ```
+   
+   ```java 
+   public static void main(String[] args) {
        Integer[] values = new Integer[]{1, 2, 3, 4};
        MyMinMax<Integer> myMinMax1 = new MyMinMax<Integer>(values);
        System.out.println("MinVal " + myMinMax1.min());
        System.out.println("MaxVal " + myMinMax1.max());
-
        String[] values2 = new String[]{"zx", "yu", "dz", "ac"};
        MyMinMax<String> myMinMax2 = new MyMinMax<>(values2);
        System.out.println("MinValStr " + myMinMax2.min());
        System.out.println("MaxValStr " + myMinMax2.max());
-
+   
        Integer[] values3= new Integer[]{1, 2, 3, 6, 3};
        MyIntegerMinMax myIntegerMinMax = new MyIntegerMinMax(values3);
        System.out.println("MinValInteger "+myIntegerMinMax.min());
        System.out.println("MaxValInteger "+myIntegerMinMax.max());
-}
-      ```
+   }
+   ```
+   
+   输出结果
+   
+   ```java 
+   MinVal 1
+   MaxVal 4
+   MinValStr ac
+   MaxValStr zx
+   MinValInteger 1
+   MaxValInteger 6
+   ```
 
-输出结果：
-
-```java 
-MinVal 1
-MaxVal 4
-MinValStr ac
-MaxValStr zx
-MinValInteger 1
-MaxValInteger 6
-```
-
-5. 泛型层次
+5. 泛型层次 (泛型的层次结构)
 
    泛型类可以是类层次的一部分，就像非泛型类那样。因此，泛型类可以作为超类或子类。
    1. 泛型和非泛型层次之间的关键区别是:  在泛型层次中，类层次中的所有子类都必须向上传递超类所有类型参数。这与必须沿着类层次向上传递构造参数类似
 
    ```java 
-    public static class GenOne<T> {
-           T t;
-           public GenOne(T t) {
-               this.t = t;
-           }
+   public static class GenOne<T> {
+       T t;
+       public GenOne(T t) {
+            this.t = t;
+       }
    
-           public T getT() {
-               return t;
-           }
+       public T getT() {
+           return t;
+       }
    
-           public void setT(T t) {
-               this.t = t;
-           }
+       public void setT(T t) {
+           this.t = t;
+       }
    }
    
    public static class GenTwo<T> extends GenOne<T> {
-           public GenTwo(T t) {
-               super(t);
-           }
+       public GenTwo(T t) {
+           super(t);
+       }
    }
    
    public static class GenThree<T, V> extends GenOne<T> {
-           private V number;
+       private V number;
    
-           public GenThree(T t, V num) {
-               super(t);
-               this.number = num;
-           }
+       public GenThree(T t, V num) {
+           super(t);
+           this.number = num;
+       }
    
-           public V getNumber() {
-               return number;
-           }
+       public V getNumber() {
+           return number;
+       }
    
-           public void setNumber(V number) {
-               this.number = number;
-           }
+       public void setNumber(V number) {
+           this.number = number;
+       }
    }
    
    // 普通类型作为泛型类的超类
    public static class NonGen {
-           private int num;
+        private int num;
    
-           public NonGen(int num) {
-               this.num = num;
-           }
+        public NonGen(int num) {
+            this.num = num;
+        }
    
-           public int getNum() {
-               return num;
-           }
+        public int getNum() {
+            return num;
+        }
    
-           public void setNum(int num) {
-               this.num = num;
-           }
+        public void setNum(int num) {
+            this.num = num;
+        }
    }
    
    public static class GenFour<T> extends NonGen{
-           private T t;
+        private T t;
    
-           public GenFour(int num, T t) {
-               super(num);
-               this.t = t;
-           }
+        public GenFour(int num, T t) {
+            super(num);
+            this.t = t;
+        }
    
-           public T getT() {
-               return t;
-           }
+        public T getT() {
+            return t;
+        }
    
-           public void setT(T t) {
-               this.t = t;
-           }
+        public void setT(T t) {
+            this.t = t;
+        }
    }
    
-    public static void main(String[] args) {
-           GenTwo<Integer> genTwo = new GenTwo<>(12);
-           System.out.println(genTwo.getT());
+   public static class GenFive extends GenFour<String>{
+       public GenFive(int num, String s) {
+           super(num, s);
+       }
+   }
    
-           GenThree<String, Integer> genTree = new GenThree<>("Hello World!", 20);
-           System.out.println(genTree.getT());
-           System.out.println(genTree.getNumber());
+   public static void main(String[] args) {
+        GenTwo<Integer> genTwo = new GenTwo<>(12);
+        System.out.println(genTwo.getT());
    
-           GenFour<String> genFour = new GenFour<>(12, "Nice To meet You");
-           System.out.println(genFour.getT());
-           System.out.println(genFour.getNum());
+        GenThree<String, Integer> genTree = new GenThree<>("Hello World!", 20);
+        System.out.println(genTree.getT());
+        System.out.println(genTree.getNumber());
+   
+        GenFour<String> genFour = new GenFour<>(12, "Nice To meet You");
+        System.out.println(genFour.getT());
+        System.out.println(genFour.getNum());
    }
    ```
 
@@ -706,27 +720,27 @@ MaxValInteger 6
    }
    
    public static void main(String[] args) {
-        Gen<Integer> genInteger = new Gen<>(12);
+        Gen<Integer> genInteger   = new Gen<>(12);
         Gen2<Integer> gen2Integer = new Gen2<>(12);
-        Gen2<String> gen2String = new Gen2<>("hello");
+        Gen2<String> gen2String   = new Gen2<>("hello");
    
         if (gen2Integer instanceof Gen2<?>) {
-               System.out.println("gen2Integer is instance of Gen2");
+            System.out.println("gen2Integer is instance of Gen2");
         }
         if (gen2Integer instanceof Gen<?>){
-               System.out.println("gen2Integer is instance of Gen");
+            System.out.println("gen2Integer is instance of Gen");
         }
         if (gen2String instanceof Gen<?>){
-               System.out.println("gen2String is instance of Gen");
+            System.out.println("gen2String is instance of Gen");
         }
         if (gen2String instanceof Gen2<?>){
             System.out.println("gen2String is instance of Gen2");
         }
         if (genInteger instanceof Gen<?>){
-               System.out.println("genInteger is instance of Gen");
+            System.out.println("genInteger is instance of Gen");
         }
         if (genInteger instanceof Gen2<?>){
-               System.out.println("genInteger is instance of Gen2");
+            System.out.println("genInteger is instance of Gen2");
         }
         // 不合法的参数 因为在运行的时候并不清楚genInteger的泛型参数类型是什么
         // 所以不能进行类型转换
@@ -736,201 +750,197 @@ MaxValInteger 6
    }
    ```
 
-   `if (genInteger instanceof Gen<Integer>)` 不能通过编译的原因是泛型参数在编译的时候会被擦除，运行的时候并不能知道具体的类型。
+7. 通配符的使用
 
-   7. 通配符的使用
+   ```java 
+   public static class Stats<T extends Number> {
+        private T[] nums;
+   
+        public Stats(T[] nums) {
+            this.nums = nums;
+        }
+   
+        public double average() {
+            double sum = 0;
+            for (int index = 0; index < nums.length; index++) {
+                   sum += nums[index].doubleValue();
+            }
+            return sum;
+        }
+   
+        //使用通配符实现不同类型的泛型实例相互之间的比较
+        public boolean isSame(Stats<?> stats) {
+            if (average() == stats.average()) {
+                return true;
+            }
+            return false;
+        }
+   
+        public boolean isSame2(Stats<T> stats) {
+            if (average() == stats.average()) {
+                return true;
+            }
+            return false;
+        }
+   }
+   
+   public static void main(String[] args) {
+       Integer[] integerArrays = new Integer[]{10, 12, 13, 14};
+       Stats<Integer> integerStats = new Stats<>(integerArrays);
+   
+       Double[] doubleArrays = new Double[]{10.0, 11.0, 13.0, 16.0};
+       Stats<Double> doubleStats = new Stats<>(doubleArrays);
+       System.out.println("isSame " + integerStats.isSame(doubleStats));
+       //如果不同的类型参数的泛型类实例之间是不可以比较的
+       //但是如果使用的是通配符 则可以突破这种限制
+       //System.out.println("isSame2" + integerStats.isSame2(doubleStats));
+   }
+   ```
 
-      ```java 
-      public static class Stats<T extends Number> {
-              private T[] nums;
-      
-              public Stats(T[] nums) {
-                  this.nums = nums;
-              }
-      
-              public double average() {
-                  double sum = 0;
-                  for (int index = 0; index < nums.length; index++) {
-                      sum += nums[index].doubleValue();
-                  }
-                  return sum;
-              }
-      
-              //使用通配符实现不同类型的泛型实例相互之间的比较
-              public boolean isSame(Stats<?> stats) {
-                  if (average() == stats.average()) {
-                      return true;
-                  }
-                  return false;
-              }
-      
-              public boolean isSame2(Stats<T> stats) {
-                  if (average() == stats.average()) {
-                      return true;
-                  }
-                  return false;
-              }
-      }
-      
-      public static void main(String[] args) {
-            Integer[] integerArrays = new Integer[]{10, 12, 13, 14};
-            Stats<Integer> integerStats = new Stats<>(integerArrays);
-      
-            Double[] doubleArrays = new Double[]{10.0, 11.0, 13.0, 16.0};
-            Stats<Double> doubleStats = new Stats<>(doubleArrays);
-            System.out.println("isSame " + integerStats.isSame(doubleStats));
-            //如果不同的类型参数的泛型类实例之间是不可以比较的
-            //但是如果使用的是通配符 则可以突破这种限制
-            //System.out.println("isSame2" + integerStats.isSame2(doubleStats));
-      }
-      ```
+   输出结果：
 
-      输出结果：
+   ```java
+   isSame true
+   ```
 
-      ```java 
-      isSame true
-      ```
+8. 边界符
 
-   8. 边界符
-
-      ```java 
-      static class Coordinates<T extends TwoD> {
-              public T[] coordinates;
-      
-              public Coordinates(T[] coordinates) {
-                  this.coordinates = coordinates;
-              }
-      }
-      
-      
-      static class TwoD {
-              private int x;
-              private int y;
-      
-              public TwoD(int x, int y) {
-                  this.x = x;
-                  this.y = y;
-      }
-      
-      public int getX() {
-                  return x;
-      }
-      
-      public void setX(int x) {
-                  this.x = x;
-              }
-      
-              public int getY() {
-                  return y;
-              }
-      
-              public void setY(int y) {
-                  this.y = y;
-              }
-          }
-      
-          static class ThreeD extends TwoD {
-              private int z;
-      
-              public ThreeD(int x, int y, int z) {
-                  super(x, y);
-                  this.z = z;
-              }
-      
-              public int getZ() {
-                  return z;
-              }
-      
-              public void setZ(int z) {
-                  this.z = z;
-              }
-          }
-      
-          static class FourD extends ThreeD {
-              private int t;
-      
-              public FourD(int x, int y, int z, int t) {
-                  super(x, y, z);
-                  this.t = t;
-              }
-      
-              public int getT() {
-                  return t;
-              }
-      
-              public void setT(int t) {
-                  this.t = t;
-              }
+   ```java 
+   static class TwoD {
+        private int x;
+        private int y;
+   
+        public TwoD(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+   
+        public int getX() {
+            return x;
+   		 }
+   
+        public void setX(int x) {
+            this.x = x;
+        }
+   
+        public int getY() {
+            return y;
+        }
+   
+        public void setY(int y) {
+            this.y = y;
+        }
+   }
+   
+   static class ThreeD extends TwoD {
+       private int z;
+   
+       public ThreeD(int x, int y, int z) {
+           super(x, y);
+           this.z = z;
        }
-      
-      ```
+   
+       public int getZ() {
+           return z;
+       }
+   
+       public void setZ(int z) {
+           this.z = z;
+       }
+   }
+   
+   static class FourD extends ThreeD {
+       private int t;
+   
+       public FourD(int x, int y, int z, int t) {
+           super(x, y, z);
+           this.t = t;
+       }
+   
+       public int getT() {
+               return t;
+       }
+   
+       public void setT(int t) {
+               this.t = t;
+       }
+   }
+   
+   static class Coordinates<T extends TwoD> {
+       public T[] coordinates;
+   
+       public Coordinates(T[] coordinates) {
+            this.coordinates = coordinates;
+       }
+   }
+   ```
 
-      ```java 
-      static class BoundWildCard  {
-              public static void showXY(Coordinates<?> c) {
-                  System.out.println("X Y coordinates ");
-                  for (int index = 0; index < c.coordinates.length; index++) {
-                      int x = c.coordinates[index].getX();
-                      int y = c.coordinates[index].getY();
-                      System.out.println("x " + x + " y " + y);
-                  }
-              }
-      
-              public static void showXYZ(Coordinates<ThreeD> c) {
-              //public static void showXYZ(Coordinates<? extends ThreeD> c) {
-                  System.out.println("X Y Z coordinates ");
-                  for (int index = 0; index < c.coordinates.length; index++) {
-                      int x = c.coordinates[index].getX();
-                      int y = c.coordinates[index].getY();
-                      int z = c.coordinates[index].getZ();
-                      System.out.println("x " + x + " y " + y + " z " + z);
-                  }
-              }
-      
-              public static void showXYZT(Coordinates<? extends FourD> c) {
-                  System.out.println("X Y Z T coordinates ");
-                  for (int index = 0; index < c.coordinates.length; index++) {
-                      int x = c.coordinates[index].getX();
-                      int y = c.coordinates[index].getY();
-                      int z = c.coordinates[index].getZ();
-                      int t = c.coordinates[index].getT();
-                      System.out.println("x " + x + " y " + y + " z " + z + " t " + t);
-                  }
-              }
-      }
-      ```
+   ```java 
+   static class BoundWildCard  {
+       public static void showXY(Coordinates<?> c) {
+            System.out.println("X Y coordinates ");
+            for (int index = 0; index < c.coordinates.length; index++) {
+                   int x = c.coordinates[index].getX();
+                   int y = c.coordinates[index].getY();
+                   System.out.println("x " + x + " y " + y);
+            }
+       }
+   
+       public static void showXYZ(Coordinates<ThreeD> c) {
+            //public static void showXYZ(Coordinates<? extends ThreeD> c) {
+            System.out.println("X Y Z coordinates ");
+            for (int index = 0; index < c.coordinates.length; index++) {
+                   int x = c.coordinates[index].getX();
+                   int y = c.coordinates[index].getY();
+                   int z = c.coordinates[index].getZ();
+                   System.out.println("x " + x + " y " + y + " z " + z);
+            }
+       }
+   
+       public static void showXYZT(Coordinates<? extends FourD> c) {
+            System.out.println("X Y Z T coordinates ");
+            for (int index = 0; index < c.coordinates.length; index++) {
+                   int x = c.coordinates[index].getX();
+                   int y = c.coordinates[index].getY();
+                   int z = c.coordinates[index].getZ();
+                   int t = c.coordinates[index].getT();
+                   System.out.println("x " + x + " y " + y + " z " + z + " t " + t);
+            }
+       }
+   }
+   ```
 
-      ```java 
-      public static void main(String[] args) {
-         TwoD[] twoDS = new TwoD[]{
-                      new TwoD(10, 20),
-                      new TwoD(10, 21),
-                      new TwoD(10, 22)
-         };
-      
-         ThreeD[] threeDS = new ThreeD[]{
-                      new ThreeD(10, 20, 2),
-                      new ThreeD(10, 21, 2),
-                      new ThreeD(10, 22, 2)
-         };
-      
-         FourD[] fourDS = new FourD[]{
-                      new FourD(10, 2, 2, 1),
-                      new FourD(10, 2, 2, 2),
-                      new FourD(10, 2, 2, 3)
-         };
-         BoundWildCard.showXY(new Coordinates<>(twoDS));
-         BoundWildCard.showXY(new Coordinates<>(threeDS));
-         BoundWildCard.showXY(new Coordinates<>(fourDS));
-      
-         //有了通配符上界 <? extends ThreeD>则TwoD不能传给ShowXYZ作为参数
-         //BoundWildCard.showXYZ(new Coordinates<>(twoDS));
-         BoundWildCard.showXYZ(new Coordinates<>(threeDS));
-         BoundWildCard.showXYZ(new Coordinates<>(fourDS));
-      
-      	 // BoundWildCard.showXYZT(new Coordinates<>(threeDS));
-         BoundWildCard.showXYZT(new Coordinates<>(fourDS));
-      }
-      ```
+   ```java 
+   public static void main(String[] args) {
+      TwoD[] twoDS = new TwoD[]{
+                   new TwoD(10, 20),
+                   new TwoD(10, 21),
+                   new TwoD(10, 22)
+      };
+   
+      ThreeD[] threeDS = new ThreeD[]{
+                   new ThreeD(10, 20, 2),
+                   new ThreeD(10, 21, 2),
+                   new ThreeD(10, 22, 2)
+      };
+   
+      FourD[] fourDS = new FourD[]{
+                   new FourD(10, 2, 2, 1),
+                   new FourD(10, 2, 2, 2),
+                   new FourD(10, 2, 2, 3)
+      };
+      BoundWildCard.showXY(new Coordinates<>(twoDS));
+      BoundWildCard.showXY(new Coordinates<>(threeDS));
+      BoundWildCard.showXY(new Coordinates<>(fourDS));
+   
+      //有了通配符上界 <? extends ThreeD>则TwoD不能传给ShowXYZ作为参数
+      //BoundWildCard.showXYZ(new Coordinates<>(twoDS));
+      BoundWildCard.showXYZ(new Coordinates<>(threeDS));
+      BoundWildCard.showXYZ(new Coordinates<>(fourDS));
+   
+   	 // BoundWildCard.showXYZT(new Coordinates<>(threeDS));
+      BoundWildCard.showXYZT(new Coordinates<>(fourDS));
+   }
+   ```
 
-      
+   
