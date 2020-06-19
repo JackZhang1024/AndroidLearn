@@ -402,7 +402,7 @@ synchronzie和volatile之间区别：
 - volatile修饰的变量禁止指令重排。指令重排的意思就是说代码经过优化后，代码的执行顺序可能会发生改变。
 
 线程A执行的操作
-```
+```java
 volatile boolean isInitiated=false;
 HashMap configuraions = new HashMap();
 String configText = readConfigs(dir, fileName);
@@ -410,7 +410,7 @@ parseConfig(configuraions, configText);
 isInitiated = true;
 ```
 线程B执行的操作
-```
+```java
 while(!isInitiated){
       sleep();   
 }
@@ -422,5 +422,765 @@ readConfigs(configurations);
 Runnable没有返回值，Callable有返回值， Runnalbe可由线程池的execute方法执行，Callable由线程池的submmit方法执行，submit方法
 执行之后，返回Future<T> 类型的对象，然后通过Future<T>类型的对象的get方法就可以获取到由Callable的call方法返回的数据，
 这个过程是个阻塞过程，直到数据有返回，才会执行get方法后面的代码。
+
+### 12. 守护线程Dameon方法的使用
+```java
+private static class MyThread extends Thread {
+
+     public MyThread(String name) {
+         super(name);
+     }
+
+     @Override
+     public void run() {
+         super.run();
+         try {
+             for (int i = 0; i < 5; i++) {
+                  System.out.println("MyThread current " + i);
+                  Thread.sleep(1000);
+             }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    }
+}
+
+private static class MyDaemonThread extends Thread {
+
+    public MyDaemonThread(String name) {
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        int i = 0;
+        for (;;) {
+            try {
+                 System.out.println("DaemonThread " + (i++));
+                 Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                 e.printStackTrace();
+            }
+        }
+    }
+}
+
+public static void main(String[] args) {
+    MyThread myThread = new MyThread("线程一");
+    MyDaemonThread myDaemonThread = new MyDaemonThread("守护线程");
+    myDaemonThread.setDaemon(true); // 设置守护线程
+    myThread.start();
+    myDaemonThread.start();
+}
+```
+输出结果：
+```java
+MyThread current 0
+DaemonThread 0
+MyThread current 1
+DaemonThread 1
+DaemonThread 2
+MyThread current 2
+DaemonThread 3
+MyThread current 3
+MyThread current 4
+DaemonThread 4
+DaemonThread 5
+```
+总结：Thread对象的setDaemon()方法，参数设置为true, 可以将线程设置为守护线程，这样就能够在进程中其他所有线程结束之后才会自行结束，否则只要有一个线程还在执行，那么守护线程就不能结束。
+
+### 13. Thread.yield()方法的使用
+```java
+private static class MyThread extends Thread {
+
+     public MyThread(String name) {
+         super(name);
+     }
+
+     @Override
+     public void run() {
+         super.run();
+         try {
+             for (int i =0; i <30; i++) {
+                  System.out.println(Thread.currentThread().getName()+" current "+i);
+                  if (i == 3) {
+                     Thread.yield(); // 将CPU分给的线程一的时间让给线程二
+                  }
+                  Thread.sleep(1000);
+             }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+    }
+}
+
+private static class MyThread2 extends Thread {
+    
+    public MyThread2(String name) {
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        try {
+             for (int i =0; i <30; i++) {
+                 System.out.println(Thread.currentThread().getName()+" current "+i);
+                 Thread.sleep(300);
+             }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+
+private static MyThread myThread;
+private static MyThread2 myThread2;
+
+public static void main(String[] args) {
+    myThread = new MyThread("线程一");
+    myThread2 = new MyThread2("线程二");
+    myThread.start();
+    myThread2.start();
+}    
+```
+输出结果：
+```java
+线程一 current 0
+线程二 current 0
+线程二 current 1
+线程二 current 2
+线程二 current 3
+线程一 current 1
+线程一 current 2
+线程一 current 3
+```
+总结：通过打印结果可以看出，调用Thread.yield()方法，可以将CPU时间尽可能的让给其他线程使用。
+
+### 13. 线程join的方法使用
+```java
+private static class MyThread1 extends Thread {
+
+    public MyThread1(String name) {
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        try {
+            for (int i = 0; i < 10; i++) {
+                 System.out.println("线程名称 " + Thread.currentThread().getName() + " " + i);
+                 Thread.sleep(2000);
+                 if (i == 5) { // 当线程一数到5的时候 线程二抢占属于CPU分给线程一的时间片 执行线程二
+                        myThread2.join();
+                 }
+            }
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+}
+
+private static class MyThread2 extends Thread {
+
+    public MyThread2(String name) {
+            super(name);
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        try {
+            for (int i = 0; i < 10; i++) {
+                System.out.println("线程名称 " + Thread.currentThread().getName() + " " + i);
+                Thread.sleep(2000);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+```
+输出结果：
+```java
+线程名称 线程一 0
+线程名称 线程二 0
+线程名称 线程二 1
+线程名称 线程一 1
+线程名称 线程二 2
+线程名称 线程一 2
+线程名称 线程二 3
+线程名称 线程一 3
+线程名称 线程一 4
+线程名称 线程二 4
+线程名称 线程一 5
+线程名称 线程二 5
+线程名称 线程二 6
+线程名称 线程二 7
+线程名称 线程二 8
+线程名称 线程二 9
+线程名称 线程一 6
+线程名称 线程一 7
+线程名称 线程一 8
+线程名称 线程一 9
+```
+总结：
+在线程一计数到5的时候，线程二就开始独占CPU时间，执行线程二中的代码，只有当线程二结束之后，
+线程一才得以获取到CPU时间，继续执行线程一的代码。join方法的是执行线程插入操作，直至线程运行结束。
+### 13. ThreadLocal的使用
+```java
+private static ThreadLocal<String> mNameThreadLoacl = new ThreadLocal<>();
+private static ThreadLocal<String> mValueThreadLocal = new ThreadLocal<>();
+
+private static void doSomething() {
+    for (int index=0; index < 10; index++){
+        final String name  = "我是线程"+index;
+        final String value = "线程设置的值"+ index;
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    // 注意：这块的name本属于主线程中的，但是因为使用了threadLocal，就将name变量备份了一份到当前线程中
+                    // 这样每个线程中都会一个name的变量备份，尽管他们的数据不一样，同理 value变量也是如此
+                    // 后面的代码的意思就是说这个变量和线程是绑定了的，只要使用threadLocal的的get()方法就可以取出值来。
+                    mNameThreadLoacl.set(name);
+                    mValueThreadLocal.set(value);
+                    callA();
+                } catch (Exception e){
+                         e.printStackTrace();
+                } finally {
+                    mNameThreadLoacl.remove();
+                    mValueThreadLocal.remove();
+                }
+            }
+        }.start();
+    }
+}
+
+private static void callA(){
+     callB();
+}
+
+private static void callB(){
+     callC();
+}
+
+private static void callC(){
+    System.out.println("当前线程 "+mNameThreadLoacl.get()+"  "+mValueThreadLocal.get());
+}
+
+public static void main(String[] args) {
+    doSomething();
+}
+```
+输出结果：
+```java
+当前线程 我是线程0  线程设置的值0
+当前线程 我是线程1  线程设置的值1
+当前线程 我是线程2  线程设置的值2
+当前线程 我是线程3  线程设置的值3
+当前线程 我是线程4  线程设置的值4
+当前线程 我是线程5  线程设置的值5
+当前线程 我是线程6  线程设置的值6
+当前线程 我是线程7  线程设置的值7
+当前线程 我是线程8  线程设置的值8
+当前线程 我是线程9  线程设置的值9
+```
+总结：ThreadLocal 顾名思义就是线程本地变量，就是说将一个变量可以做成线程的本地变量，如果有多个线程，那么这个变量就在不同的线程就有不同的副本，就是在各个副本中进行修改操作也不会影响其他线程中的副本的内容，线程之间是独立的。通过调用ThreadLocal对象的set方法将变量与线程进行绑定，在该线程后面需要该变量的地方，可以通过ThreadLocal对象的get方法获取。
+
+```java
+static class Basket {
+
+    private ArrayList<String> fruits = new ArrayList<>();
+
+    public Basket() {
+
+    }
+
+    public void addFruit(String fruit) {
+        fruits.add(fruit);
+    }
+
+    public void sell() {
+        while (!fruits.isEmpty()) {
+            String fruit = fruits.remove(0);
+            System.out.println(Thread.currentThread().getName() + "卖出 " + fruit);
+        }
+    }
+}
+
+private static ThreadLocal<Basket> basketThreadLocal = new ThreadLocal<Basket>(){
+    @Override
+    protected Basket initialValue() {
+            // 设置默认的返回数据
+            Basket basket = new Basket();
+            basket.addFruit("哈密瓜");
+            return basket;
+        }
+};
+
+private static void sellFruitsByThreadLocal() {
+    BossThreadLocal boss3 = new BossThreadLocal("xiaoli");
+    BossThreadLocal boss4 = new BossThreadLocal("xiaozhang");
+    boss3.start();
+    boss4.start();
+    basketThreadLocal.get().sell();
+}
+
+static class BossThreadLocal extends Thread {
+    private String name;
+    private Basket basket;
+
+    public BossThreadLocal(String name) {
+        super(name);
+        // 在这块进行初始化 依然是在主线程中
+        // 所以不能在这块对ThreadLocal进行数据设置
+        this.name = name;
+        this.basket = new Basket();
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        if ("xiaoli".equalsIgnoreCase(name)){
+            basket.addFruit("梨");
+            // 设置绑定xiaoli线程的数据
+            basketThreadLocal.set(basket);
+        } else if ("xiaozhang".equalsIgnoreCase(name)){
+            basket.addFruit("桃");
+            basket.addFruit("橘子");
+            // 设置绑定xiaozhang线程的数据
+            basketThreadLocal.set(basket);
+        }
+        basketThreadLocal.get().sell();
+    }
+}
+
+static Basket basket = new Basket();
+public static void main(String[] args) {
+    basket.addFruit("苹果");
+    // 设置绑定主线程的数据
+    basketThreadLocal.set(basket);
+    sellFruitsByThreadLocal();
+}
+
+```
+输出结果：
+```java
+xiaoli卖出 梨
+xiaozhang卖出 桃
+xiaozhang卖出 橘子
+main卖出 苹果
+```
+如果我们注释掉xiaoli线程的basketThreadLocal.set(basket)这行代码 输出结果是
+```java
+xiaoli卖出 哈密瓜
+main卖出 苹果
+xiaozhang卖出 桃
+xiaozhang卖出 橘子
+```
+总结：如果我们初始化过ThreadLocal, 则在没ThreadLocal对象没有设置value的时候，ThreadLocal对象get方法返回的是是初始化值。
+
+### 14. 线程死锁问题
+线程死锁问题引入
+```c
+线程： 小张(书) 小红(画)
+小张说: 你把画给我 我就把书给你
+小红说: 你把书给我 我就把画给你
+小张说: 你把画给我 我就把书给你
+小红说: 你把书给我 我就把画给你
+...
+ 
+两人都不肯给对方东西，所以就僵持不下 所以形成死锁
+ 
+抽象的来看
+小张 小红都可以看做一个线程 在运行的过程中 都拥有对方所有想要的东西(锁) 但是都释东西(释放锁) 最后结果是两个线程都不能获取后续程序继续执行所需要的锁 最后都卡住了
+```
+
+```java
+private static class XiaoZhang extends Thread {
+
+    public XiaoZhang(String name) {
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        try {
+            synchronized (book) {
+                System.out.println("小张：你把画给我，我就给你书 ");
+                Thread.sleep(1000);
+                synchronized (painting) {
+                    System.out.println("小张得到了画");
+                }
+                System.out.println("小张 .....");
+            }
+        } catch (Exception e) {
+                e.getMessage();
+        }
+    }
+}
+
+private static class XiaoHong extends Thread {
+
+    public XiaoHong(String name) {
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        try {
+            // 如果要放弃死锁 则可以在小张拿到画之后再进行同步 意思就是说先让小张拿到画的锁 
+            // 所以可以让小红先不要获取画的锁 可以让小红休息10秒 然后再去获取到锁
+            // Thread.sleep(10*1000);
+            synchronized (painting) {
+                System.out.println("小红：你把书给我，我就给你画");
+                Thread.sleep(1000 * 6);
+                synchronized (book) {
+                    System.out.println("小红得到了书");
+                }
+                System.out.println("小红 .....");
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+}
+
+private static final Object book = new Object();
+private static final Object painting = new Object();
+
+public static void main(String[] args) {
+    XiaoZhang xiaoZhang = new XiaoZhang("小张");
+    XiaoHong xiaoHong = new XiaoHong("小红");
+    xiaoHong.start();
+    xiaoZhang.start();    
+}
+```
+输出结果:
+```java
+小红：你把书给我，我就给你画
+小张：你把画给我，我就给你书 
+```
+看结果就知道死锁了，我们可以在小红获取到画的锁之前，先让小红休息10秒，让小张先获取到画的锁，可以顺利拿到画，然后依次释放画的锁，书的锁。
+最后，小红可以顺利拿到画的锁，书的锁，这样就可以顺利拿到书。
+
+输出结果：
+```
+小张：你把画给我，我就给你书 
+小张得到了画
+小张 .....
+小红：你把书给我，我就给你画
+小红得到了书
+小红 .....
+```
+
+死锁的条件:
+```java
+1. 互斥条件：资源是独占的且排他使用，线程互斥使用资源，即任意时刻一个资源只能给一个线程使用，
+其他线程若申请一个资源，而该资源被另一线程占有时，则申请者等待直到资源被占有者释放。
+2. 不可剥夺条件：进程所获得的资源在未使用完毕之前，不被其他线程强行剥夺，而只能由获得该资源的线程释放。
+3. 请求和保持条件：线程每次申请它所需要的一部分资源，在申请新的资源的同时，继续占用已分配到的资源。
+4. 循环等待条件：在发生死锁时必然存在一个进程等待队列{P1,P2,…,Pn},其中P1等待P2占有的资源，P2等待P3占有的资源，…，Pn等待P1占有的资源，形成一个进程等待环路，环路中每一个线程所占有的资源同时被另一个申请，也就是前一个线程占有后一个线程所申请的资源。
+以上给出了导致死锁的四个必要条件，只要系统发生死锁则以上四个条件至少有一个成立。事实上循环等待的成立蕴含了前三个条件的成立，
+似乎没有必要列出，然而考虑这些条件对死锁的预防是有利的，因为可以通过破坏四个条件中的任何一个来预防死锁的发生。
+```
+解除死锁的方法
+个人认为最好的办法就是破除循环等待，可以先让一个线程先执行完成，然后另外一个线程再开始执行，这样不用相互等着。因为不会发生等着锁被其他线程释放这种情况，可以随意获取到锁，然后执行相关代码。
+
+### 16. JUC包相关
+- 原子整数类 
+```java
+public static void main(String[] args) throws Exception {
+    // AtomicInteger(100) 设置了初始值100
+    AtomicInteger atomicInteger = new AtomicInteger(100);
+    CountDownLatch countDownLatch = new CountDownLatch(5);
+    for (int index = 0; index < 5; index++) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1);
+                    // getAndIncrement() 返回值是没有增加之前的值
+                    //int value = atomicInteger.getAndIncrement();
+                    // incrementAndGet() 返回值是增加之后的值
+                    int value = atomicInteger.incrementAndGet();
+                    // getAndDecrement()返回值是减少之前的数值
+                    // int value = atomicInteger.getAndDecrement();
+                    // decrementAndGet()返回值是减少之后的数值
+                    //int value = atomicInteger.decrementAndGet();
+                    System.out.println(Thread.currentThread().getName()+ " value "+value);
+                    countDownLatch.countDown();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    // 等待所有的线程结束之后（countDownLatch减到0为止）才能执行countDownLatch.awati()之后的代码
+    countDownLatch.await();
+    System.out.println("atomicInteger result is " + atomicInteger.get());
+    System.out.println("主线程结束");
+}
+```
+输出结果
+```java
+Thread-2 value 101
+Thread-0 value 102
+Thread-3 value 104
+Thread-1 value 103
+Thread-4 value 105
+atomicInteger result is 105
+主线程结束
+```
+没有是用原子整数类的示例代码
+```java
+static int count = 100;
+public static void main(String[] args) throws Exception {
+    CountDownLatch countDownLatch = new CountDownLatch(5);
+    for (int index = 0; index < 5; index++) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1);
+                    count++;
+                    System.out.println(Thread.currentThread().getName()+ " value "+count);
+                    countDownLatch.countDown();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    countDownLatch.await();
+    System.out.println("count result is "+count);
+    System.out.println("主线程结束");
+}
+```
+输出结果：
+```java
+Thread-1 value 103
+Thread-4 value 105
+Thread-0 value 101
+Thread-3 value 104
+Thread-2 value 103
+count result is 105
+主线程结束
+```
+从上面结果来看，在多线程中，不使用原子类的整数相加是会出现问题的，比如103这个数值就不应该出现两次。而使用原子类的整数相加，则没有问题。
+但是根据源码来看，原子整数类并没有使用阻塞的方式来进行数据的同步，而是使用非阻塞的方式来进行，简称CAS（Compare And Set）机制。
+- 原子布尔类
+假设有两个人早期要吃饭，依次要进行起床，洗脸，刷牙，吃早餐这几个动作，要求这两个依次进行，而不是同时进行。
+```java
+private static class Person implements Runnable {
+    private String name;
+
+    public Person(String name){
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        try {
+            if (atomicBoolean.compareAndSet(false, true)) {
+                System.out.println(name+" 起床....");
+                Thread.sleep(1000);
+                System.out.println(name+" 洗脸....");
+                Thread.sleep(1000);
+                System.out.println(name+" 刷牙....");
+                Thread.sleep(1000);
+                System.out.println(name+" 吃早餐...");
+                atomicBoolean.set(false);
+            } else {
+                System.out.println(name+ " 想起床却执行不了...");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+输出结果：
+```
+李四 想起床却执行不了...
+张三 起床....
+张三 洗脸....
+张三 刷牙....
+张三 吃早餐...
+```
+```java
+/**
+* Atomically sets the value to the given updated value
+* if the current value {@code ==} the expected value.
+*
+* @param expect the expected value
+* @param update the new value
+* @return {@code true} if successful. False return indicates that
+* the actual value was not equal to the expected value.
+*/
+public final boolean compareAndSet(boolean expect, boolean update) {
+    int e = expect ? 1 : 0;
+    int u = update ? 1 : 0;
+    return unsafe.compareAndSwapInt(this, valueOffset, e, u);
+}
+```
+总结：comparetAndSet比较当前的值和expect的值，如果当前值和expect的值相同， 则将update的值进行设置，并返回true，如果不同，则不进行设置，并返回false。 
+小节开头的问题对应的代码
+```java
+private static class Person implements Runnable {
+private String name;
+private boolean flag;
+
+public Person(String name) {
+    this.name = name;
+    this.flag = true;
+}
+
+@Override
+public void run() {
+    try {
+        // true 用于保持准备重新执行compareAndSet 让没有机会执行代码块的线程有机会重新进入代码块
+        // flag 用于只执行一次代码块 
+        while (true && flag) { 
+            if (atomicBoolean.compareAndSet(false, true)) {
+                System.out.println(name + " 起床....");
+                Thread.sleep(1000);
+                System.out.println(name + " 洗脸....");
+                Thread.sleep(1000);
+                System.out.println(name + " 刷牙....");
+                Thread.sleep(1000);
+                System.out.println(name + " 吃早餐...");
+                atomicBoolean.set(false);
+                flag = false;        
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+}
+
+static AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+public static void main(String[] args) throws Exception {
+    new Thread(new Person("张三")).start();
+    new Thread(new Person("李四")).start();
+}
+```
+输出结果：
+```java
+张三 起床....
+张三 洗脸....
+张三 刷牙....
+张三 吃早餐...
+李四 起床....
+李四 洗脸....
+李四 刷牙....
+李四 吃早餐...
+```
+
+### 17. 锁相关
+- synchronzied 关键字 
+synchronized 非静态同步方法，synchronized 静态同步方法，synchronized(this) 同步代码块，
+synchronized(object) 同步代码块，synchronized(A.class) 同步代码块。大体分为两部分，一类是对象锁，一类是类锁。
+对象锁一般又分为两种情况，一种是共享变量的对象本身，this对象，一种是其他对象。类锁一般就是共享对象的类的锁。
+一般常见的问题就是说不同类型的锁在多线程的情况下对于方法或者代码块的调用问题，代码如下
+```java
+static class ShareElement {
+    private static int totalCount;
+    private final Object lock = new Object();
+
+    public ShareElement(){
+        totalCount = 0;
+    }
+
+    public synchronized void doIncrement() throws Exception{
+        System.out.println(Thread.currentThread().getName()+ " 已经进入 非静态同步方法");
+        Thread.sleep(2000);
+        totalCount += 1;
+        System.out.println(Thread.currentThread().getName()+ " 非静态同步方法..."+totalCount);
+    }
+
+    public static synchronized void doStaticIncrement() throws Exception{
+        System.out.println(Thread.currentThread().getName()+" 已经进入静态同步方法");
+        Thread.sleep(200);
+        totalCount += 1;
+        System.out.println(Thread.currentThread().getName()+" 静态同步方法..."+totalCount);
+    }
+
+    public void doIncrementOnThis() throws Exception{
+        System.out.println(Thread.currentThread().getName()+" 准备进入 this同步代码块");
+        synchronized (this){
+            System.out.println(Thread.currentThread().getName()+ " 已经进入 this 同步代码块");
+            Thread.sleep(1000);
+            totalCount += 1;
+            System.out.println(Thread.currentThread().getName()+" this同步代码块..."+totalCount);
+        }
+    }
+
+    public void doIncrementOnLock() throws Exception{
+        System.out.println(Thread.currentThread().getName()+ " 准备进入lock代码块");
+        synchronized (lock){
+            System.out.println(Thread.currentThread().getName()+ " 已经进入lock代码块");
+            Thread.sleep(300);
+            totalCount += 1;
+            System.out.println(Thread.currentThread().getName()+" lock锁同步代码块..."+totalCount);
+        }
+    }
+
+    public void doIncrementOnClassLock() throws Exception{
+        System.out.println(Thread.currentThread().getName()+" 准备进入Class代码块");
+        synchronized (ShareElement.class){
+            System.out.println(Thread.currentThread().getName()+" 已经进入Class代码块");
+            Thread.sleep(2000);
+            totalCount += 1;
+            System.out.println(Thread.currentThread().getName()+" 类锁同步代码块..."+totalCount);
+        }
+    }
+}
+
+public static void main(String[] args) throws Exception {
+        ShareElement shareElement = new ShareElement();
+        //非静态同步方法和this同步代码块用的是同一个锁，会有线程阻塞发生
+        new Thread(()->{ 
+            try { 
+                shareElement.doIncrement(); 
+            } catch (Exception e){ 
+                e.printStackTrace(); 
+            }
+        },"线程一").start();
+        new Thread(()->{ 
+            try { 
+                shareElement.doIncrementOnThis(); 
+            } catch (Exception e){ 
+                e.printStackTrace(); 
+            }
+        },"线程二").start();
+}
+```
+输出结果：
+```java
+线程一 已经进入 非静态同步方法
+线程二 准备进入 this同步代码块
+线程一 非静态同步方法...1
+线程二 已经进入 this 同步代码块
+线程二 this同步代码块...2
+```
+总结分析：
+在进入非
+- lock
+- 可重入锁 RetreentLock
+- 其他锁
+
+### 18. 常见面试题
+
+
+
 
 
