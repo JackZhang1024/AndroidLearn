@@ -422,6 +422,48 @@ readConfigs(configurations);
 Runnable没有返回值，Callable有返回值， Runnalbe可由线程池的execute方法执行，Callable由线程池的submmit方法执行，submit方法
 执行之后，返回Future<T> 类型的对象，然后通过Future<T>类型的对象的get方法就可以获取到由Callable的call方法返回的数据，
 这个过程是个阻塞过程，直到数据有返回，才会执行get方法后面的代码。
+```java
+static class PlusTask implements Callable<Integer> {
+    private Integer mMaxValue;
+
+    public PlusTask(Integer mMaxValue) {
+        this.mMaxValue = mMaxValue;
+    }
+
+    @Override
+    public Integer call() throws Exception {
+        int sum = 0;
+        for (int index = 0; index < mMaxValue; index++) {
+            sum += index;
+            Thread.sleep(200);
+        }
+        return sum;
+    }
+}
+public static void main(String[] args) {
+    ExecutorService executorService = Executors.newFixedThreadPool(2);
+    Future<Integer> plusFuture = executorService.submit(new PlusTask(20));
+    try {
+        // get()方法会一直等待
+        System.out.println("PlusResult " + plusFuture.get());
+        // get(int time, TimeUnit unit) 方法会等待指定的时间 如果没有完成 则会抛出超时异常
+        //System.out.println("PlusResult "  + plusFuture.get(6, TimeUnit.SECONDS));
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    } catch (ExecutionException e) {
+        e.printStackTrace();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    executorService.shutdown();
+    System.out.println("Done ");
+}
+```
+输出结果：
+```java
+PlusResult 190
+Done 
+```
 
 ### 12. 守护线程Dameon方法的使用
 ```java
@@ -1084,6 +1126,596 @@ public static void main(String[] args) throws Exception {
 李四 刷牙....
 李四 吃早餐...
 ```
+- 可重入锁 ReentrantLock 
+我们可以利用可重入锁进入轮流打印输出AB
+
+```java
+class A extends Thread {
+        
+    @Override
+    public void run() {
+        super.run();
+        while (true) {
+            reentrantLock.lock();
+            try {
+                System.out.println("print A");
+                Thread.sleep(1000);
+                bCondition.signal();
+                aCondition.await();
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            reentrantLock.unlock();
+        }
+    }
+}
+
+class B extends Thread {
+
+    @Override
+    public void run() {
+        super.run();
+        while (true) {
+            reentrantLock.lock();
+            try {
+                System.out.println("print B");
+                Thread.sleep(1000);
+                aCondition.signal();
+                bCondition.await();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            reentrantLock.unlock();
+        }
+    }
+}
+
+private ReentrantLock reentrantLock = new ReentrantLock();
+private Condition aCondition = reentrantLock.newCondition();
+private Condition bCondition = reentrantLock.newCondition();
+
+public static void main(String[] args) {
+    MultiThreadLearn16 multiThreadLearn16 = new MultiThreadLearn16();
+    A threadA = multiThreadLearn16.new A();
+    B threadB = multiThreadLearn16.new B();
+    threadA.start();
+    threadB.start();
+}
+```
+输出结果：
+```java
+print A
+print B
+print A
+print B
+print A
+print B
+print A
+print B
+print A
+print B
+print A
+print B
+...
+```
+总结分析：
+可重入锁利用condition对象的await方法用于释放锁并进入等待状态，直到发生异常或者被唤醒，signal通知其他线程可以获取锁了。如此，其他线程就有机会获取可重入锁，并执行
+相关代码。
+- CountDownLatch 
+CountDownLatch 我们有时会希望线程进行等待，直到一个或者多个其他任务执行完成，等待线程才会继续执行
+CountDownLatch在初始创建时带有事件计数器，在释放锁存器之前，必须发生指定数量的事件。每发生一次事件，计数器减一。当计数器达到0时，打开锁存器。
+
+关键词 锁存器 CountDownLatch countDown await
+```java
+static class WaitThread implements Runnable {
+    
+    private CountDownLatch mCountDownLatch;
+
+    public WaitThread(CountDownLatch mCountDownLatch) {
+        this.mCountDownLatch = mCountDownLatch;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("WaitThread starting....");
+            mCountDownLatch.await();
+            System.out.println("WaitThread Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+static class WorkThread implements Runnable {
+    private CountDownLatch mCountDownLatch;
+
+    public WorkThread(CountDownLatch mCountDownLatch) {
+        this.mCountDownLatch = mCountDownLatch;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            for (int index = 0; index < 5; index++) {
+                System.out.println("Index " + index);
+                Thread.sleep(1000);
+                mCountDownLatch.countDown();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public static void main(String[] args) {
+    CountDownLatch countDownLatch = new CountDownLatch(5);
+    new Thread(new WaitThread(countDownLatch));
+    new Thread(new WorkThread(countDownLatch));
+}
+```
+输出结果：
+```java
+WaitThread starting....
+Index 0
+Index 1
+Index 2
+Index 3
+Index 4
+WaitThread Done
+```
+总结分析：
+CountDownLatch适用于等待其他线程结束之后再继续执行的某种操作，比如多个线程下载某个文件，当所有的下载任务结束之后，通知用户下载完成，就可以用CountDownLatch
+来处理。
+
+- CyclicBarrier 
+
+有如下场景：统计三个人赛跑时间 等三个人都到达终点的时候才进行统计
+情景分析：
+1. 最先到达的人先等待
+2. 二个到达的人等待
+3. 第三个人到达
+4. 进行比赛成绩统计
+
+```java
+// 比赛选手
+static class Racer implements Runnable {
+    
+    private String mName;
+    private CyclicBarrier mCyclicBarrier;
+
+    public Racer(String mName, CyclicBarrier mCyclicBarrier) {
+        this.mName = mName;
+        this.mCyclicBarrier = mCyclicBarrier;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            doSomeThing();
+            mCyclicBarrier.await();
+            System.out.println("Racer " + mName + " run over  ");
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void doSomeThing() {
+        try {
+            Random random = new Random();
+            int time = random.nextInt(5) + 1;
+            Thread.sleep(time * 1000);
+            System.out.println("Racer " + mName + " 跑了 " + time + " 秒");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// 统计数据的线程
+static class StaticsThread implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("StaticsThread start working...");
+    }
+}
+
+public static void main(String[] args) {
+    CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new StaticsThread());
+    new Racer("A", cyclicBarrier);
+    new Racer("B", cyclicBarrier);
+    new Racer("C", cyclicBarrier);
+
+    // cyclicBarrier 可以重用
+    // new Racer("X", cyclicBarrier);
+    // new Racer("Y", cyclicBarrier);
+    // new Racer("Z", cyclicBarrier);
+}
+
+```
+输出结果：
+```java
+Racer A 跑了 2 秒
+Racer C 跑了 3 秒
+Racer B 跑了 4 秒
+StaticsThread start working...
+Racer B run over  
+Racer A run over  
+Racer C run over  
+```
+总结分析：
+CyclicBarrier就是用于当最后一个线程都执行了cyclicBarrier对象的await()之后，开始执行一个任务的操作。就好比赛马，当最后一匹马跑到终点之后（碰到Barrier之后），裁判会对所有赛马的成绩进行统计。CyclicBarrier(int parties, Runnable barrierAction)构造方法的第一个参数是所有线程在barrier触发之前必须调用await()方法的次数，barrierAction是当barrier被触发之后所要执行的命令，可以为空。
+
+- Exchanger
+简化两个线程之间的数据交换，exchange()方法直到被两个线程调用之后 才会成功返回，因此，exchange()方法可以同步数据的交互。
+
+```java
+// 生产者
+static class Producer implements Runnable {
+    private Exchanger<String> mExchanger;
+    private String[] fruits = new String[]{"苹果", "梨", "橘子", "草莓"};
+
+    public Producer(Exchanger<String> mExchanger) {
+        this.mExchanger = mExchanger;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            for (int index = 0; index < fruits.length; index++) {
+                String fruit = fruits[index];
+                System.out.println("producer put " + fruit);
+                mExchanger.exchange(fruit);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// 消费者
+static class Consumer implements Runnable {
+    private Exchanger<String> mExchanger;
+
+    public Consumer(Exchanger<String> mExchanger) {
+        this.mExchanger = mExchanger;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            for (int index = 0; index < 4; index++) {
+                String result = mExchanger.exchange(new String()); // 用空字符串来替换满字符串
+                System.out.println("Consumer Got " + result);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public static void main(String[] args) {
+    Exchanger<String> exchanger = new Exchanger<>();
+    new Producer(exchanger);
+    new Consumer(exchanger);
+}
+```
+输出结果：
+```java
+producer put 苹果
+Consumer Got 苹果
+producer put 梨
+producer put 橘子
+Consumer Got 梨
+Consumer Got 橘子
+producer put 草莓
+Consumer Got 草莓
+```
+总结分析：
+Exchanger用户两个线程之间的数据交换。
+
+- Phasper 
+```java
+static class PhaserThread implements Runnable {
+    private Phaser mPhaser;
+    private String mName;
+
+    public PhaserThread(Phaser mPhaser, String mName) {
+        this.mPhaser = mPhaser;
+        this.mName = mName;
+        mPhaser.register();
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        // 阶段一
+        System.out.println("Thread " + mName + " start phase01");
+        mPhaser.arriveAndAwaitAdvance(); // 通知已经到达阶段一
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 阶段二
+        System.out.println("Thread " + mName + " start phase02");
+        mPhaser.arriveAndAwaitAdvance(); // 通知已经到达阶段二
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 阶段三
+        System.out.println("Thread " + mName + " start phase03");
+        mPhaser.arriveAndDeregister(); // 到达阶段三并解除注册
+    }
+}
+
+public static void main(String[] args) {
+    int phase = 0;
+    Phaser phaser = new Phaser(1);
+    new PhaserThread(phaser, "小张");
+    new PhaserThread(phaser, "小李");
+    new PhaserThread(phaser, "小红");
+
+    phase = phaser.getPhase();
+    phaser.arriveAndAwaitAdvance(); // 导致main线程挂起 等待阶段一所有的party结束才会执行下一步
+    System.out.println("Phase " + phase + " completed ");
+
+    phase = phaser.getPhase();
+    phaser.arriveAndAwaitAdvance(); // 导致main线程挂起 等待阶段二所有的party结束才会执行下一步
+    System.out.println("Phase " + phase + " completed ");
+
+    phase = phaser.getPhase();
+    phaser.arriveAndAwaitAdvance(); // 导致main线程挂起 等待阶段三所有的party结束才会执行下一步
+    System.out.println("Phase " + phase + " completed ");
+
+    // Deregister the main thread
+    phaser.arriveAndDeregister();
+    if (phaser.isTerminated()) {
+        System.out.println("The phaser is completed");
+    }
+}
+```
+输出结果：
+```java
+Thread 小李 start phase01
+Thread 小红 start phase01
+Thread 小张 start phase01
+Phase 0 completed 
+Thread 小李 start phase02
+Thread 小张 start phase02
+Thread 小红 start phase02
+Phase 1 completed 
+Thread 小红 start phase03
+Thread 小张 start phase03
+Thread 小李 start phase03
+Phase 2 completed 
+The phaser is completed
+```
+总结分析：
+phaser用于只有执行完成一个阶段之后 才会再执行下一个阶段，执行的过程中等待其他注册的party都完成之后 才会进入下一个阶段
+
+- Semaphore 信号量
+```java
+// 增大数量线程
+static class IncreaseThread implements Runnable {
+     
+    private Semaphore mSemaphore;
+    private String name;
+
+    public IncreaseThread(Semaphore mSemaphore, String name) {
+        this.mSemaphore = mSemaphore;
+        this.name = name;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("Thread" + name + " isWaitingFor a permit");
+            mSemaphore.acquire();
+            System.out.println("Thread" + name + " 获得了 permit");
+            for (int index = 0; index < 5; index++) {
+                Shared.count++;
+                System.out.println("Increase " + Shared.count);
+                Thread.sleep(1000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Thread " + name + " release permit");
+            mSemaphore.release();
+        }
+    }
+}
+
+// 减小数量线程
+static class DecreaseThread implements Runnable {
+    private Semaphore mSemaphore;
+    private String name;
+
+    public DecreaseThread(Semaphore mSemaphore, String name) {
+        this.mSemaphore = mSemaphore;
+        this.name = name;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("Thread" + name + " isWaitingFor a permit");
+            mSemaphore.acquire();
+            System.out.println("Thread" + name + " 获得了 permit");
+            for (int index = 0; index < 5; index++) {
+                Shared.count--;
+                System.out.println("Decrease " + Shared.count);
+                Thread.sleep(1000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Thread " + name + " release permit");
+            mSemaphore.release();
+        }
+    }
+}
+
+static class Shared {
+    static int count = 0;
+}
+
+public static void main(String[] args) {
+    Semaphore semaphore = new Semaphore(1);
+    new IncreaseThread(semaphore, "A");
+    new DecreaseThread(semaphore, "B");
+}
+```
+
+输出结果：
+```java
+ThreadA isWaitingFor a permit
+ThreadA 获得了 permit
+Increase 1
+ThreadB isWaitingFor a permit
+Increase 2
+Increase 3
+Increase 4
+Increase 5
+Thread A release permit
+ThreadB 获得了 permit
+Decrease 4
+Decrease 3
+Decrease 2
+Decrease 1
+Decrease 0
+Thread B release permit
+```
+总结分析：
+利用信号量进行数据的加减不交叉。
+- Semaphor 生产者和消费者
+ 使用两个信号量对生产者和消费者线程进行管理
+ 
+```java
+ 从结果上我们可以看到get()和put()方法是同步的,put()方法执行在get()方法之前
+ 执行get()方法的时候 我们必须从ConsumeSemaphore获取许可证，不让无法继续执行
+ 在获取到ConsumeSemaphore许可证之后，我们执行消费操作，然后我们释放ProducerSemaphore许可证
+ 这样put()方法就可以继续执行执行put()方法 我们先要从ProducerSemaphore许可证 然后执行put()操作，执行完成后
+ 释放ConsumerSemaphore许可证 这样get()方法就可以继续执行,这样的"给予获取"机制确保了在每次put()之后，都会有get()方法紧跟着执行
+ ConsumeSemaphore初始化未没有许可证，保证了put()方法先执行。信号量可以初始化同步状态是信号量更为强大的一方面。  
+```
+
+```java
+static class Plate {
+    private int num;
+    private Semaphore mConsumerSemaphore = new Semaphore(0); // 参数为0表示没有获取到信号量的许可证
+    private Semaphore mProducerSemaphore = new Semaphore(1);
+
+    public void get() {
+        try {
+            System.out.println("Consumer is ready to acquire permits ");
+            mConsumerSemaphore.acquire();
+            System.out.println("Consumer acquire permits");
+            Thread.sleep(1000);
+            System.out.println("Plate consume Num " + num);
+            mProducerSemaphore.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void put(int num) {
+        try {
+            System.out.println("Producer is ready to acquire permits");
+            mProducerSemaphore.acquire();
+            System.out.println("Producer acquire permits");
+            this.num = num;
+            Thread.sleep(1000);
+            System.out.println("Plate produce Num " + num);
+            mConsumerSemaphore.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// 消费者
+static class Consumer implements Runnable {
+    private Plate mPlate;
+
+    public Consumer(Plate mPlate) {
+        this.mPlate = mPlate;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        for (int index = 0; index < 4; index++) {
+                mPlate.get();
+        }
+    }
+}
+
+// 生产者
+static class Producer implements Runnable {
+    private Plate mPlate;
+
+    public Producer(Plate mPlate) {
+        this.mPlate = mPlate;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        for (int index = 0; index < 4; index++) {
+            mPlate.put(index);
+        }
+    }
+}
+public static void main(String[] args) {
+    Plate plate = new Plate();
+    new Thread(new Consumer(plate));
+    new Thread(new Producer(plate));
+}
+```
+
+输出
+```java
+Consumer is ready to acquire permits 
+Producer is ready to acquire permits
+Producer acquire permits
+Plate produce Num 0
+Consumer acquire permits
+Producer is ready to acquire permits
+Plate consume Num 0
+Consumer is ready to acquire permits 
+Producer acquire permits
+Plate produce Num 1
+Producer is ready to acquire permits
+Consumer acquire permits
+Plate consume Num 1
+Consumer is ready to acquire permits 
+Producer acquire permits
+Plate produce Num 2
+Producer is ready to acquire permits
+Consumer acquire permits
+Plate consume Num 2
+Consumer is ready to acquire permits 
+Producer acquire permits
+Plate produce Num 3
+Consumer acquire permits
+Plate consume Num 3
+```
+总结分析：可以看到两个线程是交替进行的，从而实现生产者和消费者模型。
 
 ### 17. 锁相关
 - synchronzied 关键字 
