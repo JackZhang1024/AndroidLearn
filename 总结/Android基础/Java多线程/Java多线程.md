@@ -1173,10 +1173,235 @@ public static void main(String[] args) throws Exception {
 线程二 this同步代码块...2
 ```
 总结分析：
-在进入非
-- lock
-- 可重入锁 RetreentLock
+在进入非静态同步方法之后，可以线程二也准备进入 this 同步代码块 但是执行到this同步代码块是走在了最后，其实线程二只需要1000毫秒就执行完了，但是因为线程二因为线程一提前获取到对象锁，只能等待线程一释放锁之后才能继续执行。 
+```java
+// 不同的锁 线程之间不存在等待锁的情况，该干什么干什么
+new Thread(()->{ 
+    try { 
+        shareElement.doIncrement(); 
+    } catch (Exception e) { 
+        e.printStackTrace(); 
+    }
+},"线程一").start();
+new Thread(()->{
+     try { 
+         shareElement.doIncrementOnLock(); 
+     } catch (Exception e){ 
+         e.printStackTrace(); 
+    }
+},"线程二").start();
+```
+输出结果：
+```
+线程一 已经进入 非静态同步方法
+线程二 准备进入lock代码块
+线程二 已经进入lock代码块
+线程二 lock锁同步代码块...1
+线程一 非静态同步方法...2
+```
+总结分析：
+因为是不同的锁（线程一的锁是this对象锁，线程二的锁是lock对象锁），所以线程之间是没有阻塞的情况发生。
+```java
+// 同是类的锁 就会发生线程阻塞等待的问题
+new Thread(()->{ 
+    try { 
+        shareElement.doIncrementOnClassLock(); 
+    } catch (Exception e){ 
+        e.printStackTrace(); 
+    }
+},"线程一").start();
+new Thread(()->{ 
+    try { 
+        ShareElement.doStaticIncrement(); 
+    } catch (Exception e){ 
+            e.printStackTrace(); 
+    }
+},"线程二").start();
+```
+输出结果：
+```java
+线程一 准备进入Class代码块
+线程一 已经进入Class代码块
+线程一 类锁同步代码块...1
+线程二 已经进入静态同步方法
+线程二 静态同步方法...2
+```
+总结分析：
+因为是相同的锁（一个是类锁，一个是静态代码方法上锁），所以会发生谁先获取到锁，谁先执行，其他的线程只有等待该线程释放锁之后
+才有机会获取到锁，然后执行相关代码。
+
+综上：只有不同的锁才不发生线程阻塞的情况，相同的锁会发生阻塞等待情况。
+- 公平锁和非公平锁Lock 
+
+Lock的一般语法：
+```java
+Lock lock = new ReentrantLock();
+lock.lock();
+try {
+   doSomethings();
+} catch(Exception e){
+   e.printStackTrace();
+} finally {
+  lock.unlock();
+}
+```
+锁lock分为“公平锁”和“非公平锁”：
+1. 公平锁：表示线程获取锁的顺序是按照线程加锁的顺序来分配的(就是按照启动的顺序来的)，即先来先得FIFO先进先出的顺序。
+2. 非公平锁：就是一种获取锁的抢占机制，是随机获得锁的。和公平锁不一样的就是先来的不一定先得到锁。这个方式可能造成某些线程一直拿不到锁，结果就是不公平的。
+
+synchronized是Java中的关键字，使用synchronized能够防止多个线程同时并发访问程序的临界区资源。
+synchronized进行同步有四种情况：
+- 第一种：修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括号{}括起来的代码，作用的对象是调用这个代码块的对象；
+- 第二种：修饰一个方法：被修饰的方法称为同步方法，其作用的范围是整个方法，作用的对象是调用这个方法的对象；
+- 第三种：修饰一个静态的方法：其作用的范围是整个静态方法，作用的对象是这个类的所有对象；
+- 第四种：修饰一个类：其作用的范围是synchronized后面括号括起来的部分，作用主的对象是这个类的所有对象。
+3. Lock与synchronized的对比
+ 1）Lock是一个接口，而synchronized是Java中的关键字，synchronized是内置的语言实现；
+ 2）synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；
+ 而Lock在发生异常时，如果没有主动通过unLock()去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁；
+ 3）Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；
+ 4）通过Lock可以知道有没有成功获取锁，而synchronized却无法办到。
+ 5）Lock可以提高多个线程进行读操作的效率。
+ 在性能上来说，如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），
+ 此时Lock的性能要远远优于synchronized。因此，在具体使用时要根据适当情况选择。
+
+ ```java
+// 公平锁
+public static class FairReentrantLock implements Runnable {
+    private static final ReentrantLock mReentrantLock = new ReentrantLock(true);
+    private static int count = 0;
+
+    @Override
+    public void run() {
+        System.out.println("FairReentrantLock " + Thread.currentThread().getName()+" start");
+        try {
+            mReentrantLock.lock();
+            System.out.println("FairReentrantLock " + Thread.currentThread().getName()+" access lock");
+            count++;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mReentrantLock.unlock();
+        }
+        System.out.println("FairReentrantLock " + Thread.currentThread().getName()+" result "+count);
+    }
+}
+private static void testFairReentrantLock(){
+    for (int index =0; index< 10; index++){
+        new Thread(new FairReentrantLock()).start();
+    }
+}
+
+public static void main(String[] args) {
+    testFairReentrantLock();
+}
+
+```
+输出结果
+```java
+FairReentrantLock Thread-0 start
+FairReentrantLock Thread-1 start
+FairReentrantLock Thread-0 access lock
+FairReentrantLock Thread-2 start
+FairReentrantLock Thread-1 access lock
+FairReentrantLock Thread-0 result 1
+FairReentrantLock Thread-2 access lock
+FairReentrantLock Thread-2 result 3
+FairReentrantLock Thread-1 result 2
+FairReentrantLock Thread-3 start
+FairReentrantLock Thread-3 access lock
+FairReentrantLock Thread-4 start
+FairReentrantLock Thread-3 result 4
+FairReentrantLock Thread-4 access lock
+FairReentrantLock Thread-4 result 5
+FairReentrantLock Thread-5 start
+FairReentrantLock Thread-5 access lock
+FairReentrantLock Thread-5 result 6
+FairReentrantLock Thread-6 start
+FairReentrantLock Thread-6 access lock
+FairReentrantLock Thread-6 result 7
+FairReentrantLock Thread-7 start
+FairReentrantLock Thread-7 access lock
+FairReentrantLock Thread-7 result 8
+FairReentrantLock Thread-8 start
+FairReentrantLock Thread-8 access lock
+FairReentrantLock Thread-8 result 9
+FairReentrantLock Thread-9 start
+FairReentrantLock Thread-9 access lock
+FairReentrantLock Thread-9 result 10
+```
+总结分析：
+从多次试验的结果来看，先启动（先执行到run方法里面）的线程是先获取到锁，后启动的线程后获取到锁。
+
+```java
+非公平锁
+public static class UnFairReentrantLock implements Runnable {
+    private static final ReentrantLock mReentrantLock = new ReentrantLock(false);
+    private static int count = 0;
+
+    @Override
+    public void run() {
+        System.out.println("UnFairReentrantLock " + Thread.currentThread().getName()+" start");
+        try {
+            mReentrantLock.lock();
+            System.out.println("UnFairReentrantLock " + Thread.currentThread().getName()+" access lock");
+            count++;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mReentrantLock.unlock();
+        }
+        System.out.println("UnFairReentrantLock " + Thread.currentThread().getName()+" result "+count);
+    }
+}
+
+private static void testUnFairReentrantLock(){
+    for (int index =0; index< 10; index++){
+        new Thread(new UnFairReentrantLock()).start();
+    }
+}
+
+public static void main(String[] args) {
+    testUnFairReentrantLock();
+}
+```
+输出结果：
+```java
+UnFairReentrantLock Thread-1 start
+UnFairReentrantLock Thread-0 start
+UnFairReentrantLock Thread-2 start
+UnFairReentrantLock Thread-3 start
+UnFairReentrantLock Thread-1 access lock
+UnFairReentrantLock Thread-1 result 1
+UnFairReentrantLock Thread-4 start
+UnFairReentrantLock Thread-2 access lock
+UnFairReentrantLock Thread-2 result 2
+UnFairReentrantLock Thread-5 start
+UnFairReentrantLock Thread-0 access lock
+UnFairReentrantLock Thread-0 result 3
+UnFairReentrantLock Thread-3 access lock
+UnFairReentrantLock Thread-4 access lock
+UnFairReentrantLock Thread-3 result 4
+UnFairReentrantLock Thread-6 start
+UnFairReentrantLock Thread-6 access lock
+UnFairReentrantLock Thread-4 result 5
+UnFairReentrantLock Thread-5 access lock
+UnFairReentrantLock Thread-6 result 6
+UnFairReentrantLock Thread-5 result 7
+UnFairReentrantLock Thread-7 start
+UnFairReentrantLock Thread-7 access lock
+UnFairReentrantLock Thread-8 start
+UnFairReentrantLock Thread-7 result 8
+UnFairReentrantLock Thread-8 access lock
+UnFairReentrantLock Thread-8 result 9
+UnFairReentrantLock Thread-9 start
+UnFairReentrantLock Thread-9 access lock
+UnFairReentrantLock Thread-9 result 10
+```
+总结分析：
+线程Thread-0比线程Thread-2更早执行，但是Thread-0获取锁的时间比Thread-2获取锁的时间晚。由此可以得到，非公平锁不能保证线程获取锁的顺序是按照线程的启动顺序来执行的。
 - 其他锁
+
 
 ### 18. 常见面试题
 
