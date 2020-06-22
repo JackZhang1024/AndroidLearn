@@ -1,8 +1,6 @@
 ## Java 多线程
 
-[toc]
-
-### 1. 线程和线程状态
+### 一. 线程和线程状态
 ```java
 /**
  * A thread state.  A thread can be in one of the following states:
@@ -35,7 +33,7 @@
  */ 
 ```
 线程的状态有六种 1. NEW出来的时候 创建状态但是还没有启动 2. RUNNABLE状态其实包含了两种情况 Ready和Running 这两种细分状态，这两种状态统称为RUNNABLE状态。Ready状态就是线程在进入Running转态之后又会因为时间片切换，CPU把资源用到了别处，此时就进入了Ready状态，一旦该线程又获得了时间片，则会又进入Running转态。 3. WAITING状态，由于Sleep, Wait , 被其他线程Join之后，进入的等待状态，4.BLOCKED状态，线程由于处于等待获取锁的情况，此时处于BLOCKED状态，6.Terminated, 线程运行结束或者运行过程中发生异常，进行死亡。
-### 2. 线程start方法和run方法的区别
+### 二. 线程start方法和run方法的区别
 两种方法的区别
 - start：
 
@@ -46,7 +44,7 @@
 - 两种方式的比较 ：
 
      实际中往往采用实现Runable接口，一方面因为java只支持单继承，继承了Thread类就无法再继续继承其它类，而且Runable接口只有一个run方法；另一方面通过结果可以看出实现Runable接口才是真正的多线程。
-### 3. 同步通信机制
+### 三. 同步通信机制
 可以理解成线程之间互相沟通的机制，如一个线程通知另外一个线程开始执行某个方法，或者通过一个共享变量的变化来控制各自线程任务的执行。
 
 - 同步方法机制
@@ -150,7 +148,7 @@ addBook 16
 上面的机制就是线程ThreadA添加书之后，线程ThreadB去借书，永远保证书的个数不会发生错误, 意思就是说添加书和借书
 这两个操作永远不会同时进行。
 
-### 4. wait()和notify()机制（显式通信方式）
+### 四. wait()和notify()机制（显式通信方式）
 ```Java
 private static class Bread {
     int count;
@@ -266,7 +264,7 @@ public static void main(String[] args) {
 ```
 
 
-### 5. 管道机制
+### 五. 管道机制
 ```java 
 // 向输出管道缓冲区中输出内容 然后输入管道从缓存区中读取内容
 static class WriteThread extends Thread {
@@ -352,14 +350,14 @@ public static void main(String[] args) {
 ReadThread: Hello, I'm from WriteThread
 ```
 
-### 6. 线程池相关
+### 六. 线程池相关
 首先说明下线程池的好处
 - 重用线程   能够重用线程池中的线程，避免因为线程的创建和销毁所带来的性能开销。
 - 控制并发数  有效的控制线程池的最大并发数，避免了大量的线程之间因为互相抢占资源而导致的阻塞现象
 - 对线程进行管理 能够对线程进行有效的管理，并提供了定时执行和周期执行等功能。
 
 常见的线程池是利用Executors的静态方法产生的线程池，Fixed, Cached, Single, Schedule四种线程池
-### 7. ThreadPoolExecutor
+### 七. ThreadPoolExecutor
 ```java
 ThreadPoolExecutor构造方法
 
@@ -371,14 +369,106 @@ unit 设置了keepAliveTime的时间单位，可以是毫秒，也可以是秒�
 对象都会被提交存储到这个队列中，threadFactory 则是为线程池提供创建新的线程，ThreadFactory是一个接口，只有一个newThread(Runnable r)
 方法。
 
-### 8. ThreadPoolExecutor的执行规则
+### 八. ThreadPoolExecutor的执行规则
 - 如果线程池中的线程数量小于核心线程数量，则会直接启动一个核心线程来执行任务。
 - 如果线程池中的线程数量大于核心线程数量，那么任务就会被添加到任务队列中等待执行。
 - 如果在第二部的情况下无法将任务插入到任务队列中，这是因为任务对列已经满了，这时候如果线程的数量未达到线程池规定的最大数量，则立刻启动一个非核心线程来执行任务。
 - 如果步骤3的中线程数量已经达到线程池规定的最大数量，则会执行拒绝策略，拒绝执行次任务，ThreadPoolExecutor
 会调用RejectionExeceptionHandler的rejectExecption方法来通知调用者。
 
-### 9. 常见的四种线程池
+```java
+public static void main(String[] args) {
+    int coreSize = 4;
+    int maxThreadSize = 10;
+    long keepAliveTime = 2;
+    //  // 4 + 队列容量（>90） + 临时线程数量（6） >= 任务总数（100）
+    //  1. 当任务队列容量>= (96 = 100-4)的时候 不会出现非核心线程处理任务
+    //  2. 当任务队列容量>= (90 = 100-4-6)的时候 会出现非核心线程处理任务
+    //  3. 当任务队列容量< (90 = 100-4-6)的时候 会出现拒绝执行问题
+    //  当队列容量小于等于89的时候 就会立刻出现拒绝问题 同时可以看到有6个其他非核心线程出现并执行任务
+    //  Exception in thread "main" java.util.concurrent.RejectedExecutionException: Task thread.threadpool.  
+    //  ThreadPoolLearn023$1@1d44bcfa rejected from java.util.concurrent.ThreadPoolExecutor@266474c2[Running, pool size = 10, active 
+    //  threads = 10, queued tasks = 89, completed tasks = 0]
+    //	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
+    //	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
+    //	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
+    //	at thread.threadpool.ThreadPoolLearn023.main(ThreadPoolLearn023.java:44)
+    int capacity = 90;
+    LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>(capacity);
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(coreSize, maxThreadSize, keepAliveTime,
+        TimeUnit.SECONDS, linkedBlockingQueue);
+        for (int index = 0; index < 100; index++) {
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        System.out.println("ThreadName "+Thread.currentThread().getName());
+                        Thread.sleep(3000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+            }
+        });
+    }
+}
+```
+当变量capacity = 90的时候
+
+输出结果：
+```java
+ThreadName pool-1-thread-2
+ThreadName pool-1-thread-1
+ThreadName pool-1-thread-3
+ThreadName pool-1-thread-4
+ThreadName pool-1-thread-5
+ThreadName pool-1-thread-6
+ThreadName pool-1-thread-7
+ThreadName pool-1-thread-8
+ThreadName pool-1-thread-9
+ThreadName pool-1-thread-10
+```
+当变量capacity = 89的时候
+
+输出结果：
+```java
+ThreadName pool-1-thread-1
+ThreadName pool-1-thread-2
+ThreadName pool-1-thread-3
+ThreadName pool-1-thread-4
+ThreadName pool-1-thread-5
+ThreadName pool-1-thread-6
+ThreadName pool-1-thread-7
+ThreadName pool-1-thread-8
+ThreadName pool-1-thread-9
+ThreadName pool-1-thread-10
+Exception in thread "main" java.util.concurrent.RejectedExecutionException: Task thread.threadpool.ThreadPoolLearn023$1@1d44bcfa rejected from java.util.concurrent.ThreadPoolExecutor@266474c2[Running, pool size = 10, active threads = 10, queued tasks = 89, completed tasks = 0]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
+	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
+	at thread.threadpool.ThreadPoolLearn023.main(ThreadPoolLearn023.java:51)
+ThreadName pool-1-thread-3
+ThreadName pool-1-thread-2
+```
+
+当变量capacity = 96的时候
+输出结果：
+
+```java
+ThreadName pool-1-thread-1
+ThreadName pool-1-thread-2
+ThreadName pool-1-thread-3
+ThreadName pool-1-thread-4
+ThreadName pool-1-thread-2
+ThreadName pool-1-thread-1
+ThreadName pool-1-thread-4
+ThreadName pool-1-thread-3
+```
+
+总结分析：
+从上面的结果来看，当任务队列中的容量足够大的时候（超过任务数的时候），不会出现拒绝问题；当任务队列的容量大于任务数目减去核心线程数的时候，不会出现非核心线程处理任务；当任务队列的容量大于任务数目减去最大线程数的时候，会出非核心线程处理任务的情况；当任务队列的容量小于
+任务数目减去最大线程数的时候，会发生线程拒绝执行任务的情况。
+
+### 九. 常见的四种线程池
 线程池分为四类：FixedThreadPool, CachedThreadPool , SingleThreadExecutor, ScheduledThreadPool
 - FixedThreadPool 是一种线程数量固定的线程池，当线程处于空闲的时候，并不会回收，当所有的线程都处于活动状态的时候，如果有新的任务到来，会将任务放到队列中进行等待，直到有空闲的线程释放出来，才继续执行新的任务，并且其任务队列的大小也没有限制。
 - CachedThreadPool 是一种线程数量不固定的线程池，它只有非核心线程，并且最大线程数为Integer.MAX_VALUE,这样当线程池的线程都处于活动状态时，新任务到来时会由线程池创建新的线程来处理，否则就会利用空闲的线程进行处理。线程池中的空闲线程有超时机制，60秒，超过60秒的闲置线程就会被回收。从CachedThreadPool的性质来看，这个线程池适合用于来执行数量多但是执行时间段的任务，当整个线程池都处于闲置状态时，线程都会应为超时停止，这个时候CachedThreadPool
@@ -386,7 +476,148 @@ unit 设置了keepAliveTime的时间单位，可以是毫秒，也可以是秒�
 - SingleThreadExecutor 是只有一个核心线程的线程池，能确保所有的任务都在同一个线程中按顺序执行。
 - ScheduledThreadPool  是核心线程数量固定的，非核心线程数量没有固定的，并且非核心线程闲置的时候会被立刻回收（闲置线程超时时间为0），用于执行定时任务或者周期任务。
 
-### 10. synchronize和volatile的区别
+```java
+// 创建一个可缓存的线程池。如果线程池的大小超过了处理任务所需要的线程，
+// 那么就会回收部分空闲（60秒不执行任务）的线程，当任务数增加时，此线程池又可以智能的添加新线程来处理任务。
+// 此线程池不会对线程池大小做限制，线程池大小完全依赖于操作系统（或者说JVM）能够创建的最大线程大小。
+static class CountTask extends Thread {
+    private int mIndex;
+
+    public CountTask(int index) {
+        this.mIndex = index;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("线程名称 "+Thread.currentThread().getName()+" mIndex " + mIndex);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public static void main(String[] args) {
+    ExecutorService executorService = Executors.newCachedThreadPool();
+    for (int index = 0; index < 100; index++) {
+        executorService.execute(new CountTask(index));
+    }
+    executorService.shutdown();
+}
+```
+输出结果：
+```java
+
+```
+
+```java
+// 线程池最大使用的线程数量是固定的，当任务数超过固定的线程数时，则会重用已经执行完任务的线程
+// 如果没有可重用的线程，则会加入队列进行等待执行
+static class CountTask extends Thread {
+    private int mIndex;
+
+    public CountTask(int index) {
+        this.mIndex = index;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("线程名称 "+Thread.currentThread().getName() + " mIndex "+mIndex);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public static void main(String[] args) {
+    int availableProcessors = Runtime.getRuntime().availableProcessors();
+    ExecutorService executorService = Executors.newFixedThreadPool(availableProcessors);
+    for (int index = 0; index < 100; index++) {
+        executorService.execute(new LearnCachedThreadPool.CountTask(index));
+    }
+    executorService.shutdown();
+}
+
+```
+
+输出结果：
+```java
+线程名称 pool-1-thread-1 mIndex 0
+线程名称 pool-1-thread-2 mIndex 1
+线程名称 pool-1-thread-3 mIndex 2
+线程名称 pool-1-thread-4 mIndex 3
+线程名称 pool-1-thread-1 mIndex 4
+线程名称 pool-1-thread-2 mIndex 5
+线程名称 pool-1-thread-3 mIndex 6
+线程名称 pool-1-thread-4 mIndex 7
+...
+```
+
+```java
+// 线程池中只有一个线程，需要执行的任务按照指定的顺序执行
+public static void main(String[] args) {
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    for (int index = 0; index < 10; index++) {
+        executorService.execute(new LearnSingleThreadPool.CountTask(index));
+    }
+    executorService.shutdown();
+}
+
+static class CountTask extends Thread {
+    private int mIndex;
+
+    public CountTask(int index) {
+        this.mIndex = index;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("线程名称 "+Thread.currentThread().getName()+" mIndex " + mIndex);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+输出结果：
+```java
+线程名称 pool-1-thread-1 mIndex 0
+线程名称 pool-1-thread-1 mIndex 1
+线程名称 pool-1-thread-1 mIndex 2
+线程名称 pool-1-thread-1 mIndex 3
+线程名称 pool-1-thread-1 mIndex 4
+...
+```
+
+```java
+// 创建一个大小无限的线程池。此线程池支持定时以及周期性执行任务的需求。
+ public static void main(String[] args) {
+    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+    executorService.schedule(()->{
+            System.out.println("定时执行");
+    }, 2000, TimeUnit.MILLISECONDS);
+    executorService.scheduleAtFixedRate(()->{
+            System.out.println("延迟2秒，间隔三秒执行："+System.currentTimeMillis());
+    }, 2000, 3000, TimeUnit.MILLISECONDS);
+
+}
+```
+输出结果：
+```java
+定时执行
+延迟2秒，间隔三秒执行：1592815563327
+延迟2秒，间隔三秒执行：1592815566330
+延迟2秒，间隔三秒执行：1592815569325
+```
+
+### 十. synchronize和volatile的区别
 volatile 的使用场景：当存在多个线程之间需要根据某个条件来执行任务时，volatile可以保证这个条件在各个线程是可见的，这样就不会引起
 多线程之间条件不统一的问题。但是只能用于此，其他的不能保证。用于多线程感知共享变量的改变，但不能用于数据处理。
 
@@ -420,7 +651,7 @@ readConfigs(configurations);
 ```
 如果变量isInitiated没有用volatile 修饰，那么就可能由于指令重排造成 isInitiated=ture 这句代码在parseConfig()方法之前执行，这样线程B会立即停止循环，执行readConfigs()方法， 但是由于configurations没有被线程A初始化完成，则获取的数据有问题。
 
-### 11. Runnable和Callable的区别
+### 十一. Runnable和Callable的区别
 Runnable没有返回值，Callable有返回值， Runnalbe可由线程池的execute方法执行，Callable由线程池的submmit方法执行，submit方法
 执行之后，返回Future<T> 类型的对象，然后通过Future<T>类型的对象的get方法就可以获取到由Callable的call方法返回的数据，
 这个过程是个阻塞过程，直到数据有返回，才会执行get方法后面的代码。
@@ -467,7 +698,7 @@ PlusResult 190
 Done 
 ```
 
-### 12. 守护线程Dameon方法的使用
+### 十二. 守护线程Dameon方法的使用
 ```java
 private static class MyThread extends Thread {
 
@@ -534,7 +765,7 @@ DaemonThread 5
 ```
 总结：Thread对象的setDaemon()方法，参数设置为true, 可以将线程设置为守护线程，这样就能够在进程中其他所有线程结束之后才会自行结束，否则只要有一个线程还在执行，那么守护线程就不能结束。
 
-### 13. Thread.yield()方法的使用
+### 十三. Thread.yield()方法的使用
 ```java
 private static class MyThread extends Thread {
 
@@ -602,7 +833,7 @@ public static void main(String[] args) {
 ```
 总结：通过打印结果可以看出，调用Thread.yield()方法，可以将CPU时间尽可能的让给其他线程使用。
 
-### 13. 线程join的方法使用
+### 十四. 线程join的方法使用
 ```java
 private static class MyThread1 extends Thread {
 
@@ -673,7 +904,7 @@ private static class MyThread2 extends Thread {
 总结：
 在线程一计数到5的时候，线程二就开始独占CPU时间，执行线程二中的代码，只有当线程二结束之后，
 线程一才得以获取到CPU时间，继续执行线程一的代码。join方法的是执行线程插入操作，直至线程运行结束。
-### 13. ThreadLocal的使用
+### 十五. ThreadLocal的使用
 ```java
 private static ThreadLocal<String> mNameThreadLoacl = new ThreadLocal<>();
 private static ThreadLocal<String> mValueThreadLocal = new ThreadLocal<>();
@@ -828,7 +1059,7 @@ xiaozhang卖出 橘子
 ```
 总结：如果我们初始化过ThreadLocal, 则在没ThreadLocal对象没有设置value的时候，ThreadLocal对象get方法返回的是是初始化值。
 
-### 14. 线程死锁问题
+### 十六. 线程死锁问题
 线程死锁问题引入
 ```c
 线程： 小张(书) 小红(画)
@@ -937,7 +1168,7 @@ public static void main(String[] args) {
 解除死锁的方法
 个人认为最好的办法就是破除循环等待，可以先让一个线程先执行完成，然后另外一个线程再开始执行，这样不用相互等着。因为不会发生等着锁被其他线程释放这种情况，可以随意获取到锁，然后执行相关代码。
 
-### 16. JUC包相关
+### 十七. JUC包相关
 - 原子整数类 
 ```java
 public static void main(String[] args) throws Exception {
@@ -1719,7 +1950,7 @@ Plate consume Num 3
 ```
 总结分析：可以看到两个线程是交替进行的，从而实现生产者和消费者模型。
 
-### 17. 锁相关
+### 十八. 锁相关
 - synchronzied 关键字 
 synchronized 非静态同步方法，synchronized 静态同步方法，synchronized(this) 同步代码块，
 synchronized(object) 同步代码块，synchronized(A.class) 同步代码块。大体分为两部分，一类是对象锁，一类是类锁。
@@ -2037,7 +2268,7 @@ UnFairReentrantLock Thread-9 result 10
 - 其他锁
 
 
-### 18. 常见面试题
+### 十九. 常见面试题
 
 
 
