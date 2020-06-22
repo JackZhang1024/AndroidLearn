@@ -508,7 +508,13 @@ public static void main(String[] args) {
 ```
 输出结果：
 ```java
-
+线程名称 pool-1-thread-3 mIndex 2
+线程名称 pool-1-thread-1 mIndex 0
+线程名称 pool-1-thread-2 mIndex 1
+线程名称 pool-1-thread-4 mIndex 3
+线程名称 pool-1-thread-5 mIndex 4
+线程名称 pool-1-thread-6 mIndex 5
+...
 ```
 
 ```java
