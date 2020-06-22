@@ -1,4 +1,7 @@
 ## Java 多线程
+
+[toc]
+
 ### 1. 线程和线程状态
 ```java
 /**
@@ -381,8 +384,7 @@ unit 设置了keepAliveTime的时间单位，可以是毫秒，也可以是秒�
 - CachedThreadPool 是一种线程数量不固定的线程池，它只有非核心线程，并且最大线程数为Integer.MAX_VALUE,这样当线程池的线程都处于活动状态时，新任务到来时会由线程池创建新的线程来处理，否则就会利用空闲的线程进行处理。线程池中的空闲线程有超时机制，60秒，超过60秒的闲置线程就会被回收。从CachedThreadPool的性质来看，这个线程池适合用于来执行数量多但是执行时间段的任务，当整个线程池都处于闲置状态时，线程都会应为超时停止，这个时候CachedThreadPool
 这个是时候是不耗任何系统资源的。
 - SingleThreadExecutor 是只有一个核心线程的线程池，能确保所有的任务都在同一个线程中按顺序执行。
-- ScheduledThreadPool  是核心线程数量固定的，非核心线程数量没有固定的，并且非核心线程闲置的时候会被立刻回收（闲置线程超时时间为0），
-用于执行定时任务或者周期任务。
+- ScheduledThreadPool  是核心线程数量固定的，非核心线程数量没有固定的，并且非核心线程闲置的时候会被立刻回收（闲置线程超时时间为0），用于执行定时任务或者周期任务。
 
 ### 10. synchronize和volatile的区别
 volatile 的使用场景：当存在多个线程之间需要根据某个条件来执行任务时，volatile可以保证这个条件在各个线程是可见的，这样就不会引起
@@ -1604,7 +1606,7 @@ Thread B release permit
 利用信号量进行数据的加减不交叉。
 - Semaphor 生产者和消费者
  使用两个信号量对生产者和消费者线程进行管理
- 
+
 ```java
  从结果上我们可以看到get()和put()方法是同步的,put()方法执行在get()方法之前
  执行get()方法的时候 我们必须从ConsumeSemaphore获取许可证，不让无法继续执行
@@ -1928,7 +1930,7 @@ public static void main(String[] args) {
     testFairReentrantLock();
 }
 
-```
+ ```
 输出结果
 ```java
 FairReentrantLock Thread-0 start
