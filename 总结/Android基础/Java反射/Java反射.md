@@ -4,9 +4,9 @@
   - [二 Java利用反射访问私有的构造方法](#二-java利用反射访问私有的构造方法)
   - [二 Java利用反射访问对象的私有属性](#二-java利用反射访问对象的私有属性)
   - [三 Java利用反射访问对象的私有方法](#三-java利用反射访问对象的私有方法)
-  - [四 Java利用反射访问类的私有静态属性](#四-java利用反射访问类的私有静态属性)
-  - [五 Java利用反射访问类的私有静态方法](#五-java利用反射访问类的私有静态方法)
-  - [六 Java利用字符串生成指定类型对象](#六-java利用字符串生成指定类型对象)
+  - [四 泛型相关的反射](#四-泛型相关的反射)
+  - [五 数组相关的反射](#五-数组相关的反射)
+  - [六 Java利用反射访问类的私有静态属性和方法](#六-java利用反射访问类的私有静态属性和方法)
 ## Java反射
 ### 一 Java反射的使用场景
 Java反射场景是为了解决不能通过正常的方式访问一个类或者对象的属性和方法而出现的手段，同时也在一些场景下通过字符串等方式进行生成一个对象等操作。
@@ -364,12 +364,173 @@ Age is  34
 Gender is  Female
 
 ```
+### 四 泛型相关的反射
+```java
+/**
+* 因为Java泛型是通过擦除来实现的，很难直接得到泛型具体的参数化类型的信息，
+* 但是我们可以通过一种间接的形式利用反射得到泛型信息。比如下面这个类：
+*/
+public class GenericObject {
 
-### 四 Java利用反射访问类的私有静态属性
+    public List<String> lists;
 
-### 五 Java利用反射访问类的私有静态方法
+    public List<String> getLists() {
+        return lists;
+    }
 
-### 六 Java利用字符串生成指定类型对象
+    public void setLists(List<String> lists) {
+        this.lists = lists;
+    }
+}
+
+
+// 泛型
+//1. 反射得到返回类型为泛型类的方法
+//2. 调用getGenericReturnType得到方法返回类型中的参数化类型
+//3. 判断该type对象能不能向下转型为ParameterizedType
+//4. 转型成功，调用getActualTypeArguments得到参数化类型的数组，因为有的泛型类，不只只有一个参数化类型如Map<K,V>
+//5. 取出数组中的每一个的值，转型为Class对象输出。
+
+Class genericClass = GenericObject.class;
+try {
+    Method method = genericClass.getMethod("getLists");
+    // 获取返回的泛型返回类型
+    Type genericReturnType = method.getGenericReturnType();
+    if (genericReturnType instanceof ParameterizedType){
+        ParameterizedType parameterizedType = (ParameterizedType) genericReturnType;
+        // 返回类型中的泛型参数类型
+        Type[] types = parameterizedType.getActualTypeArguments();
+        for (Type type: types){
+            Class clz = (Class) type;
+            System.out.println(" GenericType "+clz.getName());
+        }
+    }
+} catch (Exception e){
+    e.printStackTrace();
+}
+
+try {
+    Method setMethod = genericClass.getMethod("setLists", List.class);
+    Type[] genericParameterTypes = setMethod.getGenericParameterTypes();
+    for (Type genericParameterType: genericParameterTypes){
+        System.out.println("GenericParameterTypes为 ： " + genericParameterType.getTypeName());
+        if(genericParameterType instanceof ParameterizedType){
+            ParameterizedType parameterizedType = ((ParameterizedType) genericParameterType);
+            System.out.println("ParameterizedType为 :" + parameterizedType.getTypeName());
+            Type types[] = parameterizedType.getActualTypeArguments();
+            for (Type type : types){
+                System.out.println("参数化类型为 ： " + ((Class) type).getName());
+                if (((Class) type).isAssignableFrom(String.class)){
+                    System.out.println("泛型参数是 String类型的 ");
+                }
+            }
+        }
+    }
+} catch (Exception e){
+    e.printStackTrace();
+}
+// 获取成员变量的泛型类型
+try {
+    Field field = genericClass.getField("lists");
+    Type type = field.getGenericType();
+    if (type instanceof ParameterizedType){
+        ParameterizedType parameterizedType = ((ParameterizedType) type);
+        Type [] types = parameterizedType.getActualTypeArguments();
+        for (Type type1 : types) {
+            System.out.println("参数化类型 ： " + ((Class) type1).getTypeName());
+        }
+    }
+} catch (Exception e){
+    e.printStackTrace();
+}
+
+```
+输出结果：
+
+```java
+GenericType java.lang.String
+GenericParameterTypes为 ： java.util.List<java.lang.String>
+ParameterizedType为 :java.util.List<java.lang.String>
+参数化类型为 ： java.lang.String
+泛型参数是 String类型的 
+参数化类型 ： java.lang.String
+```
+### 五 数组相关的反射
+ 
+```java
+// 创建一个int类型的数组， 长度为3
+int[] intArray = (int[])Array.newInstance(int.class, 3);
+
+// 通过反射的形式，给数组赋值
+for (int i =0; i< intArray.length; i++){
+     Array.set(intArray, i, i+2);
+}
+// 通过反射的方式，得到数组中的值
+for (int i =0; i< intArray.length; i++){
+    System.out.println(" "+ Array.get(intArray, i));
+}
+// 获取数组Class对象
+try {
+    // [表示是数组,L的右边是类名，类型的右边是一个;
+    Class clz = int[].class;
+    Class clz1 = Class.forName("[I");
+    Class clz2 = Class.forName("[Ljava.lang.String;");
+    // 下面注释的clz3使用方式是错误的
+    //Class clz3 = Class.forName("[Lreflection.ChildrenObject");
+    System.out.println("class "+clz.getTypeName());
+    System.out.println("class1 "+clz1.getTypeName());
+    System.out.println("class2 "+clz2.getTypeName());
+    //System.out.println("class3 "+clz3.getName());
+    //ChildrenObject[] childrenObjects = (ChildrenObject[]) Array.newInstance(clz3, 2); // 利用clz3是生成不了数组的
+    ChildrenObject[] childrenObjects = (ChildrenObject[]) Array.newInstance(ChildrenObject.class, 2);
+    for (int index = 0; index < childrenObjects.length; index++) {
+        ChildrenObject childrenObject = new ChildrenObject(index, "Jack" + index, index);
+        Array.set(childrenObjects, index, childrenObject);
+    }
+    for (int index = 0; index < childrenObjects.length; index++) {
+        ChildrenObject childrenObject = (ChildrenObject) Array.get(childrenObjects, index);
+        System.out.println("age "+childrenObject.getAge()+" name "+childrenObject.getName()+" score "+childrenObject.getScore());
+    }
+}catch (Exception e){
+    e.printStackTrace();
+}
+```
+输出结果：
+```java
+ 2
+ 3
+ 4
+class int[]
+class1 int[]
+class2 java.lang.String[]
+class3 [Lreflection.ChildrenObject; // 错误的，不用这个生成对应的ChildrenObject实例
+age 0 name Jack0 score 0
+age 1 name Jack1 score 1
+```
+
+
+### 六 Java利用反射访问类的私有静态属性和方法
+```java
+Class personClass = PersonObject.class;
+try {
+    Method method = personClass.getDeclaredMethod("setName", String.class);
+    method.setAccessible(true);
+    method.invoke(null, "lisi");
+    Field field = personClass.getDeclaredField("sName");
+    field.setAccessible(true);
+    Object name = field.get(null);
+    System.out.println("name "+name);
+} catch (Exception e) {
+    e.printStackTrace();
+}
+```
+输出结果：
+```java
+name lisi
+```
+总结分析：
+当访问类的静态属性或者方法的时候，我们对其进行设置或者调用的时候，需要将调用的对象设置为null。
+
 
 
 
