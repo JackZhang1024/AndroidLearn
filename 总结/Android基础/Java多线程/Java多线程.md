@@ -1,3 +1,23 @@
+- [Java 多线程](#java-多线程)
+  - [一. 线程和线程状态](#一-线程和线程状态)
+  - [二. 线程start方法和run方法的区别](#二-线程start方法和run方法的区别)
+  - [三. 同步通信机制](#三-同步通信机制)
+  - [四. wait()和notify()机制（显式通信方式）](#四-wait和notify机制显式通信方式)
+  - [五. 管道机制](#五-管道机制)
+  - [六. 线程池相关](#六-线程池相关)
+  - [七. ThreadPoolExecutor](#七-threadpoolexecutor)
+  - [八. ThreadPoolExecutor的执行规则](#八-threadpoolexecutor的执行规则)
+  - [九. 常见的四种线程池](#九-常见的四种线程池)
+  - [十. synchronize和volatile的区别](#十-synchronize和volatile的区别)
+  - [十一. Runnable和Callable的区别](#十一-runnable和callable的区别)
+  - [十二. 守护线程Dameon方法的使用](#十二-守护线程dameon方法的使用)
+  - [十三. Thread.yield()方法的使用](#十三-threadyield方法的使用)
+  - [十四. 线程join的方法使用](#十四-线程join的方法使用)
+  - [十五. ThreadLocal的使用](#十五-threadlocal的使用)
+  - [十六. 线程死锁问题](#十六-线程死锁问题)
+  - [十七. JUC包相关](#十七-juc包相关)
+  - [十八. 锁相关](#十八-锁相关)
+  - [十九. 常见面试题](#十九-常见面试题)
 ## Java 多线程
 
 ### 一. 线程和线程状态
@@ -33,6 +53,7 @@
  */ 
 ```
 线程的状态有六种 1. NEW出来的时候 创建状态但是还没有启动 2. RUNNABLE状态其实包含了两种情况 Ready和Running 这两种细分状态，这两种状态统称为RUNNABLE状态。Ready状态就是线程在进入Running转态之后又会因为时间片切换，CPU把资源用到了别处，此时就进入了Ready状态，一旦该线程又获得了时间片，则会又进入Running转态。 3. WAITING状态，由于Sleep, Wait , 被其他线程Join之后，进入的等待状态，4.BLOCKED状态，线程由于处于等待获取锁的情况，此时处于BLOCKED状态，6.Terminated, 线程运行结束或者运行过程中发生异常，进行死亡。
+普通的IO读取和网络请求这些都是传统意义上的阻塞Blocked, 此时CPU不会把时间分给对应的线程，而是分给其他的线程，那么被阻塞的线程则是和硬盘进行交互，等待交互结束之后，会有一个中断机制，通知CPU，说我这边已经读写完成了，这样阻塞的线程就会进入等待线程队列，等待CPU来分配时间片来继续执行。在整个读写的过程中，其实所谓的阻塞线程其实一直是处于RUNNABLE的状态，而不是Blocked的状态（Blocked状态和锁Synchronized机制有关）。
 ### 二. 线程start方法和run方法的区别
 两种方法的区别
 - start：
