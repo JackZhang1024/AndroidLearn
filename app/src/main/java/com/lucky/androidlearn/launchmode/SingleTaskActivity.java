@@ -2,6 +2,7 @@ package com.lucky.androidlearn.launchmode;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ import butterknife.OnClick;
  */
 
 public class SingleTaskActivity extends AppCompatActivity {
+
+    private static final String TAG = "SingleTaskActivity";
 
     @BindView(R.id.tv_instance_name)
     TextView tvInstanceName;
@@ -46,6 +49,12 @@ public class SingleTaskActivity extends AppCompatActivity {
     public void onSingleTaskClick(View view){
         Intent intent = new Intent(this, SingleTaskActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e(TAG, "onNewIntent: ");
     }
 
 }

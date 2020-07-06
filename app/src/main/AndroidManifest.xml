@@ -680,12 +680,6 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".json.JsonToNodesActivity"
-            android:label="@string/json_to_nodes"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-
-        <activity
             android:name=".multithread.MultiThreadActivity"
             android:label="@string/multi_thread_safe"
             android:screenOrientation="portrait"
