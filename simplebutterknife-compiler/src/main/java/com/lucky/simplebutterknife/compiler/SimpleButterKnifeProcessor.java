@@ -51,6 +51,7 @@ public class SimpleButterKnifeProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "处理程序>>>>>>>>>>>>>>>>>>>>>>>");
         Map<TypeElement, BindingSet> bindingMap = new LinkedHashMap<>();
         // 查找所有被@BindView元素注解的程序元素（Element）
         for (Element element : roundEnv.getElementsAnnotatedWith(SimpleBindView.class)) {
@@ -130,6 +131,7 @@ public class SimpleButterKnifeProcessor extends AbstractProcessor {
             }
 
             viewBindingBuilder.addMethod(viewBuilder.build());
+            processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "packageName "+bindingClassName.packageName());
             // 输出Java文件
             JavaFile javaFile = JavaFile.builder(bindingClassName.packageName(),
                     viewBindingBuilder.build()).build();

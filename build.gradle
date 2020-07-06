@@ -3,7 +3,7 @@
 buildscript {
 
     // 配置kotlin第一步
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.3.72'
     repositories {
         google()
         mavenCentral()
@@ -11,7 +11,7 @@ buildscript {
         maven { url 'https://maven.google.com'}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath 'me.tatarka:gradle-retrolambda:3.6.1'
         // Dagger2自动代码生成
         // classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'

@@ -8,6 +8,9 @@
   - [五 参数注解进行类型限制](#五-参数注解进行类型限制)
   - [五 注解处理器](#五-注解处理器)
   - [六 自动代码生成](#六-自动代码生成)
+    - [创建注解](#创建注解)
+    - [注解处理器](#注解处理器)
+    - [主项目依赖处理](#主项目依赖处理)
   - [七 注解处理器相关](#七-注解处理器相关)
 ## Java注解
 ### 一 什么是注解
@@ -540,6 +543,335 @@ actionBar.setNavigationMode(AbstractActionBar.NAVIGATION_MODE_STANDARD);
 ```
 
 ### 五 注解处理器
+注解处理器常用于自动代码生成的工具，利用这个处理器，我们可以自动生成我们想要的类，达到简化和解耦代码的能力。
+```java
+public abstract class AbstractProcessor implements Processor {
+    protected ProcessingEnvironment processingEnv;
+    private boolean initialized = false;
+
+    protected AbstractProcessor() {
+    }
+
+    public Set<String> getSupportedOptions() {
+        ...
+    }
+
+    public Set<String> getSupportedAnnotationTypes() {
+       ...
+    }
+
+    public SourceVersion getSupportedSourceVersion() {
+        ...
+    }
+
+    public synchronized void init(ProcessingEnvironment var1) {
+        ...
+    }
+
+    public abstract boolean process(Set<? extends TypeElement> var1, RoundEnvironment var2);
+
+}
+```
+一般我们去继承AbstractProcessor并实现其中的 getSupportedSourceVersion()和 getSupportedAnnotationTypes()以及
+process()方法。getSupportedSourceVersion（）表示支持的源码版本，一般用SourceVersion.latestSupported()来返回。
+getSupportedAnnotationTypes()表示的要处理的注解有哪些。process()方法的意思就是进行正真的注解处理，可以利用注解的信息来
+生成Java代码。
+
 ### 六 自动代码生成
+利用注解处理器生成代码需要两步，第一步，创建注解，第二步，创建注解处理器，处理注解。需要注意的是配置环境很重要，我们的环境是
+AS4.0+GradlePlugin 3.5.2+Gradle 5.4.1
+#### 创建注解
+在AndroidStudio中创建一个Java依赖项目，名称为simplebutterknife-annotations,依赖项目的build.gradle文件内容如下：
+
+```java
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'androidx.annotation:annotation:1.0.0'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+```
+
+创建注解代码 SimpleBindView.java
+```java
+// RetentionPolicy.class 表示BindView这个注解只在编译时使用
+// ElementType.FIELD 表示BindView这个注解使用在属性元素上
+
+@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.FIELD)
+public @interface SimpleBindView {
+    @IdRes int value();
+}
+```
+
+#### 注解处理器
+创建一个Java依赖项目，名称为simplebutterknife-compiler, 其build.gradle文件如下：
+
+```java
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // 引入BindView注解
+    implementation project(':simplebutterknife-annotations')
+    implementation 'com.google.auto:auto-common:0.10'
+    // 利用javapoet生成Java文件
+    api 'com.squareup:javapoet:1.9.0'
+    compileOnly 'com.google.auto.service:auto-service:1.0-rc4'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc4'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+```
+
+注解处理器 SimpleButterKnifeProcessor.java
+
+```java
+// 对注解的元素进行分析和生成源码(就是Java文件)
+// @AutoService(Processor.class) 注解是利用了 Google 的 AutoService 为注解处理器自动生成 metadata 文件并将注解处理器jar文件加入构建路径，
+// 这样也就不需要再手动创建并更新 META-INF/services/javax.annotation.processing.Processor 文件了。
+// 覆写 getSupportedSourceVersion() 方法指定可以支持最新的 Java 版本，
+// 覆写 getSupportedAnnotationTypes() 方法指定该注解处理器用于处理哪些注解（我们这里只处理 @BindView 注解）。
+// 而检索注解元素并生成代码的是 process 方法的实现:
+@AutoService(Processor.class)
+public class SimpleButterKnifeProcessor extends AbstractProcessor {
+
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latestSupported();
+    }
+
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+        Set<String> types = new LinkedHashSet<>();
+        types.add(SimpleBindView.class.getCanonicalName());
+        return types;
+    }
+
+    /**
+     * public class MainActivity_ViewBinding {
+     *   public MainActivity target;
+     *
+     *   public MainActivity_ViewBinding(MainActivity target) {
+     *     this(target, target.getWindow().getDecorView());
+     *   }
+     *
+     *   public MainActivity_ViewBinding(MainActivity target, View source) {
+     *     this.target = target;
+     *
+     *     target.mTvCenter=(TextView)source.findViewById(2131165359);
+     *   }
+     * }
+     * */
+    @Override
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        Map<TypeElement, BindingSet> bindingMap = new LinkedHashMap<>();
+        // 查找所有被@BindView元素注解的程序元素（Element）
+        for (Element element : roundEnv.getElementsAnnotatedWith(SimpleBindView.class)) {
+            // 注解元素的外侧元素， 即View的所在Activity类
+            TypeElement enclosingElement = (TypeElement) element.getEnclosingElement();
+            // 注解的value值，即View的id
+            int id = element.getAnnotation(SimpleBindView.class).value();
+            // 注解元素的名字，即View的变量名
+            Name simpleName = element.getSimpleName();
+            String name = simpleName.toString();
+            // 注解元素的类型(注解的谁)，即View的类型（TextView ImageView）
+            TypeMirror elementType = element.asType();
+            TypeName type = TypeName.get(elementType);
+            // 将这些信息存到Activity对应的View绑定中 bindingMap的key是Activity, value是bindingSet 一系列被注解的控件元素
+            BindingSet bindingSet = bindingMap.get(enclosingElement);
+            // bindingSet表示的就是Activity中所有被注解的控件的信息集合
+            if (bindingSet == null) {
+                bindingSet = new BindingSet();
+                TypeMirror typeMirror = enclosingElement.asType();
+                // Activity对应的名称
+                TypeName targetType = TypeName.get(typeMirror);
+                String packageName = MoreElements.getPackage(enclosingElement)
+                        .getQualifiedName().toString();
+                String className = enclosingElement.getQualifiedName().toString()
+                        .substring(packageName.length()+1)
+                        .replace(".", "$");
+                ClassName bindingClassName = ClassName.get(packageName,
+                        className+"_ViewBinding");
+                bindingSet.targetTypeName = targetType;
+                bindingSet.bindingClassName = bindingClassName;
+                bindingMap.put(enclosingElement, bindingSet);
+            }
+            if (bindingSet.viewBindings == null){
+                bindingSet.viewBindings = new ArrayList<>();
+            }
+            ViewBinding viewBinding = new ViewBinding();
+            viewBinding.type = type;
+            viewBinding.id = id;
+            viewBinding.name = name;
+            bindingSet.viewBindings.add(viewBinding);
+        }
+        // 利用JavaPoet来生成Java文件
+        for (Map.Entry<TypeElement, BindingSet> entry: bindingMap.entrySet()){
+             TypeElement typeElement = entry.getKey();
+             BindingSet binding = entry.getValue();
+
+             // Activity实例的名称
+             TypeName targetTypeName = binding.targetTypeName;
+             // Activity的类名称
+             ClassName bindingClassName = binding.bindingClassName;
+             List<ViewBinding> viewBindings = binding.viewBindings;
+
+             //binding类 public class MainActivity_ViewBinding
+            TypeSpec.Builder viewBindingBuilder = TypeSpec
+                    .classBuilder(bindingClassName.simpleName())
+                    .addModifiers(Modifier.PUBLIC);
+            //public的target字段用来保存Activity引用 public MainActivity target
+            viewBindingBuilder.addField(targetTypeName, "target",
+                    Modifier.PUBLIC);
+            //构造器
+            MethodSpec.Builder activityViewBuilder = MethodSpec.constructorBuilder()
+                    .addModifiers(Modifier.PUBLIC)
+                    .addParameter(targetTypeName, "target");
+            activityViewBuilder.addStatement("this(target, target.getWindow().getDecorView())");
+            viewBindingBuilder.addMethod(activityViewBuilder.build());
+
+            //第二个构造器
+            MethodSpec.Builder viewBuilder = MethodSpec.constructorBuilder()
+                    .addModifiers(Modifier.PUBLIC)
+                    .addParameter(targetTypeName, "target")
+                    .addParameter(ClassName.get("android.view", "View"), "source");
+            viewBuilder.addStatement("this.target = target");
+            viewBuilder.addCode("\n");
+            for (ViewBinding viewBinding: viewBindings){
+                // target.mTvCenter=(TextView)source.findViewById(2131165359);
+                CodeBlock.Builder builder = CodeBlock.builder()
+                        .add("target.$L=", viewBinding.name);
+                builder.add("($T)", viewBinding.type);
+                builder.add("source.findViewById($L)", CodeBlock.of("$L", viewBinding.id));
+                viewBuilder.addStatement("$L", builder.build());
+            }
+
+            viewBindingBuilder.addMethod(viewBuilder.build());
+            // 输出Java文件
+            JavaFile javaFile = JavaFile.builder(bindingClassName.packageName(),
+                    viewBindingBuilder.build()).build();
+            try {
+                javaFile.writeTo(processingEnv.getFiler());
+            }catch (IOException e){
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+            }
+        }
+        return true;
+    }
+
+
+    class BindingSet {
+        TypeName targetTypeName;
+        ClassName bindingClassName;
+        List<ViewBinding> viewBindings;
+    }
+
+    class ViewBinding {
+        // TextView ImageViedw
+        TypeName type;
+        // 控件对应的ID
+        int id;
+        // 控件的名称
+        String name;
+    }
+}
+```
+#### 主项目依赖处理
+在app主模块的build.gradle中引入注解和注解处理器
+```java
+// 在app Module中添加注解依赖和注解处理器依赖
+api project(':simplebutterknife-annotations')
+annotationProcessor project(':simplebutterknife-compiler')
+```
+因为我们生成的代码只是用于查找对应的控件，但是仍然需要注入一个Activity来作为查找的上下文环境，生成的代码如下：
+```java
+public class MainActivity_ViewBinding {
+  public MainActivity target;
+
+  public MainActivity_ViewBinding(MainActivity target) {
+    this(target, target.getWindow().getDecorView());
+  }
+
+  public MainActivity_ViewBinding(MainActivity target, View source) {
+    this.target = target;
+    target.mTvCenter=(TextView)source.findViewById(2131165360);
+    target.mIvCenter=(ImageView)source.findViewById(2131165284);
+  }
+}
+```
+从上面的代码来看，我们需要生成一个MainActivity_ViewBinding的实例对象，然后将MainActivity的引用注入到其中，才能完成实例化
+被注解的控件。所以我们需要像ButterKnife那样，有一个类似`ButterKnife.bind(this)`的代码，来完成这个功能。代码实现如下：
+
+```java
+/**
+ * SimpleButterKnife类利用bind方法只需要加载注解处理器自动生成的类并执行
+ * 它的构造器就可以了
+ */
+public final class SimpleButterKnife {
+
+    public static void bind(Activity target) {
+        View sourceView = target.getWindow().getDecorView();
+        Class<?> targetClass = target.getClass();
+        String targetClassName = targetClass.getName();
+        Constructor constructor;
+        try {
+            // 1. 利用类加载器进行类加载
+            Class<?> bindingClass = targetClass.getClassLoader()
+                    .loadClass(targetClassName + "_ViewBinding");
+            // 2. 获取类的构造器        
+            constructor = bindingClass.getConstructor(targetClass, View.class);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Not found. Should try search its superclass of " + targetClassName, e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("Unable to find binding constructor for " + targetClassName, e);
+        }
+        try {
+            // 3. 利用构造器注入Activity引用，实例化控件
+            constructor.newInstance(target, sourceView);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Unable to invoke " + constructor, e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException("Unable to invoke " + constructor, e);
+        } catch (InvocationTargetException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            }
+            if (cause instanceof Error) {
+                throw (Error) cause;
+            }
+            throw new RuntimeException("Unable to create binding instance " + cause);
+        }
+    }
+}
+
+```
+在测试的Activity中，代码如下：
+
+```java
+public class MainActivity extends AppCompatActivity {
+    @SimpleBindView(R.id.tv_center)
+    TextView mTvCenter;
+
+    @SimpleBindView(R.id.iv_center)
+    ImageView mIvCenter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        SimpleButterKnife.bind(this);
+        mTvCenter.setText("我是Jack");
+    }
+}
+```
+
 ### 七 注解处理器相关
+
 
