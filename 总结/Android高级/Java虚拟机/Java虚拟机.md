@@ -16,6 +16,10 @@
   - [八 Java的双亲委托机制](#八-java的双亲委托机制)
   - [九 类加载和初始化过程](#九-类加载和初始化过程)
   - [十 Java虚拟机参数](#十-java虚拟机参数)
+    - [jvm参数的分类](#jvm参数的分类)
+    - [关键参数详解](#关键参数详解)
+    - [jvm参数设置和测试](#jvm参数设置和测试)
+    - [总结](#总结)
 ## Java虚拟机
 Java虚拟机是了解ava对象在从加载到运行和结束的完整生命周期流程和环节的重要部分，因此学习好Java虚拟机是深入了解Java机制的途径。
 
@@ -466,8 +470,98 @@ Person类会被加载到方法区中，并且创建一个Person类的Class对象
 
 ### 十 Java虚拟机参数
 
+Android这块其实不必清除这些Java虚拟机参数，但是搞懂这些，有利于掌握Java虚拟机的运行原理和垃圾回收机制。
+jvm的参数有很多，下面是一些必须知道且面试的时候经常问到的。
+
+#### jvm参数的分类
+根据jvm参数开头可以区分参数类型，共分为三类："-"，"-X"，"-XX",
+1. 标准参数（-）：所有的JVM实现都必须实现这些参数的功能，而且向后兼容；
+例子：-verbose:class, -verbose:gc, -verbose:jni ....
+2. 非标准参数（-X）：默认jvm实现这些参数的功能，但是并不保证所有jvm实现都满足，且不保证
+向后兼容；
+例子：Xms20m, -Xmx20m, -Xmn20m, -Xss128k...
+3. 非Stable参数（-XX）：此类参数各个jvm 实现会有所不同，将来可能会随时取消，需要谨慎使用；
+例子：-XX:+PrintGCDetails, -XX:-UseParallelGC, -XX:PrintGCTimeStamps ...
+
+#### 关键参数详解
+最重要和常见的几个参数如下：
+- 1. -Xms20m:  设置jvm初始化堆大小为20m, 一般与-Xmx相同避免垃圾回收完成后jvm重新分。
+- 2. -Xmx20m:  设置jvm最大可用内存大小为20m.
+- 3. -Xmn10m:  设置新生代大小为20m.
+- 4. -Xss128k: 设置每个线程的栈大小为128k
+
+如下图：
+
+|参数|拆分|含义|
+|----|----|----|
+|-Xms|-X, memory, size|内存大小|
+|-Xmx|-X, memory, max|内存最大|
+|-Xmn|-X, memory, new|新生代内存|
+|-Xss|-X, stack, size|栈大小|
+
+含有一些其他常见的参数如下：
+- 1. -verbose:gc : 可以输出每次GC的一些信息
+- 2. -XX:-UseConcMarkSweepGC: 使用CMS收集器
+- 3. -XX:-UseParallelGC
+- 4. -XX:-UseSerialGC
+- 5. -XX:CMSInitiatingOccupancyFraction=80 CMS gc, 表示老年代达到80%使用率时马上进行回收
+- 6. -XX:+printGC;
+- 7. -XX:+PrintGCDetails: 打印GC详情
+- 8. -XX:+PrintGCTimeStamps: 打印时间戳；
+  
+#### jvm参数设置和测试
+```java
+public class Test {
+    public static void main(String[] args) {
+
+    }
+}
+```
+![jvm_params](./images/jvm_params.png)
+
+配置的最后两个参数：
+-XX:+PrintGCDetails: 打印GC详细系信息
+-XX:SurvivorRatio=8 : eden/survivor=8
+
+运行结果如下：
+![gc_params](./images/44280B66-00F9-49A2-B0A1-9A1AD350ADAD.png)
+
+可以看到输出了一些内容，解释如下：
+PSYoungGen: 其中PS是Parallel Scavenge的简写，整个就表示新生代采用了Parallel Scavenge收集器。
+
+后面紧跟total参数：表示新生代使用了9216K, 只有9M是因为只计算了eden和from survivor，我们知道to survivor在jvm
+运行时是预留的,只有在回收的时候才会使用，刚刚设置新生代内存是10M，eden/survivor=8 （8192k/1024k）正好验证了配置参数。
+
+eden space 8192k, 14% used: eden区域总共8192k,使用了14%。1171/8192 = 14%
+
+from space 1024k, 0% used;
+to space 1024k, 0% used:
+因为还没有进行过回收所以两个survivor区域都是空的。
+
+ParOldGen total 10240K, used 0K：Par是Parallel Old的简写，所以老年代采用的是Parallel Old收集器进行垃圾回收。
+
+Metaspace used 2651K：元空间，因为用的是本地内存，所以没有total只有used。
+
+在代码中加入一个字节数组如下图：
+```java
+public class Test {
+    public static void main(String[] args) {
+        int  size = 512*1024;
+        byte[] bytes = new byte[size];
+    }
+}
+```
+![eden_allocate](./images/1E93D49C-91F0-4092-A759-18F4FBF4117B.png)
+可以看到新生代的内存上增加了512k（1683k-1171k), 正好是我们给字节数组分配的大小，所以，可以说字节数组是放到堆的新生代中。
+
+#### 总结
+从上面的实验我们可以得出结论，JDK1.8的垃圾回收器分为两种，一种是Parallel Scavenge收集器，一种是Parallel Old收集器, 分别作用于新生代和老年代内存。同时，我们了解了内存分配是按照年龄来划分的。
 
 
+
+
+
+ 
 
 
 
