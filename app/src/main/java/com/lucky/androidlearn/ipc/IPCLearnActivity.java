@@ -12,6 +12,7 @@ import com.lucky.androidlearn.R;
 import com.lucky.androidlearn.aidl.BookManagerActivity;
 import com.lucky.androidlearn.ipc.socket.SocketIPCActivity;
 import com.lucky.androidlearn.messager.MessengerActivity;
+import com.lucky.androidlearn.provider.MainProviderActivity;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -74,7 +75,8 @@ public class IPCLearnActivity extends AppCompatActivity {
     // provider通讯
     @OnClick(R.id.btn_ipc_contentprovider)
     public void onContentProviderClick() {
-
+        Intent intent = new Intent(this, MainProviderActivity.class);
+        startActivity(intent);
     }
 
 

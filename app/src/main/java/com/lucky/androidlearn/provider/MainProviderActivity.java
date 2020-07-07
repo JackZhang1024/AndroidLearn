@@ -75,7 +75,10 @@ public class MainProviderActivity extends AppCompatActivity implements LoaderMan
     @OnClick(R.id.btn_delete)
     public void onDeleteClick(View view) {
         Uri uri = Uri.parse("content://com.lucky.androidlearn.provider/book");
-        int deletedRows = getContentResolver().delete(uri, null, null);
+        // name Android开发艺术
+        String where = "name=?";
+        String[] selectionArgs = new String[]{"Android开发艺术"};
+        int deletedRows = getContentResolver().delete(uri, where, selectionArgs);
         Log.e(TAG, "onDeleteClick: " + deletedRows);
     }
 
