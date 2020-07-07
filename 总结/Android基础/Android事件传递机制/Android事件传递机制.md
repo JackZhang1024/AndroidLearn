@@ -1,1 +1,37 @@
 # Android 事件传递机制
+
+事件分发由Activity传递给Window，然后由window传递给DecorView, 最后传递给顶级View, 即我们setContentView方法中设置的View,
+顶级View对点击事件的分发过程：点击事件到达顶级View(一般是一个ViewGroup)之后，会调用ViewGroup的dispatchTouchEvent 方法，
+然后逻辑是这样的，如果顶级ViewGroup拦截事件即OnInterceptTouchEvent返回true, 则事件由ViewGroup处理，这时如果ViewGroup
+的mToucherListener被设置了，则onTouch会被调用，否则onTouchEvent被调用。也就是说，如果都提供的话，onTouch会屏蔽掉onTouchEvent。
+在onTouchEvent中，如果设置了mOnClickListener, 则OnClick会被调用。如果顶级ViewGroup不拦截事件，则事件会传递给它所在的
+点击事件链上的子View, 这时子View的dispatchTouchEvent 会被调用。到此为止，事件已经从顶级View传递给下一层View, 接下来
+的传递过程就和顶级View是一样的，如果循环，完成整个事件的分发。
+
+事件传递机制的一些结论：
+1. 同一个事件序列是指从手指触摸屏幕的那一刻起，到手指离开屏幕的那一刻结束，在这个过程中所产生的一系列事件，这个事件
+序列以down事件开始，中间含有数量不定的move事件，最终以up事件结束。
+2. 正常情况下，一个事件序列只能被一个View拦截且消耗。这一条的原因可以参考结论3。因为一旦一个元素拦截了某个事件，那么
+同一个事件序列内的所有事件都会直接交给它处理，因此同一个事件序列中的事件不能分别由两个View同时处理，但是通过特殊的
+手段可以做到，比如一个View将本应该自己处理的事件通过onTouchEvent强行传递给其他View处理。
+3. 某个View 一旦决定拦截，那么这一个事件序列都只能由它来处理（如果事件序列能够传递给它的话），并且它的onInterceptTouchEvent
+不会再被调用。这条好理解，就是当一个View决定拦截一个事件后，那么系统就会把同一个事件序列内的其他事件都直接交给它来处理，
+因此就不再调用这个View的onInterceptTouchEvent 去询问它是否拦截了。
+4. 某个View一旦开始处理事件，如果它不消耗 ACTION_DOWN 事件（OnTouchEvent返回了false）,那么同一事件序列中的其他
+事件都不会再交给它来处理，并且事件将重新交由它的父元素处理，即父元素的onTouchEvent会被调用。意思就是事件一旦交给一个
+View处理（即事件被这个View拦截了），那么它就必须消耗掉，否则同一事件序列中剩下的事件就不再交给它来处理了，这就好比上级交给程序员一件事，如果这件事没有处理好，短期内上级就不敢再把事情交给这个程序员来做了，二者类似的道理。
+5. 如果View不消耗ACTION_DOWN 以外的其他事件（在onTouchEvent)方法中，那么这个点击事件会消失，此时父元素的onTouchEvent
+并不会调用，并且当前View可以持续收到后续的事件，最终这些消失的点击事件会传递给Activity处理。
+6. ViewGroup 默认不拦截任何事件。Android源码中ViewGroup的OnInterceptTouchEvent方法默认返回false。
+7. View没有onInterceptTouchEvent 方法，一旦有点击事件传递给它，那么它的onTouchEvent 方法会被调用。
+8. View的onTouchEvent 默认都会消耗事件（返回true）,除非它是不可点击的（clickable和longClickable 同时为false）。View的longClickable 属性默认都为false, clickable属性要分情况，比如Button的clickable 属性默认为true, 而TextView的clickable
+属性默认为false.
+9. View的enable属性不影响onTouchEvent的默认返回值。哪怕一个View是disable状态的，只要它的clickable或者longClickable
+有一个为true, 那么它的onTouchEvent就返回true。
+10. onClick会发生的前提是当前View是可点击的，并且它收到了down和up事件。
+11. 事件传递过程是由外向内的，即事件总是先传递给父元素，然后再由父元素分发给子View, 通过requestDisallowInterceptTouchEvent
+方法可以在子元素中干预父元素的事件分发过程，但是ACTION_DOWN事件除外。
+12. 在子View的dispatchTouchEvent中，处理down事件，parent.requestDisallowInterceptTouchEvent(true) 是让父元素不拦截事件
+parent.requestDisallowInterceptTouchEvent(false) 则是让父元素作出是否作出执行父元素OnInterceptTouchEvent方法的判断，
+至于是否真的父元素进行事件拦截，是要看onInterceptTouchEvent怎么处理。
+
