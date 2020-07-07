@@ -28,6 +28,7 @@ import com.lucky.androidlearn.mvp.MVPMainActivity
 import com.lucky.androidlearn.mvvm.MVVMMainActivity
 import com.lucky.androidlearn.plugin.hookplugin.HookPluginMainActivity
 import com.lucky.androidlearn.proxy.DynamicProxyActivity
+import com.lucky.androidlearn.service.ServiceActivity
 import com.lucky.androidlearn.widget.common.CommonWidgetActivity
 import com.lucky.androidlearn.window.WindowManagerActivity
 import com.lucky.kotlin.KotlinLearnMainActivity
@@ -122,6 +123,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
     },
     HANDLER("Handler学习", NewsConstant.IMG_LOVELY, HandlerLearnActivity::class.java, true) {
         override fun channelName(): String = "handler"
+
+        override fun channelType() = "android"
+    },
+    SERVICE("Service学习", NewsConstant.IMG_LOVELY, ServiceActivity::class.java, true) {
+        override fun channelName(): String = "service"
 
         override fun channelType() = "android"
     },

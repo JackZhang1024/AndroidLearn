@@ -35,13 +35,10 @@ public class LearnBindService extends Service{
     }
 
     class BindServiceBinder extends Binder{
-
         public LearnBindService getService(){
             return LearnBindService.this;
         }
     }
-
-
-
-
 }
+
+

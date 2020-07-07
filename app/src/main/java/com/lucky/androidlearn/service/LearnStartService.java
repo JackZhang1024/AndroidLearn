@@ -25,19 +25,20 @@ public class LearnStartService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "StartServiceLearn");
-//        builder.setContentTitle("StartServiceTitle");
-//        builder.setContentText("StartServiceText");
-//        builder.setWhen(System.currentTimeMillis());
-//        builder.setSmallIcon(R.drawable.ic_launcher);
-//        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-//        Intent intent = new Intent(this, MainActivity.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-//        builder.setContentIntent(pendingIntent);
-//        Notification notification = builder.build();
-        //startForeground(1, notification);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "StartServiceLearn");
+        builder.setContentTitle("StartServiceTitle");
+        builder.setContentText("StartServiceText");
+        builder.setWhen(System.currentTimeMillis());
+        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true);
+        Notification notification = builder.build();
+        startForeground(1, notification);
 
-        createNotification();
+        //createNotification();
         Log.e(TAG, "onCreate: ");
     }
 
@@ -57,7 +58,7 @@ public class LearnStartService extends Service {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                System.out.println("++++++++++++++++++++++");
+                System.out.println("doSomethings2...");
             }
         }, 1000*6);
     }
@@ -81,8 +82,8 @@ public class LearnStartService extends Service {
         NotificationChannel channel = new NotificationChannel("fore_service", "前台服务", NotificationManager.IMPORTANCE_HIGH);
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannel(channel);
-        Intent intentForeSerive = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intentForeSerive, 0);
+        Intent intentForeService = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intentForeService, 0);
         Notification notification = new NotificationCompat.Builder(this, "fore_service")
                 .setContentTitle("This is content title")
                 .setContentText("This is content text")
