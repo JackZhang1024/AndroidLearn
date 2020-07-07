@@ -47,6 +47,12 @@ public class BookManagerActivity extends AppCompatActivity {
         public void onServiceDisconnected(ComponentName name) {
             Log.e(TAG, "onServiceDisconnected: ");
         }
+
+        @Override
+        public void onBindingDied(ComponentName name) {
+
+        }
+
     };
 
     private void bindBookManagerService() {

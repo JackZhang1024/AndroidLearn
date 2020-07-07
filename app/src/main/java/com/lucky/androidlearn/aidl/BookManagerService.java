@@ -45,7 +45,4 @@ public class BookManagerService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-
-
-
 }

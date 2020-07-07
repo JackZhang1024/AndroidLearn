@@ -9,14 +9,18 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.RemoteException;
 import android.util.Log;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucky.androidlearn.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MessengerActivity extends AppCompatActivity {
 
@@ -30,17 +34,40 @@ public class MessengerActivity extends AppCompatActivity {
         bindMessengerService();
     }
 
+    @BindView(R.id.et_input)
+    EditText mEtData;
+
+    @OnClick(R.id.btn_send)
+    public void onSendMessage() {
+        try {
+            String data = mEtData.getText().toString();
+            //System.out.println("data "+data);
+            Message message = Message.obtain(null, Constants.MESSAGE_FROM_CLIENT);
+            Bundle bundle = new Bundle();
+            bundle.putString("msg", data);
+            message.setData(bundle);
+            message.replyTo = mGetReplyMessenger;
+            mSendMessenger.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // 负责接收服务端发送过来的消息的Messenger
     private Messenger mGetReplyMessenger = new Messenger(new MessengerHandler());
+    // 负责发送消息到服务端的Messenger
+    private Messenger mSendMessenger;
 
     @SuppressWarnings("handlerLeak")
-    class MessengerHandler extends Handler{
+    class MessengerHandler extends Handler {
 
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case Constants.MESSAGE_FROM_SERVER:
                     String messgae = msg.getData().getString("reply");
-                    Log.e(TAG, "message from server : "+messgae);
+                    Log.e(TAG, "message from server : " + messgae);
                     break;
                 default:
                     super.handleMessage(msg);
@@ -54,14 +81,15 @@ public class MessengerActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.e(TAG, "onServiceConnected: ");
-            Messenger messenger = new Messenger(service);
+            //Messenger messenger = new Messenger(service);
+            mSendMessenger = new Messenger(service);
             Message message = Message.obtain(null, Constants.MESSAGE_FROM_CLIENT);
             Bundle bundle = new Bundle();
             bundle.putString("msg", "This is message from Client");
             message.setData(bundle);
             try {
                 message.replyTo = mGetReplyMessenger;
-                messenger.send(message);
+                mSendMessenger.send(message);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -81,7 +109,7 @@ public class MessengerActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mServiceConnection!=null){
+        if (mServiceConnection != null) {
             unbindService(mServiceConnection);
         }
     }
