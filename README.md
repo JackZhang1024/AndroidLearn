@@ -34,7 +34,7 @@ Android 基础通常考察范围包括启动模式，跨进程调用（IPC），
 
 [Android两种不同的Service启动方式](./总结/Android基础/Android服务启动方式/Service启动方式.md)
 
-[Android自定义控件以及注意点](./总计/Android基础/Android自定义控件/自定义控件.md)
+[Android自定义控件以及注意点](./总结/Android基础/Android自定义控件/自定义控件.md)
 
 [Android滑动冲突](./总结/Android基础/Android滑动冲突/滑动冲突.md)
 
