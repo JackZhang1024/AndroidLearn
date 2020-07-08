@@ -2,6 +2,7 @@ package com.lucky.androidlearn.widget.common.scrollconflict;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -53,14 +54,25 @@ public class HorizontalScrollViewEx2 extends ViewGroup {
         int y = (int) event.getY();
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
+            Log.e(TAG, "onInterceptTouchEvent: ACTION_DOWN");
             mLastX = x;
             mLastY = y;
             if (!mScroller.isFinished()) {
                 mScroller.abortAnimation();
                 return true;
             }
-            return false;
+            return false; // 表示不拦截事件 后面的MOVE，UP事件是可以继续传递过来的
+            //return true; // 表示onInterceptTouchEvent就DOWN结束了 不会再次调用onInterceptTouchEvent() 除非重新来一个事件序列 但是要注意仅仅是不再调用
+            //在OnTouchEvent事件中 属于这个事件序列的MOVE，UP事件是依旧能传递过来的，不要搞混了。
         } else {
+            if (action == MotionEvent.ACTION_MOVE) {
+                Log.e(TAG, "onInterceptTouchEvent: ACTION_MOVE");
+                // return false 这样就表示事件序列仍然可以继续（后面的MOVE,UP事件是可以继续通过onInterceptTouchEvent方法来继续传递过来的）
+                //return true 表示这个事件序列就到此结束了 后面属于这个事件序列的MOVE，UP事件是不会继续传递过来的
+                //这样就可能会造成一个问题 就是UP事件传递不过来 那么点击时间也就不能成立了 无法响应
+            } else if (action == MotionEvent.ACTION_UP) {
+                Log.e(TAG, "onInterceptTouchEvent: ACTION_UP");
+            }
             return true;
         }
     }

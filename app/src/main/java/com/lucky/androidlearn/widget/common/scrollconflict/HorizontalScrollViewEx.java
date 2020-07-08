@@ -2,6 +2,7 @@ package com.lucky.androidlearn.widget.common.scrollconflict;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -54,6 +55,7 @@ public class HorizontalScrollViewEx extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        Log.e(TAG, "onInterceptTouchEvent: start ");
         boolean intercepted = false;
         int x = (int) event.getX();
         int y = (int) event.getY();
@@ -81,6 +83,7 @@ public class HorizontalScrollViewEx extends ViewGroup {
                 if (Math.abs(deltaX) > Math.abs(deltaY)) {
                     // 水平滑动距离差 > 竖直滑动距离差
                     intercepted = true;
+                    Log.e(TAG, "onInterceptTouchEvent: true");
                 } else {
                     // 水平滑动距离差 < 竖直滑动距离差
                     intercepted = false;
@@ -99,6 +102,7 @@ public class HorizontalScrollViewEx extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.e(TAG, "onTouchEvent: "+event.getAction());
         // 表示追踪当前点击事件的速度
         mVelocityTracker.addMovement(event);
         int x = (int) event.getX();
