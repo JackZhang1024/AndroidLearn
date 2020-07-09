@@ -28,6 +28,7 @@ import com.lucky.androidlearn.mvp.MVPMainActivity
 import com.lucky.androidlearn.mvvm.MVVMMainActivity
 import com.lucky.androidlearn.plugin.hookplugin.HookPluginMainActivity
 import com.lucky.androidlearn.proxy.DynamicProxyActivity
+import com.lucky.androidlearn.rxjava2.RxJavaActivity
 import com.lucky.androidlearn.service.ServiceActivity
 import com.lucky.androidlearn.widget.common.CommonWidgetActivity
 import com.lucky.androidlearn.window.WindowManagerActivity
@@ -187,6 +188,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
         override fun channelName(): String = "mvp_frame"
 
         override fun channelType() = "frame"
+    },
+    RXJava("RxJava", NewsConstant.IMG_LOVELY, RxJavaActivity::class.java, true) {
+        override fun channelName(): String = "rxjava"
+
+        override fun channelType() = "rxjava"
     },
     KOTLIN("Kotlin", NewsConstant.IMG_LOVELY, KotlinLearnMainActivity::class.java, true) {
         override fun channelName(): String = "mvp_frame"

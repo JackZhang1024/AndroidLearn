@@ -44,7 +44,12 @@ public class RxJavaBasicActivity extends AppCompatActivity {
 //            }
 //        });
 
-        observable.subscribe(new Consumer<String>() {
+        observable.doOnSubscribe(new Consumer<Disposable>() {
+            @Override
+            public void accept(Disposable disposable) throws Exception {
+                Log.e(TAG, "accept: disposable的具体指向的类是 "+disposable.getClass().getName());
+            }
+        }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 Log.e(TAG, "accept: "+s);
