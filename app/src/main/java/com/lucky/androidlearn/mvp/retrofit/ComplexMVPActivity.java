@@ -31,6 +31,7 @@ public class ComplexMVPActivity extends BaseActivity<TestContact.Presenter> impl
         setContentView(R.layout.activity_mvp_main2);
         ButterKnife.bind(this);
         presenter.getData();
+        presenter.getIPInfo();
     }
 
     @Override

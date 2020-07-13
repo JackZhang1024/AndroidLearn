@@ -23,6 +23,14 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -140,12 +148,12 @@ public class OkHttpLearnActivity extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.e(TAG, "onFailure: "+e.getMessage());
+                Log.e(TAG, "onFailure: " + e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().toString();
+                String result = response.body().string();
                 Log.e(TAG, "onResponse: " + result);
             }
         });
@@ -328,4 +336,54 @@ public class OkHttpLearnActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OkHttpsLearnActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_ip_fetch)
+    public void onIPFetch() {
+        getObservable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String o) {
+                Log.e(TAG, "onNext: " + o);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: " + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+
+    private Observable getObservable() {
+        return Observable.create((ObservableOnSubscribe<String>) e -> {
+            OkHttpClient okHttpClient = new OkHttpClient();
+            String url = "http://ip-api.com/json/?lang=zh-CN";
+            Request request = new Request.Builder().get().url(url).build();
+            Call call = okHttpClient.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException exception) {
+                    e.onError(exception);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String result = response.body().string();
+                    e.onNext(result);
+                    e.onComplete();
+                }
+            });
+        });
+    }
+
+
 }

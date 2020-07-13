@@ -22,4 +22,22 @@
         android:layout_height="wrap_content"
         android:text="Map操作符" />
 
+    <Button
+        android:id="@+id/btn_operator_flatmap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="flatMap操作符" />
+
+    <Button
+        android:id="@+id/btn_operator_buffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="buffer操作符" />
+
+    <Button
+        android:id="@+id/btn_operator_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="filter操作符" />
+
 </LinearLayout>

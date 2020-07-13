@@ -20,4 +20,8 @@ public interface RetrofitService {
     @GET("Heart/index/all")
     Observable<WeatherModelBean> getWeatherDetailInfo(@QueryMap Map<String, String> params);
 
+
+    @GET("http://ip-api.com/json/?lang=zh-CN")
+    Observable<IPInfo> getIPInfo();
+
 }

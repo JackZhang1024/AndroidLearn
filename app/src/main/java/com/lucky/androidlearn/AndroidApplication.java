@@ -81,7 +81,7 @@ public class AndroidApplication extends Application {
         //友盟统计
         //UMConfigure.init(this, "5bdbef32b465f5b32400001d", "AndroidLearn", UMConfigure.DEVICE_TYPE_PHONE, null);
         //设置LOG开关，默认为false
-        UMConfigure.setLogEnabled(true);
+        UMConfigure.setLogEnabled(false);
         try {
             Class<?> aClass = Class.forName("com.umeng.commonsdk.UMConfigure");
             Field[] fs = aClass.getDeclaredFields();

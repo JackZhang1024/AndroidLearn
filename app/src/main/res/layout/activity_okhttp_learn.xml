@@ -54,6 +54,11 @@
         android:layout_height="wrap_content"
         android:text="https访问" />
 
+    <Button
+        android:id="@+id/btn_ip_fetch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IP地址获取" />
 
     <ImageView
         android:id="@+id/iv_image_show"

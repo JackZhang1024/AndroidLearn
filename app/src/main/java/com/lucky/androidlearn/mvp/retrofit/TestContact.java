@@ -15,10 +15,14 @@ public interface TestContact {
 
     interface Presenter extends BasePresenter{
         void getData();
+
+        void getIPInfo();
     }
 
     interface View extends BaseView{
         void setData(List<WeatherItem> weatherItemList);
+
+
     }
 
 }

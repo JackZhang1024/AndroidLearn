@@ -26,6 +26,7 @@ import com.lucky.androidlearn.multithread.MultiThreadActivity
 import com.lucky.androidlearn.mvc.MVCMainActivity
 import com.lucky.androidlearn.mvp.MVPMainActivity
 import com.lucky.androidlearn.mvvm.MVVMMainActivity
+import com.lucky.androidlearn.okhttplearn.OkHttpLearnActivity
 import com.lucky.androidlearn.plugin.hookplugin.HookPluginMainActivity
 import com.lucky.androidlearn.proxy.DynamicProxyActivity
 import com.lucky.androidlearn.rxjava2.RxJavaActivity
@@ -193,6 +194,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
         override fun channelName(): String = "rxjava"
 
         override fun channelType() = "rxjava"
+    },
+    OKHTTP("OKHttp", NewsConstant.IMG_LOVELY, OkHttpLearnActivity::class.java, true) {
+        override fun channelName(): String = "okHttpLearn"
+
+        override fun channelType() = "android"
     },
     KOTLIN("Kotlin", NewsConstant.IMG_LOVELY, KotlinLearnMainActivity::class.java, true) {
         override fun channelName(): String = "mvp_frame"

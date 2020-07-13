@@ -2,6 +2,7 @@ package com.lucky.androidlearn.rxjava2;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -36,7 +38,6 @@ public class RxJavaCountDownActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rxjava_countdown);
         ButterKnife.bind(this);
-
     }
 
     @OnClick(R.id.btn_countdown)
@@ -68,6 +69,28 @@ public class RxJavaCountDownActivity extends AppCompatActivity {
                     public void onComplete() {
                         Log.e(TAG, "onComplete: ");
                         mBtnCountDown.setText("倒计时");
+                    }
+                });
+    }
+
+    private void range(){
+        // 从0 开始 到10 结束 左闭右开
+        Observable.range(0, 5).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                // ...
+            }
+        });
+    }
+
+    private void repeat(){
+        // repeat创建一个重复多次发射的Observable
+        Observable.range(0,3 )
+                .repeat(2)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+
                     }
                 });
     }
