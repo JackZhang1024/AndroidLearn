@@ -200,6 +200,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
 
         override fun channelType() = "android"
     },
+    EVENTBUS("EventBus", NewsConstant.IMG_LOVELY, EventBusActivity::class.java, true) {
+        override fun channelName(): String = "event_bus"
+
+        override fun channelType() = "android"
+    },
     KOTLIN("Kotlin", NewsConstant.IMG_LOVELY, KotlinLearnMainActivity::class.java, true) {
         override fun channelName(): String = "mvp_frame"
 
