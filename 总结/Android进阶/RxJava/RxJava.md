@@ -982,7 +982,360 @@ public final Observable<T> subscribeOn(Scheduler scheduler) {
     return RxJavaPlugins.onAssembly(new ObservableSubscribeOn<T>(this, scheduler));
 }
 ```
+返回值是ObservableSubscribeOn对象，这个ObservableSubscribeOn也是一个Observable,这就意味着在最后调用subscribe()
+方法的时候，用的就是这个ObservableSubscribeOn对象，最后回调subscribeActual()方法也是这块了。
+```java
+// ObservableSubscribeOn
+public final class ObservableSubscribeOn<T> extends AbstractObservableWithUpstream<T, T> {
+    final Scheduler scheduler;
+
+    // ObservableSource就是在调用SubscribeOn方法之前的Observable
+    // Scheduler就是Schedulers.IO 这个调度器就是用来切换到工作线程的
+    // scheduler里面是实现了一个线程池？？？
+    public ObservableSubscribeOn(ObservableSource<T> source, Scheduler scheduler) {
+        super(source);
+        this.scheduler = scheduler;
+    }
+
+    // subscribeActual就是实现subscribe()最终调用的地方
+    @Override
+    public void subscribeActual(final Observer<? super T> s) {
+        // SubscribeOnObserver是对原有的Observer进行包装
+        final SubscribeOnObserver<T> parent = new SubscribeOnObserver<T>(s);
+        // 在订阅subscribe的时候进行回调
+        s.onSubscribe(parent);
+        // 开始进行线程切换并且执行任务
+        parent.setDisposable(scheduler.scheduleDirect(new SubscribeTask(parent)));
+    }
+
+    static final class SubscribeOnObserver<T> extends AtomicReference<Disposable> implements Observer<T>, Disposable {
+
+        private static final long serialVersionUID = 8094547886072529208L;
+        final Observer<? super T> actual;
+
+        final AtomicReference<Disposable> s;
+
+        SubscribeOnObserver(Observer<? super T> actual) {
+            this.actual = actual;
+            this.s = new AtomicReference<Disposable>();
+        }
+
+        @Override
+        public void onSubscribe(Disposable s) {
+            DisposableHelper.setOnce(this.s, s);
+        }
+
+        @Override
+        public void onNext(T t) {
+            actual.onNext(t);
+        }
+
+        @Override
+        public void onError(Throwable t) {
+            actual.onError(t);
+        }
+
+        @Override
+        public void onComplete() {
+            actual.onComplete();
+        }
+
+        @Override
+        public void dispose() {
+            DisposableHelper.dispose(s);
+            DisposableHelper.dispose(this);
+        }
+
+        @Override
+        public boolean isDisposed() {
+            return DisposableHelper.isDisposed(get());
+        }
+
+        void setDisposable(Disposable d) {
+            DisposableHelper.setOnce(this, d);
+        }
+    }
+
+    final class SubscribeTask implements Runnable {
+        private final SubscribeOnObserver<T> parent;
+
+        SubscribeTask(SubscribeOnObserver<T> parent) {
+            this.parent = parent;
+        }
+
+        @Override
+        public void run() {
+            // 将线程从主线程中切换到工作线程中！！！！
+            source.subscribe(parent);
+        }
+    }
+}
+```
+```java
+// Scheduler.java
+
+@NonNull
+public Disposable scheduleDirect(@NonNull Runnable run) {
+    return scheduleDirect(run, 0L, TimeUnit.NANOSECONDS);
+}
+
+@NonNull
+public Disposable scheduleDirect(@NonNull Runnable run, long delay, @NonNull TimeUnit unit) {
+   final Worker w = createWorker(); // createWorker()是一个抽象方法 具体是实现是在IoScheduler中
+   final Runnable decoratedRun = RxJavaPlugins.onSchedule(run);
+   DisposeTask task = new DisposeTask(decoratedRun, w);
+   w.schedule(task, delay, unit); // 在IoScheduler中的worker进行任务调度
+   return task;
+}
+```
+
+```java
+// Scheudlers.io()最终返回的对象
+public final class IoScheduler extends Scheduler {
+    
+    @NonNull
+    @Override
+    public Worker createWorker() {
+        return new EventLoopWorker(pool.get());
+    }
+
+    static final class EventLoopWorker extends Scheduler.Worker {
+        private final CompositeDisposable tasks;
+        // CacheWorkerPool 是对Worker进行池化 后面研究
+        private final CachedWorkerPool pool;
+        private final ThreadWorker threadWorker;
+
+        final AtomicBoolean once = new AtomicBoolean();
+
+        EventLoopWorker(CachedWorkerPool pool) {
+            this.pool = pool;
+            this.tasks = new CompositeDisposable();
+            this.threadWorker = pool.get();
+        }
+
+        @Override
+        public void dispose() {
+            if (once.compareAndSet(false, true)) {
+                tasks.dispose();
+                // releasing the pool should be the last action
+                pool.release(threadWorker);
+            }
+        }
+
+        @Override
+        public boolean isDisposed() {
+            return once.get();
+        }
+
+        // worker对任务进行调度
+        @NonNull
+        @Override
+        public Disposable schedule(@NonNull Runnable action, long delayTime, @NonNull TimeUnit unit) {
+            if (tasks.isDisposed()) {
+                // don't schedule, we are unsubscribed
+                return EmptyDisposable.INSTANCE;
+            }
+            return threadWorker.scheduleActual(action, delayTime, unit, tasks);
+        }
+    }
+}
+
+```
+```java
+// NewThreadWorker.java
+public ScheduledRunnable scheduleActual(final Runnable run, long delayTime,
+@NonNull TimeUnit unit, @Nullable DisposableContainer parent) {
+        Runnable decoratedRun = RxJavaPlugins.onSchedule(run);
+        ScheduledRunnable sr = new ScheduledRunnable(decoratedRun, parent);
+        if (parent != null) {
+            if (!parent.add(sr)) {
+                return sr;
+            }
+        }
+        Future<?> f;
+        try {
+            // 在此进行任务的执行 
+            if (delayTime <= 0) {
+                f = executor.submit((Callable<Object>)sr);
+            } else {
+                f = executor.schedule((Callable<Object>)sr, delayTime, unit);
+            }
+            sr.setFuture(f);
+        } catch (RejectedExecutionException ex) {
+            if (parent != null) {
+                parent.remove(sr);
+            }
+            RxJavaPlugins.onError(ex);
+        }
+        return sr;
+    }
+
+// 在NewThreadWorker的构造方法中创建线程池
+public NewThreadWorker(ThreadFactory threadFactory) {
+    executor = SchedulerPoolFactory.create(threadFactory);
+}        
+// 这里的executor是一个什么样子的线程池呢？
+// SchedulerPoolFactory.java 
+// 创建只有一个核心线程的线程池
+public static ScheduledExecutorService create(ThreadFactory factory) {
+    final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1, factory);
+    if (exec instanceof ScheduledThreadPoolExecutor) {
+        ScheduledThreadPoolExecutor e = (ScheduledThreadPoolExecutor) exec;
+        POOLS.put(e, exec);
+    }
+    return exec;
+}
+```
+以上是在将任务放到工作线程中进行任务执行的分析，下面是将回调放到主线程中的分析
+
+```java
+// 在主线程中进行观察 scheduler对象为AndroidSchedulers.mainThread()对象
+@CheckReturnValue
+@SchedulerSupport(SchedulerSupport.CUSTOM)
+public final Observable<T> observeOn(Scheduler scheduler) {
+    return observeOn(scheduler, false, bufferSize());
+}
+
+// 最终返回ObservableObserveOn对象
+@CheckReturnValue
+@SchedulerSupport(SchedulerSupport.CUSTOM)
+public final Observable<T> observeOn(Scheduler scheduler, boolean delayError, int bufferSize) {
+    ObjectHelper.requireNonNull(scheduler, "scheduler is null");
+    ObjectHelper.verifyPositive(bufferSize, "bufferSize");
+    // this 就是ObservableSubscribeOn对象（经过ObservableOn()方法返回的对象）
+    return RxJavaPlugins.onAssembly(new ObservableObserveOn<T>(this, scheduler, delayError, bufferSize));
+}
+```
+```java
+// ObservableObserveOn仍旧是Observable对象
+public final class ObservableObserveOn<T> extends AbstractObservableWithUpstream<T, T> {
+    @Override
+    protected void subscribeActual(Observer<? super T> observer) {
+        if (scheduler instanceof TrampolineScheduler) {
+            source.subscribe(observer);
+        } else {
+            Scheduler.Worker w = scheduler.createWorker();
+            source.subscribe(new ObserveOnObserver<T>(observer, w, delayError, bufferSize));
+        }
+    }
+
+    static final class ObserveOnObserver<T> extends BasicIntQueueDisposable<T>
+    implements Observer<T>, Runnable {
+        ....
+
+        @Override
+        public void onNext(T t) {
+            if (done) {
+                return;
+            }
+
+            if (sourceMode != QueueDisposable.ASYNC) {
+                queue.offer(t);
+            }
+            schedule();
+        }
+
+        
+        void schedule() {
+            if (getAndIncrement() == 0) {
+                // worker是HanlderScheduler的worker
+                worker.schedule(this);
+            }
+        } 
+    }
+
+}
+```
+```java
+
+// AndroidSchedulers.java中的MainHolder静态内部类
+private static final class MainHolder {
+    static final Scheduler DEFAULT = new HandlerScheduler(new Handler(Looper.getMainLooper()));
+}
+
+// HandlerWorker是HandlerScheduler的静态内部类 
+private static final class HandlerWorker extends Worker {
+    
+    Override
+    public Disposable schedule(Runnable run, long delay, TimeUnit unit) {
+        run = RxJavaPlugins.onSchedule(run);
+        ScheduledRunnable scheduled = new ScheduledRunnable(handler, run);
+        Message message = Message.obtain(handler, scheduled);
+        message.obj = this; // Used as token for batch disposal of this worker's runnables.
+        handler.sendMessageDelayed(message, Math.max(0L, unit.toMillis(delay)));
+        // Re-check disposed state for removing in case we were racing a call to dispose().
+        if (disposed) {
+            handler.removeCallbacks(scheduled);
+            return Disposables.disposed();
+        }
+        return scheduled;
+    }
+}
+```
 
 #### RxJava变换符操作原理
+通过分析变换操作符map来分析变换符操作原理
+```java
+Observable.just(1, 2, 3)
+    .map(new Function<Integer, String>() {
+            @Override
+            public String apply(Integer integer) throws Exception {
+                return String.format("我是第%s", integer);
+            }
+    })
+    .subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Log.e(TAG, "accept: " + s);
+            }
+    });
+```
+```java
+// map变换 返回的数据依旧是Observable
+@CheckReturnValue
+@SchedulerSupport(SchedulerSupport.NONE)
+public final <R> Observable<R> map(Function<? super T, ? extends R> mapper) {
+    ObjectHelper.requireNonNull(mapper, "mapper is null");
+    return RxJavaPlugins.onAssembly(new ObservableMap<T, R>(this, mapper));
+}
+```
 
+```java
+// ObservableMap
+public final class ObservableMap<T, U> extends AbstractObservableWithUpstream<T, U> {
+    final Function<? super T, ? extends U> function;
 
+    public ObservableMap(ObservableSource<T> source, Function<? super T, ? extends U> function) {
+        super(source);
+        this.function = function;
+    }
+
+    @Override
+    public void subscribeActual(Observer<? super U> t) {
+        source.subscribe(new MapObserver<T, U>(t, function));
+    }
+
+    static final class MapObserver<T, U> extends BasicFuseableObserver<T, U> {
+        final Function<? super T, ? extends U> mapper;
+
+        MapObserver(Observer<? super U> actual, Function<? super T, ? extends U> mapper) {
+            super(actual);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public void onNext(T t) {
+            ....
+            try {
+                // 重点在mapper.apply(t) // 可以通过函数将t对象进行转换u对象
+                v = ObjectHelper.requireNonNull(mapper.apply(t), "The mapper function returned a null value.");
+            } catch (Throwable ex) {
+                fail(ex);
+                return;
+            }
+            actual.onNext(v);
+        }
+        ...
+    }
+}
+```

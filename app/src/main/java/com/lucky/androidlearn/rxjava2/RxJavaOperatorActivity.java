@@ -64,30 +64,30 @@ public class RxJavaOperatorActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_operator_map)
     public void operatorMap() {
-//        Observable.just(1, 2, 3)
-//                .map(new Function<Integer, String>() {
-//                    @Override
-//                    public String apply(Integer integer) throws Exception {
-//                        return String.format("我是第%s", integer);
-//                    }
-//                })
-//                .subscribe(new Consumer<String>() {
-//                    @Override
-//                    public void accept(String s) throws Exception {
-//                        Log.e(TAG, "accept: " + s);
-//                    }
-//                });
-        mapStudents();
+        Observable.just(1, 2, 3)
+                .map(new Function<Integer, String>() {
+                    @Override
+                    public String apply(Integer integer) throws Exception {
+                        return String.format("我是第%s", integer);
+                    }
+                })
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Log.e(TAG, "accept: " + s);
+                    }
+                });
+//        mapStudents();
     }
 
     @OnClick(R.id.btn_operator_flatmap)
     public void onFlatMapClick() {
-        //flatMapStudents();
+        flatMapStudents();
         //onElementAtClick();
         //onDistinctClick();
         //onSkipClick();
         //onTakeClick();
-        onTimeOutClick();
+        //onTimeOutClick();
     }
 
     @OnClick(R.id.btn_login)
