@@ -1,23 +1,20 @@
-- [Retrofit](#retrofit)
-  - [Retrofit的常用使用方法](#retrofit的常用使用方法)
-    - [1. Retrofit的创建](#1-retrofit的创建)
-    - [2. Retrofit的GET请求](#2-retrofit的get请求)
-    - [3. Retrofit的POST请求](#3-retrofit的post请求)
-    - [4. Retrofit的文件上传](#4-retrofit的文件上传)
-    - [5. Retrofit的文件下载](#5-retrofit的文件下载)
-  - [Retrofit的原理分析](#retrofit的原理分析)
-    - [1. 动态代理](#1-动态代理)
-    - [2. Retroif的create方法](#2-retroif的create方法)
-## Retrofit
-### Retrofit的常用使用方法
-#### 1. Retrofit的创建
-#### 2. Retrofit的GET请求
-#### 3. Retrofit的POST请求
-#### 4. Retrofit的文件上传
-#### 5. Retrofit的文件下载
-### Retrofit的原理分析
-#### 1. 动态代理
-```java
+package com.lucky.androidlearn.proxy;
+
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.lucky.androidlearn.R;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class DynamicProxyNewActivity extends AppCompatActivity {
 
     private static final String TAG = "DynamicProxyNewActivity";
@@ -33,7 +30,7 @@ public class DynamicProxyNewActivity extends AppCompatActivity {
     public void onDynamicProxyClick() {
         Student student = new Student();
         IStudy study = (IStudy) Proxy.newProxyInstance(student.getClass().getClassLoader(), new Class[]{IStudy.class}, new StudentHandler(student));
-        // 用IStudy这个代理对象代理原来的student对象
+        // 用IStudy这个代理对象
         study.study();
     }
 
@@ -47,6 +44,7 @@ public class DynamicProxyNewActivity extends AppCompatActivity {
         public void study() {
             Log.e(TAG, "study: 我要好好学习，天天向上");
         }
+
     }
 
     static class StudentHandler implements InvocationHandler {
@@ -73,13 +71,6 @@ public class DynamicProxyNewActivity extends AppCompatActivity {
             Log.e(TAG, "postStudy: 好好学习，迎娶白富美");
         }
     }
+
+
 }
-```
-输出结果：
-```java
-2020-07-15 18:03:35.199 22282-22282/com.lucky.androidlearn E/DynamicProxyNewActivity: preStudy: 我要好好看书学习
-2020-07-15 18:03:35.199 22282-22282/com.lucky.androidlearn E/DynamicProxyNewActivity: invoke: methodName study
-2020-07-15 18:03:35.199 22282-22282/com.lucky.androidlearn E/DynamicProxyNewActivity: study: 我要好好学习，天天向上
-2020-07-15 18:03:35.199 22282-22282/com.lucky.androidlearn E/DynamicProxyNewActivity: postStudy: 好好学习，迎娶白富美
-```
-#### 2. Retroif的create方法

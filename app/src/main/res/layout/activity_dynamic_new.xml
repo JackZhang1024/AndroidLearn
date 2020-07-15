@@ -2,18 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="测试"
-        />
-
-    <Button
-        android:id="@+id/button_dynamic"
+        android:id="@+id/btn_dynamic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="动态代理"

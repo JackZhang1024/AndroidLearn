@@ -899,6 +899,8 @@
 
         <activity android:name=".okhttplearn.OkHttpCacheActivity"/>
 
+        <activity android:name=".proxy.DynamicProxyNewActivity"/>
+
         <activity
             android:name=".eventbus.EventBusActivity"
             android:label="@string/eventbus_learn"

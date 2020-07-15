@@ -1,5 +1,6 @@
 package com.lucky.androidlearn.proxy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,11 +31,15 @@ public class DynamicProxyActivity extends AppCompatActivity {
                 Toast.makeText(DynamicProxyActivity.this, ((Button) v).getText(), Toast.LENGTH_SHORT).show();
             }
         });
-        try {
-            hook(btn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            hook(btn);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        Button btnDynamic = findViewById(R.id.button_dynamic);
+        btnDynamic.setOnClickListener(v->{
+            startActivity(new Intent(DynamicProxyActivity.this, DynamicProxyNewActivity.class));
+        });
     }
 
 
