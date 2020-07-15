@@ -11,6 +11,11 @@
         android:layout_height="wrap_content"
         android:text="Get请求" />
 
+    <Button
+        android:id="@+id/btn_okhttp_get_execute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get的同步请求" />
 
     <Button
         android:id="@+id/btn_okhttp_post"
@@ -60,9 +65,18 @@
         android:layout_height="wrap_content"
         android:text="IP地址获取" />
 
+    <Button
+        android:id="@+id/btn_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取缓存数据"
+        />
+
     <ImageView
         android:id="@+id/iv_image_show"
         android:layout_width="match_parent"
         android:layout_height="240dp" />
+
+
 
 </LinearLayout>

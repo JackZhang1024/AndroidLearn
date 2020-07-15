@@ -897,6 +897,8 @@
 
         <activity android:name=".fragmentation.FragmentationActivity"/>
 
+        <activity android:name=".okhttplearn.OkHttpCacheActivity"/>
+
         <activity
             android:name=".eventbus.EventBusActivity"
             android:label="@string/eventbus_learn"

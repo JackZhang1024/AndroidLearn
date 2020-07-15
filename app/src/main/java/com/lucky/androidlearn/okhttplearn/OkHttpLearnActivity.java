@@ -63,8 +63,17 @@ public class OkHttpLearnActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_okhttp_learn);
         ButterKnife.bind(this);
+    }
 
+    @OnClick(R.id.btn_okhttp_get_execute)
+    public void onGetSyncClick(){
+        onHttpGetExecuteClick();
+    }
 
+    @OnClick(R.id.btn_cache)
+    public void onFetchCacheClick(){
+        Intent intent = new Intent(this, OkHttpCacheActivity.class);
+        startActivity(intent);
     }
 
     // https://kyfw.12306.cn/otn/
@@ -73,7 +82,7 @@ public class OkHttpLearnActivity extends AppCompatActivity {
     @OnClick(R.id.btn_okhttp_get)
     public void onHttpGetClick() {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("https://kyfw.12306.cn/otn/").build();
+        Request request = new Request.Builder().get().url("http://ip-api.com/json/?lang=zh-CN").build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -94,6 +103,21 @@ public class OkHttpLearnActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void onHttpGetExecuteClick(){
+        new Thread(()->{
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder().get().url("http://ip-api.com/json/?lang=zh-CN").build();
+                Call call = client.newCall(request);
+                Response response = call.execute();
+                String responseResult = response.body().string();
+                Log.e(TAG, "onHttpGetExecuteClick: "+responseResult);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     /**
