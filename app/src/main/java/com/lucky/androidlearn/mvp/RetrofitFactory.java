@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -44,6 +45,7 @@ public class RetrofitFactory {
                     .create()))
             // 添加Retrofi到RxJava的转换器
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .callbackExecutor(Executors.newSingleThreadExecutor())
             .client(httpClient)
             .build()
             .create(RetrofitService.class);

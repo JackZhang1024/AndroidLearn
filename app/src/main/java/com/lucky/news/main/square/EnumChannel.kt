@@ -29,6 +29,7 @@ import com.lucky.androidlearn.mvvm.MVVMMainActivity
 import com.lucky.androidlearn.okhttplearn.OkHttpLearnActivity
 import com.lucky.androidlearn.plugin.hookplugin.HookPluginMainActivity
 import com.lucky.androidlearn.proxy.DynamicProxyActivity
+import com.lucky.androidlearn.retrofit.RetrofitActivity
 import com.lucky.androidlearn.rxjava2.RxJavaActivity
 import com.lucky.androidlearn.service.ServiceActivity
 import com.lucky.androidlearn.widget.common.CommonWidgetActivity
@@ -167,6 +168,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
 
     LAUNCH_MODE("Activity启动模式", NewsConstant.IMG_LOVELY, LaunchModeActivity::class.java, true) {
         override fun channelName(): String = "launch_mode"
+
+        override fun channelType() = "android"
+    },
+    RETROFIT("Retrofit", NewsConstant.IMG_LOVELY, RetrofitActivity::class.java, true) {
+        override fun channelName(): String = "retrofit"
 
         override fun channelType() = "android"
     },

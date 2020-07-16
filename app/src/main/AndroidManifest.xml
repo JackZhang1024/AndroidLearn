@@ -36,7 +36,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -49,10 +49,10 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <!--        <meta-data android:value="5bdbef32b465f5b32400001d" android:name="UMENG_APPKEY"/>
                 <meta-data android:value="AndroidLearn" android:name="UMENG_CHANNEL"/>-->
@@ -887,19 +887,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".fragmentation.FragmentationViewPagerActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+        <activity
+            android:name=".fragmentation.FragmentationViewPagerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".fragmentation.FragmentationMultiFragmentInActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+        <activity
+            android:name=".fragmentation.FragmentationMultiFragmentInActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".fragmentation.FragmentationActivity"/>
+        <activity android:name=".fragmentation.FragmentationActivity" />
 
-        <activity android:name=".okhttplearn.OkHttpCacheActivity"/>
+        <activity android:name=".okhttplearn.OkHttpCacheActivity" />
 
-        <activity android:name=".proxy.DynamicProxyNewActivity"/>
+        <activity android:name=".proxy.DynamicProxyNewActivity" />
+
+        <activity android:name=".retrofit.RetrofitActivity" />
 
         <activity
             android:name=".eventbus.EventBusActivity"
@@ -926,38 +928,42 @@
 
         <activity android:name=".hotfix.HotFixActivity" />
 
-        <activity android:name=".loadmore.PullRefreshLoadMoreActivity"/>
+        <activity android:name=".loadmore.PullRefreshLoadMoreActivity" />
 
-        <activity android:name=".loadmore.PullRefreshLoadMoreNewActivity"/>
+        <activity android:name=".loadmore.PullRefreshLoadMoreNewActivity" />
 
-        <activity android:name=".hybrid.WebAnotherProcessActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
+        <activity
+            android:name=".hybrid.WebAnotherProcessActivity"
             android:process=":h5"
-            />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <activity android:name=".hybrid.VsonicBrowserActivity" />
 
-        <activity android:name=".loadsir.LoadSirActivity"/>
+        <activity android:name=".loadsir.LoadSirActivity" />
 
-        <activity android:name=".loadsir.LoadSirFragmentActivity"/>
+        <activity android:name=".loadsir.LoadSirFragmentActivity" />
 
         <activity android:name=".proxy.DynamicProxyActivity" />
 
         <!--  利用Hook的方式进行插件化      -->
-        <activity android:name=".plugin.hookplugin.HookPluginMainActivity"/>
+        <activity android:name=".plugin.hookplugin.HookPluginMainActivity" />
 
         <!--  代理ProxyActivity      -->
-        <activity android:name=".plugin.hookplugin.ProxyActivity"/>
+        <activity android:name=".plugin.hookplugin.ProxyActivity" />
 
         <!--  代理形式的插件化       -->
-        <activity android:name=".plugin.proxyplugin.DelegatePluginActivity"/>
+        <activity android:name=".plugin.proxyplugin.DelegatePluginActivity" />
 
-        <activity android:name=".window.WindowManagerActivity"/>
+        <activity android:name=".window.WindowManagerActivity" />
 
-        <activity android:name=".type.TypeAndInterfaceActivity"/>
+        <activity android:name=".type.TypeAndInterfaceActivity" />
 
-        <activity android:name=".markdown.MarkdownActivity"/>
+        <activity android:name=".markdown.MarkdownActivity" />
+
+        <activity android:name=".retrofit.RetrofitSecondActivity"/>
+
+        <activity android:name=".retrofit.RetrofitUploadActivity"/>
 
         <service
             android:name=".core.service.PollService"
@@ -1030,8 +1036,7 @@
         <provider
             android:name="com.lucky.androidlearn.provider.BooksProvider"
             android:authorities="com.lucky.androidlearn.provider"
-            android:exported="true"
-            >
+            android:exported="true">
 
         </provider>
 
