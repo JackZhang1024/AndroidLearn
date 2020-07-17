@@ -787,3 +787,323 @@ public class DynamicProxyNewActivity extends AppCompatActivity {
 2020-07-15 18:03:35.199 22282-22282/com.lucky.androidlearn E/DynamicProxyNewActivity: postStudy: 好好学习，迎娶白富美
 ```
 #### 2. Retroif的create方法
+在调用具体的接口之前，我们先调用了create(),但是为什么就调用creat()之后就可以直接调用具体的接口方法呢？答案就在create()方法的实现上，代码如下：
+```java
+public <T> T create(final Class<T> service) {
+    Utils.validateServiceInterface(service);
+    if (validateEagerly) {
+      eagerlyValidateMethods(service); // 没什么用 不用看
+    }
+    return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class<?>[] { service },
+        new InvocationHandler() {
+          private final Platform platform = Platform.get();
+
+          @Override public Object invoke(Object proxy, Method method, @Nullable Object[] args)
+              throws Throwable {
+            // 没什么用
+            if (method.getDeclaringClass() == Object.class) {
+              return method.invoke(this, args);
+            }
+            // 没什么用
+            if (platform.isDefaultMethod(method)) {
+              return platform.invokeDefaultMethod(method, service, proxy, args);
+            }
+            // 重点来了    
+            ServiceMethod<Object, Object> serviceMethod =
+                (ServiceMethod<Object, Object>) loadServiceMethod(method);
+            OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
+            // 返回一个Call对象，没错就是我们OkhttpClient中的Call对象
+            // 获取Call对象之后，就可以像OkHttpClient一样继续enque进行网络请求了
+            return serviceMethod.callAdapter.adapt(okHttpCall);
+          }
+        });
+  }
+```
+刚开始没有明白为什么要用代理，并且用常理推测应该有一个实现RetrofitService的对象，但是没有发现。用代理对象的好处就是我仅仅通过接口就可以所有获取方法，并不是通过一个实现类来获取。能够拿到方法，那么该方法上的注解，方法参数的注解，方法参数名称都是可以通过InvocationHandler的invoke回调方法的参数method参数来获取，基本上就可以拿到构建一个请求的所有需要，url, 参数名，但是还差一个参数，对了，invoke回调中的args参数就是当方法调用的时候，传递过来的参数，到此，构建请求的所有参数都齐了。但是我们这个回调
+需要返回一个Call对象，那么才能继续enqueue进行网络请求,所以，我们需要通过上面的获取到的参数构建Call对象，和OkHttpClient一样，我们需要构建Request对象，然后OkHttpClient.newCall(request)返回Call对象，核心思想就是如此，那么具体在Retrofit中怎么实现的呢？那么秘密就在最后面的三句代码中。
+```java
+ServiceMethod<?, ?> loadServiceMethod(Method method) {
+  ServiceMethod<?, ?> result = serviceMethodCache.get(method);
+  if (result != null) return result;
+  synchronized (serviceMethodCache) {
+    result = serviceMethodCache.get(method);
+    if (result == null) {
+      // 重点在ServiceMethod.Builder, 看构造方法来说是对method的包装
+      result = new ServiceMethod.Builder<>(this, method).build();
+      serviceMethodCache.put(method, result);
+    }
+  }
+  return result;
+}
+```
+```java
+// ServiveMethod.java
+static final class Builder<T, R> {
+    ...
+    Builder(Retrofit retrofit, Method method) {
+      this.retrofit = retrofit;
+      this.method = method;
+      this.methodAnnotations = method.getAnnotations(); // 方法的注解 @GET @POST等
+      this.parameterTypes = method.getGenericParameterTypes(); // 方法的参数类型 String int等 
+      this.parameterAnnotationsArray = method.getParameterAnnotations(); // 方法的参数注解 @Query @Path等
+    }
+    ...
+    public ServiceMethod build() {
+      callAdapter = createCallAdapter();
+      responseType = callAdapter.responseType();
+      if (responseType == Response.class || responseType == okhttp3.Response.class) {
+        throw methodError("'"
+            + Utils.getRawType(responseType).getName()
+            + "' is not a valid response body type. Did you mean ResponseBody?");
+      }
+      // 1. 类型转换器 将ResponseBody转化成目标类型
+      responseConverter = createResponseConverter();
+
+      for (Annotation annotation : methodAnnotations) {
+          // 2. 解析方法注解类型 是@GET还是 @POST 最后决定是GET请求还是POST请求
+          parseMethodAnnotation(annotation);
+      }
+
+      if (httpMethod == null) {
+        throw methodError("HTTP method annotation is required (e.g., @GET, @POST, etc.).");
+      }
+
+      if (!hasBody) {
+        if (isMultipart) {
+          throw methodError(
+              "Multipart can only be specified on HTTP methods with request body (e.g., @POST).");
+        }
+        if (isFormEncoded) {
+          throw methodError("FormUrlEncoded can only be specified on HTTP methods with "
+              + "request body (e.g., @POST).");
+        }
+      }
+
+      int parameterCount = parameterAnnotationsArray.length;
+      parameterHandlers = new ParameterHandler<?>[parameterCount];
+      for (int p = 0; p < parameterCount; p++) {
+        Type parameterType = parameterTypes[p];
+        if (Utils.hasUnresolvableType(parameterType)) {
+          throw parameterError(p, "Parameter type must not include a type variable or wildcard: %s",
+              parameterType);
+        }
+
+        Annotation[] parameterAnnotations = parameterAnnotationsArray[p];
+        if (parameterAnnotations == null) {
+          throw parameterError(p, "No Retrofit annotation found.");
+        }
+        // 3. 开始处理参数的注解 @Query @Path @Part等 获取到注解内的参数 注解名称
+        parameterHandlers[p] = parseParameter(p, parameterType, parameterAnnotations);
+      }
+
+      if (relativeUrl == null && !gotUrl) {
+        throw methodError("Missing either @%s URL or @Url parameter.", httpMethod);
+      }
+      if (!isFormEncoded && !isMultipart && !hasBody && gotBody) {
+        throw methodError("Non-body HTTP method cannot contain @Body.");
+      }
+      if (isFormEncoded && !gotField) {
+        throw methodError("Form-encoded method must contain at least one @Field.");
+      }
+      if (isMultipart && !gotPart) {
+        throw methodError("Multipart method must contain at least one @Part.");
+      }
+      // 创建ServiceMethod对象
+      return new ServiceMethod<>(this);
+    }
+}
+```
+好了，经过上面的ServiceMethod对象的创建，我们已经获取到了构建请求的参数的要素，除了真实的方法参数。剩下的就是来进行Request对象和Call对象的创建。
+```java
+//1. Call对象的创建
+OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
+
+//OkHttpCall.java
+//OkHttpCall实现Call接口
+final class OkHttpCall<T> implements Call<T> {
+  
+  OkHttpCall(ServiceMethod<T, ?> serviceMethod, @Nullable Object[] args) {
+    this.serviceMethod = serviceMethod;
+    this.args = args;
+  }
+
+  @Override public synchronized Request request() {
+    okhttp3.Call call = rawCall;
+    if (call != null) {
+      return call.request();
+    ... 
+    try {
+      // 创建OKHttpClient中的Call对象 不是Retrofit中的OkHttpCall对象
+      return (rawCall = createRawCall()).request();
+    } catch (RuntimeException e) {
+      creationFailure = e;
+      throw e;
+    } catch (IOException e) {
+      creationFailure = e;
+      throw new RuntimeException("Unable to create request.", e);
+    }
+  }      
+
+  // Callback<T>是一个回调接口 Callback.java接口
+  @Override public void enqueue(final Callback<T> callback) {
+     ...
+     // 注意这里的call对象是 okhttp3.Call rawCall 是OkHttpClient中的Call对象
+     call.enqueue(new okhttp3.Callback() {
+      @Override public void onResponse(okhttp3.Call call, okhttp3.Response rawResponse)
+      throws IOException {
+        Response<T> response;
+        try {
+          response = parseResponse(rawResponse);
+        } catch (Throwable e) {
+          callFailure(e);
+          return;
+        }
+        callSuccess(response);
+      }
+
+      @Override public void onFailure(okhttp3.Call call, IOException e) {
+        try {
+          callback.onFailure(OkHttpCall.this, e);
+        } catch (Throwable t) {
+          t.printStackTrace();
+        }
+      }
+
+      private void callFailure(Throwable e) {
+        try {
+          //失败之后进行回调 回调给OkHttpCall对象本身 回调OkHttpCall对象本身和错误对象
+          callback.onFailure(OkHttpCall.this, e);
+        } catch (Throwable t) {
+          t.printStackTrace();
+        }
+      }
+
+      private void callSuccess(Response<T> response) {
+        try {
+          //成功之后进行回调 回调OkHttpCall对象本身和Response对象
+          callback.onResponse(OkHttpCall.this, response);
+        } catch (Throwable t) {
+          t.printStackTrace();
+        }
+      }
+    });
+  }
+
+  @Override public Response<T> execute() throws IOException {
+     ...
+     //call对象为OkHttpClient中的call对象
+     return parseResponse(call.execute());
+  }
+
+  ...  
+}
+```
+好了，有了Call对象了，那么已经有了Call对象了，怎么还要adapt一下，我们继续看最后一句
+```java
+return serviceMethod.callAdapter.adapt(okHttpCall);
+
+// serviceMethod.callAdapter这个Adapter是哪里的呢？
+// 最后根据Duebug得到Adapter的由来，是在Retrofit创建的时候已经创建好了CallAdapter.Factory
+// 然后在需要的时候获取Adapter对象，由ExecutorCallAdapterFactory的get()方法获得
+CallAdapter.Factory defaultCallAdapterFactory(@Nullable Executor callbackExecutor) {
+    if (callbackExecutor != null) {
+      return new ExecutorCallAdapterFactory(callbackExecutor);
+    }
+    return DefaultCallAdapterFactory.INSTANCE;
+}
+```
+```java
+// ExecutorCallAdapterFactory.java
+final class ExecutorCallAdapterFactory extends CallAdapter.Factory {
+  final Executor callbackExecutor;
+
+  ExecutorCallAdapterFactory(Executor callbackExecutor) {
+    this.callbackExecutor = callbackExecutor;
+  }
+
+  @Override
+  public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
+    ...
+    final Type responseType = Utils.getCallResponseType(returnType);
+    // 返回CallAdapter对象
+    return new CallAdapter<Object, Call<?>>() {
+      @Override public Type responseType() {
+        return responseType;
+      }
+      // 返回Call对象
+      @Override public Call<Object> adapt(Call<Object> call) {
+        // callbackExecutor对象是最后切换回调处理到主线程中
+        // callbackExecutor对象是构造方法传入的 对应的是Platform中的静态内部类 MainThreadExecutor
+        return new ExecutorCallbackCall<>(callbackExecutor, call);
+      }
+    };
+  }
+
+  static final class ExecutorCallbackCall<T> implements Call<T> {
+    final Executor callbackExecutor;
+    final Call<T> delegate;
+
+    ExecutorCallbackCall(Executor callbackExecutor, Call<T> delegate) {
+      this.callbackExecutor = callbackExecutor;
+      this.delegate = delegate;
+    }
+     
+
+    @Override public void enqueue(final Callback<T> callback) {
+      checkNotNull(callback, "callback == null");
+
+      delegate.enqueue(new Callback<T>() {
+        @Override public void onResponse(Call<T> call, final Response<T> response) {
+          //在获取到网络请求结果之后，通过executor将结果所在的线程切换到主线程中 
+          callbackExecutor.execute(new Runnable() {
+            @Override public void run() {
+              if (delegate.isCanceled()) {
+                // Emulate OkHttp's behavior of throwing/delivering an IOException on cancellation.
+                callback.onFailure(ExecutorCallbackCall.this, new IOException("Canceled"));
+              } else {
+                callback.onResponse(ExecutorCallbackCall.this, response);
+              }
+            }
+          });
+        }
+
+        @Override public void onFailure(Call<T> call, final Throwable t) {
+          callbackExecutor.execute(new Runnable() {
+            @Override public void run() {
+              callback.onFailure(ExecutorCallbackCall.this, t);
+            }
+          });
+        }
+      });
+    }
+```
+```java
+//Platform.java   
+static class MainThreadExecutor implements Executor {
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    
+    @Override public void execute(Runnable r) {
+        handler.post(r);
+    }
+}
+```
+从上面基本上已经摸清了Call对象的转换过程，其实这个分析针对的只是Call对象的转换，还有RxJava的转换，这个Adapter是
+RxJava2CallAdapter，可以将Call对象转换成Observable对象，这个转换其本质就是包装，将对应的请求过程转化成RxJava的请求过程。涉及到的类有RxJava2CallAdaper和CallEnqueueObservable。还有一个环节需要找到，就是请求参数的拼接，在哪里组装?
+我们需要追踪参数的流向，还是倒数第二句
+```java
+OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
+```
+
+```java
+// OkHttpCall.java
+private okhttp3.Call createRawCall() throws IOException {
+  // 看到这里，基本上就明白了，参数是在怎么处理的了，根据位置获取到参数值，然后和对应的参数匹配，放到请求里
+  // 每个参数都有对应的handler来处理对应的参数
+  Request request = serviceMethod.toRequest(args);
+  okhttp3.Call call = serviceMethod.callFactory.newCall(request);
+  if (call == null) {
+    throw new NullPointerException("Call.Factory returned null.");
+  }
+  return call;
+}
+```
