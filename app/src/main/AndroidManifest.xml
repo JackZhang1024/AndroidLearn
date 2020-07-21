@@ -59,8 +59,8 @@
 
         <!-- android:excludeFromRecents="true" -->
         <activity
-            android:name="com.lucky.news.splash.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:name="com.lucky.news.SplashNewActivity"
+            android:theme="@style/SplashThemeNew">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -964,6 +964,8 @@
         <activity android:name=".retrofit.RetrofitSecondActivity"/>
 
         <activity android:name=".retrofit.RetrofitUploadActivity"/>
+
+        <activity android:name=".imageload.GlideActivity"/>
 
         <service
             android:name=".core.service.PollService"

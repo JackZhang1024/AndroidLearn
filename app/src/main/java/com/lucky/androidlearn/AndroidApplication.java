@@ -69,6 +69,7 @@ public class AndroidApplication extends Application {
         Log.e(TAG, "onCreate: 进程ID " + Process.myPid());
         //HookPluginUtil.getInstance(this).initHook();
         try {
+            Thread.sleep(1200);
             // 测试某个类是否已经被加载过来了
             Class pluginMain = Class.forName("com.luckyboy.plugin_package.MainActivity");
             String name = pluginMain.getSimpleName();

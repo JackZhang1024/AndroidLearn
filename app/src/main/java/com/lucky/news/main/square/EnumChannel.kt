@@ -13,6 +13,7 @@ import com.lucky.androidlearn.fragmentation.FragmentationViewPagerActivity
 import com.lucky.androidlearn.handler.HandlerLearnActivity
 import com.lucky.androidlearn.hotfix.HotFixActivity
 import com.lucky.androidlearn.hybrid.WebViewSummaryActivity
+import com.lucky.androidlearn.imageload.GlideActivity
 import com.lucky.androidlearn.ipc.IPCLearnActivity
 import com.lucky.androidlearn.j2v8.J2V8LearnActivity
 import com.lucky.androidlearn.jindong.JingdongActivity
@@ -203,6 +204,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
     },
     OKHTTP("OKHttp", NewsConstant.IMG_LOVELY, OkHttpLearnActivity::class.java, true) {
         override fun channelName(): String = "okHttpLearn"
+
+        override fun channelType() = "android"
+    },
+    GLIDE("Glide", NewsConstant.IMG_LOVELY, GlideActivity::class.java, true) {
+        override fun channelName(): String = "glie"
 
         override fun channelType() = "android"
     },

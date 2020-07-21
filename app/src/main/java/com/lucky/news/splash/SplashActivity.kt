@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         immerseStatusBar()
         setContentView(R.layout.activity_splash)
-        alphaAnimation = AlphaAnimation(1.0f, 0.0f);
+        alphaAnimation = AlphaAnimation(1.0f, 0.0f)
         alphaAnimation?.run {
             duration = 4000
             setAnimationListener(object : Animation.AnimationListener {
