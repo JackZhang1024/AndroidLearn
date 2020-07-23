@@ -90,6 +90,8 @@ Android 高级部分通常涉及一些底层原理和开源框架相关的知识
 
 [APK包优化-瘦身计划](./总结/Android高级/APK包优化/APK包优化.md)
 
+[APK混淆-加密计划](./总结/Android高级/App混淆规则/App混淆规则.md)
+
 [APK打包原理-包打天下](./总结/Android高级/APK打包原理/APK打包原理.md)
 
 [ARouter路由-业务解耦](./总结/Android高级/ARouter路由/ARouter路由.md)
