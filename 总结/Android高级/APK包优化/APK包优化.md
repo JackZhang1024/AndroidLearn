@@ -163,7 +163,7 @@ release {
 ```console
 // proguard-rules.pro 自定义混淆规则文件
 ```
-![](../App混淆规则/App混淆规则.md)
+[App混淆规则](../App混淆规则/App混淆规则.md)
 ### 7. 微信混淆资源名称
 [微信混淆资源文件名称-张绍文](https://github.com/shwenzhang/AndResGuard/blob/master/README.zh-cn.md)
 
@@ -238,7 +238,7 @@ dependencies{
 }
 ```
 4. 生成apk 
-```console
+```java
 在Gradle一栏中找到andresguard，会看到三个个Task, resguardDebug, resguardRelease, resguarduseapk, 前两个是生成新的经过资源名混淆后的apk, 后一个暂时不清楚是干什么用的。
 ```
 
