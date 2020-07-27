@@ -28,6 +28,7 @@ import com.lucky.androidlearn.mvc.MVCMainActivity
 import com.lucky.androidlearn.mvp.MVPMainActivity
 import com.lucky.androidlearn.mvvm.MVVMMainActivity
 import com.lucky.androidlearn.okhttplearn.OkHttpLearnActivity
+import com.lucky.androidlearn.performance.PerformanceOptimizationActivity
 import com.lucky.androidlearn.plugin.hookplugin.HookPluginMainActivity
 import com.lucky.androidlearn.proxy.DynamicProxyActivity
 import com.lucky.androidlearn.retrofit.RetrofitActivity
@@ -209,6 +210,11 @@ enum class EnumChannel(var desc: String, var imageUrl: String, var clazz: Class<
     },
     GLIDE("Glide", NewsConstant.IMG_LOVELY, GlideActivity::class.java, true) {
         override fun channelName(): String = "glie"
+
+        override fun channelType() = "android"
+    },
+    PERFORMANCE("Performance", NewsConstant.IMG_LOVELY, PerformanceOptimizationActivity::class.java, true) {
+        override fun channelName(): String = "performance"
 
         override fun channelType() = "android"
     },
