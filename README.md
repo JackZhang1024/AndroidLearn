@@ -63,7 +63,7 @@ Android 进阶部分一般涉及到Android核心API的原理和一些开源框�
 
 [RxJava使用和原理分析](./总结/Android进阶/RxJava/RxJava.md)
 
-[EventBus使用和原理剖析](./总计/Android进阶/EventBus.md)
+[EventBus使用和原理剖析](./总结/Android进阶/EventBus.md)
 
 [OkHttp常见使用API和架构](./总结/Android进阶/OkHttp/OkHttp.md)
 

@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/AndroidLearn.iml" filepath="$PROJECT_DIR$/.idea/AndroidLearn.iml" group="AndroidLearn" />
-      <module fileurl="file://$PROJECT_DIR$/repository/CommonUtil/CommonUtil.iml" filepath="$PROJECT_DIR$/repository/CommonUtil/CommonUtil.iml" group="AndroidLearn/repository/CommonUtil" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="AndroidLearn/app" />
-      <module fileurl="file://$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" filepath="$PROJECT_DIR$/repository/fancygallery/fancygallery.iml" group="AndroidLearn/repository/fancygallery" />
-      <module fileurl="file://$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" filepath="$PROJECT_DIR$/repository/materialdesign/materialdesign.iml" group="AndroidLearn/repository/materialdesign" />
-      <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/repository/repository.iml" filepath="$PROJECT_DIR$/repository/repository.iml" group="AndroidLearn/repository" />
-      <module fileurl="file://$PROJECT_DIR$/simpleaar/simpleaar.iml" filepath="$PROJECT_DIR$/simpleaar/simpleaar.iml" group="AndroidLearn/simpleaar" />
-      <module fileurl="file://$PROJECT_DIR$/simpleaar2/simpleaar2.iml" filepath="$PROJECT_DIR$/simpleaar2/simpleaar2.iml" group="AndroidLearn/simpleaar2" />
-      <module fileurl="file://$PROJECT_DIR$/simplebutterknife-annotations/simplebutterknife-annotations.iml" filepath="$PROJECT_DIR$/simplebutterknife-annotations/simplebutterknife-annotations.iml" group="AndroidLearn/simplebutterknife-annotations" />
-      <module fileurl="file://$PROJECT_DIR$/simplebutterknife-compiler/simplebutterknife-compiler.iml" filepath="$PROJECT_DIR$/simplebutterknife-compiler/simplebutterknife-compiler.iml" group="AndroidLearn/simplebutterknife-compiler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidLearn.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidLearn.iml" group="AndroidLearn" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/CommonUtil/CommonUtil.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/CommonUtil/CommonUtil.iml" group="AndroidLearn/repository/CommonUtil" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="AndroidLearn/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/fancygallery/fancygallery.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/fancygallery/fancygallery.iml" group="AndroidLearn/repository/fancygallery" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/materialdesign/materialdesign.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/materialdesign/materialdesign.iml" group="AndroidLearn/repository/materialdesign" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/repository.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/repository.iml" group="AndroidLearn/repository" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simpleaar/simpleaar.iml" filepath="$PROJECT_DIR$/.idea/modules/simpleaar/simpleaar.iml" group="AndroidLearn/simpleaar" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simpleaar2/simpleaar2.iml" filepath="$PROJECT_DIR$/.idea/modules/simpleaar2/simpleaar2.iml" group="AndroidLearn/simpleaar2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simplebutterknife-annotations/simplebutterknife-annotations.iml" filepath="$PROJECT_DIR$/.idea/modules/simplebutterknife-annotations/simplebutterknife-annotations.iml" group="AndroidLearn/simplebutterknife-annotations" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simplebutterknife-compiler/simplebutterknife-compiler.iml" filepath="$PROJECT_DIR$/.idea/modules/simplebutterknife-compiler/simplebutterknife-compiler.iml" group="AndroidLearn/simplebutterknife-compiler" />
     </modules>
   </component>
 </project>
